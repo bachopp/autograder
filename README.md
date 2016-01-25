@@ -11,6 +11,8 @@ $ npm install --save react react-dom babelify babel-preset-react
 
 to compile your React code run :
 
-$ browserify -t [ babelify --presets [ react ] ] main.js -o bundle.js
+$ browserify -t [ babelify --presets [ react ] ] web/main.js -o build/bundle.js
+
+compiled JavaScript should be in /build while source in /web
 
 more info at [facebook.github.io](https://facebook.github.io/react/docs/getting-started.html)
