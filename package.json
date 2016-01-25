@@ -1,0 +1,25 @@
+{
+  "name": "frontreact",
+  "version": "0.0.0",
+  "description": "Lolz",
+  "main": "script.js",
+  "dependencies": {
+    "babelify": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-bootstrap":"latest"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "compile": "browserify -t [ babelify --presets [ react ] ] ./web/main.js -o ./build/bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tokams/frontreact"
+  },
+  "author": "Thomas Darvik",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tokams/frontreact/issues"
+  }
+}
