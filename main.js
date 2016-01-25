@@ -1,15 +1,8 @@
-var React = require('react')
-var ReactDOM = require('react-dom')
-
-var Welcome = React.createClass({
-	render: function() {
-		return(
-			<div>Welcome to Autograder</div>
-		);
-	}
-});
+// main.js
+var React = require('react');
+var ReactDOM = require('react-dom');
 
 ReactDOM.render(
-	<Wrapper />,
-	document.getElementById("welcome")
+  <h1>Welcome to Autograder</h1>,
+  document.getElementById('example')
 );
