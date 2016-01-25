@@ -1,8 +1,15 @@
 var React = require('react')
 var ReactDOM = require('react-dom')
 
+var Welcome = React.createClass({
+	render: function() {
+		return(
+			<div>Welcome to Autograder</div>
+		);
+	}
+});
 
 ReactDOM.render(
-    <h1>Hello, world!</h1>,
-        document.getElementByID('app')
+	<Wrapper />,
+	document.getElementById("welcome")
 );
