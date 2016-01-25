@@ -15,11 +15,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/tokams/frontreact"
+    "url": "https://github.com/tokams/autograder-fronend"
   },
   "author": "Thomas Darvik",
-  "license": "ISC",
+  "license": "GNU v3.0",
   "bugs": {
-    "url": "https://github.com/tokams/frontreact/issues"
+    "url": "https://github.com/tokams/autograder-fronend/issues"
   }
 }
