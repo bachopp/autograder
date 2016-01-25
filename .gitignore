@@ -1,4 +1,4 @@
 .gitignore
 node_modules
 
-bundle.js
+build/bundle.js
