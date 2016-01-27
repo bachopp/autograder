@@ -2,28 +2,51 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net/http"
-	"strings"
+	"time"
+
+	"github.com/gorilla/websocket"
 )
 
-func sayhelloName(w http.ResponseWriter, r *http.Request) {
-	r.ParseForm()       // parse arguments, you have to call this by yourself
-	fmt.Println(r.Form) // print form information in server side
-	fmt.Println("path", r.URL.Path)
-	fmt.Println("scheme", r.URL.Scheme)
-	fmt.Println(r.Form["url_long"])
-	for k, v := range r.Form {
-		fmt.Println("key:", k)
-		fmt.Println("val:", strings.Join(v, ""))
-	}
-	fmt.Fprintf(w, "This is Autograder server response") // send data to client side
+var webroot = "/var/www/html/autograder-frontend/"
+
+var upgrader = websocket.Upgrader{}
+
+type myStruct struct {
+	Username  string `json: "username"`
+	FirstName string `json: "firstName"`
+	LastName  string `json: "lastName"`
+}
+
+func fileServer(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, fmt.Sprintf("%s%s", webroot, "web/index.html"))
+}
+
+func wsSocket(w http.ResponseWriter, r *http.Request) {
+	conn, _ := upgrader.Upgrade(w, r, nil)
+	go func(conn *websocket.Conn) {
+		ch := time.Tick(5 * time.Second)
+
+		for range ch {
+			conn.WriteJSON(myStruct{
+				Username:  "tokams",
+				FirstName: "tomasz",
+				LastName:  "uis.no",
+			})
+		}
+		// for {
+		// 	mType, msg, _ := conn.ReadMessage()
+		//
+		// 	conn.WriteMessage(mType, msg)
+		//
+		// 	println(string(msg))
+		// }
+	}(conn)
 }
 
 func main() {
-	http.HandleFunc("/", sayhelloName)       // set router
-	err := http.ListenAndServe(":8002", nil) // set listen port
-	if err != nil {
-		log.Fatal("ListenAndServe: ", err)
-	}
+	http.HandleFunc("/", fileServer)
+	http.HandleFunc("/ws", wsSocket)
+	http.ListenAndServe(":8004", nil)
+
 }
