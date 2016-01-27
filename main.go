@@ -13,9 +13,11 @@ var webroot = "/var/www/html/autograder-frontend/"
 var upgrader = websocket.Upgrader{}
 
 type myStruct struct {
-	Username  string `json: "username"`
-	FirstName string `json: "firstName"`
-	LastName  string `json: "lastName"`
+	Username      string `json: "gitUsername"`
+	FirstName     string `json: "firstName"`
+	LastName      string `json: "lastName"`
+	Email         string `json: "emailAddress"`
+	StudentNumber string `json: "studentNumber"`
 }
 
 func fileServer(w http.ResponseWriter, r *http.Request) {
@@ -30,17 +32,30 @@ func wsSocket(w http.ResponseWriter, r *http.Request) {
 		for range ch {
 			conn.WriteJSON(myStruct{
 				Username:  "tokams",
-				FirstName: "tomasz",
-				LastName:  "uis.no",
+				FirstName: "Tomasz",
+				LastName:  "Gliniecki",
 			})
+
+			_, _, err := conn.ReadMessage()
+
+			if err != nil {
+				conn.Close()
+			}
 		}
-		// for {
-		// 	mType, msg, _ := conn.ReadMessage()
-		//
-		// 	conn.WriteMessage(mType, msg)
-		//
-		// 	println(string(msg))
-		// }
+	}(conn)
+
+	go func(conn *websocket.Conn) {
+		mType, msg, err := conn.ReadMessage()
+
+		for {
+			conn.WriteMessage(mType, msg)
+			println(string(msg))
+
+			if err != nil {
+				conn.Close()
+			}
+
+		}
 	}(conn)
 }
 
