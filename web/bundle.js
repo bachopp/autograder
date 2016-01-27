@@ -35100,7 +35100,7 @@ var AGPage = React.createClass({
 		return null;
 	},
 	handleClick: function (element, event) {
-		window.location = "http://152.94.124.172:8001/";
+		window.location = "http://152.94.124.172:8004/";
 	},
 	render: function () {
 		var self = this;

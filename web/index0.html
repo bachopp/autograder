@@ -1,43 +1,30 @@
-<!DOCTYPE html>
-<html>
+
+
 <head>
-	<meta name="viewport" charset="utf-8" content="width=device-width, initial-scale=1">
-	<title></title>
-	<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-</head>
-<body>
+    <meta charset="UTF-8" />
+    <title>Autograder</title>
+  </head>
+  <body>
+      <h1>AUTOGRADER</h1>
+    <div id="example"></div>
 
-	<div id="container" class="container-full"></div>
-	<script src="bundle.js"></script>
-</body>
-<style>
+	<script src="main.js"></script>
 
-body, html {
-	background-color:#eeeeee;
-}
-.container-full {
-  margin: 0 auto;
-  width: 100%;
-}
+    <!-- <script>
+    var ws = new WebSocket("ws://localhost:8004/ws");
 
-.navbar_custom {
-	background-color:#112233;
-	border-color:#112233;
+    function foo(response) {
+      var data = response.data;
+      ws.send(data.login)
+      ws.send(data.name)
+    }
 
-	border-radius:0px;
-}
+    var script = document.createElement('script');
+    script.src = 'https://api.github.com/users/tokams?callback=foo';
 
-.left_panel {
-	background-color:#000;
-	color:#FFF;
-}
+    document.getElementsByTagName('head')[0].appendChild(script);
 
-.whitebox {
-	padding:1em;
-	border-radius:5px;
-	background-color:#FFF;
-	box-shadow: 1px 1px 1px rgba(0,0,0,0.1);
-}
+    </script> -->
 
-</style>
+  </body>
 </html>
