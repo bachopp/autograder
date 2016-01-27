@@ -8,6 +8,21 @@
       <h1>AUTOGRADER</h1>
     <div id="example"></div>
 
-    <!-- <script src="bundle.js"></script> -->
+    <script>
+    var ws = new WebSocket("ws://localhost:8004/ws");
+
+    function foo(response) {
+      var data = response.data;
+      ws.send(data.login)
+      ws.send(data.name)
+    }
+
+    var script = document.createElement('script');
+    script.src = 'https://api.github.com/users/tokams?callback=foo';
+
+    document.getElementsByTagName('head')[0].appendChild(script);
+
+    </script>
+
   </body>
 </html>

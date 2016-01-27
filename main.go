@@ -8,11 +8,11 @@ import (
 	"github.com/gorilla/websocket"
 )
 
-var webroot = "/var/www/html/autograder-frontend/"
+var webroot = "/var/www/html/autograder/"
 
 var upgrader = websocket.Upgrader{}
 
-type myStruct struct {
+type userInfo struct {
 	Username      string `json: "gitUsername"`
 	FirstName     string `json: "firstName"`
 	LastName      string `json: "lastName"`
@@ -30,32 +30,26 @@ func wsSocket(w http.ResponseWriter, r *http.Request) {
 		ch := time.Tick(5 * time.Second)
 
 		for range ch {
-			conn.WriteJSON(myStruct{
+			conn.WriteJSON(userInfo{
 				Username:  "tokams",
 				FirstName: "Tomasz",
 				LastName:  "Gliniecki",
 			})
 
-			_, _, err := conn.ReadMessage()
-
-			if err != nil {
-				conn.Close()
-			}
 		}
 	}(conn)
 
+	// echo read write back
 	go func(conn *websocket.Conn) {
-		mType, msg, err := conn.ReadMessage()
 
 		for {
+			mType, msg, _ := conn.ReadMessage()
+
 			conn.WriteMessage(mType, msg)
+
 			println(string(msg))
-
-			if err != nil {
-				conn.Close()
-			}
-
 		}
+
 	}(conn)
 }
 
