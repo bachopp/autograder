@@ -54,8 +54,9 @@ func wsSocket(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	http.Handle("/", http.FileServer(http.Dir(webroot)))
 
-	http.HandleFunc("/", fileServer)
+	// http.HandleFunc("/", fileServer)
 	http.HandleFunc("/ws", wsSocket)
 	http.ListenAndServe(":8004", nil)
 
