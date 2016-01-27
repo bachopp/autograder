@@ -8,14 +8,16 @@ import (
 	"github.com/gorilla/websocket"
 )
 
-var webroot = "/var/www/html/autograder-frontend/"
+var webroot = "/var/www/html/autograder/"
 
 var upgrader = websocket.Upgrader{}
 
-type myStruct struct {
-	Username  string `json: "username"`
-	FirstName string `json: "firstName"`
-	LastName  string `json: "lastName"`
+type userInfo struct {
+	Username      string `json: "gitUsername"`
+	FirstName     string `json: "firstName"`
+	LastName      string `json: "lastName"`
+	Email         string `json: "emailAddress"`
+	StudentNumber string `json: "studentNumber"`
 }
 
 func fileServer(w http.ResponseWriter, r *http.Request) {
@@ -28,19 +30,26 @@ func wsSocket(w http.ResponseWriter, r *http.Request) {
 		ch := time.Tick(5 * time.Second)
 
 		for range ch {
-			conn.WriteJSON(myStruct{
+			conn.WriteJSON(userInfo{
 				Username:  "tokams",
-				FirstName: "tomasz",
-				LastName:  "uis.no",
+				FirstName: "Tomasz",
+				LastName:  "Gliniecki",
 			})
+
 		}
-		// for {
-		// 	mType, msg, _ := conn.ReadMessage()
-		//
-		// 	conn.WriteMessage(mType, msg)
-		//
-		// 	println(string(msg))
-		// }
+	}(conn)
+
+	// echo read write back
+	go func(conn *websocket.Conn) {
+
+		for {
+			mType, msg, _ := conn.ReadMessage()
+
+			conn.WriteMessage(mType, msg)
+
+			println(string(msg))
+		}
+
 	}(conn)
 }
 
