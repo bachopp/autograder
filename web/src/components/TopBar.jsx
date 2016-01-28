@@ -13,8 +13,7 @@ var TopBar = React.createClass({
 	getInitialState:function(){
 		return {
 			barObjects	:this.props.barObjects,
-			barTitle	:this.props.barTitle
-			
+			barTitle	:this.props.barObjects.title
 		}
 	},
 	notificationSenter: function() {
@@ -22,6 +21,9 @@ var TopBar = React.createClass({
 	},
 	render:function(){
 		var self = this;
+		var elements = self.state.barObjects.links;
+		console.log(elements);
+		
 		return(
 			<div className="col-xs-12">
 				<Navbar inverse>
@@ -33,29 +35,19 @@ var TopBar = React.createClass({
 					</Navbar.Header>
 					<Navbar.Collapse>
 						<Nav>
-							<NavDropdown title="Student">
-								<MenuItem>Course 1</MenuItem>
-								<MenuItem>Course 2</MenuItem>
-								<MenuItem>Course 3</MenuItem>
-								<MenuItem devider />
-								<MenuItem>New Course</MenuItem>
-							</NavDropdown>
-							<NavDropdown title="Teacher">
-								<MenuItem>Course 1</MenuItem>
-								<MenuItem>Course 2</MenuItem>
-								<MenuItem>Course 3</MenuItem>
-								<MenuItem devider />
-								<MenuItem>New Course</MenuItem>
-							</NavDropdown>
-							<NavDropdown title="Admin">
-								<MenuItem>Course 1</MenuItem>
-								<MenuItem>Course 2</MenuItem>
-								<MenuItem>Course 3</MenuItem>
-								<MenuItem devider />
-								<MenuItem>New Course</MenuItem>
-							</NavDropdown>
-							<NavItem href="#">Help</NavItem>
-							<NavItem href="#">About</NavItem>
+
+							{elements.map(function(navItem,i) {
+								return(
+									<NavDropdown title={navItem.title}>
+										<h1>{navItem.elements}</h1>
+										
+										<MenuItem>Course 2</MenuItem>
+										<MenuItem>Course 3</MenuItem>
+										<MenuItem devider />
+										<MenuItem>New Course</MenuItem>
+									</NavDropdown>
+								);
+							})}
 						</Nav>
 						<Nav pullRight>
 							<NavItem href="#" onClick={self.notificationSenter}>

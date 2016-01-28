@@ -1,1 +1,0 @@
-console.error("SyntaxError: /var/www/html/autograder/web/main.jsx: Unexpected token (21:35) while parsing file: /var/www/html/autograder/web/main.jsx");
