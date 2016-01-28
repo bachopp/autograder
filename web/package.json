@@ -1,26 +1,20 @@
 {
-  "name": "LoginOAuth",
-  "version": "0.0.1",
-  "description": "Login using the github API",
-  "main": "script.js",
-  "dependencies": {
-    "babelify": "^7.2.0",
-    "react": "^0.14.6",
-    "react-dom": "^0.14.6",
-    "babel-preset-react": "^6.3.13",
-    "react-bootstrap":"latest"
-  },
-  "devDependencies": {},
+  "name": "web",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "build": "browserify -t [ babelify --presets [ react ] ] script.js -o bundle.js"
+    "start": "watchify main.jsx -v -t [ babelify --presets [ react ] ] -o main.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/tokams/frontreact"
-  },
-  "author": "Thomas Darvik and Tomasz Gliniecki",
+  "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/tokams/frontreact/issues"
+  "dependencies": {
+    "babel-preset-react": "^6.3.13",
+    "babelify": "^7.2.0",
+    "browserify": "^13.0.0",
+    "react": "^0.14.6",
+    "react-bootstrap": "^0.28.2",
+    "react-dom": "^0.14.6",
+    "watchify": "^3.7.0"
   }
 }
