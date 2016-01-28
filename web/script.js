@@ -10,6 +10,7 @@ var NavItem = ReactBootstrap.NavItem;
 var ButtonGroup = ReactBootstrap.ButtonGroup;
 var Button = ReactBootstrap.Button;
 
+
 var NavBar = React.createClass({
 	getInitialState: function() {
 		return null;
@@ -74,7 +75,7 @@ var AGPage = React.createClass({
 		return null;
 	},
 	handleClick: function(element,event) {
-		window.location = "http://152.94.124.172:8004/";
+		window.location = "http://152.94.124.234:8004";
 	},
 	render: function() {
 		var self = this;
@@ -94,3 +95,5 @@ ReactDOM.render(
 	<AGPage/>,
 	document.getElementById("container")
 );
+
+var ws = new WebSocket("ws://152.94.124.234:8004/ws");

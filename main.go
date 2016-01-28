@@ -21,7 +21,7 @@ type userInfo struct {
 }
 
 func fileServer(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, fmt.Sprintf("%s%s", webroot, "web/index.html"))
+	http.ServeFile(w, r, fmt.Sprintf("%s%s", webroot, "index.html"))
 }
 
 func wsSocket(w http.ResponseWriter, r *http.Request) {
@@ -47,17 +47,16 @@ func wsSocket(w http.ResponseWriter, r *http.Request) {
 
 			conn.WriteMessage(mType, msg)
 
-			println(string(msg))
+			// println(string(msg))
 		}
 
 	}(conn)
 }
 
 func main() {
-	http.Handle("/", http.FileServer(http.Dir(webroot)))
 
-	// http.HandleFunc("/", fileServer)
 	http.HandleFunc("/ws", wsSocket)
+	http.Handle("/", http.FileServer(http.Dir(webroot)))
 	http.ListenAndServe(":8004", nil)
 
 }

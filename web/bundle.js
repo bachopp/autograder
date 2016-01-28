@@ -35100,7 +35100,7 @@ var AGPage = React.createClass({
 		return null;
 	},
 	handleClick: function (element, event) {
-		window.location = "http://152.94.124.172:8004/";
+		window.location = "http://152.94.124.234:8004";
 	},
 	render: function () {
 		var self = this;
@@ -35116,5 +35116,7 @@ var AGPage = React.createClass({
 var list = ["Course 1", "Course 2", "New Course"];
 
 ReactDOM.render(React.createElement(AGPage, null), document.getElementById("container"));
+
+var ws = new WebSocket("ws://152.94.124.234:8004/ws");
 
 },{"react":402,"react-bootstrap/lib":73,"react-dom":246}]},{},[403]);
