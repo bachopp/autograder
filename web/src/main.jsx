@@ -2,7 +2,7 @@ var React = require("react");
 var ReactDOM = require("react-dom");
 var RB = require("react-bootstrap/lib");
 
-var TopBar = require("./components/TopBar.jsx");
+var TopBar = require("./components/navbar/TopBar.jsx");
 
 var Wrapper = React.createClass({
 	render: function() {
@@ -11,7 +11,7 @@ var Wrapper = React.createClass({
 			<TopBar barObjects={self.props.barObjects}/>
 		);
 	}
-});	
+});
 
 var student_elements = [
 	{title: "Course 1",href:"./course.html"},
@@ -37,4 +37,3 @@ ReactDOM.render(
 	<Wrapper barObjects={topbarData}/>,
 	document.getElementById("container")
 );
-
