@@ -8,7 +8,7 @@ import (
 	"github.com/gorilla/websocket"
 )
 
-var webroot = "/var/www/html/autograder/"
+var webroot = "/home/tomgli/workspace/go/src/github.com/bacheloroppgave/autograder"
 
 var upgrader = websocket.Upgrader{}
 
