@@ -5,23 +5,62 @@ var RB = require("react-bootstrap/lib");
 
 var TopBar = require("./navbar/TopBar.jsx");
 
-var Wrapper = React.createClass({
-	displayName: "Wrapper",
+var App = React.createClass({
+	displayName: "App",
 
+	getInitialState: function () {
+		return {
+			view: this.props.initialPage
+		};
+	},
+	handleClick: function (page, event) {
+		var self = this;
+		if (page == "homepage") {
+			self.setState({ view: "about" });
+		} else {
+			self.setState({ view: "homepage" });
+		}
+	},
 	render: function () {
 		var self = this;
-		return React.createElement(TopBar, { barObjects: self.props.barObjects });
+		var htmlPage = "";
+		console.log(self);
+		switch (self.state.view) {
+			case "homepage":
+				htmlPage = React.createElement(
+					"div",
+					null,
+					"Hello homepage ",
+					React.createElement(
+						"button",
+						{ onClick: self.handleClick.bind(this, self.state.view) },
+						"About"
+					)
+				);
+
+				break;
+			case "about":
+				htmlPage = React.createElement(
+					"div",
+					null,
+					"Hello about page ",
+					React.createElement(
+						"button",
+						{ onClick: self.handleClick.bind(this, self.state.view) },
+						"Home"
+					)
+				);
+				break;
+		}
+		return React.createElement(
+			"div",
+			null,
+			htmlPage
+		);
 	}
 });
 
-var student_elements = [{ title: "Course 1", href: "./course.html" }, { title: "Course 2", href: "./course.html" }, { title: "Course 3", href: "./course.html" }, { title: "Course 4", href: "./course.html" }, { title: "devider" }, { title: "New course", href: "./new_course.html" }];
-
-var topbarData = {
-	title: "Autograder",
-	links: [{ title: "Student", type: "dropdown", elements: student_elements }, { title: "Teacher", type: "dropdown", elements: student_elements }, { title: "Admin", type: "dropdown", elements: student_elements }, { title: "Help", type: "link", href: "./help.html" }, { title: "About", type: "link", href: "./about.html" }]
-};
-
-ReactDOM.render(React.createElement(Wrapper, { barObjects: topbarData }), document.getElementById("container"));
+ReactDOM.render(React.createElement(App, { initialPage: "homepage" }), document.getElementById("container"));
 
 },{"./navbar/TopBar.jsx":2,"react":404,"react-bootstrap/lib":75,"react-dom":248}],2:[function(require,module,exports){
 var React = require("react");
