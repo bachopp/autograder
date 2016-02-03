@@ -1,0 +1,1 @@
+var rootPath = "~/work/src/github.com/bacheloroppgave/autograder/";
