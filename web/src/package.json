@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "watchify ./components/main.jsx -v -t [ babelify --presets [ react ] ] -o ../public/main.js"
+    "start": "watchify ./components/main.jsx -v -t [ babelify --presets [ react ] ] -o ../public/main.js",
+    "homepage" : "watchify ../views/homepage/homepage.jsx -v -t [ babelify --presets [ react ] ] -o ../views/homepage/homepage.js" 
   },
   "author": "",
   "license": "ISC",
