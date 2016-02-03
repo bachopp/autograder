@@ -1,1 +1,1 @@
-console.error("Error: Cannot find module 'react-bootstrap' from '/home/thomas/work/src/github.com/bacheloroppgave/autograder/web/views/homepage'");
+console.error("Error: Cannot find module 'rootpath' from '/home/thomas/work/src/github.com/bacheloroppgave/autograder/web/views/homepage'");

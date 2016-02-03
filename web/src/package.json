@@ -1,13 +1,13 @@
 {
-  "name": "web",
+  "name": "AutograderWebApp",
   "version": "0.0.0",
-  "description": "",
+  "description": "Autograder webfrontend project",
   "main": "index.js",
   "scripts": {
     "start": "watchify ./components/main.jsx -v -t [ babelify --presets [ react ] ] -o ../public/main.js",
-    "homepage" : "watchify ../views/homepage/homepage.jsx -v -t [ babelify --presets [ react ] ] -o ../views/homepage/homepage.js" 
+    "homepage": "watchify ../views/homepage/homepage.jsx -v -t [ babelify --presets [ react ] ] -o ../views/homepage/homepage.js"
   },
-  "author": "",
+  "author": "Thomas Darvik and Tomasz Gliniecki",
   "license": "ISC",
   "dependencies": {
     "babel-preset-react": "^6.3.13",
@@ -16,6 +16,7 @@
     "react": "^0.14.6",
     "react-bootstrap": "^0.28.2",
     "react-dom": "^0.14.6",
+    "rootpath": "^0.1.2",
     "watchify": "^3.7.0"
   }
 }

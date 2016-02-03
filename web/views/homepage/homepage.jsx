@@ -1,6 +1,10 @@
+// from $HOME_PROJECT/web/src/
+require("rootpath")();
+
+
 var React = require("react");
 var ReactDOM = require("react-dom");
-var RB = require("react-bootstrap");
+
 
 
 var Button = RB.Button;
