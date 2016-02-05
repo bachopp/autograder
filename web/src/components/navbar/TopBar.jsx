@@ -12,26 +12,33 @@ var Glyphicon = RB.Glyphicon;
 var DropDownItem = React.createClass({
 	getInitialState: function() {
 		return {
-			menuItem: this.props.menuItem
+			menuItemObject: this.props.menuItemObject
 		}
 	},
 	render: function() {
 		var self = this;
-		console.log(self.state.menuItem);
-		return(
-			<div>Hello, world</div>
-		);
-		/*return(
-			<NavDropdown title={dropDownTitle} id={dropDownTitle}>
-				{dropDownItems.map(function(element,index) {
-					return(
-						<MenuItem href={element.link}>
-							{element.content}
-						</MenuItem>
-					);
-				})}
-			</NavDropdown>	
-		);*/
+		console.log(self.state.menuItemObject);
+		var dropdownTitle = self.state.menuItemObject.title;
+		var dropdownElements = self.state.menuItemObject.elements;
+		if(self.state.menuItemObject.type == "dropdown"){
+			return(
+				<NavDropdown title={dropdownTitle} id={dropdownTitle + "box"}>
+					{dropdownElements.map(function(menuItem, index){
+						return(
+							<MenuItem key={"menuitem" + index} href={menuItem.link}>
+								{menuItem.content}
+							</MenuItem>
+						);
+					})}
+				</NavDropdown>
+			);
+		} else {
+			return(
+				<NavItem href={self.state.menuItemObject.link}>
+					{self.state.menuItemObject.title}
+				</NavItem>
+			);
+		}
 	}
 });
 
@@ -43,9 +50,6 @@ var TopBar = React.createClass({
 		return{
 			titleBar: this.props.titleBar
 		}
-	},
-	notificationSenter: function() {
-		console.log("Notifications");
 	},
 	render:function(){
 		var self = this;
@@ -60,12 +64,11 @@ var TopBar = React.createClass({
 				</Navbar.Header>
 				<Navbar.Collapse>
 					<Nav>
-						{titleBar.elements.map(function(menuItem, index){
-							<DropDownItem menuItem={menuItem}/>
+						{titleBar.elements.map(function(menuItemObject, index){
+							return(
+								<DropDownItem key={"dropdown" + index}menuItemObject={menuItemObject}/>
+							);
 						})}
-						<NavItem href="">Help</NavItem>
-						<NavItem href="">About</NavItem>
-						<DropDownItem />
 					</Nav>
 					<Nav pullRight>
 						<NavItem>Notification</NavItem>

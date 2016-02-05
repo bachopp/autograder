@@ -4,24 +4,6 @@ var RB = require("react-bootstrap/lib");
 
 var TopBar = require("./navbar/TopBar.jsx");
 
-var App = React.createClass({
-	getInitialState: function(){
-		var self = this;
-		return {
-			titleBar: this.props.titleBar
-		}
-	},
-	render: function(){
-		var self = this;
-		var titleBar = self.state.titleBar;
-		return(
-			<div className="container-fluid">
-				<TopBar titleBar={titleBar}/>
-			</div>
-		);	
-	}
-});
-
 var titleBar = {
 	title: "Autograder",
 	elements: [
@@ -38,15 +20,42 @@ var titleBar = {
 			title: "Teacher",
 			type:"dropdown",
 			elements: [
-				{link: "http:about",content:"Course 1"},
-				{link: "http:about",content:"Course 2"},
-				{link: "http:about",content:"Course 3"}
+				{link: "http:c1",content:"Course 1"},
+				{link: "http:c2",content:"Course 2"},
+				{devider:""},							// <-- hvorfor søren funker dette????
+				{link: "http:c3",content:"Course 3"}
 			]
+		},
+		{
+			title: "Help",
+			type:"single",
+			link:"#help"
+		},
+		{
+			title: "About",
+			type:"single",
+			link:"#help"
 		}
 	]
 };
 
-console.log(titleBar);
+var App = React.createClass({
+	getInitialState: function(){
+		var self = this;
+		return {
+			titleBar: this.props.titleBar
+		}
+	},
+	render: function(){
+		var self = this;
+		return(
+			<div className="container-fluid">
+				<TopBar titleBar={self.state.titleBar}/>
+			</div>
+		);	
+	}
+});
+
 
 
 ReactDOM.render(

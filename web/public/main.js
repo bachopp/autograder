@@ -5,6 +5,28 @@ var RB = require("react-bootstrap/lib");
 
 var TopBar = require("./navbar/TopBar.jsx");
 
+var titleBar = {
+	title: "Autograder",
+	elements: [{
+		title: "Student",
+		type: "dropdown",
+		elements: [{ link: "http:about", content: "Course 1" }, { link: "http:about", content: "Course 2" }, { link: "http:about", content: "Course 3" }]
+	}, {
+		title: "Teacher",
+		type: "dropdown",
+		elements: [{ link: "http:c1", content: "Course 1" }, { link: "http:c2", content: "Course 2" }, { devider: "" }, // <-- hvorfor søren funker dette????
+		{ link: "http:c3", content: "Course 3" }]
+	}, {
+		title: "Help",
+		type: "single",
+		link: "#help"
+	}, {
+		title: "About",
+		type: "single",
+		link: "#help"
+	}]
+};
+
 var App = React.createClass({
 	displayName: "App",
 
@@ -16,29 +38,13 @@ var App = React.createClass({
 	},
 	render: function () {
 		var self = this;
-		var titleBar = self.state.titleBar;
 		return React.createElement(
 			"div",
 			{ className: "container-fluid" },
-			React.createElement(TopBar, { titleBar: titleBar })
+			React.createElement(TopBar, { titleBar: self.state.titleBar })
 		);
 	}
 });
-
-var titleBar = {
-	title: "Autograder",
-	elements: [{
-		title: "Student",
-		type: "dropdown",
-		elements: [{ link: "http:about", content: "Course 1" }, { link: "http:about", content: "Course 2" }, { link: "http:about", content: "Course 3" }]
-	}, {
-		title: "Teacher",
-		type: "dropdown",
-		elements: [{ link: "http:about", content: "Course 1" }, { link: "http:about", content: "Course 2" }, { link: "http:about", content: "Course 3" }]
-	}]
-};
-
-console.log(titleBar);
 
 ReactDOM.render(React.createElement(App, { titleBar: titleBar }), document.getElementById("container"));
 
@@ -59,28 +65,33 @@ var DropDownItem = React.createClass({
 
 	getInitialState: function () {
 		return {
-			menuItem: this.props.menuItem
+			menuItemObject: this.props.menuItemObject
 		};
 	},
 	render: function () {
 		var self = this;
-		console.log(self.state.menuItem);
-		return React.createElement(
-			"div",
-			null,
-			"Hello, world"
-		);
-		/*return(
-  	<NavDropdown title={dropDownTitle} id={dropDownTitle}>
-  		{dropDownItems.map(function(element,index) {
-  			return(
-  				<MenuItem href={element.link}>
-  					{element.content}
-  				</MenuItem>
-  			);
-  		})}
-  	</NavDropdown>	
-  );*/
+		console.log(self.state.menuItemObject);
+		var dropdownTitle = self.state.menuItemObject.title;
+		var dropdownElements = self.state.menuItemObject.elements;
+		if (self.state.menuItemObject.type == "dropdown") {
+			return React.createElement(
+				NavDropdown,
+				{ title: dropdownTitle, id: dropdownTitle + "box" },
+				dropdownElements.map(function (menuItem, index) {
+					return React.createElement(
+						MenuItem,
+						{ key: "menuitem" + index, href: menuItem.link },
+						menuItem.content
+					);
+				})
+			);
+		} else {
+			return React.createElement(
+				NavItem,
+				{ href: self.state.menuItemObject.link },
+				self.state.menuItemObject.title
+			);
+		}
 	}
 });
 
@@ -91,9 +102,6 @@ var TopBar = React.createClass({
 		return {
 			titleBar: this.props.titleBar
 		};
-	},
-	notificationSenter: function () {
-		console.log("Notifications");
 	},
 	render: function () {
 		var self = this;
@@ -121,20 +129,9 @@ var TopBar = React.createClass({
 				React.createElement(
 					Nav,
 					null,
-					titleBar.elements.map(function (menuItem, index) {
-						React.createElement(DropDownItem, { menuItem: menuItem });
-					}),
-					React.createElement(
-						NavItem,
-						{ href: "" },
-						"Help"
-					),
-					React.createElement(
-						NavItem,
-						{ href: "" },
-						"About"
-					),
-					React.createElement(DropDownItem, null)
+					titleBar.elements.map(function (menuItemObject, index) {
+						return React.createElement(DropDownItem, { key: "dropdown" + index, menuItemObject: menuItemObject });
+					})
 				),
 				React.createElement(
 					Nav,
