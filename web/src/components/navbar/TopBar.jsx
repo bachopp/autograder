@@ -9,11 +9,39 @@ var MenuItem = RB.MenuItem;
 var NavDropdown = RB.NavDropdown;
 var Glyphicon = RB.Glyphicon;
 
+var DropDownItem = React.createClass({
+	getInitialState: function() {
+		return {
+			menuItem: this.props.menuItem
+		}
+	},
+	render: function() {
+		var self = this;
+		console.log(self.state.menuItem);
+		return(
+			<div>Hello, world</div>
+		);
+		/*return(
+			<NavDropdown title={dropDownTitle} id={dropDownTitle}>
+				{dropDownItems.map(function(element,index) {
+					return(
+						<MenuItem href={element.link}>
+							{element.content}
+						</MenuItem>
+					);
+				})}
+			</NavDropdown>	
+		);*/
+	}
+});
+
+
+
+
 var TopBar = React.createClass({
 	getInitialState:function(){
-		return {
-			barObjects	:this.props.barObjects,
-			barTitle	:this.props.barObjects.title
+		return{
+			titleBar: this.props.titleBar
 		}
 	},
 	notificationSenter: function() {
@@ -21,43 +49,30 @@ var TopBar = React.createClass({
 	},
 	render:function(){
 		var self = this;
-		var elements = self.state.barObjects.links;
-		console.log(elements);
-		
+		var titleBar = self.state.titleBar;
 		return(
-			<div className="col-xs-12">
-				<Navbar inverse>
-					<Navbar.Header>
-						<Navbar.Brand>
-							<a href="#">{self.state.barTitle}</a>
-						</Navbar.Brand>
-						<Navbar.Toggle/>
-					</Navbar.Header>
-					<Navbar.Collapse>
-						<Nav>
-
-							{elements.map(function(navItem,i) {
-								return(
-									<NavDropdown title={navItem.title}>
-										<h1>{navItem.elements}</h1>
-										
-										<MenuItem>Course 2</MenuItem>
-										<MenuItem>Course 3</MenuItem>
-										<MenuItem devider />
-										<MenuItem>New Course</MenuItem>
-									</NavDropdown>
-								);
-							})}
-						</Nav>
-						<Nav pullRight>
-							<NavItem href="#" onClick={self.notificationSenter}>
-								<Glyphicon glyph="exclamation-sign"/> Notification
-							</NavItem>
-							<NavItem href="#">Sign in</NavItem>
-						</Nav>	
-					</Navbar.Collapse>
-				</Navbar>
-			</div>
+			<Navbar inverse>
+				<Navbar.Header>
+					<Navbar.Brand>
+						<a href="#">{titleBar.title}</a>
+					</Navbar.Brand>
+					<Navbar.Toggle />
+				</Navbar.Header>
+				<Navbar.Collapse>
+					<Nav>
+						{titleBar.elements.map(function(menuItem, index){
+							<DropDownItem menuItem={menuItem}/>
+						})}
+						<NavItem href="">Help</NavItem>
+						<NavItem href="">About</NavItem>
+						<DropDownItem />
+					</Nav>
+					<Nav pullRight>
+						<NavItem>Notification</NavItem>
+						<NavItem>Sign in</NavItem>
+					</Nav>
+				</Navbar.Collapse>
+			</Navbar>
 		);
 	}
 });

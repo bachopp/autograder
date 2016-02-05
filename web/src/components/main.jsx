@@ -5,41 +5,51 @@ var RB = require("react-bootstrap/lib");
 var TopBar = require("./navbar/TopBar.jsx");
 
 var App = React.createClass({
-	getInitialState: function() {
+	getInitialState: function(){
+		var self = this;
 		return {
-			view: this.props.initialPage
+			titleBar: this.props.titleBar
 		}
 	},
-	handleClick: function(page,event){
+	render: function(){
 		var self = this;
-		if(page == "homepage") {
-			self.setState({view: "about"});
-		} else {
-			self.setState({view: "homepage"});
-		}
-	},
-	render: function() {
-		var self = this;
-		var htmlPage = "";
-		console.log(self);
-		switch(self.state.view) {
-			case "homepage":
-				htmlPage = <div>Hello homepage <button onClick={self.handleClick.bind(this,self.state.view)}>About</button></div>;
-				
-				break;
-			case "about":
-				htmlPage = <div>Hello about page <button onClick={self.handleClick.bind(this,self.state.view)}>Home</button></div>;
-				break;
-		}
+		var titleBar = self.state.titleBar;
 		return(
-			<div>
-				{htmlPage}
+			<div className="container-fluid">
+				<TopBar titleBar={titleBar}/>
 			</div>
-		);
+		);	
 	}
-});	
+});
+
+var titleBar = {
+	title: "Autograder",
+	elements: [
+		{
+			title: "Student",
+			type:"dropdown",
+			elements: [
+				{link: "http:about",content:"Course 1"},
+				{link: "http:about",content:"Course 2"},
+				{link: "http:about",content:"Course 3"}
+			]
+		},
+		{
+			title: "Teacher",
+			type:"dropdown",
+			elements: [
+				{link: "http:about",content:"Course 1"},
+				{link: "http:about",content:"Course 2"},
+				{link: "http:about",content:"Course 3"}
+			]
+		}
+	]
+};
+
+console.log(titleBar);
+
 
 ReactDOM.render(
-	<App initialPage={"homepage"}/>,
+	<App titleBar={titleBar}/>,
 	document.getElementById("container")
-);
+);	

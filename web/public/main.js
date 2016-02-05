@@ -9,58 +9,38 @@ var App = React.createClass({
 	displayName: "App",
 
 	getInitialState: function () {
-		return {
-			view: this.props.initialPage
-		};
-	},
-	handleClick: function (page, event) {
 		var self = this;
-		if (page == "homepage") {
-			self.setState({ view: "about" });
-		} else {
-			self.setState({ view: "homepage" });
-		}
+		return {
+			titleBar: this.props.titleBar
+		};
 	},
 	render: function () {
 		var self = this;
-		var htmlPage = "";
-		console.log(self);
-		switch (self.state.view) {
-			case "homepage":
-				htmlPage = React.createElement(
-					"div",
-					null,
-					"Hello homepage ",
-					React.createElement(
-						"button",
-						{ onClick: self.handleClick.bind(this, self.state.view) },
-						"About"
-					)
-				);
-
-				break;
-			case "about":
-				htmlPage = React.createElement(
-					"div",
-					null,
-					"Hello about page ",
-					React.createElement(
-						"button",
-						{ onClick: self.handleClick.bind(this, self.state.view) },
-						"Home"
-					)
-				);
-				break;
-		}
+		var titleBar = self.state.titleBar;
 		return React.createElement(
 			"div",
-			null,
-			htmlPage
+			{ className: "container-fluid" },
+			React.createElement(TopBar, { titleBar: titleBar })
 		);
 	}
 });
 
-ReactDOM.render(React.createElement(App, { initialPage: "homepage" }), document.getElementById("container"));
+var titleBar = {
+	title: "Autograder",
+	elements: [{
+		title: "Student",
+		type: "dropdown",
+		elements: [{ link: "http:about", content: "Course 1" }, { link: "http:about", content: "Course 2" }, { link: "http:about", content: "Course 3" }]
+	}, {
+		title: "Teacher",
+		type: "dropdown",
+		elements: [{ link: "http:about", content: "Course 1" }, { link: "http:about", content: "Course 2" }, { link: "http:about", content: "Course 3" }]
+	}]
+};
+
+console.log(titleBar);
+
+ReactDOM.render(React.createElement(App, { titleBar: titleBar }), document.getElementById("container"));
 
 },{"./navbar/TopBar.jsx":2,"react":404,"react-bootstrap/lib":75,"react-dom":248}],2:[function(require,module,exports){
 var React = require("react");
@@ -74,13 +54,42 @@ var MenuItem = RB.MenuItem;
 var NavDropdown = RB.NavDropdown;
 var Glyphicon = RB.Glyphicon;
 
+var DropDownItem = React.createClass({
+	displayName: "DropDownItem",
+
+	getInitialState: function () {
+		return {
+			menuItem: this.props.menuItem
+		};
+	},
+	render: function () {
+		var self = this;
+		console.log(self.state.menuItem);
+		return React.createElement(
+			"div",
+			null,
+			"Hello, world"
+		);
+		/*return(
+  	<NavDropdown title={dropDownTitle} id={dropDownTitle}>
+  		{dropDownItems.map(function(element,index) {
+  			return(
+  				<MenuItem href={element.link}>
+  					{element.content}
+  				</MenuItem>
+  			);
+  		})}
+  	</NavDropdown>	
+  );*/
+	}
+});
+
 var TopBar = React.createClass({
 	displayName: "TopBar",
 
 	getInitialState: function () {
 		return {
-			barObjects: this.props.barObjects,
-			barTitle: this.props.barObjects.title
+			titleBar: this.props.titleBar
 		};
 	},
 	notificationSenter: function () {
@@ -88,77 +97,57 @@ var TopBar = React.createClass({
 	},
 	render: function () {
 		var self = this;
-		var elements = self.state.barObjects.links;
-		console.log(elements);
-
+		var titleBar = self.state.titleBar;
 		return React.createElement(
-			"div",
-			{ className: "col-xs-12" },
+			Navbar,
+			{ inverse: true },
 			React.createElement(
-				Navbar,
-				{ inverse: true },
+				Navbar.Header,
+				null,
 				React.createElement(
-					Navbar.Header,
+					Navbar.Brand,
 					null,
 					React.createElement(
-						Navbar.Brand,
-						null,
-						React.createElement(
-							"a",
-							{ href: "#" },
-							self.state.barTitle
-						)
+						"a",
+						{ href: "#" },
+						titleBar.title
+					)
+				),
+				React.createElement(Navbar.Toggle, null)
+			),
+			React.createElement(
+				Navbar.Collapse,
+				null,
+				React.createElement(
+					Nav,
+					null,
+					titleBar.elements.map(function (menuItem, index) {
+						React.createElement(DropDownItem, { menuItem: menuItem });
+					}),
+					React.createElement(
+						NavItem,
+						{ href: "" },
+						"Help"
 					),
-					React.createElement(Navbar.Toggle, null)
+					React.createElement(
+						NavItem,
+						{ href: "" },
+						"About"
+					),
+					React.createElement(DropDownItem, null)
 				),
 				React.createElement(
-					Navbar.Collapse,
-					null,
+					Nav,
+					{ pullRight: true },
 					React.createElement(
-						Nav,
+						NavItem,
 						null,
-						elements.map(function (navItem, i) {
-							return React.createElement(
-								NavDropdown,
-								{ title: navItem.title },
-								React.createElement(
-									"h1",
-									null,
-									navItem.elements
-								),
-								React.createElement(
-									MenuItem,
-									null,
-									"Course 2"
-								),
-								React.createElement(
-									MenuItem,
-									null,
-									"Course 3"
-								),
-								React.createElement(MenuItem, { devider: true }),
-								React.createElement(
-									MenuItem,
-									null,
-									"New Course"
-								)
-							);
-						})
+						"Notification"
 					),
 					React.createElement(
-						Nav,
-						{ pullRight: true },
-						React.createElement(
-							NavItem,
-							{ href: "#", onClick: self.notificationSenter },
-							React.createElement(Glyphicon, { glyph: "exclamation-sign" }),
-							" Notification"
-						),
-						React.createElement(
-							NavItem,
-							{ href: "#" },
-							"Sign in"
-						)
+						NavItem,
+						null,
+						"Sign in"
 					)
 				)
 			)
