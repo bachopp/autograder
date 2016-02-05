@@ -10,7 +10,7 @@ $ npm install
 
 to compile your React code run :
 
-$ npm run compile
+$ npm start
 
 compiled JavaScript should be in /build while source in /web
 
