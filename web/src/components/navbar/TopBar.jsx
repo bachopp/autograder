@@ -1,13 +1,13 @@
 var React = require("react");
 var ReactDOM = require("react-dom");
-var RB = require("react-bootstrap");
+var Rb = require("react-bootstrap");
 
-var Navbar = RB.Navbar;
-var Nav = RB.Nav;
-var NavItem = RB.NavItem;
-var MenuItem = RB.MenuItem;
-var NavDropdown = RB.NavDropdown;
-var Glyphicon = RB.Glyphicon;
+var Navbar = Rb.Navbar;
+var Nav = Rb.Nav;
+var NavItem = Rb.NavItem;
+var MenuItem = Rb.MenuItem;
+var NavDropdown = Rb.NavDropdown;
+var Glyphicon = Rb.Glyphicon;
 
 var DropDownItem = React.createClass({
 	getInitialState: function() {
@@ -17,7 +17,6 @@ var DropDownItem = React.createClass({
 	},
 	render: function() {
 		var self = this;
-		console.log(self.state.menuItemObject);
 		var dropdownTitle = self.state.menuItemObject.title;
 		var dropdownElements = self.state.menuItemObject.elements;
 		if(self.state.menuItemObject.type == "dropdown"){
@@ -42,9 +41,6 @@ var DropDownItem = React.createClass({
 	}
 });
 
-
-
-
 var TopBar = React.createClass({
 	getInitialState:function(){
 		return{
@@ -64,15 +60,18 @@ var TopBar = React.createClass({
 				</Navbar.Header>
 				<Navbar.Collapse>
 					<Nav>
-						{titleBar.elements.map(function(menuItemObject, index){
+						{titleBar.elementsLeft.map(function(menuItemObject, index){
 							return(
 								<DropDownItem key={"dropdown" + index}menuItemObject={menuItemObject}/>
 							);
 						})}
 					</Nav>
 					<Nav pullRight>
-						<NavItem>Notification</NavItem>
-						<NavItem>Sign in</NavItem>
+						{titleBar.elementsRight.map(function(menuItemObject, index){
+							return(
+								<DropDownItem key={"dropdown" + index}menuItemObject={menuItemObject}/>
+							);
+						})}
 					</Nav>
 				</Navbar.Collapse>
 			</Navbar>

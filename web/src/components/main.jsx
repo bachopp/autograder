@@ -1,43 +1,13 @@
 var React = require("react");
 var ReactDOM = require("react-dom");
-var RB = require("react-bootstrap/lib");
+var Rb = require("react-bootstrap/lib");
 
 var TopBar = require("./navbar/TopBar.jsx");
-
-var titleBar = {
-	title: "Autograder",
-	elements: [
-		{
-			title: "Student",
-			type:"dropdown",
-			elements: [
-				{link: "http:about",content:"Course 1"},
-				{link: "http:about",content:"Course 2"},
-				{link: "http:about",content:"Course 3"}
-			]
-		},
-		{
-			title: "Teacher",
-			type:"dropdown",
-			elements: [
-				{link: "http:c1",content:"Course 1"},
-				{link: "http:c2",content:"Course 2"},
-				{devider:""},							// <-- hvorfor søren funker dette????
-				{link: "http:c3",content:"Course 3"}
-			]
-		},
-		{
-			title: "Help",
-			type:"single",
-			link:"#help"
-		},
-		{
-			title: "About",
-			type:"single",
-			link:"#help"
-		}
-	]
-};
+var CenterWrapperHomepage = require("./centerWrapper/CenterWrapperHomepage.jsx");
+/*
+	TITLEBAR-DATA IS ADDED AS A SEPERATE SCRIPT IN THE HTML
+	(this is the "json" file that will be used later on)
+*/
 
 var App = React.createClass({
 	getInitialState: function(){
@@ -49,14 +19,13 @@ var App = React.createClass({
 	render: function(){
 		var self = this;
 		return(
-			<div className="container-fluid">
+			<Rb.Col xs={12}>
 				<TopBar titleBar={self.state.titleBar}/>
-			</div>
+				<CenterWrapperHomepage/>
+			</Rb.Col>
 		);	
 	}
 });
-
-
 
 ReactDOM.render(
 	<App titleBar={titleBar}/>,
