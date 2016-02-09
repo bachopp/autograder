@@ -23,11 +23,11 @@ var App = React.createClass({
 				<TopBar titleBar={self.state.titleBar}/>
 				<CenterWrapperHomepage/>
 			</Rb.Col>
-		);	
+		);
 	}
 });
 
 ReactDOM.render(
 	<App titleBar={titleBar}/>,
 	document.getElementById("container")
-);	
+);

@@ -1,46 +1,16 @@
 var React = require("react");
 var ReactDOM = require("react-dom");
-var Rb = require("react-bootstrap");
 
-var Navbar = Rb.Navbar;
-var Nav = Rb.Nav;
-var NavItem = Rb.NavItem;
-var MenuItem = Rb.MenuItem;
-var NavDropdown = Rb.NavDropdown;
-var Glyphicon = Rb.Glyphicon;
+// react-bootstrap requires
+var Navbar = require("react-bootstrap").Navbar;
+var Nav = require("react-bootstrap").Nav;
+var Glyphicon = require("react-bootstrap").Glyphicon;
 
-var DropDownItem = React.createClass({
-	getInitialState: function() {
-		return {
-			menuItemObject: this.props.menuItemObject
-		}
-	},
-	render: function() {
-		var self = this;
-		var dropdownTitle = self.state.menuItemObject.title;
-		var dropdownElements = self.state.menuItemObject.elements;
-		if(self.state.menuItemObject.type == "dropdown"){
-			return(
-				<NavDropdown title={dropdownTitle} id={dropdownTitle + "box"}>
-					{dropdownElements.map(function(menuItem, index){
-						return(
-							<MenuItem key={"menuitem" + index} href={menuItem.link}>
-								{menuItem.content}
-							</MenuItem>
-						);
-					})}
-				</NavDropdown>
-			);
-		} else {
-			return(
-				<NavItem href={self.state.menuItemObject.link}>
-					{self.state.menuItemObject.title}
-				</NavItem>
-			);
-		}
-	}
-});
+// local component requires
+var DropDownItem = require("./DropDownItem.jsx")
 
+
+// this class
 var TopBar = React.createClass({
 	getInitialState:function(){
 		return{
