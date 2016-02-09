@@ -8,7 +8,7 @@ import (
 	"github.com/gorilla/websocket"
 )
 
-var webroot = "/var/www/autograder"
+var webroot = "/var/www/autograder/web/public"
 
 var upgrader = websocket.Upgrader{}
 
@@ -57,6 +57,6 @@ func main() {
 
 	http.HandleFunc("/ws", wsSocket)
 	http.Handle("/", http.FileServer(http.Dir(webroot)))
-	http.ListenAndServe(":8004", nil)
+	http.ListenAndServe(":8000", nil)
 
 }
