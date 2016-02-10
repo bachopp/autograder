@@ -6,7 +6,7 @@ var NavItem = require("react-bootstrap").NavItem
 var Nav = require("react-bootstrap").Nav
 
 // react-router requires
-
+var Link = require("react-router").Link
 // local requires
 var Dropdown = require("./Dropdown.jsx")
 
@@ -34,7 +34,7 @@ var Topbar = React.createClass({
 
         <Navbar.Header>
           <Navbar.Brand>
-            <a>Autograder</a>
+            <Link to="/">Autograder</Link>
           </Navbar.Brand>
         </Navbar.Header>
 
@@ -49,8 +49,12 @@ var Topbar = React.createClass({
           </Nav>
 
           <Nav pullRight>
-            <NavItem>Help</NavItem>
-            <NavItem>Log in</NavItem>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+            <li>
+              <Link to="/login">Log in</Link>
+            </li>
           </Nav>
 
         </Navbar.Collapse>

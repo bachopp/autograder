@@ -11,13 +11,18 @@ var Link = require("react-router").Link
 
 // local components requires
 var Topbar = require("./topbar/Topbar.jsx")
+var About = require("./about/About.jsx")
 
 // this class
 var App = React.createClass({
 
 	render: function(){
 		return (
-			<Topbar {...this.props} />
+			<div>
+				<Topbar {...this.props} />
+
+				{this.props.children}
+			</div>
 		)
 	}
 });
@@ -26,9 +31,7 @@ var App = React.createClass({
 ReactDOM.render(
 	<Router history={browserHistory} >
 		<Route path="/" component={App}>
-
-
-
+			<Route path="about" component={About}/>
 		</Route>
 	</Router>,
 	document.getElementById("container")

@@ -3,7 +3,7 @@ var React = require("react")
 // react-bootstrap
 var MenuItem = require("react-bootstrap").MenuItem
 // react-router
-
+var Link = require("react-router").Link
 // this class
 
 
@@ -16,16 +16,17 @@ var DropdownElement = React.createClass({
   onClick: function(e) {
     e.preventDefault();
     console.log(e);
-    var {chooseCourse, course}= this.props;
+    var chooseCourse = this.props.chooseCourse;
+    var course = this.props.course;
     chooseCourse(course);
   },
 
   render: function() {
     var course = this.props.course;
     return (
-      <MenuItem onClick={this.onClick}>
-      {course.name}
-      </MenuItem>
+      <li onClick={this.onClick}>
+      <Link to={course.name}>{course.name}</Link>
+      </li>
     );
   }
 })
