@@ -4,7 +4,7 @@
   "description": "Autograder webfrontend project",
   "main": "index.js",
   "scripts": {
-    "start": "watchify ./components/main.jsx -v -t [ babelify --presets [ react ] ] -o ../public/main.js",
+    "start": "watchify ./components/index.jsx -v -t [ babelify --presets [ react ] ] -o ../public/main.js",
     "homepage": "watchify ../views/homepage/homepage.jsx -v -t [ babelify --presets [ react ] ] -o ../views/homepage/homepage.js"
   },
   "author": "Thomas Darvik and Tomasz Gliniecki",
@@ -16,7 +16,7 @@
     "react": "^0.14.6",
     "react-bootstrap": "^0.28.2",
     "react-dom": "^0.14.6",
-    "react-router": "^1.0.3",
+    "react-router": "^2.0.0",
     "rootpath": "^0.1.2",
     "watchify": "^3.7.0"
   }
