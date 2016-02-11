@@ -2,16 +2,25 @@
 
 developing frontend for autograder system @ UiS
 
+# requirements:
+
+* npm
+* node.js
+
 # Instructions
 
 You need to install npm and run:
 
 $ npm install
 
-to compile your React code run :
+this will install dependencies locally
+
+# Modifications
+
+To compile your JSX, CommonJS run:
 
 $ npm start
 
-compiled JavaScript should be in /build while source in /web
+Compiled code is located in web/public, while source is in web/src
 
 more info at [facebook.github.io](https://facebook.github.io/react/docs/getting-started.html)
