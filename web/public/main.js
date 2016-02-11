@@ -218,13 +218,45 @@ var Topbar = React.createClass({
 
   getInitialState: function () {
     return {
-      courses: [{ id: 0, name: "DAT100" }, { id: 1, name: "DAT200" }, { id: 2, name: "DAT300" }]
+      courses: [{ id: 0, name: "DAT100" }, { id: 1, name: "DAT200" }, { id: 2, name: "DAT300" }],
+      connected: false
+
     };
   },
 
-  chooseCourse: function () {
+  chooseCourse: function (e) {
     this.setState({ choosen: choosen });
+    console.log(e);
   },
+
+  // Creates a websocket connection after the react component has been mounted.
+  //
+  componentDidMount: function () {
+    var ws = this.ws = new WebSocket("ws://localhost:8000/ws");
+    ws.onmessage = this.message;
+    ws.onopen = this.open;
+    ws.onclose = this.close;
+  },
+
+  message: function () {
+    console.log("Message from server received");
+  },
+
+  open: function () {
+    this.setState({ connected: true });
+  },
+
+  close: function () {
+    this.setState({ connected: false });
+  },
+
+  showAbout: function () {
+    if (this.state.connected) {
+      this.ws.send("Send to sever");
+    }
+  },
+
+  logIn: function () {},
 
   // TODO : iterate over buttons available fo user
   render: function () {
@@ -243,7 +275,8 @@ var Topbar = React.createClass({
             { to: "/" },
             "Autograder"
           )
-        )
+        ),
+        React.createElement(Navbar.Toggle, null)
       ),
       React.createElement(
         Navbar.Collapse,
@@ -264,7 +297,7 @@ var Topbar = React.createClass({
             null,
             React.createElement(
               Link,
-              { to: "/about" },
+              { to: "/about", onClick: this.showAbout },
               "About"
             )
           ),
@@ -273,7 +306,7 @@ var Topbar = React.createClass({
             null,
             React.createElement(
               Link,
-              { to: "/login" },
+              { to: "/login", onClick: this.logIn },
               "Log in"
             )
           )

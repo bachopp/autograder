@@ -3,56 +3,48 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"time"
 
 	"github.com/gorilla/websocket"
 )
 
 var webroot = "/var/www/autograder/web/public"
 
+// This "upgrades" browser connection to websocket.
+// default for now
 var upgrader = websocket.Upgrader{}
 
-type userInfo struct {
-	Username      string `json: "gitUsername"`
-	FirstName     string `json: "firstName"`
-	LastName      string `json: "lastName"`
-	Email         string `json: "emailAddress"`
-	StudentNumber string `json: "studentNumber"`
+// This funciton reads input on websocket and prints it back out.
+func echoBack(socket *websocket.Conn) {
+	for {
+
+		// messageType is websocket protocol type, type int
+		messageType, msg, err := socket.ReadMessage()
+		if err != nil {
+			fmt.Print(err)
+			return
+		}
+		fmt.Println(string(msg))
+
+		err = socket.WriteMessage(messageType, msg)
+		if err != nil {
+			fmt.Print(err)
+			return
+		}
+	}
+}
+
+func wsSocket(w http.ResponseWriter, r *http.Request) {
+	socket, err := upgrader.Upgrade(w, r, nil)
+	if err != nil {
+		fmt.Print(err)
+		return
+	}
+	go echoBack(socket)
 }
 
 func fileServer(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, fmt.Sprintf("%s%s", webroot, "index.html"))
 }
-
-func wsSocket(w http.ResponseWriter, r *http.Request) {
-	conn, _ := upgrader.Upgrade(w, r, nil)
-	go func(conn *websocket.Conn) {
-		ch := time.Tick(5 * time.Second)
-
-		for range ch {
-			conn.WriteJSON(userInfo{
-				Username:  "tokams",
-				FirstName: "Tomasz",
-				LastName:  "Gliniecki",
-			})
-
-		}
-	}(conn)
-
-	// echo read write back
-	go func(conn *websocket.Conn) {
-
-		for {
-			mType, msg, _ := conn.ReadMessage()
-
-			conn.WriteMessage(mType, msg)
-
-			// println(string(msg))
-		}
-
-	}(conn)
-}
-
 func main() {
 
 	http.HandleFunc("/ws", wsSocket)

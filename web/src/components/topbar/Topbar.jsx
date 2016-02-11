@@ -18,12 +18,47 @@ var Topbar = React.createClass({
         {id: 0, name:"DAT100"},
         {id: 1, name:"DAT200"},
         {id: 2, name:"DAT300"}
-      ]
+      ],
+      connected: false
+
     };
   },
 
-  chooseCourse: function() {
+  chooseCourse: function(e) {
       this.setState({choosen: choosen});
+      console.log(e);
+  },
+
+  // Creates a websocket connection after the react component has been mounted.
+  //
+  componentDidMount: function() {
+    var ws = this.ws = new WebSocket("ws://localhost:8000/ws");
+    ws.onmessage = this.message;
+    ws.onopen = this.open;
+    ws.onclose = this.close;
+  },
+
+  message: function() {
+    console.log("Message from server received");
+  },
+
+  open: function() {
+    this.setState({connected: true});
+  },
+
+  close: function() {
+    this.setState({connected: false});
+  },
+
+  showAbout: function() {
+    if (this.state.connected) {
+      this.ws.send("Send to sever");
+    }
+  },
+
+
+  logIn: function() {
+
   },
 
   // TODO : iterate over buttons available fo user
@@ -36,24 +71,25 @@ var Topbar = React.createClass({
           <Navbar.Brand>
             <Link to="/">Autograder</Link>
           </Navbar.Brand>
+          <Navbar.Toggle />
         </Navbar.Header>
 
         <Navbar.Collapse>
           <Nav>
 
-          <Dropdown
-          courses={self.state.courses}
-          chooseCourse={self.chooseCourse}
-          />
+            <Dropdown
+            courses={self.state.courses}
+            chooseCourse={self.chooseCourse}
+            />
 
           </Nav>
 
           <Nav pullRight>
             <li>
-              <Link to="/about">About</Link>
+              <Link to="/about" onClick={this.showAbout}>About</Link>
             </li>
             <li>
-              <Link to="/login">Log in</Link>
+              <Link to="/login" onClick={this.logIn}>Log in</Link>
             </li>
           </Nav>
 
