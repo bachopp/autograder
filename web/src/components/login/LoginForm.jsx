@@ -60,19 +60,23 @@ var LoginForm = React.createClass({
     var value = this.state.value;
     return (
       <Navbar.Form>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} className="form-vertical">
             <Modal.Dialog>
               <Modal.Header>
                 Log in to Autograder
               </Modal.Header>
 
                 <Modal.Body>
-                  <Input type="text" value={this.state.login} onChange={this.handleChange} name="login" placeholder="Login" />
-                  <Input type="text" value={this.state.password} onChange={this.handleChange} name="password" placeholder="Password" />
+                  <p>
+                    <Input type="text" value={this.state.login} onChange={this.handleChange} name="login" placeholder="Login" />
+                  </p>
+                  <p>
+                    <Input type="text" value={this.state.password} onChange={this.handleChange} name="password" placeholder="Password" />
+                  </p>
                 </Modal.Body>
 
                 <Modal.Footer>
-                  <ButtonInput type="submit" onSubmit={this.handleSubmit}/>
+                    <ButtonInput type="submit" onSubmit={this.handleSubmit}/>
                 </Modal.Footer>
 
             </Modal.Dialog>

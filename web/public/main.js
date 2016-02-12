@@ -209,7 +209,7 @@ var LoginForm = React.createClass({
       null,
       React.createElement(
         "form",
-        { onSubmit: this.handleSubmit },
+        { onSubmit: this.handleSubmit, className: "form-vertical" },
         React.createElement(
           Modal.Dialog,
           null,
@@ -221,8 +221,16 @@ var LoginForm = React.createClass({
           React.createElement(
             Modal.Body,
             null,
-            React.createElement(Input, { type: "text", value: this.state.login, onChange: this.handleChange, name: "login", placeholder: "Login" }),
-            React.createElement(Input, { type: "text", value: this.state.password, onChange: this.handleChange, name: "password", placeholder: "Password" })
+            React.createElement(
+              "p",
+              null,
+              React.createElement(Input, { type: "text", value: this.state.login, onChange: this.handleChange, name: "login", placeholder: "Login" })
+            ),
+            React.createElement(
+              "p",
+              null,
+              React.createElement(Input, { type: "text", value: this.state.password, onChange: this.handleChange, name: "password", placeholder: "Password" })
+            )
           ),
           React.createElement(
             Modal.Footer,
