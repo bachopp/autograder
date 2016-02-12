@@ -97,7 +97,7 @@ ReactDOM.render(React.createElement(
 var React = require("react");
 
 // react-bootstrap requires
-var Button = require("react-bootstrap").Button;
+var ButtonInput = require("react-bootstrap").ButtonInput;
 // react-router requires
 var Link = require("react-router").Link;
 
@@ -111,10 +111,18 @@ var LoginButton = React.createClass({
   propTypes: {
     login: React.PropTypes.string.isRequired,
     password: React.PropTypes.string.isRequired,
-    handleLogin: React.PropTypes.func.isRequired
+    handleSubmit: React.PropTypes.func.isRequired
   },
 
   // class methods
+  handleClick: function (e) {
+    e.preventDefault();
+    console.log(e);
+    var login = this.props.login;
+    var password = this.props.password;
+    var handleSubmit = this.props.handleSubmit;
+    handleSubmit(login, password);
+  },
 
   render: function () {
     var self = this;
@@ -123,8 +131,8 @@ var LoginButton = React.createClass({
       Link,
       { to: "/" },
       React.createElement(
-        Button,
-        { onClick: this.handleLogin },
+        ButtonInput,
+        { type: "submit", onClick: this.handleClick },
         "Log in "
       )
     );
@@ -138,8 +146,9 @@ var React = require("react");
 
 // react-bootstrap requires
 var Modal = require("react-bootstrap").Modal;
-var Col = require("react-bootstrap").Col;
 var Input = require("react-bootstrap").Input;
+var ButtonInput = require("react-bootstrap").ButtonInput;
+var Navbar = require("react-bootstrap").Navbar;
 
 // reqct-router requires
 var Link = require("react-router").Link;
@@ -151,37 +160,75 @@ var LoginForm = React.createClass({
   displayName: "LoginForm",
 
 
+  // not needed
   getInitialState: function () {
-    return login, password;
+    return {
+      login: '',
+      password: ''
+    };
   },
 
-  handleLogin: function () {
+  componentDidMount: function () {
+    var ws = this.ws = new WebSocket("ws://localhost:8000/ws");
+    ws.onmessage = this.message;
+    ws.onopen = this.open;
+    ws.onclose = this.close;
+  },
+
+  message: function () {
+    console.log("Message from server received");
+  },
+
+  open: function () {
+    this.setState({ connected: true });
+  },
+
+  close: function () {
+    this.setState({ connected: false });
+  },
+
+  handleSubmit: function (e) {
+    e.preventDefault();
     // TODO: send via websocked to server
+    this.ws.send(this.state.login + ":" + this.state.password);
+    this.setState({ login: "", password: "" });
+  },
+
+  handleChange: function (event) {
+    if (event.target.name === "login") {
+      this.setState({ login: event.target.value });
+    } else {
+      this.setState({ password: event.target.value });
+    }
   },
 
   render: function () {
-    var self = this;
+    var value = this.state.value;
     return React.createElement(
-      Col,
-      { md: 6, mdPush: 6 },
+      Navbar.Form,
+      null,
       React.createElement(
-        Modal.Dialog,
-        null,
+        "form",
+        { onSubmit: this.handleSubmit },
         React.createElement(
-          Modal.Header,
+          Modal.Dialog,
           null,
-          "Log in to Autograder"
-        ),
-        React.createElement(
-          Modal.Body,
-          null,
-          React.createElement(Input, { type: "text", placeholder: "Login" }),
-          React.createElement(Input, { type: "text", placeholder: "Password" })
-        ),
-        React.createElement(
-          Modal.Footer,
-          null,
-          React.createElement(LoginButton, null)
+          React.createElement(
+            Modal.Header,
+            null,
+            "Log in to Autograder"
+          ),
+          React.createElement(
+            Modal.Body,
+            null,
+            React.createElement(Input, { type: "text", value: this.state.login, onChange: this.handleChange, name: "login", placeholder: "Login" }),
+            React.createElement(Input, { type: "text", value: this.state.password, onChange: this.handleChange, name: "password", placeholder: "Password" })
+          ),
+          React.createElement(
+            Modal.Footer,
+            null,
+            React.createElement(ButtonInput, { type: "submit", onSubmit: this.handleSubmit })
+          )
         )
       )
     );
