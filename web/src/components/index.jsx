@@ -12,6 +12,7 @@ var Link = require("react-router").Link
 // local components requires
 var Topbar = require("./topbar/Topbar.jsx")
 var About = require("./about/About.jsx")
+var LoginForm = require("./login/LoginForm.jsx")
 
 // this class
 var App = React.createClass({
@@ -32,6 +33,7 @@ ReactDOM.render(
 	<Router history={browserHistory} >
 		<Route path="/" component={App}>
 			<Route path="about" component={About}/>
+			<Route path="login" component={LoginForm} />
 		</Route>
 	</Router>,
 	document.getElementById("container")

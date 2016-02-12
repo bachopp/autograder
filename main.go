@@ -45,6 +45,11 @@ func wsSocket(w http.ResponseWriter, r *http.Request) {
 func fileServer(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, fmt.Sprintf("%s%s", webroot, "index.html"))
 }
+
+func handler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("OYOY")
+}
+
 func main() {
 
 	http.HandleFunc("/ws", wsSocket)

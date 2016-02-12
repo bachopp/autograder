@@ -9,6 +9,7 @@ var Nav = require("react-bootstrap").Nav
 var Link = require("react-router").Link
 // local requires
 var Dropdown = require("./Dropdown.jsx")
+var LoginForm = require("../login/LoginForm.jsx")
 
 // this class
 var Topbar = React.createClass({
@@ -50,15 +51,16 @@ var Topbar = React.createClass({
     this.setState({connected: false});
   },
 
-  showAbout: function() {
+  showAbout: function(e) {
     if (this.state.connected) {
-      this.ws.send("Send to sever");
+      this.ws.send(e.target.href);
     }
   },
 
-
-  logIn: function() {
-
+  logIn: function(e) {
+    if (this.state.connected) {
+      this.ws.send(e.target.href)
+    }
   },
 
   // TODO : iterate over buttons available fo user
