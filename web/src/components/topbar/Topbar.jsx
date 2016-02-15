@@ -11,6 +11,15 @@ var Link = require("react-router").Link
 var Dropdown = require("./Dropdown.jsx")
 var LoginForm = require("../login/LoginForm.jsx")
 
+
+
+var pageRequest = function(request,isServed) {
+  this.pageRequest = request;
+  this.isServed = isServed;
+}
+
+
+
 // this class
 var Topbar = React.createClass({
   getInitialState: function() {
@@ -37,14 +46,25 @@ var Topbar = React.createClass({
     ws.onmessage = this.message;
     ws.onopen = this.open;
     ws.onclose = this.close;
+    
+    /*
+    ws.send();
+    */
+
   },
 
   message: function() {
     console.log("Message from server received");
   },
 
+  getTopBar: function() {
+    var topBarRequest = new pageRequest("topbar",false);
+    var json = JSON.stringify(topBarRequest);
+    ws.send(json);
+  },
   open: function() {
     this.setState({connected: true});
+    this.getTopBar;
   },
 
   close: function() {

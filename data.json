@@ -1,0 +1,20 @@
+{"navbar":[
+	{"Student":[
+		{"id":0,"name":"DAT100"},
+		{"id":0,"name":"DAT100"},
+		{"id":0,"name":"DAT100"},
+		{"id":0,"name":"DAT100"}
+	]},
+	{"Teacher":[
+		{"id":0,"name":"DAT100"},
+		{"id":0,"name":"DAT100"},
+		{"id":0,"name":"DAT100"},
+		{"id":0,"name":"DAT100"}
+	]},
+	{"Admin":[
+		{"id":0,"name":"DAT100"},
+		{"id":0,"name":"DAT100"},
+		{"id":0,"name":"DAT100"},
+		{"id":0,"name":"DAT100"}
+	]}
+]}

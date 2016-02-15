@@ -25,7 +25,7 @@ var DropdownElement = React.createClass({
     var course = this.props.course;
     return (
       <li onClick={this.onClick}>
-      <Link to={course.name}>{course.name}</Link>
+        <Link to={course.name}>{course.name}</Link>
       </li>
     );
   }

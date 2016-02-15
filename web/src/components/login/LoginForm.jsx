@@ -24,13 +24,22 @@ var LoginForm = React.createClass({
 
   componentDidMount: function() {
     var ws = this.ws = new WebSocket("ws://localhost:8000/ws");
-    ws.onmessage = this.message;
+    //ws.addEventListener("message", this.logFromServer );
+    ws.onmessage = this.handleServerMessage;
+    //ws.onmessage = this.message;
     ws.onopen = this.open;
     ws.onclose = this.close;
   },
 
+  handleServerMessage: function(event) {
+    console.log(event.data);
+  },
+  logFromServer: function(event) {
+    console.log(event);
+  },
+
   message: function() {
-    console.log("Message from server received");
+    //Sconsole.log("Message from server received");
   },
 
   open: function() {

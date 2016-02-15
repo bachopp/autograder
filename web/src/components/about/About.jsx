@@ -8,7 +8,9 @@ var Link = require("react-router").Link
 // this class
 
 var About = React.createClass({
-
+  handleMe: function(event) {
+    console.log("hello, world");
+  },
   render: function() {
     var self = this;
     return (
@@ -18,6 +20,7 @@ var About = React.createClass({
           <Modal.Body>
             This is just about page.
             Move along.
+            //<Button onClick={self.props.onClick}>Hello fucker</Button>
           </Modal.Body>
           <Modal.Footer>
             <Link to="/">

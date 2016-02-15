@@ -13,18 +13,22 @@ var webroot = "/var/www/autograder/web/public"
 // default for now
 var upgrader = websocket.Upgrader{}
 
+type Message struct {
+	dataRequest string
+}
+
 // This funciton reads input on websocket and prints it back out.
 func echoBack(socket *websocket.Conn) {
 	for {
 
 		// messageType is websocket protocol type, type int
-		messageType, msg, err := socket.ReadMessage()
+		messageType, 	, err := socket.ReadMessage()
+
 		if err != nil {
 			fmt.Print(err)
 			return
 		}
 		fmt.Println(string(msg))
-
 		err = socket.WriteMessage(messageType, msg)
 		if err != nil {
 			fmt.Print(err)
@@ -32,6 +36,7 @@ func echoBack(socket *websocket.Conn) {
 		}
 	}
 }
+
 
 func wsSocket(w http.ResponseWriter, r *http.Request) {
 	socket, err := upgrader.Upgrade(w, r, nil)
