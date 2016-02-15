@@ -20,7 +20,7 @@ var Dropdown = React.createClass({
         chooseCourse={self.props.chooseCourse}
         courses={self.props.courses}
       />
-    )
+    );
   }
 })
 
