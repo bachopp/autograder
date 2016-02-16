@@ -380,9 +380,12 @@ var Link = require("react-router").Link;
 var Dropdown = require("./Dropdown.jsx");
 var LoginForm = require("../login/LoginForm.jsx");
 
-var pageRequest = function (request, isServed) {
-  this.pageRequest = request;
-  this.isServed = isServed;
+var Request = function (requestType, fromURL, requestedURL, username, password) {
+  this.requestType = requestType;
+  this.fromURL = fromURL;
+  this.requestedURL = requestedURL;
+  this.username = username;
+  this.password = password;
 };
 
 // this class
@@ -415,18 +418,21 @@ var Topbar = React.createClass({
     */
   },
 
-  message: function () {
-    console.log("Message from server received");
+  message: function (response) {
+    var json = JSON.parse(response.data);
+    console.log(json);
+    console.log("Something is in my inbox");
   },
 
   getTopBar: function () {
-    var topBarRequest = new pageRequest("topbar", false);
-    var json = JSON.stringify(topBarRequest);
-    ws.send(json);
+    var topBarRequest = new Request("element", "/", "/course/", "thomas", "darvik");
+    var formatted = JSON.stringify(topBarRequest);
+    console.log(formatted);
+    this.ws.send(formatted);
   },
   open: function () {
     this.setState({ connected: true });
-    this.getTopBar;
+    this.getTopBar();
   },
 
   close: function () {
