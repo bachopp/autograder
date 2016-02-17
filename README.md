@@ -7,6 +7,11 @@ developing frontend for autograder system @ UiS
 * npm
 * node.js
 
+# dependencies: 
+
+* go get github.com/ziutek/mymysql
+* go get github.com/ziutek/thrsafe
+
 # Instructions
 
 You need to install npm and run:
