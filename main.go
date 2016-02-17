@@ -23,7 +23,7 @@ func echoBack(socket *websocket.Conn) {
 	for {
 
 		// messageType is websocket protocol type, type int
-		messageType, 	, err := socket.ReadMessage()
+		messageType, msg, err := socket.ReadMessage()
 
 		if err != nil {
 			fmt.Print(err)
@@ -37,7 +37,6 @@ func echoBack(socket *websocket.Conn) {
 		}
 	}
 }
-
 
 func wsSocket(w http.ResponseWriter, r *http.Request) {
 	socket, err := upgrader.Upgrade(w, r, nil)
