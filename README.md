@@ -4,6 +4,7 @@ developing frontend for autograder system @ UiS
 
 # requirements:
 
+* mysql-server
 * npm
 * node.js 
 
