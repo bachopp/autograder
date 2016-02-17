@@ -8,10 +8,10 @@ developing frontend for autograder system @ UiS
 * node.js
 
 # dependencies: 
-*
-$ go get github.com/ziutek/mymysql/thrsafe
-$ go get github.com/ziutek/mymysql/autorc
-$ go get github.com/ziutek/mymysql/godrv
+
+	$ go get github.com/ziutek/mymysql/thrsafe
+	$ go get github.com/ziutek/mymysql/autorc
+	$ go get github.com/ziutek/mymysql/godrv
 
 # Instructions
 
