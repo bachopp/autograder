@@ -20,17 +20,13 @@ var Request = function(requestType,fromURL,requestedURL,username,password) {
   this.password = password;
 }
 
+
 // this class
 var Topbar = React.createClass({
   getInitialState: function() {
     return {
-      courses: [
-        {id: 0, name:"DAT100"},
-        {id: 1, name:"DAT200"},
-        {id: 2, name:"DAT300"}
-      ],
-      connected: false
-
+      connected: false,
+      roles: []
     };
   },
 
@@ -46,23 +42,17 @@ var Topbar = React.createClass({
     ws.onmessage = this.message;
     ws.onopen = this.open;
     ws.onclose = this.close;
-    
-    /*
-    ws.send();
-    */
-
   },
 
   message: function(response) {
-    var json = JSON.parse(response.data);
-    console.log(json);
-    console.log("Something is in my inbox");
+    var responseObject = JSON.parse(response.data);
+    var dropDownElements = responseObject.roles;
+    this.setState({roles: dropDownElements});
   },
 
   getTopBar: function() {
     var topBarRequest = new Request("element","/","/course/","thomas","darvik");
     var formatted = JSON.stringify(topBarRequest);
-    console.log(formatted);
     this.ws.send(formatted);
   },
   open: function() {
@@ -91,7 +81,6 @@ var Topbar = React.createClass({
     var self = this;
     return (
       <Navbar inverse>
-
         <Navbar.Header>
           <Navbar.Brand>
             <Link to="/">Autograder</Link>
@@ -100,15 +89,9 @@ var Topbar = React.createClass({
         </Navbar.Header>
 
         <Navbar.Collapse>
-          <Nav>
-
             <Dropdown
-            courses={self.state.courses}
-            chooseCourse={self.chooseCourse}
+            roles={self.state.roles}
             />
-
-          </Nav>
-
           <Nav pullRight>
             <li>
               <Link to="/about" onClick={this.showAbout}>About</Link>

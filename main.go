@@ -29,20 +29,6 @@ type Request struct {
 	Username     string `json:"username"`
 }
 
-/*
-type Response struct {
-	ElementName string `json:"elementName"`
-	Roles       []Role `json:"roles"`
-}
-type Role struct {
-	DropDownName     string            `json:"dropDownName"`
-	DropDownElements []DropDownElement `json:"dropDownElements"`
-}
-type DropDownElement struct {
-	Id   int    `json:"id,string,omitempty"`
-	Name string `json:"name"`
-}*/
-
 // This "upgrades" browser connection to websocket.
 // default for now
 var upgrader = websocket.Upgrader{}

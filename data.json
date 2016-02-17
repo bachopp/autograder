@@ -11,10 +11,6 @@
 				{
 					"id":"1",
 					"name":"Course 2"
-				},
-				{
-					"id":"2",
-					"name":"Course 3"
 				}
 			]
 		},
@@ -22,15 +18,15 @@
 			"dropDownName":"Teacher",
 			"dropDownElements":[
 				{
-					"id":"0",
+					"id":"2",
 					"name":"Course 1"
 				},
 				{
-					"id":"1",
+					"id":"3",
 					"name":"Course 2"
 				},
 				{
-					"id":"2",
+					"id":"4",
 					"name":"Course 3"
 				}
 			]
@@ -39,19 +35,27 @@
 			"dropDownName":"Admin",
 			"dropDownElements":[
 				{
-					"id":"0",
+					"id":"5",
 					"name":"Course 1"
 				},
 				{
-					"id":"1",
+					"id":"6",
 					"name":"Course 2"
 				},
 				{
-					"id":"2",
+					"id":"7",
 					"name":"Course 3"
+				},
+				{
+					"id":"8",
+					"name":"Course 3"
+				},
+				{
+					"id":"9",
+					"name":"New course"
 				}
 			]
 		}
 	]
-	
+
 }
