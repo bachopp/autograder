@@ -5,7 +5,8 @@ developing frontend for autograder system @ UiS
 # requirements:
 
 * npm
-* node.js *node.js is installed with [npm](https://www.npmjs.com/)*
+* node.js 
+*node.js is installed with [npm](https://www.npmjs.com/)*
 
 # dependencies: 
 
