@@ -6,7 +6,6 @@ import (
 	"net/http"
 
 	"io/ioutil"
-	"net/http"
 
 	"github.com/bacheloroppgave/autograder/database"
 	"github.com/gorilla/websocket"
