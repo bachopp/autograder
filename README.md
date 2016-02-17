@@ -6,6 +6,7 @@ developing frontend for autograder system @ UiS
 
 * npm
 * node.js 
+
 *node.js is installed with [npm](https://www.npmjs.com/)*
 
 # dependencies: 
