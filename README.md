@@ -5,7 +5,7 @@ developing frontend for autograder system @ UiS
 # requirements:
 
 * npm
-* node.js
+* node.js *node.js is installed with [npm](https://www.npmjs.com/)*
 
 # dependencies: 
 
@@ -17,7 +17,7 @@ developing frontend for autograder system @ UiS
 
 You need to install npm and run:
 
-$ npm install
+	$ npm install
 
 this will install dependencies locally
 
@@ -25,7 +25,7 @@ this will install dependencies locally
 
 To compile your JSX, CommonJS run:
 
-$ npm start
+	$ npm start
 
 Compiled code is located in web/public, while source is in web/src
 
