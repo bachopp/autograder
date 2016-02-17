@@ -11,6 +11,8 @@ developing frontend for autograder system @ UiS
 
 # dependencies: 
 
+mymysql is diver for mysql-server, you need to have mysql-server instance running for autograder to work.
+
 	$ go get github.com/ziutek/mymysql/thrsafe
 	$ go get github.com/ziutek/mymysql/autorc
 	$ go get github.com/ziutek/mymysql/godrv
