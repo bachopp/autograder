@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/bacheloroppgave/autograder/database"
 	"github.com/gorilla/websocket"
 )
 
@@ -47,11 +48,11 @@ func fileServer(w http.ResponseWriter, r *http.Request) {
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("OYOY")
+	// TODO: write new handler for websocked connection to handle urs differently
 }
 
 func main() {
-
+	database.DbInit("agdatabase")
 	http.HandleFunc("/ws", wsSocket)
 	http.Handle("/", http.FileServer(http.Dir(webroot)))
 	http.ListenAndServe(":8000", nil)
