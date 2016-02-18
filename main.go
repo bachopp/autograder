@@ -7,7 +7,7 @@ import (
 
 	"io/ioutil"
 
-	"github.com/bacheloroppgave/autograder/database"
+	"github.com/bachopp/autograder/database"
 	"github.com/gorilla/websocket"
 )
 
