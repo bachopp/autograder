@@ -1,36 +1,15 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"net/http"
 
-	"io/ioutil"
-
-	"github.com/bacheloroppgave/autograder/database"
+	"github.com/bachopp/autograder/database"
+	"github.com/bachopp/autograder/jsonify"
 	"github.com/gorilla/websocket"
 )
 
 var webroot = "/var/www/autograder/web/public"
-
-type MyJSON struct {
-	ElementName string `json:"elementName"`
-	Roles       []struct {
-		DropDownElements []struct {
-			ID   string `json:"id"`
-			Name string `json:"name"`
-		} `json:"dropDownElements"`
-		DropDownName string `json:"dropDownName"`
-	} `json:"roles"`
-}
-
-type Request struct {
-	FromURL      string `json:"fromURL"`
-	Password     string `json:"password"`
-	RequestType  string `json:"requestType"`
-	RequestedURL string `json:"requestedURL"`
-	Username     string `json:"username"`
-}
 
 // This "upgrades" browser connection to websocket.
 // default for now
@@ -47,40 +26,18 @@ func echoBack(socket *websocket.Conn) {
 
 		// messageType is websocket protocol type, type int
 		messageType, msg, err := socket.ReadMessage()
-		var myReq Request
-		err = json.Unmarshal(msg, &myReq)
 
+		byte, err := jsonify.GetFile("./data.json")
 		if err != nil {
 			fmt.Print(err)
 			return
 		}
+		fmt.Println(string(byte))
 
-		datafilePath := "./data.json"
-
-		file, err := ioutil.ReadFile(datafilePath)
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-		socket.WriteMessage(messageType, file)
-		/* IKKE KAST DENNE DELEN AV KODEN
-		jsonFile, _ := os.Open(datafilePath)
-		fmt.Println(jsonFile.Read(b))
-		var navbarJSON MyJSON
-		err = json.NewDecoder(jsonFile).Decode(&navbarJSON)
-		jsonString := string(navbarJSON)
-		fmt.Println(jsonString)
-		if err != nil {
-			fmt.Print(err)
-			return
-		}
-		*/
-		//err = socket.WriteMessage(messageType, navbarJSON)
-		//err = socket.WriteMessage(messageType, msg)
-		/*if err != nil {
-			fmt.Print(err)
-			return
-		}*/
+		var lol jsonify.Request
+		returned, err := jsonify.HandleRequest(byte, lol)
+		fmt.Println(returned)
+		socket.WriteMessage(messageType, msg)
 	}
 }
 
