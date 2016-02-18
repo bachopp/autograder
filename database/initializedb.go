@@ -38,12 +38,15 @@ func connectDb() mysql.Conn {
 }
 
 func createDatabase(db mysql.Conn, dbname string) {
-	fmt.Printf("creating database\n")
 
 	_, _, err := db.Query("DROP SCHEMA " + dbname)
 	if err != nil {
-		panic(err)
+		fmt.Printf("drop database failed, database not found\n")
+	} else {
+		fmt.Printf("dropping old database\n")
 	}
+
+	fmt.Printf("creating database\n")
 	_, _, err = db.Query("CREATE SCHEMA " + dbname)
 	if err != nil {
 		panic(err)
