@@ -448,8 +448,9 @@ var Link = require("react-router").Link;
 var Dropdown = require("./Dropdown.jsx");
 var LoginForm = require("../login/LoginForm.jsx");
 
-var Request = function (requestType, fromURL, requestedURL, username, password) {
+var Request = function (requestType, requestedElement, fromURL, requestedURL, username, password) {
   this.requestType = requestType;
+  this.requestedElement = requestedElement;
   this.fromURL = fromURL;
   this.requestedURL = requestedURL;
   this.username = username;
@@ -488,7 +489,7 @@ var Topbar = React.createClass({
   },
 
   getTopBar: function () {
-    var topBarRequest = new Request("element", "/", "/course/", "thomas", "darvik");
+    var topBarRequest = new Request("element", "navbar", "/", "/course/", "thomas", "darvik");
     var formatted = JSON.stringify(topBarRequest);
     this.ws.send(formatted);
   },

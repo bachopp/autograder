@@ -1,3 +1,8 @@
+/*
+	Changed echoBack() to handleRequest() and implemented
+	request handler. Right now, only navbar-requests can be handled
+*/
+
 package main
 
 import (
@@ -20,25 +25,36 @@ var isAdmin bool
 var isStudent bool
 var isTeacher bool
 
-// This funciton reads input on websocket and prints it back out.
-func echoBack(socket *websocket.Conn) {
+/*
+	This function handles the socket connection
+	TODO: Implement and remove the websocket and request passing into
+	this function. Is it possible to use pointers or something similar?
+*/
+func handleRequest(socket *websocket.Conn) {
 	for {
-
-		// messageType is websocket protocol type, type int
-		messageType, msg, err := socket.ReadMessage()
-
-		byte, err := jsonify.GetFile("./data.json")
+		msgType, msg, err := socket.ReadMessage()
 		if err != nil {
-			fmt.Print(err)
+			fmt.Println(err)
 			return
 		}
-		fmt.Println(string(byte))
+		var request jsonify.Request
+		// this is the request struct with all fields filled out
+		request, err = jsonify.Structify(msg, request)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
 
-		var lol jsonify.Request
-		returned, err := jsonify.HandleRequest(byte, lol)
-		fmt.Println(returned)
-		socket.WriteMessage(messageType, msg)
+		if request.RequestedElement == "navbar" {
+			file, err := jsonify.GetFile("./data.json")
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+			socket.WriteMessage(msgType, file)
+		}
 	}
+
 }
 
 func wsSocket(w http.ResponseWriter, r *http.Request) {
@@ -47,7 +63,7 @@ func wsSocket(w http.ResponseWriter, r *http.Request) {
 		fmt.Print(err)
 		return
 	}
-	go echoBack(socket)
+	go handleRequest(socket)
 }
 
 func fileServer(w http.ResponseWriter, r *http.Request) {

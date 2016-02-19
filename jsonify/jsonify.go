@@ -9,11 +9,12 @@ import (
 
 // Request struct is the skeleton of the websocket request
 type Request struct {
-	FromURL      string `json:"fromURL"`
-	Password     string `json:"password"`
-	RequestType  string `json:"requestType"`
-	RequestedURL string `json:"requestedURL"`
-	Username     string `json:"username"`
+	FromURL          string `json:"fromURL"`
+	RequestedElement string `json:"requestedElement"`
+	Password         string `json:"password"`
+	RequestType      string `json:"requestType"`
+	RequestedURL     string `json:"requestedURL"`
+	Username         string `json:"username"`
 }
 
 // GetFile opens JSON files and returns the format as a struct
@@ -34,10 +35,10 @@ func GetFile(filename string) ([]byte, error) {
 }
 
 /*
-HandleRequest inputs the JSON-file as []byte and an empty struct.
+Structify inputs the JSON-file as []byte and an empty struct.
 Returns the struct with data.
 */
-func HandleRequest(data []byte, request Request) (Request, error) {
+func Structify(data []byte, request Request) (Request, error) {
 	err := json.Unmarshal(data, &request)
 	return request, err
 }
