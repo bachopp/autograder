@@ -11,6 +11,8 @@ import (
 
 // InitializeDb creates all neccesary tables for autograder
 func InitializeDb() {
+	// database name in sql.Open is required, as a result one needs to create a database before starting the server.
+	// name of the database should be "agdatabase"
 	db, err := sql.Open("mymysql",
 		"agdatabase/autograder/autograder")
 	if err != nil {
