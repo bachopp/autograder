@@ -102,7 +102,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	database.DbInit("agdatabase")
+	database.InitializeDb()
 	http.HandleFunc("/ws", wsSocket)
 	http.Handle("/", http.FileServer(http.Dir(webroot)))
 	http.ListenAndServe(":8000", nil)
