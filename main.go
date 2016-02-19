@@ -40,12 +40,15 @@ func handleRequest(socket *websocket.Conn) {
 		var request jsonify.Request
 		// this is the request struct with all fields filled out
 		request, err = jsonify.Structify(msg, request)
+		fmt.Printf("%+v\n", request)
 		if err != nil {
 			fmt.Println(err)
 			return
 		}
 
-		if request.RequestedElement == "navbar" {
+		// TODO: We should fix this. Maybe a switch-case is good enough?
+		switch request.RequestedElement {
+		case "navbar":
 			file, err := jsonify.GetFile("./data.json")
 			if err != nil {
 				fmt.Println(err)
@@ -53,6 +56,7 @@ func handleRequest(socket *websocket.Conn) {
 			}
 			socket.WriteMessage(msgType, file)
 		}
+
 	}
 
 }
