@@ -9,16 +9,13 @@ var Link = require("react-router").Link
 
 var DropdownElement = React.createClass({
   propTypes: {
-    //chooseCourse: React.PropTypes.func.isRequired,
     course: React.PropTypes.object.isRequired
   },
 
   onClick: function(e) {
     e.preventDefault();
     console.log(e);
-    //var chooseCourse = this.props.chooseCourse;
     var course = this.props.course;
-    //chooseCourse(course);
   },
 
   render: function() {

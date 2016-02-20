@@ -35,24 +35,25 @@ func handleRequest(socket *websocket.Conn) {
 	for {
 		msgType, msg, err := socket.ReadMessage()
 		if err != nil {
-			fmt.Println(err)
+			fmt.Printf("ERROR: %s\n", err)
 			return
 		}
 		var request jsonify.Request
 		// this is the request struct with all fields filled out
 		request, err = jsonify.Structify(msg, request)
-		fmt.Printf("%+v\n", request)
+		fmt.Printf("%+v TEST\n", request)
 		if err != nil {
-			fmt.Println(err)
+			fmt.Printf("ERROR: %s\n", err)
 			return
 		}
 
 		// TODO: We should fix this. Maybe a switch-case is good enough?
 		switch request.RequestedElement {
 		case "navbar":
+			// TODO: Here comes logic for authorization of requested element
 			file, err := jsonify.GetFile("./data.json")
 			if err != nil {
-				fmt.Println(err)
+				fmt.Printf("ERROR: %s\n", err)
 				return
 			}
 			socket.WriteMessage(msgType, file)
@@ -65,7 +66,7 @@ func handleRequest(socket *websocket.Conn) {
 func wsSocket(w http.ResponseWriter, r *http.Request) {
 	socket, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
-		fmt.Print(err)
+		fmt.Println(err)
 		return
 	}
 	go handleRequest(socket)

@@ -11,7 +11,6 @@ var DropdownElement = require("./DropdownElement.jsx")
 var DropdownList = React.createClass({
 
   propTypes: {
-    //chooseCourse: React.PropTypes.func.isRequired,
     courses: React.PropTypes.array,
     title: React.PropTypes.string,
   },
