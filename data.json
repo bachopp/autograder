@@ -55,6 +55,19 @@
 					"name":"New course"
 				}
 			]
+		},
+		{
+			"dropDownName":"Breaking?",
+			"dropDownElements":[
+				{
+					"id":"10",
+					"name":"<script>console.log('hello, breaking');</script>"
+				},
+				{
+					"id":"11",
+					"name":"<a>Close</a>"
+				}
+			]
 		}
 	]
 

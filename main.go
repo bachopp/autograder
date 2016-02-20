@@ -1,36 +1,26 @@
+/*
+	Changed echoBack() to handleRequest() and implemented
+	request handler. Right now, only navbar-requests can be handled
+*/
+
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"net/http"
 
+<<<<<<< HEAD
 	"io/ioutil"
 
 	"github.com/bachopp/autograder/database"
+=======
+	"github.com/bachopp/autograder/database"
+	"github.com/bachopp/autograder/jsonify"
+>>>>>>> feature/json
 	"github.com/gorilla/websocket"
 )
 
 var webroot = "/var/www/autograder/web/public"
-
-type MyJSON struct {
-	ElementName string `json:"elementName"`
-	Roles       []struct {
-		DropDownElements []struct {
-			ID   string `json:"id"`
-			Name string `json:"name"`
-		} `json:"dropDownElements"`
-		DropDownName string `json:"dropDownName"`
-	} `json:"roles"`
-}
-
-type Request struct {
-	FromURL      string `json:"fromURL"`
-	Password     string `json:"password"`
-	RequestType  string `json:"requestType"`
-	RequestedURL string `json:"requestedURL"`
-	Username     string `json:"username"`
-}
 
 // This "upgrades" browser connection to websocket.
 // default for now
@@ -41,47 +31,40 @@ var isAdmin bool
 var isStudent bool
 var isTeacher bool
 
-// This funciton reads input on websocket and prints it back out.
-func echoBack(socket *websocket.Conn) {
+/*
+	This function handles the socket connection
+	TODO: Implement and remove the websocket and request passing into
+	this function. Is it possible to use pointers or something similar?
+*/
+func handleRequest(socket *websocket.Conn) {
 	for {
-
-		// messageType is websocket protocol type, type int
-		messageType, msg, err := socket.ReadMessage()
-		var myReq Request
-		err = json.Unmarshal(msg, &myReq)
-
-		if err != nil {
-			fmt.Print(err)
-			return
-		}
-
-		datafilePath := "./data.json"
-
-		file, err := ioutil.ReadFile(datafilePath)
+		msgType, msg, err := socket.ReadMessage()
 		if err != nil {
 			fmt.Println(err)
 			return
 		}
-		socket.WriteMessage(messageType, file)
-		/* IKKE KAST DENNE DELEN AV KODEN
-		jsonFile, _ := os.Open(datafilePath)
-		fmt.Println(jsonFile.Read(b))
-		var navbarJSON MyJSON
-		err = json.NewDecoder(jsonFile).Decode(&navbarJSON)
-		jsonString := string(navbarJSON)
-		fmt.Println(jsonString)
+		var request jsonify.Request
+		// this is the request struct with all fields filled out
+		request, err = jsonify.Structify(msg, request)
+		fmt.Printf("%+v\n", request)
 		if err != nil {
-			fmt.Print(err)
+			fmt.Println(err)
 			return
 		}
-		*/
-		//err = socket.WriteMessage(messageType, navbarJSON)
-		//err = socket.WriteMessage(messageType, msg)
-		/*if err != nil {
-			fmt.Print(err)
-			return
-		}*/
+
+		// TODO: We should fix this. Maybe a switch-case is good enough?
+		switch request.RequestedElement {
+		case "navbar":
+			file, err := jsonify.GetFile("./data.json")
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+			socket.WriteMessage(msgType, file)
+		}
+
 	}
+
 }
 
 func wsSocket(w http.ResponseWriter, r *http.Request) {
@@ -90,7 +73,7 @@ func wsSocket(w http.ResponseWriter, r *http.Request) {
 		fmt.Print(err)
 		return
 	}
-	go echoBack(socket)
+	go handleRequest(socket)
 }
 
 func fileServer(w http.ResponseWriter, r *http.Request) {

@@ -79,6 +79,7 @@ var LoginForm = require("./login/LoginForm.jsx");
 var App = React.createClass({
 	displayName: "App",
 
+
 	render: function () {
 		return React.createElement(
 			"div",
@@ -166,6 +167,7 @@ var LoginButton = require("./LoginButton.jsx");
 
 var LoginForm = React.createClass({
   displayName: "LoginForm",
+
 
   // not needed
   getInitialState: function () {
@@ -406,6 +408,7 @@ var DropdownElement = require("./DropdownElement.jsx");
 var DropdownList = React.createClass({
   displayName: "DropdownList",
 
+
   propTypes: {
     //chooseCourse: React.PropTypes.func.isRequired,
     courses: React.PropTypes.array,
@@ -445,8 +448,9 @@ var Link = require("react-router").Link;
 var Dropdown = require("./Dropdown.jsx");
 var LoginForm = require("../login/LoginForm.jsx");
 
-var Request = function (requestType, fromURL, requestedURL, username, password) {
+var Request = function (requestType, requestedElement, fromURL, requestedURL, username, password) {
   this.requestType = requestType;
+  this.requestedElement = requestedElement;
   this.fromURL = fromURL;
   this.requestedURL = requestedURL;
   this.username = username;
@@ -485,7 +489,7 @@ var Topbar = React.createClass({
   },
 
   getTopBar: function () {
-    var topBarRequest = new Request("element", "/", "/course/", "thomas", "darvik");
+    var topBarRequest = new Request("element", "navbar", "/", "/course/", "thomas", "darvik");
     var formatted = JSON.stringify(topBarRequest);
     this.ws.send(formatted);
   },
@@ -2573,7 +2577,6 @@ var Dropdown = (function (_React$Component) {
     return _react2['default'].createElement(
       Component,
       _extends({}, props, {
-        tabIndex: '-1',
         className: _classnames2['default'](this.props.className, rootClasses)
       }),
       children
@@ -4710,7 +4713,37 @@ var Modal = _react2['default'].createClass({
      * A callback fired when the header closeButton or non-static backdrop is
      * clicked. Required if either are specified.
      */
-    onHide: _react2['default'].PropTypes.func
+    onHide: _react2['default'].PropTypes.func,
+
+    /**
+     * Callback fired before the Modal transitions in
+     */
+    onEnter: _react2['default'].PropTypes.func,
+
+    /**
+     * Callback fired as the Modal begins to transition in
+     */
+    onEntering: _react2['default'].PropTypes.func,
+
+    /**
+     * Callback fired after the Modal finishes transitioning in
+     */
+    onEntered: _react2['default'].PropTypes.func,
+
+    /**
+     * Callback fired right before the Modal transitions out
+     */
+    onExit: _react2['default'].PropTypes.func,
+
+    /**
+     * Callback fired as the Modal begins to transition out
+     */
+    onExiting: _react2['default'].PropTypes.func,
+
+    /**
+     * Callback fired after the Modal finishes transitioning out
+     */
+    onExited: _react2['default'].PropTypes.func
   }),
 
   childContextTypes: {
@@ -6767,7 +6800,11 @@ var Pagination = _react2['default'].createClass({
     items: _react2['default'].PropTypes.number,
     maxButtons: _react2['default'].PropTypes.number,
     /**
-     * When `true`, will display the default node value ('...').
+     * When `true`, will display the first and the last button page
+     */
+    boundaryLinks: _react2['default'].PropTypes.bool,
+    /**
+     * When `true`, will display the default node value ('&hellip;').
      * Otherwise, will display provided node (when specified).
      */
     ellipsis: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.bool, _react2['default'].PropTypes.node]),
@@ -6808,6 +6845,7 @@ var Pagination = _react2['default'].createClass({
       prev: false,
       next: false,
       ellipsis: true,
+      boundaryLinks: false,
       buttonComponentClass: _SafeAnchor2['default'],
       bsClass: 'pagination'
     };
@@ -6825,6 +6863,7 @@ var Pagination = _react2['default'].createClass({
     var onSelect = _props.onSelect;
     var ellipsis = _props.ellipsis;
     var buttonComponentClass = _props.buttonComponentClass;
+    var boundaryLinks = _props.boundaryLinks;
 
     if (maxButtons) {
       var hiddenPagesBefore = activePage - parseInt(maxButtons / 2, 10);
@@ -6858,6 +6897,32 @@ var Pagination = _react2['default'].createClass({
       ));
     }
 
+    if (boundaryLinks && ellipsis && startPage !== 1) {
+      pageButtons.unshift(_react2['default'].createElement(
+        _PaginationButton2['default'],
+        {
+          key: 'ellipsisFirst',
+          disabled: true,
+          buttonComponentClass: buttonComponentClass },
+        _react2['default'].createElement(
+          'span',
+          { 'aria-label': 'More' },
+          this.props.ellipsis === true ? '…' : this.props.ellipsis
+        )
+      ));
+
+      pageButtons.unshift(_react2['default'].createElement(
+        _PaginationButton2['default'],
+        {
+          key: 1,
+          eventKey: 1,
+          active: false,
+          onSelect: onSelect,
+          buttonComponentClass: buttonComponentClass },
+        '1'
+      ));
+    }
+
     if (maxButtons && hasHiddenPagesAfter && ellipsis) {
       pageButtons.push(_react2['default'].createElement(
         _PaginationButton2['default'],
@@ -6868,9 +6933,22 @@ var Pagination = _react2['default'].createClass({
         _react2['default'].createElement(
           'span',
           { 'aria-label': 'More' },
-          this.props.ellipsis === true ? '...' : this.props.ellipsis
+          this.props.ellipsis === true ? '…' : this.props.ellipsis
         )
       ));
+
+      if (boundaryLinks && endPage !== items) {
+        pageButtons.push(_react2['default'].createElement(
+          _PaginationButton2['default'],
+          {
+            key: items,
+            eventKey: items,
+            active: false,
+            onSelect: onSelect,
+            buttonComponentClass: buttonComponentClass },
+          items
+        ));
+      }
     }
 
     return pageButtons;
@@ -8002,10 +8080,11 @@ var SplitButton = (function (_React$Component) {
     var onClick = _props.onClick;
     var target = _props.target;
     var href = _props.href;
+    var toggleLabel = _props.toggleLabel;
     var bsSize = _props.bsSize;
     var bsStyle = _props.bsStyle;
 
-    var props = _objectWithoutProperties(_props, ['children', 'title', 'onClick', 'target', 'href', 'bsSize', 'bsStyle']);
+    var props = _objectWithoutProperties(_props, ['children', 'title', 'onClick', 'target', 'href', 'toggleLabel', 'bsSize', 'bsStyle']);
 
     var disabled = props.disabled;
 
@@ -8028,7 +8107,7 @@ var SplitButton = (function (_React$Component) {
         title
       ),
       _react2['default'].createElement(_SplitToggle2['default'], {
-        'aria-label': title,
+        'aria-label': toggleLabel || title,
         bsStyle: bsStyle,
         bsSize: bsSize,
         disabled: disabled
@@ -8056,7 +8135,11 @@ SplitButton.propTypes = _extends({}, _Dropdown2['default'].propTypes, {
   /**
    * The content of the split button.
    */
-  title: _react2['default'].PropTypes.node.isRequired
+  title: _react2['default'].PropTypes.node.isRequired,
+  /**
+   * Accessible label for the toggle; the value of `title` if not specified.
+   */
+  toggleLabel: _react2['default'].PropTypes.string
 });
 
 SplitButton.defaultProps = {
@@ -9548,15 +9631,11 @@ var _SafeAnchor3 = _interopRequireDefault(_SafeAnchor2);
 
 exports.SafeAnchor = _SafeAnchor3['default'];
 
-var _SplitButton3 = require('./SplitButton');
+var _SplitButton2 = require('./SplitButton');
 
-var _SplitButton4 = _interopRequireDefault(_SplitButton3);
+var _SplitButton3 = _interopRequireDefault(_SplitButton2);
 
-exports.SplitButton = _SplitButton4['default'];
-
-var _SplitButton5 = _interopRequireDefault(_SplitButton3);
-
-exports.SplitButton = _SplitButton5['default'];
+exports.SplitButton = _SplitButton3['default'];
 
 var _Tab2 = require('./Tab');
 
@@ -14136,6 +14215,9 @@ var Modal = _react2['default'].createClass({
 
     /**
      * A callback fired when either the backdrop is clicked, or the escape key is pressed.
+     *
+     * The `onHide` callback only signals intent from the Modal,
+     * you must actually set the `show` prop to `false` for the Modal to close.
      */
     onHide: _react2['default'].PropTypes.func,
 
@@ -14181,30 +14263,33 @@ var Modal = _react2['default'].createClass({
     transition: _reactPropTypesLibElementType2['default'],
 
     /**
-     * The `timeout` of the dialog transition if specified. This number is used to ensure that transition callbacks are always
-     * fired, even if browser transition events are canceled.
+     * The `timeout` of the dialog transition if specified. This number is used to ensure that
+     * transition callbacks are always fired, even if browser transition events are canceled.
      *
      * See the Transition `timeout` prop for more infomation.
      */
     dialogTransitionTimeout: _react2['default'].PropTypes.number,
 
     /**
-     * The `timeout` of the backdrop transition if specified. This number is used to ensure that transition callbacks are always
-     * fired, even if browser transition events are canceled.
+     * The `timeout` of the backdrop transition if specified. This number is used to
+     * ensure that transition callbacks are always fired, even if browser transition events are canceled.
      *
      * See the Transition `timeout` prop for more infomation.
      */
     backdropTransitionTimeout: _react2['default'].PropTypes.number,
 
     /**
-     * When `true` The modal will automatically shift focus to itself when it opens, and replace it to the last focused element when it closes.
-     * Generally this should never be set to false as it makes the Modal less accessible to assistive technologies, like screen readers.
+     * When `true` The modal will automatically shift focus to itself when it opens, and
+     * replace it to the last focused element when it closes.
+     * Generally this should never be set to false as it makes the Modal less
+     * accessible to assistive technologies, like screen readers.
      */
     autoFocus: _react2['default'].PropTypes.bool,
 
     /**
      * When `true` The modal will prevent focus from leaving the Modal while open.
-     * Generally this should never be set to false as it makes the Modal less accessible to assistive technologies, like screen readers.
+     * Generally this should never be set to false as it makes the Modal less
+     * accessible to assistive technologies, like screen readers.
      */
     enforceFocus: _react2['default'].PropTypes.bool
 
@@ -14228,8 +14313,6 @@ var Modal = _react2['default'].createClass({
   },
 
   render: function render() {
-    var _this = this;
-
     var _props = this.props;
     var children = _props.children;
     var Transition = _props.transition;
@@ -14246,10 +14329,6 @@ var Modal = _react2['default'].createClass({
 
     var show = !!props.show;
     var dialog = _react2['default'].Children.only(this.props.children);
-
-    var setMountNode = function setMountNode(ref) {
-      return _this.mountNode = !ref || ref.getMountNode();
-    };
 
     var mountModal = show || Transition && !this.state.exited;
 
@@ -14290,7 +14369,7 @@ var Modal = _react2['default'].createClass({
     return _react2['default'].createElement(
       _Portal2['default'],
       {
-        ref: setMountNode,
+        ref: this.setMountNode,
         container: props.container
       },
       _react2['default'].createElement(
@@ -14385,6 +14464,10 @@ var Modal = _react2['default'].createClass({
     this._onFocusinListener = _utilsAddFocusListener2['default'](this.enforceFocus);
 
     this.focus();
+
+    if (this.props.onShow) {
+      this.props.onShow();
+    }
   },
 
   onHide: function onHide() {
@@ -14395,6 +14478,10 @@ var Modal = _react2['default'].createClass({
     this._onFocusinListener.remove();
 
     this.restoreLastFocus();
+  },
+
+  setMountNode: function setMountNode(ref) {
+    this.mountNode = ref ? ref.getMountNode() : ref;
   },
 
   handleHidden: function handleHidden() {
@@ -14546,7 +14633,7 @@ function findContainer(data, modal) {
 
 var ModalManager = (function () {
   function ModalManager() {
-    var hideSiblingNodes = arguments[0] === undefined ? true : arguments[0];
+    var hideSiblingNodes = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
 
     _classCallCheck(this, ModalManager);
 
@@ -14622,7 +14709,8 @@ var ModalManager = (function () {
 
     this.modals.splice(modalIdx, 1);
 
-    //if that was the last modal in a container, clean it up.
+    // if that was the last modal in a container,
+    // clean up the container stylinhg.
     if (data.modals.length === 0) {
       Object.keys(data.style).forEach(function (key) {
         return container.style[key] = data.style[key];
@@ -14663,7 +14751,7 @@ function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in ob
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var _react = require('react');
 
@@ -14690,6 +14778,8 @@ var _reactPropTypesLibElementType2 = _interopRequireDefault(_reactPropTypesLibEl
  */
 
 var Overlay = (function (_React$Component) {
+  _inherits(Overlay, _React$Component);
+
   function Overlay(props, context) {
     _classCallCheck(this, Overlay);
 
@@ -14698,8 +14788,6 @@ var Overlay = (function (_React$Component) {
     this.state = { exited: !props.show };
     this.onHiddenListener = this.handleHidden.bind(this);
   }
-
-  _inherits(Overlay, _React$Component);
 
   Overlay.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
     if (nextProps.show) {
@@ -14716,11 +14804,12 @@ var Overlay = (function (_React$Component) {
     var containerPadding = _props.containerPadding;
     var target = _props.target;
     var placement = _props.placement;
+    var shouldUpdatePosition = _props.shouldUpdatePosition;
     var rootClose = _props.rootClose;
     var children = _props.children;
     var Transition = _props.transition;
 
-    var props = _objectWithoutProperties(_props, ['container', 'containerPadding', 'target', 'placement', 'rootClose', 'children', 'transition']);
+    var props = _objectWithoutProperties(_props, ['container', 'containerPadding', 'target', 'placement', 'shouldUpdatePosition', 'rootClose', 'children', 'transition']);
 
     // Don't un-render the overlay while it's transitioning out.
     var mountOverlay = props.show || Transition && !this.state.exited;
@@ -14735,7 +14824,7 @@ var Overlay = (function (_React$Component) {
     // which the other wrappers don't forward correctly.
     child = _react2['default'].createElement(
       _Position2['default'],
-      { container: container, containerPadding: containerPadding, target: target, placement: placement },
+      { container: container, containerPadding: containerPadding, target: target, placement: placement, shouldUpdatePosition: shouldUpdatePosition },
       child
     );
 
@@ -14982,7 +15071,7 @@ function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in ob
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var _react = require('react');
 
@@ -15020,14 +15109,16 @@ var _reactPropTypesLibMountable2 = _interopRequireDefault(_reactPropTypesLibMoun
  */
 
 var Position = (function (_React$Component) {
+  _inherits(Position, _React$Component);
+
   function Position(props, context) {
     _classCallCheck(this, Position);
 
     _React$Component.call(this, props, context);
 
     this.state = {
-      positionLeft: null,
-      positionTop: null,
+      positionLeft: 0,
+      positionTop: 0,
       arrowOffsetLeft: null,
       arrowOffsetTop: null
     };
@@ -15035,8 +15126,6 @@ var Position = (function (_React$Component) {
     this._needsFlush = false;
     this._lastTarget = null;
   }
-
-  _inherits(Position, _React$Component);
 
   Position.prototype.componentDidMount = function componentDidMount() {
     this.updatePosition();
@@ -15072,6 +15161,11 @@ var Position = (function (_React$Component) {
 
     var arrowPosition = _objectWithoutProperties(_state, ['positionLeft', 'positionTop']);
 
+    // These should not be forwarded to the child.
+    delete props.target;
+    delete props.container;
+    delete props.containerPadding;
+
     var child = _react2['default'].Children.only(children);
     return _react.cloneElement(child, _extends({}, props, arrowPosition, {
       //do we need to also forward positionLeft and positionTop if they are set to style?
@@ -15102,7 +15196,7 @@ var Position = (function (_React$Component) {
   Position.prototype.updatePosition = function updatePosition(placementChanged) {
     var target = this.getTargetSafe();
 
-    if (target === this._lastTarget && !placementChanged) {
+    if (!this.props.shouldUpdatePosition && target === this._lastTarget && !placementChanged) {
       return;
     }
 
@@ -15110,8 +15204,8 @@ var Position = (function (_React$Component) {
 
     if (!target) {
       this.setState({
-        positionLeft: null,
-        positionTop: null,
+        positionLeft: 0,
+        positionTop: 0,
         arrowOffsetLeft: null,
         arrowOffsetTop: null
       });
@@ -15131,12 +15225,14 @@ var Position = (function (_React$Component) {
 Position.propTypes = {
   /**
    * Function mapping props to a DOM node the component is positioned next to
+   *
    */
   target: _react2['default'].PropTypes.func,
+
   /**
    * "offsetParent" of the component
    */
-  container: _reactPropTypesLibMountable2['default'],
+  container: _react2['default'].PropTypes.oneOfType([_reactPropTypesLibMountable2['default'], _react2['default'].PropTypes.func]),
   /**
    * Minimum spacing in pixels between container border and component border
    */
@@ -15144,14 +15240,19 @@ Position.propTypes = {
   /**
    * How to position the component relative to the target
    */
-  placement: _react2['default'].PropTypes.oneOf(['top', 'right', 'bottom', 'left'])
+  placement: _react2['default'].PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+  /**
+   * Whether the position should be changed on each update
+   */
+  shouldUpdatePosition: _react2['default'].PropTypes.bool
 };
 
 Position.displayName = 'Position';
 
 Position.defaultProps = {
   containerPadding: 0,
-  placement: 'right'
+  placement: 'right',
+  shouldUpdatePosition: false
 };
 
 exports['default'] = Position;
@@ -15165,7 +15266,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var _react = require('react');
 
@@ -15206,6 +15307,8 @@ function getSuppressRootClose() {
 }
 
 var RootCloseWrapper = (function (_React$Component) {
+  _inherits(RootCloseWrapper, _React$Component);
+
   function RootCloseWrapper(props) {
     _classCallCheck(this, RootCloseWrapper);
 
@@ -15223,8 +15326,6 @@ var RootCloseWrapper = (function (_React$Component) {
 
     this._suppressRootCloseHandler = suppressRootClose;
   }
-
-  _inherits(RootCloseWrapper, _React$Component);
 
   RootCloseWrapper.prototype.bindRootCloseHandlers = function bindRootCloseHandlers() {
     var doc = _utilsOwnerDocument2['default'](this);
@@ -15329,7 +15430,7 @@ function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in ob
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var _react = require('react');
 
@@ -15375,6 +15476,8 @@ exports.EXITING = EXITING;
  */
 
 var Transition = (function (_React$Component) {
+  _inherits(Transition, _React$Component);
+
   function Transition(props, context) {
     _classCallCheck(this, Transition);
 
@@ -15391,8 +15494,6 @@ var Transition = (function (_React$Component) {
 
     this.nextCallback = null;
   }
-
-  _inherits(Transition, _React$Component);
 
   Transition.prototype.componentDidMount = function componentDidMount() {
     if (this.props.transitionAppear && this.props['in']) {
@@ -15416,12 +15517,12 @@ var Transition = (function (_React$Component) {
 
       // Otherwise we're already entering or entered.
     } else {
-      if (status === ENTERING || status === ENTERED) {
-        this.performExit(nextProps);
-      }
+        if (status === ENTERING || status === ENTERED) {
+          this.performExit(nextProps);
+        }
 
-      // Otherwise we're already exited or exiting.
-    }
+        // Otherwise we're already exited or exiting.
+      }
   };
 
   Transition.prototype.componentDidUpdate = function componentDidUpdate() {
