@@ -3,7 +3,6 @@ node_modules
 
 build/bundle.js
 
-<<<<<<< HEAD
 *.log
 
 // files ending in .private should have local passwords etc. eg. database config file.
