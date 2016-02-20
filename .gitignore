@@ -2,3 +2,7 @@
 node_modules
 
 build/bundle.js
+
+*.private*
+
+main.js
