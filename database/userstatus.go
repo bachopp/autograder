@@ -2,6 +2,7 @@ package database
 
 import (
 	"database/sql"
+	"fmt"
 	"log"
 )
 
@@ -56,7 +57,7 @@ func getUserID(username string) (int, error) {
 }
 
 // UpgradeUser upgrades user to either `admin`, `teacher` or `student` based on input string
-func UpgradeUser(username string, courses []string, upgrades ...string) {
+func UpgradeUser(username string, upgrades ...string) {
 	userid, err := getUserID(username)
 
 	tx, err := con.Begin()
@@ -66,11 +67,12 @@ func UpgradeUser(username string, courses []string, upgrades ...string) {
 	defer tx.Rollback()
 	for _, upgrade := range upgrades {
 
-		if upgrade == "student" {
-			for _, course := range courses {
-				makeStudent(username, course)
-			}
-		}
+		// TODO:
+		// if upgrade == "student" {
+		// 	for _, course := range courses {
+		// 		makeStudent(username, course)
+		// 	}
+		// }
 
 		stmt, err := tx.Prepare("INSERT INTO " + upgrade + " (userid) VALUES (?)")
 		if err != nil {
@@ -98,24 +100,9 @@ func makeTeacher(username string, course string) {
 
 func makeStudent(username string, course string) {
 	// TODO: Logic for making student status
-	tx, err := con.Begin()
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer tx.Rollback()
 
 	// TODO: Prepare statement for adding `student_number` to database with `course`
-	stmt, err := tx.Prepare("? ?")
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer stmt.Close()
-	_, err = stmt.Exec(username, course)
-	if err != nil {
-		log.Fatal(err)
-	}
-	err = tx.Commit()
-	if err != nil {
-		log.Fatal(err)
-	}
+
+	fmt.Printf("%s : %s \n", username, course)
+
 }
