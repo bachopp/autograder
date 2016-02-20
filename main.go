@@ -9,14 +9,9 @@ import (
 	"fmt"
 	"net/http"
 
-<<<<<<< HEAD
-	"io/ioutil"
-
-	"github.com/bachopp/autograder/database"
-=======
 	"github.com/bachopp/autograder/database"
 	"github.com/bachopp/autograder/jsonify"
->>>>>>> feature/json
+
 	"github.com/gorilla/websocket"
 )
 
