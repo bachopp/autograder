@@ -1,10 +1,10 @@
 DROP SCHEMA IF EXISTS agdatabase;
 CREATE SCHEMA agdatabase;
 USE agdatabase;
-CREATE TABLE user (userid int NOT NULL PRIMARY KEY, github VARCHAR(255), last_name VARCHAR(255), first_name VARCHAR(255));
+CREATE TABLE user (userid int NOT NULL PRIMARY KEY AUTO_INCREMENT, github VARCHAR(255), last_name VARCHAR(255), first_name VARCHAR(255));
 CREATE TABLE admin (userid INT NOT NULL PRIMARY KEY);
 CREATE TABLE teacher (userid INT NOT NULL PRIMARY KEY);
-CREATE TABLE student (userid INT NOT NULL PRIMARY KEY);
+CREATE TABLE student (userid INT NOT NULL PRIMARY KEY, student_numer INT NOT NULL);
 CREATE TABLE course (courseid INT NOT NULL PRIMARY KEY, course_name VARCHAR(255) NOT NULL);
 CREATE TABLE admin_course (admin_id INT NOT NULL, course_id INT NOT NULL, FOREIGN KEY (admin_id) REFERENCES admin(userid),FOREIGN KEY (course_id) REFERENCES course(courseid), PRIMARY KEY (admin_id, course_id));
 CREATE TABLE teacher_course (teacher_id INT NOT NULL, course_id INT NOT NULL, FOREIGN KEY (teacher_id) REFERENCES teacher(userid), FOREIGN KEY (course_id) REFERENCES course(courseid), PRIMARY KEY (teacher_id, course_id));

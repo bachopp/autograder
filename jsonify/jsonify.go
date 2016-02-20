@@ -9,12 +9,12 @@ import (
 
 // Request struct is the skeleton of the websocket request
 type Request struct {
-	FromURL          string `json:"fromURL"`
-	RequestedElement string `json:"requestedElement"`
-	Password         string `json:"password"`
 	RequestType      string `json:"requestType"`
+	RequestedElement string `json:"requestedElement"`
+	FromURL          string `json:"fromURL"`
 	RequestedURL     string `json:"requestedURL"`
 	Username         string `json:"username"`
+	Password         string `json:"password"`
 }
 
 // GetFile opens JSON files and returns the format as a struct

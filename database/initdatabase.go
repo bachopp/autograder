@@ -9,7 +9,7 @@ import (
 	_ "github.com/ziutek/mymysql/godrv" // driver mysql
 )
 
-// InitializeDb creates all neccesary tables for autograder
+// InitializeDb creates all neccesary tables for autograder and holds the connection
 func InitializeDb() {
 	// database name in sql.Open is required, as a result one needs to create a database before starting the server.
 	// name of the database should be "agdatabase"

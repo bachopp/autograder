@@ -51,6 +51,8 @@ func handleRequest(socket *websocket.Conn) {
 		switch request.RequestedElement {
 		case "navbar":
 			// TODO: Here comes logic for authorization of requested element
+			// username := request.Username
+
 			file, err := jsonify.GetFile("./data.json")
 			if err != nil {
 				fmt.Printf("ERROR: %s\n", err)
@@ -58,9 +60,7 @@ func handleRequest(socket *websocket.Conn) {
 			}
 			socket.WriteMessage(msgType, file)
 		}
-
 	}
-
 }
 
 func wsSocket(w http.ResponseWriter, r *http.Request) {
@@ -82,6 +82,9 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	database.InitializeDb()
+	database.ConnectDb()
+	database.InsertTestUser("tokams")
+	database.UpgradeUser("tokams", "admin", "teacher", "student")
 	http.HandleFunc("/ws", wsSocket)
 	http.Handle("/", http.FileServer(http.Dir(webroot)))
 	http.ListenAndServe(":8000", nil)
