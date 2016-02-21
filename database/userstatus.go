@@ -1,7 +1,6 @@
 package database
 
 import (
-	"database/sql"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -14,21 +13,11 @@ type Roles struct {
 	Courses []string
 }
 
-var con sql.DB
-
-// ConnectDb connects to database
-func ConnectDb() {
-	db, err := sql.Open("mymysql",
-		"agdatabase/autograder/autograder")
-	if err != nil {
-		log.Fatal(err)
-	}
-	con = *db
-	defer db.Close()
-}
-
 // InsertTestUser inserts test user
 func InsertTestUser(github string) {
+	connectDb()
+	defer con.Close()
+
 	tx, err := con.Begin()
 	if err != nil {
 		log.Fatal(err)
@@ -82,6 +71,9 @@ func getCourseID(courseName string) (int, error) {
 
 // UpgradeUser upgrades user to either `admin`, `teacher` or `student` based on input string
 func UpgradeUser(username string, roles ...Roles) {
+	connectDb()
+	defer con.Close()
+
 	userid, err := getUserID(username)
 
 	tx, err := con.Begin()
@@ -112,6 +104,7 @@ func UpgradeUser(username string, roles ...Roles) {
 }
 
 func makeUpdate(username string, role Roles) {
+	connectDb()
 	// TODO: Logic for ascending user to admin status
 	str, err := json.Marshal(role)
 	if err != nil {
@@ -149,8 +142,27 @@ func makeUpdate(username string, role Roles) {
 	}
 }
 
-func getUserRoles(username string) []Roles {
-	//TODO: Return roles of user from database as slice of Roles
-
-	return nil
-}
+// func getUserRoles(username string) []Roles {
+// 	connectDb()
+// 	//TODO: Return roles of user from database as slice of Roles
+// 	userid, err := getUserID(username)
+// 	if err != nil {
+// 		log.Fatal(err)
+// 	}
+// 	// statement to get courseid
+// 	stmta, err := con.Prepare("SELECT course_name FROM course WHERE courseid = (?)")
+// 	if err != nil {
+// 		log.Fatal(err)
+// 	}
+//
+// 	modes := []string{"admin", "teacher", "student"}
+// 	for _, mode := range modes {
+// 		stmtb, err := con.Prepare("SELECT courseid FROM " + mode + "_course WHERE userid = (?)")
+// 		if err != nil {
+// 			log.Fatal(err)
+// 		}
+// 		//TODO: collect courses in each mode
+// 	}
+// 	// TODO: Combine result to one slice size < 3
+// 	return nil
+// }

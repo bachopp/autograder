@@ -82,7 +82,6 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	database.InitializeDb()
-	database.ConnectDb()
 	database.InsertTestUser("tokamsUserId1")
 	database.InsertTestUser("tokams")
 	a := database.Roles{"student", []string{"DAT300", "DAT200", "ING200"}}
