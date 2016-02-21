@@ -5,7 +5,7 @@ CREATE TABLE user (userid int NOT NULL PRIMARY KEY AUTO_INCREMENT, github VARCHA
 CREATE TABLE admin (userid INT NOT NULL PRIMARY KEY, FOREIGN KEY (userid) REFERENCES user(userid));
 CREATE TABLE teacher (userid INT NOT NULL PRIMARY KEY, FOREIGN KEY (userid) REFERENCES user(userid));
 CREATE TABLE student (userid INT NOT NULL PRIMARY KEY, student_number INT NOT NULL, FOREIGN KEY (userid) REFERENCES user(userid));
-CREATE TABLE course (courseid INT NOT NULL PRIMARY KEY, course_name VARCHAR(255) NOT NULL);
+CREATE TABLE course (courseid INT NOT NULL PRIMARY KEY AUTO_INCREMENT, course_name VARCHAR(255) NOT NULL);
 CREATE TABLE admin_course (userid INT NOT NULL, courseid INT NOT NULL, FOREIGN KEY (userid) REFERENCES admin(userid),FOREIGN KEY (courseid) REFERENCES course(courseid), PRIMARY KEY (userid, courseid));
 CREATE TABLE teacher_course (userid INT NOT NULL, courseid INT NOT NULL, FOREIGN KEY (userid) REFERENCES teacher(userid), FOREIGN KEY (courseid) REFERENCES course(courseid), PRIMARY KEY (userid, courseid));
 CREATE TABLE student_course (userid INT NOT NULL, courseid INT NOT NULL, FOREIGN KEY (userid) REFERENCES student(userid),FOREIGN KEY (courseid) REFERENCES course(courseid), PRIMARY KEY (userid, courseid));

@@ -90,7 +90,8 @@ func UpgradeUser(username string, roles ...Roles) {
 			log.Fatal(err)
 		}
 		defer stmt.Close() // danger!
-		makeUpdate(username, role)
+		// defer to wait for transaction to commit and not fail.
+		defer makeUpdate(username, role)
 
 		_, err = stmt.Exec(userid)
 		if err != nil {
@@ -132,7 +133,9 @@ func makeUpdate(username string, role Roles) {
 		}
 		defer stmt.Close()
 		_, err = stmt.Exec(userid, courseid)
-
+		if err != nil {
+			log.Fatal(err)
+		}
 		fmt.Printf("%s %s : %s \n", role.Mode, username, course)
 	}
 
@@ -142,27 +145,34 @@ func makeUpdate(username string, role Roles) {
 	}
 }
 
-// func getUserRoles(username string) []Roles {
-// 	connectDb()
-// 	//TODO: Return roles of user from database as slice of Roles
-// 	userid, err := getUserID(username)
-// 	if err != nil {
-// 		log.Fatal(err)
-// 	}
-// 	// statement to get courseid
-// 	stmta, err := con.Prepare("SELECT course_name FROM course WHERE courseid = (?)")
-// 	if err != nil {
-// 		log.Fatal(err)
-// 	}
-//
-// 	modes := []string{"admin", "teacher", "student"}
-// 	for _, mode := range modes {
-// 		stmtb, err := con.Prepare("SELECT courseid FROM " + mode + "_course WHERE userid = (?)")
-// 		if err != nil {
-// 			log.Fatal(err)
-// 		}
-// 		//TODO: collect courses in each mode
-// 	}
-// 	// TODO: Combine result to one slice size < 3
-// 	return nil
-// }
+func getUserRoles(username string) []Roles {
+	connectDb()
+	//TODO: Return roles of user from database as slice of Roles
+	userid, err := getUserID(username)
+	if err != nil {
+		log.Fatal(err)
+	}
+	// statement to get courseid
+	stmta, err := con.Prepare("SELECT course_name FROM course WHERE courseid = (?)")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	modes := []string{"admin", "teacher", "student"}
+	for _, mode := range modes {
+		stmtb, err := con.Prepare("SELECT courseid FROM " + mode + "_course WHERE userid = (?)")
+		if err != nil {
+			log.Fatal(err)
+		}
+		//TODO: collect courses in each mode
+		stmtc, err := con.Prepare(
+			"SELECT course_name" +
+				"FROM " + mode + "_course" +
+				"INNER JOIN " + mode + " " +
+				"ON " + mode + ".userid = " + mode + "_course.userid" +
+				"INNER JOIN course " +
+				"ON course.courseid = " + mode + "_course.courseid")
+	}
+	// TODO: Combine result to one slice size < 3
+	return nil
+}

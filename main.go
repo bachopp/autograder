@@ -84,9 +84,12 @@ func main() {
 	database.InitializeDb()
 	database.InsertTestUser("tokamsUserId1")
 	database.InsertTestUser("tokams")
-	a := database.Roles{"student", []string{"DAT300", "DAT200", "ING200"}}
+	database.AddCourse("DAT300")
+	database.AddCourse("DAT100")
+	database.AddCourse("DAT310")
+	a := database.Roles{"student", []string{"DAT300", "DAT310"}}
 	b := database.Roles{"teacher", []string{"DAT100"}}
-	c := database.Roles{"admin", []string{"ADMINS EVERYTHING LOL"}}
+	c := database.Roles{"admin", []string{"DAT300"}}
 
 	database.UpgradeUser("tokams", a, b, c)
 	http.HandleFunc("/ws", wsSocket)
