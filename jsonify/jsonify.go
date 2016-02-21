@@ -17,8 +17,14 @@ type Request struct {
 	Username         string `json:"username"`
 }
 
-// GetFile opens JSON files and returns the format as a struct
-func GetFile(filename string) ([]byte, error) {
+// Response struct is the skeleton of the websocket response
+type Response struct {
+	DeliveredData string `json:"deliveredData"`
+}
+
+//TODO: This will be removed and placed somewhere else...
+// GetJSONFile opens JSON files and returns the format as a struct
+func GetJSONFile(filename string) ([]byte, error) {
 	if len(filename) <= 0 {
 		err := errors.New("getfile: filename too short")
 		log.Fatal(err)

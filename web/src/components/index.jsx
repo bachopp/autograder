@@ -34,7 +34,6 @@ ReactDOM.render(
 	<Router history={browserHistory} >
 		<Route path="/" component={App}>
 			<Route path="student" component={Student}>
-
 			</Route>
 			<Route path="about" component={About}/>
 			<Route path="login" component={LoginForm} />

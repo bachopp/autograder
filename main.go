@@ -49,16 +49,25 @@ func handleRequest(socket *websocket.Conn) {
 		// TODO: We should fix this. Maybe a switch-case is good enough?
 		switch request.RequestedElement {
 		case "navbar":
-			file, err := jsonify.GetFile("./data.json")
+			file, err := jsonify.GetJSONFile("./data.json")
 			if err != nil {
 				fmt.Println(err)
 				return
 			}
 			socket.WriteMessage(msgType, file)
+			//return ???
+		case "centerWrapper":
+			//TODO: Handle centerwrapper
+			return
+		case "leftWrapper":
+			//TODO: Handle leftwrapper
+			return
+		case "rightWrapper":
+			//TODO: Handle rightwrapper
+			return
 		}
 
 	}
-
 }
 
 func wsSocket(w http.ResponseWriter, r *http.Request) {
