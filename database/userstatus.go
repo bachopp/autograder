@@ -6,10 +6,11 @@ import (
 	"log"
 )
 
-// TODO: this will serve as communication between client and database
-
-// InsertToData inserts query into database
-func InsertToData() {
+// Roles type is created when upgrading a user
+// function UpgradeUser will use this to update user with access rights to Courses
+type Roles struct {
+	Mode    string
+	Courses []string
 }
 
 var con sql.DB
@@ -53,11 +54,33 @@ func InsertTestUser(github string) {
 
 func getUserID(username string) (int, error) {
 	// TODO: username is candidate key, find primary key of `username`
-	return 1, nil
+	stmt, err := con.Prepare("SELECT userid FROM user WHERE github = ?")
+	if err != nil {
+		return 0, err
+	}
+	var userid int
+	err = stmt.QueryRow(username).Scan(&userid)
+	if err != nil {
+		return 0, err
+	}
+	return userid, nil
+}
+func getCourseID(courseName string) (int, error) {
+	// TODO: use courseName as candidate key to return `courseid` from database
+	stmt, err := con.Prepare("SELECT courseid FROM course WHERE course_name = ?")
+	if err != nil {
+		log.Fatal(err)
+	}
+	var courseid int
+	err = stmt.QueryRow(courseName).Scan(&courseid)
+	if err != nil {
+		return 0, err
+	}
+	return courseid, nil
 }
 
 // UpgradeUser upgrades user to either `admin`, `teacher` or `student` based on input string
-func UpgradeUser(username string, upgrades ...string) {
+func UpgradeUser(username string, roles ...Roles) {
 	userid, err := getUserID(username)
 
 	tx, err := con.Begin()
@@ -65,20 +88,17 @@ func UpgradeUser(username string, upgrades ...string) {
 		log.Fatal(err)
 	}
 	defer tx.Rollback()
-	for _, upgrade := range upgrades {
 
-		// TODO:
-		// if upgrade == "student" {
-		// 	for _, course := range courses {
-		// 		makeStudent(username, course)
-		// 	}
-		// }
+	// Prepare statement in loop
+	for _, role := range roles {
 
-		stmt, err := tx.Prepare("INSERT INTO " + upgrade + " (userid) VALUES (?)")
+		stmt, err := tx.Prepare("INSERT INTO " + role.Mode + " (userid) VALUES (?)")
 		if err != nil {
 			log.Fatal(err)
 		}
 		defer stmt.Close() // danger!
+		makeUpdate(username, role)
+
 		_, err = stmt.Exec(userid)
 		if err != nil {
 			log.Fatal(err)
@@ -90,19 +110,36 @@ func UpgradeUser(username string, upgrades ...string) {
 	}
 }
 
-func makeAdmin(username string) {
+func makeUpdate(username string, role Roles) {
 	// TODO: Logic for ascending user to admin status
-}
+	userid, err := getUserID(username)
+	if err != nil {
+		log.Fatal(err)
+	}
 
-func makeTeacher(username string, course string) {
-	// TODO: Logic for upgrading to teacher status
-}
+	tx, err := con.Begin()
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer tx.Rollback()
 
-func makeStudent(username string, course string) {
-	// TODO: Logic for making student status
+	// Prepare statement in loop
+	for _, course := range role.Courses {
+		courseid, err := getCourseID(course)
+		// TODO : prepare transaction
+		stmt, err := tx.Prepare("INSERT INTO " + role.Mode + "_course VALUES (?, ?)")
+		if err != nil {
+			log.Fatal(err)
+		}
+		defer stmt.Close()
+		_, err = stmt.Exec(userid, courseid)
 
-	// TODO: Prepare statement for adding `student_number` to database with `course`
+		fmt.Printf("%s %s : %s \n", role.Mode, username, course)
+	}
 
-	fmt.Printf("%s : %s \n", username, course)
+	err = tx.Commit()
+	if err != nil {
+		log.Fatal(err)
+	}
 
 }
