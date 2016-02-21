@@ -2,6 +2,7 @@ package database
 
 import (
 	"database/sql"
+	"encoding/json"
 	"fmt"
 	"log"
 )
@@ -112,6 +113,11 @@ func UpgradeUser(username string, roles ...Roles) {
 
 func makeUpdate(username string, role Roles) {
 	// TODO: Logic for ascending user to admin status
+	str, err := json.Marshal(role)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(string(str))
 	userid, err := getUserID(username)
 	if err != nil {
 		log.Fatal(err)
@@ -141,5 +147,10 @@ func makeUpdate(username string, role Roles) {
 	if err != nil {
 		log.Fatal(err)
 	}
+}
 
+func getUserRoles(username string) []Roles {
+	//TODO: Return roles of user from database as slice of Roles
+
+	return nil
 }

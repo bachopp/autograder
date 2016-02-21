@@ -54,7 +54,6 @@ func handleRequest(socket *websocket.Conn) {
 			// username := request.Username
 
 			file, err := jsonify.GetFile("./data.json")
-			fmt.Println(file)
 			if err != nil {
 				fmt.Printf("ERROR: %s\n", err)
 				return
@@ -86,9 +85,9 @@ func main() {
 	database.ConnectDb()
 	database.InsertTestUser("tokamsUserId1")
 	database.InsertTestUser("tokams")
-	a := database.Roles{"student", []string{"DAT300"}}
-	b := database.Roles{"teacher", []string{"DAT200"}}
-	c := database.Roles{"admin", []string{"DUMMYCOURSSE ADMIN OYOY"}}
+	a := database.Roles{"student", []string{"DAT300", "DAT200", "ING200"}}
+	b := database.Roles{"teacher", []string{"DAT100"}}
+	c := database.Roles{"admin", []string{"ADMINS EVERYTHING LOL"}}
 
 	database.UpgradeUser("tokams", a, b, c)
 	http.HandleFunc("/ws", wsSocket)
