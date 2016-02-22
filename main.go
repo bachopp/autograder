@@ -9,7 +9,6 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/bachopp/autograder/database"
 	"github.com/bachopp/autograder/jsonify"
 
 	"github.com/gorilla/websocket"
@@ -81,17 +80,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	database.InitializeDb()
-	database.InsertTestUser("tokamsUserId1")
-	database.InsertTestUser("tokams")
-	database.AddCourse("DAT300")
-	database.AddCourse("DAT100")
-	database.AddCourse("DAT310")
-	a := database.Roles{"student", []string{"DAT300", "DAT310"}}
-	b := database.Roles{"teacher", []string{"DAT100"}}
-	c := database.Roles{"admin", []string{"DAT300"}}
 
-	database.UpgradeUser("tokams", a, b, c)
 	http.HandleFunc("/ws", wsSocket)
 	http.Handle("/", http.FileServer(http.Dir(webroot)))
 	http.ListenAndServe(":8000", nil)

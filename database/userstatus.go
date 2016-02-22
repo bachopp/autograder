@@ -1,10 +1,6 @@
 package database
 
-import (
-	"encoding/json"
-	"fmt"
-	"log"
-)
+import "log"
 
 // Roles type is created when upgrading a user
 // function UpgradeUser will use this to update user with access rights to Courses
@@ -107,11 +103,6 @@ func UpgradeUser(username string, roles ...Roles) {
 func makeUpdate(username string, role Roles) {
 	connectDb()
 	// TODO: Logic for ascending user to admin status
-	str, err := json.Marshal(role)
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println(string(str))
 	userid, err := getUserID(username)
 	if err != nil {
 		log.Fatal(err)
@@ -136,7 +127,6 @@ func makeUpdate(username string, role Roles) {
 		if err != nil {
 			log.Fatal(err)
 		}
-		fmt.Printf("%s %s : %s \n", role.Mode, username, course)
 	}
 
 	err = tx.Commit()
@@ -145,34 +135,48 @@ func makeUpdate(username string, role Roles) {
 	}
 }
 
-func getUserRoles(username string) []Roles {
+// GetUserRoles returns slice of Roles
+func GetUserRoles(username string) []Roles {
 	connectDb()
+	defer con.Close()
 	//TODO: Return roles of user from database as slice of Roles
 	userid, err := getUserID(username)
 	if err != nil {
 		log.Fatal(err)
 	}
-	// statement to get courseid
-	stmta, err := con.Prepare("SELECT course_name FROM course WHERE courseid = (?)")
-	if err != nil {
-		log.Fatal(err)
-	}
-
+	roles := make([]Roles, 0, 3)
+	var course string
+	courses := make([]string, 0, 32)
 	modes := []string{"admin", "teacher", "student"}
 	for _, mode := range modes {
-		stmtb, err := con.Prepare("SELECT courseid FROM " + mode + "_course WHERE userid = (?)")
+		//TODO: collect courses in each mode
+		stmt, err := con.Prepare(
+			"SELECT course_name " +
+				"FROM " + mode + "_course " +
+				"INNER JOIN " + mode + " " +
+				"ON " + mode + ".userid = " + mode + "_course.userid " +
+				"INNER JOIN course " +
+				"ON course.courseid = " + mode + "_course.courseid " +
+				"WHERE " + mode + ".userid = (?)")
 		if err != nil {
 			log.Fatal(err)
 		}
-		//TODO: collect courses in each mode
-		stmtc, err := con.Prepare(
-			"SELECT course_name" +
-				"FROM " + mode + "_course" +
-				"INNER JOIN " + mode + " " +
-				"ON " + mode + ".userid = " + mode + "_course.userid" +
-				"INNER JOIN course " +
-				"ON course.courseid = " + mode + "_course.courseid")
+		defer stmt.Close()
+		rows, err := stmt.Query(userid)
+		if err != nil {
+			log.Fatal(err)
+		}
+		defer rows.Close()
+		for rows.Next() {
+			err := rows.Scan(&course)
+			if err != nil {
+				log.Fatal(err)
+			}
+			courses = append(courses, course)
+		}
+		role := Roles{mode, courses}
+		roles = append(roles, role)
 	}
-	// TODO: Combine result to one slice size < 3
-	return nil
+	// TODO: Combine result to one slice size <= 3
+	return roles
 }
