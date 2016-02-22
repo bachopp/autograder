@@ -7,6 +7,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/bachopp/autograder/database"
@@ -34,28 +35,25 @@ func handleRequest(socket *websocket.Conn) {
 	for {
 		msgType, msg, err := socket.ReadMessage()
 		if err != nil {
-			fmt.Println(err)
+			log.Fatal(err)
 			return
 		}
 		var request jsonify.Request
 		// this is the request struct with all fields filled out
-		request, err = jsonify.Structify(msg, request)
-		fmt.Printf("%+v\n", request)
+		err = jsonify.Structify(msg, &request)
 		if err != nil {
-			fmt.Println(err)
+			log.Fatal(err)
 			return
 		}
-
 		// TODO: We should fix this. Maybe a switch-case is good enough?
 		switch request.RequestedElement {
 		case "navbar":
-			file, err := jsonify.GetJSONFile("./data.json")
+			jsonFile, err := jsonify.GetJSONFile("./data.json")
 			if err != nil {
-				fmt.Println(err)
-				return
+				log.Fatal(err)
 			}
-			socket.WriteMessage(msgType, file)
-			//return ???
+			socket.WriteMessage(msgType, jsonFile)
+			//return
 		case "centerWrapper":
 			//TODO: Handle centerwrapper
 			return
@@ -66,14 +64,13 @@ func handleRequest(socket *websocket.Conn) {
 			//TODO: Handle rightwrapper
 			return
 		}
-
 	}
 }
 
 func wsSocket(w http.ResponseWriter, r *http.Request) {
 	socket, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
-		fmt.Print(err)
+		log.Fatal(err)
 		return
 	}
 	go handleRequest(socket)
