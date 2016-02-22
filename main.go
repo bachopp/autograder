@@ -6,9 +6,12 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 
+	"github.com/bachopp/autograder/database"
 	"github.com/bachopp/autograder/jsonify"
 
 	"github.com/gorilla/websocket"
@@ -40,11 +43,12 @@ func handleRequest(socket *websocket.Conn) {
 		var request jsonify.Request
 		// this is the request struct with all fields filled out
 		request, err = jsonify.Structify(msg, request)
-		fmt.Printf("%+v TEST\n", request)
 		if err != nil {
-			fmt.Printf("ERROR: %s\n", err)
+			log.Fatal(err)
 			return
 		}
+
+		fmt.Println(request.Username)
 
 		// TODO: We should fix this. Maybe a switch-case is good enough?
 		switch request.RequestedElement {
@@ -52,12 +56,11 @@ func handleRequest(socket *websocket.Conn) {
 			// TODO: Here comes logic for authorization of requested element
 			// username := request.Username
 
-			file, err := jsonify.GetFile("./data.json")
+			resp, err := json.Marshal(database.GetUserRoles(request.Username))
 			if err != nil {
-				fmt.Printf("ERROR: %s\n", err)
-				return
+				log.Fatal(err)
 			}
-			socket.WriteMessage(msgType, file)
+			socket.WriteMessage(msgType, resp)
 		}
 	}
 }

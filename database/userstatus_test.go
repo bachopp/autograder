@@ -1,29 +1,29 @@
 package database
 
 import (
+	"encoding/json"
 	"fmt"
 	"testing"
 )
 
 func TestUser(t *testing.T) {
 	InitializeDb()
-
-	InsertTestUser("tokamsUserId1")
-	InsertTestUser("tokams")
+	InsertTestUser("thomasUserId1")
+	InsertTestUser("thomas")
 
 	AddCourse("DAT300")
+	ida := 1
 	AddCourse("DAT100")
+	idb := 2
 	AddCourse("DAT310")
+	idc := 3
 
-	a := Roles{"student", []string{"DAT300", "DAT310"}}
-	b := Roles{"teacher", []string{"DAT100"}}
-	c := Roles{"admin", []string{"DAT300"}}
+	a := Roles{"student", []courses{{ida, "DAT300"}, {idc, "DAT310"}}}
+	b := Roles{"teacher", []courses{{idb, "DAT100"}}}
+	c := Roles{"admin", []courses{{idb, "DAT100"}}}
 
-	UpgradeUser("tokams", a, b, c)
-	roles := GetUserRoles("tokams")
+	UpgradeUser("thomas", a, b, c)
 
-	for _, role := range roles {
-		fmt.Printf("%s : %s\n", role.Mode, role.Courses)
-	}
+	fmt.Println(json.Marshal(GetUserRoles("thomas")))
 
 }

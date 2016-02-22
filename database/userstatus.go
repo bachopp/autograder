@@ -4,9 +4,13 @@ import "log"
 
 // Roles type is created when upgrading a user
 // function UpgradeUser will use this to update user with access rights to Courses
+type courses struct {
+	Courseid   int
+	CourseName string
+}
 type Roles struct {
 	Mode    string
-	Courses []string
+	Courses []courses
 }
 
 // InsertTestUser inserts test user
@@ -116,7 +120,7 @@ func makeUpdate(username string, role Roles) {
 
 	// Prepare statement in loop
 	for _, course := range role.Courses {
-		courseid, err := getCourseID(course)
+		courseid, err := getCourseID(course.CourseName)
 		// TODO : prepare transaction
 		stmt, err := tx.Prepare("INSERT INTO " + role.Mode + "_course VALUES (?, ?)")
 		if err != nil {
@@ -144,14 +148,16 @@ func GetUserRoles(username string) []Roles {
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	roles := make([]Roles, 0, 3)
-	var course string
-	courses := make([]string, 0, 32)
 	modes := []string{"admin", "teacher", "student"}
+	crses := make([]courses, 0, 32)
+	var course string
+	var courseid int
 	for _, mode := range modes {
 		//TODO: collect courses in each mode
 		stmt, err := con.Prepare(
-			"SELECT course_name " +
+			"SELECT course.courseid, course_name " +
 				"FROM " + mode + "_course " +
 				"INNER JOIN " + mode + " " +
 				"ON " + mode + ".userid = " + mode + "_course.userid " +
@@ -168,13 +174,14 @@ func GetUserRoles(username string) []Roles {
 		}
 		defer rows.Close()
 		for rows.Next() {
-			err := rows.Scan(&course)
+			err := rows.Scan(&courseid, &course)
 			if err != nil {
 				log.Fatal(err)
 			}
-			courses = append(courses, course)
+			crses = append(crses, courses{courseid, course})
 		}
-		role := Roles{mode, courses}
+		role := Roles{mode, crses}
+		crses = nil
 		roles = append(roles, role)
 	}
 	// TODO: Combine result to one slice size <= 3
