@@ -36,10 +36,11 @@ func handleRequest(socket *websocket.Conn) {
 		}
 		var request jsonify.Request
 		// this is the request struct with all fields filled out
-		err = jsonify.Structify(msg, request)
+		err = jsonify.Structify(msg, &request)
 		if err != nil {
 			log.Fatal(err)
 		}
+		fmt.Println(request.Username)
 		// TODO: We should fix this. Maybe a switch-case is good enough?
 		switch request.RequestedElement {
 		case "navbar":
@@ -47,6 +48,7 @@ func handleRequest(socket *websocket.Conn) {
 			if err != nil {
 				log.Fatal(err)
 			}
+			fmt.Println(resp)
 			socket.WriteMessage(msgType, resp)
 			//return
 		case "centerWrapper":

@@ -44,7 +44,7 @@ Structify inputs the JSON-file as []byte and an empty struct.
 Returns the struct with data.
 */
 func Structify(data []byte, str interface{}) error {
-	return json.Unmarshal(data, &str)
+	return json.Unmarshal(data, str)
 }
 
 /*

@@ -48,7 +48,7 @@ var Topbar = React.createClass({
   message: function(response) {
     var responseObject = JSON.parse(response.data);
     var dropDownElements = responseObject.roles;
-    console.log(response.data)
+    console.log(response.data.json)
     this.setState({roles: dropDownElements});
   },
 
