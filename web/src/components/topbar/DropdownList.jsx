@@ -11,7 +11,6 @@ var DropdownElement = require("./DropdownElement.jsx")
 var DropdownList = React.createClass({
 
   propTypes: {
-    //chooseCourse: React.PropTypes.func.isRequired,
     courses: React.PropTypes.array,
     title: React.PropTypes.string,
   },
@@ -27,7 +26,7 @@ var DropdownList = React.createClass({
             return(
             <DropdownElement
               course={course}
-              key={course.id + course.name}
+              key={course.Courseid}
             />
           );
           })

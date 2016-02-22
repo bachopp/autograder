@@ -8,11 +8,9 @@ var DropdownList = require("./DropdownList.jsx")
 
 var Dropdown = React.createClass({
   propTypes: {
-    //chooseCourse: React.PropTypes.func.isRequired,
     courses: React.PropTypes.array,
+    roles: React.PropTypes.array.isRequired
   },
-
-  // TODO: find out how to list the dropdown lists, like if(permitted) draw...
 
   render:function() {
     var self = this;
@@ -22,9 +20,9 @@ var Dropdown = React.createClass({
         {roles.map(function(role) {
           return(
             <DropdownList
-              key={role.dropDownName}
-              title={role.dropDownName}
-              courses={role.dropDownElements}/>
+              key={role.Mode}
+              title={role.Mode}
+              courses={role.Courses}/>
           );
         })}
         </Nav>

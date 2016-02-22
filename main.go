@@ -12,6 +12,7 @@ import (
 
 	"github.com/bachopp/autograder/database"
 	"github.com/bachopp/autograder/jsonify"
+
 	"github.com/gorilla/websocket"
 )
 
@@ -20,11 +21,6 @@ var webroot = "/var/www/autograder/web/public"
 // This "upgrades" browser connection to websocket.
 // default for now
 var upgrader = websocket.Upgrader{}
-
-// some random vars for permission testing etc
-var isAdmin bool
-var isStudent bool
-var isTeacher bool
 
 /*
 	This function handles the socket connection
@@ -35,24 +31,23 @@ func handleRequest(socket *websocket.Conn) {
 	for {
 		msgType, msg, err := socket.ReadMessage()
 		if err != nil {
-			log.Fatal(err)
+			fmt.Println(err)
 			return
 		}
 		var request jsonify.Request
 		// this is the request struct with all fields filled out
-		err = jsonify.Structify(msg, &request)
+		err = jsonify.Structify(msg, request)
 		if err != nil {
 			log.Fatal(err)
-			return
 		}
 		// TODO: We should fix this. Maybe a switch-case is good enough?
 		switch request.RequestedElement {
 		case "navbar":
-			jsonFile, err := jsonify.GetJSONFile("./data.json")
+			resp, err := jsonify.Unstructify(database.GetUserRoles(request.Username))
 			if err != nil {
 				log.Fatal(err)
 			}
-			socket.WriteMessage(msgType, jsonFile)
+			socket.WriteMessage(msgType, resp)
 			//return
 		case "centerWrapper":
 			//TODO: Handle centerwrapper
@@ -71,7 +66,6 @@ func wsSocket(w http.ResponseWriter, r *http.Request) {
 	socket, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		log.Fatal(err)
-		return
 	}
 	go handleRequest(socket)
 }
@@ -85,7 +79,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	database.DbInit("agdatabase")
+
 	http.HandleFunc("/ws", wsSocket)
 	http.Handle("/", http.FileServer(http.Dir(webroot)))
 	http.ListenAndServe(":8000", nil)
