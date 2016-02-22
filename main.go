@@ -23,11 +23,6 @@ var webroot = "/var/www/autograder/web/public"
 // default for now
 var upgrader = websocket.Upgrader{}
 
-// some random vars for permission testing etc
-var isAdmin bool
-var isStudent bool
-var isTeacher bool
-
 /*
 	This function handles the socket connection
 	TODO: Implement and remove the websocket and request passing into
@@ -37,8 +32,7 @@ func handleRequest(socket *websocket.Conn) {
 	for {
 		msgType, msg, err := socket.ReadMessage()
 		if err != nil {
-			fmt.Printf("ERROR: %s\n", err)
-			return
+			log.Fatal(err)
 		}
 		var request jsonify.Request
 		// this is the request struct with all fields filled out
@@ -47,8 +41,6 @@ func handleRequest(socket *websocket.Conn) {
 			log.Fatal(err)
 			return
 		}
-
-		fmt.Println(request.Username)
 
 		// TODO: We should fix this. Maybe a switch-case is good enough?
 		switch request.RequestedElement {
@@ -68,8 +60,7 @@ func handleRequest(socket *websocket.Conn) {
 func wsSocket(w http.ResponseWriter, r *http.Request) {
 	socket, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
-		fmt.Println(err)
-		return
+		log.Fatal(err)
 	}
 	go handleRequest(socket)
 }

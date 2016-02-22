@@ -18,9 +18,9 @@ func TestUser(t *testing.T) {
 	AddCourse("DAT310")
 	idc := 3
 
-	a := Roles{"student", []courses{{ida, "DAT300"}, {idc, "DAT310"}}}
-	b := Roles{"teacher", []courses{{idb, "DAT100"}}}
-	c := Roles{"admin", []courses{{idb, "DAT100"}}}
+	a := Role{"student", []courses{{ida, "DAT300"}, {idc, "DAT310"}}}
+	b := Role{"teacher", []courses{{idb, "DAT100"}}}
+	c := Role{"admin", []courses{{idb, "DAT100"}}}
 
 	UpgradeUser("thomas", a, b, c)
 

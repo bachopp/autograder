@@ -26,7 +26,7 @@ var DropdownList = React.createClass({
             return(
             <DropdownElement
               course={course}
-              key={course.id + course.name}
+              key={course.Courseid}
             />
           );
           })

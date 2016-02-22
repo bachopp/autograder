@@ -20,9 +20,9 @@ var Dropdown = React.createClass({
         {roles.map(function(role) {
           return(
             <DropdownList
-              key={role.dropDownName}
-              title={role.dropDownName}
-              courses={role.dropDownElements}/>
+              key={role.Mode}
+              title={role.Mode}
+              courses={role.Courses}/>
           );
         })}
         </Nav>

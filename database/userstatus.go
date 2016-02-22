@@ -2,15 +2,20 @@ package database
 
 import "log"
 
-// Roles type is created when upgrading a user
-// function UpgradeUser will use this to update user with access rights to Courses
 type courses struct {
 	Courseid   int
 	CourseName string
 }
-type Roles struct {
+
+// Role references usertype and courses associated with it
+type Role struct {
 	Mode    string
 	Courses []courses
+}
+
+// Roles wraps all the roles to send as json through websocket
+type Roles struct {
+	Roles []Role `json:"roles"`
 }
 
 // InsertTestUser inserts test user
@@ -70,7 +75,7 @@ func getCourseID(courseName string) (int, error) {
 }
 
 // UpgradeUser upgrades user to either `admin`, `teacher` or `student` based on input string
-func UpgradeUser(username string, roles ...Roles) {
+func UpgradeUser(username string, roles ...Role) {
 	connectDb()
 	defer con.Close()
 
@@ -104,7 +109,7 @@ func UpgradeUser(username string, roles ...Roles) {
 	}
 }
 
-func makeUpdate(username string, role Roles) {
+func makeUpdate(username string, role Role) {
 	connectDb()
 	// TODO: Logic for ascending user to admin status
 	userid, err := getUserID(username)
@@ -139,17 +144,17 @@ func makeUpdate(username string, role Roles) {
 	}
 }
 
-// GetUserRoles returns slice of Roles
-func GetUserRoles(username string) []Roles {
+// GetUserRoles returns Roles
+func GetUserRoles(username string) Roles {
 	connectDb()
 	defer con.Close()
-	//TODO: Return roles of user from database as slice of Roles
+	//TODO: Return roles of user from database as Roles
 	userid, err := getUserID(username)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	roles := make([]Roles, 0, 3)
+	roles := make([]Role, 0, 3)
 	modes := []string{"admin", "teacher", "student"}
 	crses := make([]courses, 0, 32)
 	var course string
@@ -180,10 +185,14 @@ func GetUserRoles(username string) []Roles {
 			}
 			crses = append(crses, courses{courseid, course})
 		}
-		role := Roles{mode, crses}
+		role := Role{mode, crses}
+		// if rows is empty there is no courses associated with mode, therefore no append
+		if len(crses) > 0 {
+			roles = append(roles, role)
+		}
 		crses = nil
-		roles = append(roles, role)
 	}
+	rls := Roles{roles}
 	// TODO: Combine result to one slice size <= 3
-	return roles
+	return rls
 }
