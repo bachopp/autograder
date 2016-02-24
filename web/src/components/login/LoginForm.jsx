@@ -24,15 +24,15 @@ var LoginForm = React.createClass({
 
   componentDidMount: function() {
     var ws = this.ws = new WebSocket("ws://localhost:8000/ws");
-    //ws.addEventListener("message", this.logFromServer );
+    // ws.addEventListener("message", this.logFromServer );
     ws.onmessage = this.handleServerMessage;
-    //ws.onmessage = this.message;
     ws.onopen = this.open;
     ws.onclose = this.close;
   },
 
   handleServerMessage: function(event) {
     console.log(event.data);
+    // this.setState({login: event.data})
   },
   logFromServer: function(event) {
     console.log(event);
@@ -52,9 +52,10 @@ var LoginForm = React.createClass({
 
   handleSubmit: function(e) {
     e.preventDefault();
-    // TODO: send via websocked to server
-    this.ws.send(this.state.login + ":" + this.state.password);
+    // TODO: send via websocked to server as json -> Structify
+    this.ws.send(this.state.login + " " + this.state.password)
     this.setState({login: "", password: ""});
+    console.log(this.state.login + " " + this.state.password)
   },
 
   handleChange:function(event) {
@@ -76,12 +77,8 @@ var LoginForm = React.createClass({
               </Modal.Header>
 
                 <Modal.Body>
-                  <p>
                     <Input type="text" value={this.state.login} onChange={this.handleChange} name="login" placeholder="Login" />
-                  </p>
-                  <p>
                     <Input type="text" value={this.state.password} onChange={this.handleChange} name="password" placeholder="Password" />
-                  </p>
                 </Modal.Body>
 
                 <Modal.Footer>

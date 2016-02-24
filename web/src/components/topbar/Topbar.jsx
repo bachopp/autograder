@@ -95,10 +95,10 @@ var Topbar = React.createClass({
             />
           <Nav pullRight>
             <li>
-              <Link to="/about" onClick={this.showAbout}>About</Link>
+              <Link to="about" >About</Link>
             </li>
             <li>
-              <Link to="/login" onClick={this.logIn}>Log in</Link>
+              <Link to="login" >Log in</Link>
             </li>
           </Nav>
 
