@@ -7,7 +7,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 
 	"github.com/bachopp/autograder/database"
@@ -38,7 +37,8 @@ func handleRequest(socket *websocket.Conn) {
 		// this is the request struct with all fields filled out
 		err = jsonify.Structify(msg, &request)
 		if err != nil {
-			log.Fatal(err)
+			fmt.Println(err)
+			return
 		}
 		fmt.Println(request.Username)
 		// TODO: We should fix this. Maybe a switch-case is good enough?
@@ -46,7 +46,8 @@ func handleRequest(socket *websocket.Conn) {
 		case "navbar":
 			resp, err := jsonify.Unstructify(database.GetUserRoles(request.Username))
 			if err != nil {
-				log.Fatal(err)
+				fmt.Println(err)
+				return
 			}
 			fmt.Println(resp)
 			socket.WriteMessage(msgType, resp)
@@ -67,7 +68,8 @@ func handleRequest(socket *websocket.Conn) {
 func wsSocket(w http.ResponseWriter, r *http.Request) {
 	socket, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println(err)
+		return
 	}
 	go handleRequest(socket)
 }

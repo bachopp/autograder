@@ -18,7 +18,7 @@ var DropdownList = React.createClass({
   render:function() {
     var self = this;
     var courses = this.props.courses;
-    console.log(courses);
+    //console.log(courses);
     return (
       <NavDropdown title={this.props.title} id="basic-nav-dropdown">
         {

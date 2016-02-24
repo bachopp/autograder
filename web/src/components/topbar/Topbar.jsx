@@ -11,7 +11,6 @@ var Link = require("react-router").Link
 var Dropdown = require("./Dropdown.jsx")
 var LoginForm = require("../login/LoginForm.jsx")
 
-
 var Request = function(requestType,requestedElement,fromURL,requestedURL,username,password) {
   this.requestType = requestType;
   this.requestedElement = requestedElement;
@@ -48,7 +47,7 @@ var Topbar = React.createClass({
   message: function(response) {
     var responseObject = JSON.parse(response.data);
     var dropDownElements = responseObject.roles;
-    console.log(response.data.json)
+    //console.log(response.data.json);
     this.setState({roles: dropDownElements});
   },
 
@@ -66,6 +65,11 @@ var Topbar = React.createClass({
     this.setState({connected: false});
   },
 
+  showStudent: function(e) {
+    if (this.state.connected) {
+      this.ws.send(e.target.href);
+    }
+  },
   showAbout: function(e) {
     if (this.state.connected) {
       this.ws.send(e.target.href);
@@ -95,6 +99,9 @@ var Topbar = React.createClass({
             roles={self.state.roles}
             />
           <Nav pullRight>
+            <li>
+              <Link to="/student" onClick={this.showStudent}>Student</Link>
+            </li>
             <li>
               <Link to="/about" onClick={this.showAbout}>About</Link>
             </li>
