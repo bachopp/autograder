@@ -31,6 +31,7 @@ func main() {
 	r.HandleFunc("/ws", agsocket.AGSocket)
 	r.HandleFunc("/login", Handler)
 	r.HandleFunc("/about", Handler)
+	r.HandleFunc("/student", Handler)
 
 	r.PathPrefix("/").Handler(http.FileServer(http.Dir("../web/public")))
 	http.Handle("/", r)
