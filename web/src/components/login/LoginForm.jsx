@@ -10,8 +10,14 @@ var Navbar = require("react-bootstrap").Navbar
 var Link = require("react-router").Link
 // local requires
 var LoginButton = require("./LoginButton.jsx")
-// this class
 
+var Request = function(RequestedElement, username, password) {
+  this.RequestedElement = RequestedElement;
+  this.username = username;
+  this.password = password;
+}
+
+// this class
 var LoginForm = React.createClass({
 
   // not needed
@@ -24,7 +30,6 @@ var LoginForm = React.createClass({
 
   componentDidMount: function() {
     var ws = this.ws = new WebSocket("ws://localhost:8000/ws");
-    // ws.addEventListener("message", this.logFromServer );
     ws.onmessage = this.handleServerMessage;
     ws.onopen = this.open;
     ws.onclose = this.close;
@@ -32,14 +37,14 @@ var LoginForm = React.createClass({
 
   handleServerMessage: function(event) {
     console.log(event.data);
-    // this.setState({login: event.data})
+    this.setState({login: event.data})
   },
   logFromServer: function(event) {
     console.log(event);
   },
 
   message: function() {
-    //Sconsole.log("Message from server received");
+    //console.log("Message from server received");
   },
 
   open: function() {
@@ -52,10 +57,9 @@ var LoginForm = React.createClass({
 
   handleSubmit: function(e) {
     e.preventDefault();
-    // TODO: send via websocked to server as json -> Structify
-    this.ws.send(this.state.login + " " + this.state.password)
+    var loginRequest = new Request("loginform", this.state.login, this.state.password)
+    this.ws.send(JSON.stringify(loginRequest))
     this.setState({login: "", password: ""});
-    console.log(this.state.login + " " + this.state.password)
   },
 
   handleChange:function(event) {
@@ -77,12 +81,13 @@ var LoginForm = React.createClass({
               </Modal.Header>
 
                 <Modal.Body>
-                    <Input type="text" value={this.state.login} onChange={this.handleChange} name="login" placeholder="Login" />
-                    <Input type="text" value={this.state.password} onChange={this.handleChange} name="password" placeholder="Password" />
+                  <Input type="text" value={this.state.login} onChange={this.handleChange} name="login" placeholder="Login" />
+                  <Input type="text" value={this.state.password} onChange={this.handleChange} name="password" placeholder="Password" />
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <ButtonInput type="submit" onSubmit={this.handleSubmit}/>
+                  <ButtonInput type="submit" onSubmit={this.handleSubmit}/>
+                  <Link to="/"><ButtonInput>Close</ButtonInput></Link>
                 </Modal.Footer>
 
             </Modal.Dialog>

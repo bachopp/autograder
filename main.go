@@ -6,24 +6,34 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/bachopp/autograder/agsocket"
 	"github.com/gorilla/mux"
 )
 
-var webroot = "/var/www/autograder/web/public"
+// var webroot = "/var/www/autograder/web/public"
+
+func serveSingle(pattern string, filename string) {
+	http.HandleFunc(pattern, func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, filename)
+	})
+}
+func Handler(w http.ResponseWriter, r *http.Request) {
+	fmt.Printf("I am handling %s now\n", r.URL)
+	http.ServeFile(w, r, "../web/public")
+}
 
 func main() {
 
 	r := mux.NewRouter()
 	r.HandleFunc("/ws", agsocket.AGSocket)
-	r.HandleFunc("/login", agsocket.LoginHandler)
+	r.HandleFunc("/login", Handler)
+	r.HandleFunc("/about", Handler)
 
-	r.PathPrefix("/").Handler(http.FileServer(http.Dir(webroot)))
-
+	r.PathPrefix("/").Handler(http.FileServer(http.Dir("../web/public")))
 	http.Handle("/", r)
-	// http.HandleFunc("/ws", agsocket.AGSocket)
 
 	http.ListenAndServe(":8000", nil)
 }

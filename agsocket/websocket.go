@@ -10,19 +10,9 @@ import (
 	"github.com/gorilla/websocket"
 )
 
+var webroot = "/var/www/autograder/web/public"
+
 var upgrader = websocket.Upgrader{}
-
-func AboutHandler(w http.ResponseWriter, r *http.Request) {
-
-	fmt.Printf("I am handling %s now\n", r.URL)
-
-}
-
-func LoginHandler(w http.ResponseWriter, r *http.Request) {
-
-	fmt.Printf("I am handling %s now\n", r.URL)
-
-}
 
 func handleRequest(socket *websocket.Conn) {
 	for {
@@ -55,10 +45,9 @@ func handleRequest(socket *websocket.Conn) {
 		case "rightWrapper":
 			//TODO: Handle rightwrapper
 			return
-		default:
-			fmt.Println(string(msg))
-			socket.WriteMessage(msgType, []byte("RESPONSE"))
-			return
+		case "loginform":
+			fmt.Printf("user : %s logged in!", request.Username)
+			socket.WriteMessage(msgType, []byte("logged in"))
 		}
 	}
 }
