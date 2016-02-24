@@ -1,10 +1,6 @@
 package database
 
-import (
-	"encoding/json"
-	"fmt"
-	"testing"
-)
+import "testing"
 
 func TestUser(t *testing.T) {
 	InitializeDb()
@@ -23,7 +19,5 @@ func TestUser(t *testing.T) {
 	c := Role{"admin", []courses{{idb, "DAT100"}}}
 
 	UpgradeUser("thomas", a, b, c)
-
-	fmt.Println(json.Marshal(GetUserRoles("thomas")))
 
 }

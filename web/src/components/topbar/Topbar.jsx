@@ -47,8 +47,7 @@ var Topbar = React.createClass({
   message: function(response) {
     var responseObject = JSON.parse(response.data);
     var dropDownElements = responseObject.roles;
-    //console.log(response.data.json);
-    this.setState({roles: dropDownElements});
+    this.setSta({roles: dropDownElements});
   },
 
   getTopBar: function() {
@@ -106,7 +105,7 @@ var Topbar = React.createClass({
               <Link to="/about" onClick={this.showAbout}>About</Link>
             </li>
             <li>
-              <Link to="/login" onClick={this.logIn}>Log in</Link>
+              <Link to="login" >Log in</Link>
             </li>
           </Nav>
 

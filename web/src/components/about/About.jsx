@@ -20,7 +20,6 @@ var About = React.createClass({
           <Modal.Body>
             This is just about page.
             Move along.
-            //<Button onClick={self.props.onClick}>Hello fucker</Button>
           </Modal.Body>
           <Modal.Footer>
             <Link to="/">
