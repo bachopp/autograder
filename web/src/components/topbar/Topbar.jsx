@@ -11,6 +11,8 @@ var Link = require("react-router").Link
 var Dropdown = require("./Dropdown.jsx")
 var LoginForm = require("../login/LoginForm.jsx")
 
+var Socket = require("../socket.js")
+
 var Request = function(requestType,requestedElement,fromURL,requestedURL,username,password) {
   this.requestType = requestType;
   this.requestedElement = requestedElement;
@@ -29,39 +31,26 @@ var Topbar = React.createClass({
       roles: []
     };
   },
-
   chooseCourse: function(e) {
       this.setState({choosen: choosen});
       console.log(e);
   },
 
-  // Creates a websocket connection after the react component has been mounted.
-  //
   componentDidMount: function() {
-    var ws = this.ws = new WebSocket("ws://localhost:8000/ws");
-    ws.onmessage = this.message;
-    ws.onopen = this.open;
-    ws.onclose = this.close;
+    var socket = new Socket()
+    socket.on('connect', this.onConnect);
   },
-
-  message: function(response) {
-    var responseObject = JSON.parse(response.data);
-    var dropDownElements = responseObject.roles;
-    this.setState({roles: dropDownElements});
+  onConnect: function() {
+    this.setState({connected: true});
+  },
+  onDisconnect: function() {
+    this.setState({connected: false});
   },
 
   getTopBar: function() {
     var topBarRequest = new Request("element","navbar","/","/course/","thomas","darvik");
     var formatted = JSON.stringify(topBarRequest);
     this.ws.send(formatted);
-  },
-  open: function() {
-    this.setState({connected: true});
-    this.getTopBar();
-  },
-
-  close: function() {
-    this.setState({connected: false});
   },
 
   showStudent: function(e) {
@@ -76,6 +65,12 @@ var Topbar = React.createClass({
   },
 
   logIn: function(e) {
+    if (this.state.connected) {
+      this.ws.send(e.target.href)
+    }
+  },
+
+  oAuth: function(e) {
     if (this.state.connected) {
       this.ws.send(e.target.href)
     }
@@ -99,13 +94,16 @@ var Topbar = React.createClass({
             />
           <Nav pullRight>
             <li>
-              <Link to="/student" onClick={this.showStudent}>Student</Link>
+              <Link to="student" onClick={this.showStudent}>Student</Link>
             </li>
             <li>
-              <Link to="/about" onClick={this.showAbout}>About</Link>
+              <Link to="about" onClick={this.showAbout}>About</Link>
             </li>
             <li>
-              <Link to="login" >Log in</Link>
+              <Link to="login">Log in</Link>
+            </li>
+            <li>
+              <Link to = "oauth" onClick={this.oAuth}>Github Login</Link>
             </li>
           </Nav>
 

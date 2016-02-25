@@ -15,6 +15,8 @@ var Student = require("./student/Student.jsx")
 var About = require("./about/About.jsx")
 var LoginForm = require("./login/LoginForm.jsx")
 
+var Knapp = require("./button/Knapp.jsx")
+
 // this class
 var App = React.createClass({
 
@@ -36,7 +38,8 @@ ReactDOM.render(
 			<Route path="student" component={Student}>
 		</Route>
 			<Route path="about" component={About}/>
-			<Route path="login" component={LoginForm} />
+			<Route path="login" component={LoginForm}/>
+			<Route path="oauth" component={Knapp}/>
 		</Route>
 	</Router>,
 	document.getElementById("container")
