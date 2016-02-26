@@ -1,47 +1,43 @@
 var EventEmitter = require("events");
 
-var Socket = function() {
+
+var Socket = function(inicial) {
+  self = this;
   this.ws = new WebSocket("ws://localhost:8000/ws");
   this.ee = new EventEmitter();
 
-  this.ws.onmessage = this.message;
-  this.ws.onopen = this.open;
-  this.ws.onclose = this.close;
+  this.ws.onmessage = function(response) {
+    try {
+      var message = JSON.parse(response.data);
+      self.ee.emit(message.name, message.data);
+    }catch(err) {
+      self.ee.emit('error', err);
+    }
+  };
+
+  this.ws.onopen = function() {
+    self.ee.emit('connect');
+    console.log(inicial)
+  };
+
+  this.ws.onclose = function() {
+    self.ee.emit('disconnect');
+  };;
 
   this.on = function(name, fn) {
-    this.ee.on(name,fn);
+    self.ee.on(name,fn);
   };
 
   this.off = function(name, fn) {
-    this.ee.removeListener(name, fn);
+    self.ee.removeListener(name, fn);
   };
 
   this.emit = function(name, data) {
-    var message = JSON.stringify({name, data})
-    this.ws.send(message);
-  };
-
-  this.message = function(response) {
-    try {
-      var message = JSON.parse(response.data)
-      this.ee.emit(message.name, message.data);
-    }catch(err) {
-      this.ee.emit('error', err)
-    }
-    // var responseObject = JSON.parse(response.data);
-    // var dropDownElements = responseObject.roles;
-    // this.setState({roles: dropDownElements});
-  };
-  this.open = function() {
-    this.ee.emit('connect')
-    // this.setState({connected: true});
-    // this.getTopBar();
-  };
-
-  this.close = function() {
-    this.ee.emit('disconnect')
-    // this.setState({connected: false});
+    var message = JSON.stringify({name, data});
+    self.ws.send(message);
   };
 }
+
+
 
 module.exports = Socket;

@@ -9,12 +9,9 @@ import (
 
 // Request struct is the skeleton of the websocket request
 type Request struct {
-	RequestType      string `json:"requestType"`
-	RequestedElement string `json:"requestedElement"`
-	FromURL          string `json:"fromURL"`
-	RequestedURL     string `json:"requestedURL"`
-	Username         string `json:"username"`
-	Password         string `json:"password"`
+	Name     string      `json:"name"`
+	Data     interface{} `json:"data"`
+	Username string      `json:"username"`
 }
 
 // Response struct is the skeleton of the websocket response

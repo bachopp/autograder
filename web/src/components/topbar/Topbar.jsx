@@ -13,16 +13,6 @@ var LoginForm = require("../login/LoginForm.jsx")
 
 var Socket = require("../socket.js")
 
-var Request = function(requestType,requestedElement,fromURL,requestedURL,username,password) {
-  this.requestType = requestType;
-  this.requestedElement = requestedElement;
-  this.fromURL = fromURL;
-  this.requestedURL = requestedURL;
-  this.username = username;
-  this.password = password;
-}
-
-
 // this class
 var Topbar = React.createClass({
   getInitialState: function() {
@@ -37,48 +27,34 @@ var Topbar = React.createClass({
   },
 
   componentDidMount: function() {
-    var socket = new Socket()
-    socket.on('connect', this.onConnect);
+    var socket = this.socket = new Socket("topbar Socket");
+    socket.on('connect', this.onConnectT);
+    socket.on('navbar', this.onTopBar);
   },
-  onConnect: function() {
+  onConnectT: function() {
     this.setState({connected: true});
+    console.log("Topbar connected");
+    this.getTopBar();
   },
   onDisconnect: function() {
     this.setState({connected: false});
   },
 
+  onTopBar: function(data) {
+    var roles = this.state.roles;
+    roles = data.roles;
+    this.setState({roles:roles});
+  },
+
   getTopBar: function() {
-    var topBarRequest = new Request("element","navbar","/","/course/","thomas","darvik");
-    var formatted = JSON.stringify(topBarRequest);
-    this.ws.send(formatted);
-  },
-
-  showStudent: function(e) {
-    if (this.state.connected) {
-      this.ws.send(e.target.href);
-    }
-  },
-  showAbout: function(e) {
-    if (this.state.connected) {
-      this.ws.send(e.target.href);
-    }
-  },
-
-  logIn: function(e) {
-    if (this.state.connected) {
-      this.ws.send(e.target.href)
-    }
-  },
-
-  oAuth: function(e) {
-    if (this.state.connected) {
-      this.ws.send(e.target.href)
-    }
+    this.socket.emit('navbar',{username: "thomas"});
   },
 
   // TODO : iterate over buttons available fo user
   render:function() {
     var self = this;
+    // console.log("how many rimes? root")
+
     return (
       <Navbar inverse>
         <Navbar.Header>
@@ -94,16 +70,16 @@ var Topbar = React.createClass({
             />
           <Nav pullRight>
             <li>
-              <Link to="student" onClick={this.showStudent}>Student</Link>
+              <Link to="student">Student</Link>
             </li>
             <li>
-              <Link to="about" onClick={this.showAbout}>About</Link>
+              <Link to="about">About</Link>
             </li>
             <li>
               <Link to="login">Log in</Link>
             </li>
             <li>
-              <Link to = "oauth" onClick={this.oAuth}>Github Login</Link>
+              <Link to = "oauth">Github Login</Link>
             </li>
           </Nav>
 

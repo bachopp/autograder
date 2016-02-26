@@ -7,7 +7,7 @@ var Col = require("react-bootstrap").Col
 
 var CourseCard = React.createClass({
   propTypes: {
-    course: React.PropTypes.object
+    course: React.PropTypes.object.isRequired
   },
   render: function() {
     var self = this;

@@ -1,6 +1,7 @@
 package agsocket
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -21,21 +22,37 @@ func handleRequest(socket *websocket.Conn) {
 			fmt.Println(err)
 			return
 		}
+
 		var request jsonify.Request
-		// this is the request struct with all fields filled out
-		err = jsonify.Structify(msg, &request)
+		err = json.Unmarshal(msg, &request)
 		if err != nil {
 			fmt.Println(err)
 		}
-		// TODO: We should fix this. Maybe a switch-case is good enough?
-		switch request.RequestedElement {
+		name := request.Name
+		payload := request.Data.(map[string]interface{})
+
+		switch name {
 		case "navbar":
-			resp, err := jsonify.Unstructify(database.GetUserRoles(request.Username))
+
+			fmt.Println(payload["username"])
+			data := database.GetUserRoles(payload["username"].(string))
+			response := jsonify.Request{Name: name, Data: data}
+
+			resp, err := jsonify.Unstructify(response)
 			if err != nil {
 				log.Fatal(err)
 			}
 			socket.WriteMessage(msgType, resp)
-			//return
+		case "student":
+			fmt.Println(payload["username"])
+			data := database.GetUserRoles(payload["username"].(string))
+			response := jsonify.Request{Name: name, Data: data}
+
+			resp, err := jsonify.Unstructify(response)
+			if err != nil {
+				log.Fatal(err)
+			}
+			socket.WriteMessage(msgType, resp)
 		case "centerWrapper":
 			//TODO: Handle centerwrapper
 			return

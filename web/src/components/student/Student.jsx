@@ -11,63 +11,49 @@ var Link = require("react-router").Link
 
 var CenterWrapper = require("../centerWrapper/CenterWrapper.jsx")
 
-var Request = function(requestType,requestedElement,fromURL,requestedURL,username,password) {
-  this.requestType = requestType;
-  this.requestedElement = requestedElement;
-  this.fromURL = fromURL;
-  this.requestedURL = requestedURL;
-  this.username = username;
-  this.password = password;
-}
-
-
+var Socket = require("../socket.js")
 
 var Student = React.createClass({
   getInitialState: function() {
     return {
       connected: false,
-      studentCourses: [{}]
+      roles: [],
     }
   },
-  open: function() {
-    this.setState({connected: true});
-    var topBarRequest = new Request("element","navbar","/","/course/","thomas","darvik");
-    var formatted = JSON.stringify(topBarRequest);
-    this.ws.send(formatted);
-  },
-  close: function() {
-    this.setState({connected: false});
-  },
-  message: function(response) {
-    var self = this;
-    var responseObject = JSON.parse(response.data);
-    var theRoles = responseObject.roles;
 
-    for(var i = 0; i<theRoles.length; i++) {
-      currentRole = theRoles[i];
-      if(currentRole.Mode == "student") {
-        var courses = currentRole.Courses;
-        self.setState({studentCourses: courses});
-      }
-    }
-  },
   componentDidMount: function() {
-    var ws = this.ws = new WebSocket("ws://localhost:8000/ws");
-    ws.onmessage = this.message;
-    ws.onopen = this.open;
-    ws.onclose = this.close;
+    var socket = this.socket = new Socket("student Socket");
+    socket.on('connect', this.onConnectS);
+    socket.on('disconnect', this.onDisconnect);
+    socket.on('student', this.onStudent);
   },
+
+  onConnectS: function() {
+    this.setState({connected: true})
+    console.log("Student connected");
+    this.socket.emit('student',{username: "thomas"})
+  },
+  onDisconnect: function() {
+    this.setState({connected: false})
+  },
+  onStudent: function(data) {
+    var roles = this.state.roles
+    roles = data.roles;
+    this.setState({roles:roles});
+  },
+
   render: function() {
     var self = this;
-    var studentCourses = this.state.studentCourses;
-
+    var courses = this.state.courses;
+    var roles = this.state.roles;
+    // console.log("how many times? student")
     return (
       <Col>
         <Col xs={12} md={12}>
           <h1>View courses</h1>
         </Col>
         <Col xs={12} md={12}>
-          <CenterWrapper courses={studentCourses}/>
+          <CenterWrapper roles={roles}/>
         </Col>
 
       </Col>

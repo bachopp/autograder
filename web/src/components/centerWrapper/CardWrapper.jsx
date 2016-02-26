@@ -7,7 +7,7 @@ var CourseCard = require("./CourseCard.jsx");
 
 var CardWrapper = React.createClass({
   propTypes: {
-    courses: React.PropTypes.array
+    courses: React.PropTypes.array.isRequired
   },
   render: function() {
     var self = this;
@@ -28,7 +28,7 @@ var CardWrapper = React.createClass({
         <Col xs={12} sm={8} md={6} lg={3}>
           {courses.map(function(course){
             return(
-              <CourseCard course={course} />
+              <CourseCard key={course.Courseid} course={course} />
             );
           })}
         </Col>
