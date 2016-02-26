@@ -16,8 +16,8 @@ var Socket = function(inicial) {
   };
 
   this.ws.onopen = function() {
-    self.ee.emit('connect');
     console.log(inicial)
+    self.ee.emit('connect');
   };
 
   this.ws.onclose = function() {

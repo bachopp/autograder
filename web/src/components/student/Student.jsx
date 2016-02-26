@@ -22,7 +22,7 @@ var Student = React.createClass({
   },
 
   componentDidMount: function() {
-    var socket = this.socket = new Socket("student Socket");
+    var socket = this.socket = new Socket("student Socket connect");
     socket.on('connect', this.onConnectS);
     socket.on('disconnect', this.onDisconnect);
     socket.on('student', this.onStudent);
@@ -30,7 +30,7 @@ var Student = React.createClass({
 
   onConnectS: function() {
     this.setState({connected: true})
-    console.log("Student connected");
+    console.log("student connected");
     this.socket.emit('student',{username: "thomas"})
   },
   onDisconnect: function() {
@@ -46,7 +46,7 @@ var Student = React.createClass({
     var self = this;
     var courses = this.state.courses;
     var roles = this.state.roles;
-    // console.log("how many times? student")
+
     return (
       <Col>
         <Col xs={12} md={12}>

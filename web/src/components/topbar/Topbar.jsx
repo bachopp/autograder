@@ -27,13 +27,13 @@ var Topbar = React.createClass({
   },
 
   componentDidMount: function() {
-    var socket = this.socket = new Socket("topbar Socket");
+    var socket = this.socket = new Socket("topbar Socket connect");
     socket.on('connect', this.onConnectT);
     socket.on('navbar', this.onTopBar);
   },
   onConnectT: function() {
     this.setState({connected: true});
-    console.log("Topbar connected");
+    console.log("topbar connected")
     this.getTopBar();
   },
   onDisconnect: function() {
@@ -53,7 +53,6 @@ var Topbar = React.createClass({
   // TODO : iterate over buttons available fo user
   render:function() {
     var self = this;
-    // console.log("how many rimes? root")
 
     return (
       <Navbar inverse>
