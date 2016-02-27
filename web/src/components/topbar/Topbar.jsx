@@ -11,8 +11,6 @@ var Link = require("react-router").Link
 var Dropdown = require("./Dropdown.jsx")
 var LoginForm = require("../login/LoginForm.jsx")
 
-var Socket = require("../socket.js")
-
 // this class
 var Topbar = React.createClass({
   getInitialState: function() {
@@ -27,28 +25,30 @@ var Topbar = React.createClass({
   },
 
   componentDidMount: function() {
-    var socket = this.socket = new Socket("topbar Socket connect");
-    socket.on('connect', this.onConnectT);
-    socket.on('navbar', this.onTopBar);
+    var ws = this.ws = new WebSocket("ws://localhost:8000/ws");
+    ws.onmessage = this.message;
+    ws.onopen = this.open;
+    ws.onclose = this.close;
   },
-  onConnectT: function() {
+  message: function(response) {
+    if (this.state.connected===true) {
+      var response = JSON.parse(response.data);
+      var data = response.data
+      this.setState({roles: data.roles});
+    };
+  },
+  open: function() {
     this.setState({connected: true});
-    console.log("topbar connected")
     this.getTopBar();
   },
-  onDisconnect: function() {
+  close: function() {
     this.setState({connected: false});
   },
 
-  onTopBar: function(data) {
-    var roles = this.state.roles;
-    roles = data.roles;
-    this.setState({roles:roles});
-  },
-
   getTopBar: function() {
-    this.socket.emit('navbar',{username: "thomas"});
-  },
+    var formatted = JSON.stringify({name:'navbar', data:{"username": "thomas"}});
+    this.ws.send(formatted);
+},
 
   // TODO : iterate over buttons available fo user
   render:function() {

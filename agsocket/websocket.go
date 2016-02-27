@@ -30,11 +30,10 @@ func handleRequest(socket *websocket.Conn) {
 		}
 		name := request.Name
 		payload := request.Data.(map[string]interface{})
-
+		fmt.Println(string(msg))
 		switch name {
 		case "navbar":
 
-			fmt.Println(payload["username"])
 			data := database.GetUserRoles(payload["username"].(string))
 			response := jsonify.Request{Name: name, Data: data}
 
@@ -44,7 +43,6 @@ func handleRequest(socket *websocket.Conn) {
 			}
 			socket.WriteMessage(msgType, resp)
 		case "student":
-			fmt.Println(payload["username"])
 			data := database.GetUserRoles(payload["username"].(string))
 			response := jsonify.Request{Name: name, Data: data}
 
@@ -63,7 +61,8 @@ func handleRequest(socket *websocket.Conn) {
 			//TODO: Handle rightwrapper
 			return
 		case "loginform":
-			fmt.Printf("user : %s logged in!", request.Username)
+			// TODO: fix test
+			fmt.Printf("user : %s logged in!", "test")
 			socket.WriteMessage(msgType, []byte("logged in"))
 		}
 	}

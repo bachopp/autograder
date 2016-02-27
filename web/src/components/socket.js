@@ -1,5 +1,7 @@
-var EventEmitter = require("events");
+@Depricated
 
+var EventEmitter = require("events").EventEmitter;
+var util = require("util");
 
 var Socket = function(inicial) {
   self = this;
@@ -22,7 +24,7 @@ var Socket = function(inicial) {
 
   this.ws.onclose = function() {
     self.ee.emit('disconnect');
-  };;
+  };
 
   this.on = function(name, fn) {
     self.ee.on(name,fn);
@@ -34,10 +36,27 @@ var Socket = function(inicial) {
 
   this.emit = function(name, data) {
     var message = JSON.stringify({name, data});
-    self.ws.send(message);
+    waitForSocketConnection(self.ws, function() {
+           self.ws.send(message);
+       });
+    // self.ws.send(message);
   };
-}
 
+  function waitForSocketConnection(socket, callback){
+        setTimeout(
+            function(){
+                if (socket.readyState === 1) {
+                    if(callback !== undefined){
+                        callback();
+                    }
+                    return;
+                } else {
+                    waitForSocketConnection(socket,callback);
+                }
+            }, 5);
+    };
 
+};
 
+util.inherits(Socket, EventEmitter);
 module.exports = Socket;
