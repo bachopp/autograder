@@ -58,7 +58,7 @@ var Student = React.createClass({
         <Col xs={12} md={12}>
           <CenterWrapper roles={roles}/>
         </Col>
-
+          {this.props.children}
       </Col>
     )
   }

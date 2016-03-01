@@ -69,16 +69,16 @@ var Topbar = React.createClass({
             />
           <Nav pullRight>
             <li>
-              <Link to="student">Student</Link>
+              <Link to="/student">Student</Link>
             </li>
             <li>
-              <Link to="about">About</Link>
+              <Link to="/about">About</Link>
             </li>
             <li>
-              <Link to="login">Log in</Link>
+              <Link to="/login">Log in</Link>
             </li>
             <li>
-              <Link to = "oauth">Github Login</Link>
+              <Link to="/oauth">Github Login</Link>
             </li>
           </Nav>
 
