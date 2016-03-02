@@ -13,7 +13,11 @@ import (
 
 var webroot = "/var/www/autograder/web/public"
 
-var upgrader = websocket.Upgrader{}
+var upgrader = websocket.Upgrader{
+	CheckOrigin: func(r *http.Request) bool {
+		return true
+	},
+}
 
 func handleRequest(socket *websocket.Conn) {
 	for {
