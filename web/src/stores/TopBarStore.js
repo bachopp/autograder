@@ -10,11 +10,7 @@ var CHANGE_EVENT = 'change';
 var _roles = [];
 
 function _addRoles(rawRoles) {
-  rawRoles.forEach(function(role) {
-    _roles[role.Mode] = TopBarUtils.convertRawRole(
-      role
-    );
-  });
+  _roles = rawRoles;
 }
 
 var TopBarStore = assign({}, EventEmitter.prototype, {
@@ -44,7 +40,6 @@ TopBarStore.dispachToken = AGDispatcher.register(function(action) {
 
      case ActionTypes.RECEIVE_RAW_ROLES:
       _addRoles(action.rawRoles);
-      console.log(_roles);
       TopBarStore.emitChange();
 
      default:
