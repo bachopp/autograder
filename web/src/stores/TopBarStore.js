@@ -1,15 +1,17 @@
 var AGDispatcher = require('../dispatcher/AGDispatcher');
-var AGConstants = require('../constants/AGConstants.js')
+var AGConstants = require('../constants/AGConstants.js');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
+var TopBarUtils = require('../utils/TopBarUtils');
+var ActionTypes = AGConstants.ActionTypes;
 
 var CHANGE_EVENT = 'change';
 
-var _roles = {};
+var _roles = [];
 
 function _addRoles(rawRoles) {
   rawRoles.forEach(function(role) {
-    _roles[role.Mode] = ChatMessageutils.convertRawRole(
+    _roles[role.Mode] = TopBarUtils.convertRawRole(
       role
     );
   });
@@ -42,6 +44,7 @@ TopBarStore.dispachToken = AGDispatcher.register(function(action) {
 
      case ActionTypes.RECEIVE_RAW_ROLES:
       _addRoles(action.rawRoles);
+      console.log(_roles);
       TopBarStore.emitChange();
 
      default:
@@ -49,3 +52,5 @@ TopBarStore.dispachToken = AGDispatcher.register(function(action) {
   }
 
 });
+
+module.exports = TopBarStore;

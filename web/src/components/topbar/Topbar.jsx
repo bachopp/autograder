@@ -12,10 +12,14 @@ var Dropdown = require("./Dropdown.jsx");
 var LoginForm = require("../login/LoginForm.jsx");
 // stores
 var TopBarStore = require("../../stores/TopBarStore.js");
+// utils
+var TopBarAPIUtils = require("../../utils/TopBarAPIUtils");
+
+TopBarAPIUtils.getAllRoles();
 
 function getStateFromStores() {
   return {
-    roles: TopBarStore.getAllRoles()
+    roles: TopBarStore.getAllRoles(),
   };
 }
 
