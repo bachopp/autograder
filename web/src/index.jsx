@@ -16,29 +16,15 @@ var About 		=	require("./components/about/About.jsx")
 var LoginForm = require("./components/login/LoginForm.jsx")
 var Knapp 		= require("./components/button/Knapp.jsx")
 
-var Socket = require("./utils/socket.js")
 // this class
 var App = React.createClass({
 
 	componentDidMount: function() {
-		var ws = this.ws = new WebSocket("ws://localhost:8000/ws");
-		ws.onmessage = this.message;
-		ws.onopen = this.open;
-		ws.onclose = this.close;
-		console.log(ws.onmessage);
+		// TODO: add listener from relevant stores
 	},
 
-	open: function() {
-		// TODO: render all routed components
-		var childs = React.Children.toArray(this.props.children);
-
-		for (var i = 0; i < childs.length; i++) {
-			console.log(childs[i]);
-		};
-	},
-
-	message: function() {
-		// TODO: render component associated with message
+	componentWillUnmount: function() {
+		// TODO: add listener from relevant stores
 	},
 
 	render: function(){

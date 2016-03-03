@@ -1,49 +1,38 @@
-var React = require("react")
+var React = require("react");
 
 // react-bootstrap requires
-var Navbar = require("react-bootstrap").Navbar
-var NavItem = require("react-bootstrap").NavItem
-var Nav = require("react-bootstrap").Nav
+var Navbar = require("react-bootstrap").Navbar;
+var NavItem = require("react-bootstrap").NavItem;
+var Nav = require("react-bootstrap").Nav;
 
 // react-router requires
-var Link = require("react-router").Link
-// local requires
-var Dropdown = require("./Dropdown.jsx")
-var LoginForm = require("../login/LoginForm.jsx")
+var Link = require("react-router").Link;
+// components
+var Dropdown = require("./Dropdown.jsx");
+var LoginForm = require("../login/LoginForm.jsx");
+// stores
+var TopBarStore = require("../../stores/TopBarStore.js");
+
+function getStateFromStores() {
+  return {
+    roles: TopBarStore.getAllRoles()
+  };
+}
 
 // this class
 var Topbar = React.createClass({
   getInitialState: function() {
-    return {
-      connected: false,
-      roles: []
-    };
-  },
-  chooseCourse: function(e) {
-      this.setState({choosen: choosen});
-      console.log(e);
+    return getStateFromStores();
   },
 
   componentDidMount: function() {
-    var ws = this.ws = new WebSocket("ws://localhost:8000/ws");
-    ws.onmessage = this.message;
-    ws.onopen = this.open;
-    ws.onclose = this.close;
+    TopBarStore.addChangeListener(this._onChange);
   },
-  message: function(response) {
-    if (this.state.connected===true) {
-      var response = JSON.parse(response.data);
-      var data = response.data
-      this.setState({roles: data.roles});
-    };
+
+  componentWillUnmount: function() {
+    TopBarStore.removeChangeListener(this._onChange);
   },
-  open: function() {
-    this.setState({connected: true});
-    this.getTopBar();
-  },
-  close: function() {
-    this.setState({connected: false});
-  },
+
 
   getTopBar: function() {
     var formatted = JSON.stringify({name:'navbar', data:{"username": "thomas"}});
@@ -85,7 +74,11 @@ var Topbar = React.createClass({
         </Navbar.Collapse>
       </Navbar>
     )
-  }
+  },
+
+  _onChange: function() {
+    this.setState(getStateFromStores());
+  },
 })
 
 module.exports = Topbar;
