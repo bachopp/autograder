@@ -1,10 +1,14 @@
 var TopBarServerActionCreators = require("../actions/TopBarServerActionCreators");
 
+var Socket = require("./Socket.js");
+
 module.exports = {
-  // TODO: functions for receiving data from server
+  // TODO: ask socket for data from server
   getAllRoles: function() {
-    var roles = [{Mode: "admin", Courses: [{CourseName: "DAT300", Courseid: 1},{CourseName: "DAT100", Courseid: 2}]}];
-    console.log(roles);
-    TopBarServerActionCreators.receiveAll(roles);
+
+    Socket.waitForSocketConnection(Socket.ws, function() {
+      var payload = JSON.stringify({"name": "navbar", "data": {"username": "thomas"}});
+      Socket.ws.send(payload);
+    });
   }
 };

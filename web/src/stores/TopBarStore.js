@@ -1,7 +1,10 @@
-var AGDispatcher = require('../dispatcher/AGDispatcher');
-var AGConstants = require('../constants/AGConstants.js');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
+
+// local
+var AGDispatcher = require('../dispatcher/AGDispatcher');
+var AGConstants = require('../constants/AGConstants.js');
+
 var TopBarUtils = require('../utils/TopBarUtils');
 var ActionTypes = AGConstants.ActionTypes;
 
