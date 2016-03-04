@@ -1,6 +1,7 @@
 package agsocket
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -12,7 +13,11 @@ import (
 
 var webroot = "/var/www/autograder/web/public"
 
-var upgrader = websocket.Upgrader{}
+var upgrader = websocket.Upgrader{
+	CheckOrigin: func(r *http.Request) bool {
+		return true
+	},
+}
 
 func handleRequest(socket *websocket.Conn) {
 	for {
@@ -21,21 +26,35 @@ func handleRequest(socket *websocket.Conn) {
 			fmt.Println(err)
 			return
 		}
+
 		var request jsonify.Request
-		// this is the request struct with all fields filled out
-		err = jsonify.Structify(msg, &request)
+		err = json.Unmarshal(msg, &request)
 		if err != nil {
 			fmt.Println(err)
 		}
-		// TODO: We should fix this. Maybe a switch-case is good enough?
-		switch request.RequestedElement {
+		name := request.Name
+		payload := request.Data.(map[string]interface{})
+		fmt.Println(string(msg))
+		switch name {
 		case "navbar":
-			resp, err := jsonify.Unstructify(database.GetUserRoles(request.Username))
+
+			data := database.GetUserRoles(payload["username"].(string))
+			response := jsonify.Request{Name: name, Data: data}
+
+			resp, err := jsonify.Unstructify(response)
 			if err != nil {
 				log.Fatal(err)
 			}
 			socket.WriteMessage(msgType, resp)
-			//return
+		case "student":
+			data := database.GetUserRoles(payload["username"].(string))
+			response := jsonify.Request{Name: name, Data: data}
+
+			resp, err := jsonify.Unstructify(response)
+			if err != nil {
+				log.Fatal(err)
+			}
+			socket.WriteMessage(msgType, resp)
 		case "centerWrapper":
 			//TODO: Handle centerwrapper
 			return
@@ -46,7 +65,8 @@ func handleRequest(socket *websocket.Conn) {
 			//TODO: Handle rightwrapper
 			return
 		case "loginform":
-			fmt.Printf("user : %s logged in!", request.Username)
+			// TODO: fix test
+			fmt.Printf("user : %s logged in!", "test")
 			socket.WriteMessage(msgType, []byte("logged in"))
 		}
 	}

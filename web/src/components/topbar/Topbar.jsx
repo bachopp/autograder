@@ -1,89 +1,47 @@
-var React = require("react")
+var React = require("react");
 
 // react-bootstrap requires
-var Navbar = require("react-bootstrap").Navbar
-var NavItem = require("react-bootstrap").NavItem
-var Nav = require("react-bootstrap").Nav
+var Navbar = require("react-bootstrap").Navbar;
+var NavItem = require("react-bootstrap").NavItem;
+var Nav = require("react-bootstrap").Nav;
 
 // react-router requires
-var Link = require("react-router").Link
-// local requires
-var Dropdown = require("./Dropdown.jsx")
-var LoginForm = require("../login/LoginForm.jsx")
+var Link = require("react-router").Link;
+// components
+var Dropdown = require("./Dropdown.jsx");
+var LoginForm = require("../login/LoginForm.jsx");
+// stores
+var TopBarStore = require("../../stores/TopBarStore.js");
+// utils
+var TopBarAPIUtils = require("../../utils/TopBarAPIUtils");
 
-var Request = function(requestType,requestedElement,fromURL,requestedURL,username,password) {
-  this.requestType = requestType;
-  this.requestedElement = requestedElement;
-  this.fromURL = fromURL;
-  this.requestedURL = requestedURL;
-  this.username = username;
-  this.password = password;
+// Calls for initial data from server on first render cycle only.
+TopBarAPIUtils.getAllRoles();
+
+function getStateFromStores() {
+  return {
+    roles: TopBarStore.getAllRoles(),
+  };
 }
-
 
 // this class
 var Topbar = React.createClass({
   getInitialState: function() {
-    return {
-      connected: false,
-      roles: []
-    };
+    return getStateFromStores();
   },
 
-  chooseCourse: function(e) {
-      this.setState({choosen: choosen});
-      console.log(e);
-  },
-
-  // Creates a websocket connection after the react component has been mounted.
-  //
   componentDidMount: function() {
-    var ws = this.ws = new WebSocket("ws://localhost:8000/ws");
-    ws.onmessage = this.message;
-    ws.onopen = this.open;
-    ws.onclose = this.close;
+    TopBarStore.addChangeListener(this._onChange);
   },
 
-  message: function(response) {
-    var responseObject = JSON.parse(response.data);
-    var dropDownElements = responseObject.roles;
-    this.setState({roles: dropDownElements});
-  },
-
-  getTopBar: function() {
-    var topBarRequest = new Request("element","navbar","/","/course/","thomas","darvik");
-    var formatted = JSON.stringify(topBarRequest);
-    this.ws.send(formatted);
-  },
-  open: function() {
-    this.setState({connected: true});
-    this.getTopBar();
-  },
-
-  close: function() {
-    this.setState({connected: false});
-  },
-
-  showStudent: function(e) {
-    if (this.state.connected) {
-      this.ws.send(e.target.href);
-    }
-  },
-  showAbout: function(e) {
-    if (this.state.connected) {
-      this.ws.send(e.target.href);
-    }
-  },
-
-  logIn: function(e) {
-    if (this.state.connected) {
-      this.ws.send(e.target.href)
-    }
+  componentWillUnmount: function() {
+    TopBarStore.removeChangeListener(this._onChange);
   },
 
   // TODO : iterate over buttons available fo user
   render:function() {
     var self = this;
+
     return (
       <Navbar inverse>
         <Navbar.Header>
@@ -99,20 +57,27 @@ var Topbar = React.createClass({
             />
           <Nav pullRight>
             <li>
-              <Link to="/student" onClick={this.showStudent}>Student</Link>
+              <Link to="/student">Student</Link>
             </li>
             <li>
-              <Link to="/about" onClick={this.showAbout}>About</Link>
+              <Link to="/about">About</Link>
             </li>
             <li>
-              <Link to="login" >Log in</Link>
+              <Link to="/login">Log in</Link>
+            </li>
+            <li>
+              <Link to="/oauth">Github Login</Link>
             </li>
           </Nav>
 
         </Navbar.Collapse>
       </Navbar>
     )
-  }
+  },
+
+  _onChange: function() {
+    this.setState(getStateFromStores());
+  },
 })
 
 module.exports = Topbar;

@@ -11,11 +11,11 @@ var Link = require("react-router").Link
 // local requires
 var LoginButton = require("./LoginButton.jsx")
 
-var Request = function(RequestedElement, username, password) {
-  this.RequestedElement = RequestedElement;
-  this.username = username;
-  this.password = password;
-}
+// var Request = function(RequestedElement, username, password) {
+//   this.RequestedElement = RequestedElement;
+//   this.username = username;
+//   this.password = password;
+// }
 
 // this class
 var LoginForm = React.createClass({
@@ -30,35 +30,27 @@ var LoginForm = React.createClass({
 
   componentDidMount: function() {
     var ws = this.ws = new WebSocket("ws://localhost:8000/ws");
-    ws.onmessage = this.handleServerMessage;
+    ws.onmessage = this.message;
     ws.onopen = this.open;
     ws.onclose = this.close;
   },
 
-  handleServerMessage: function(event) {
+  message: function(event) {
     console.log(event.data);
-    this.setState({login: event.data})
+    this.setState({login: event.data});
   },
-  logFromServer: function(event) {
-    console.log(event);
-  },
-
-  message: function() {
-    //console.log("Message from server received");
-  },
-
   open: function() {
     this.setState({connected: true});
   },
-
   close: function() {
     this.setState({connected: false});
   },
 
   handleSubmit: function(e) {
     e.preventDefault();
-    var loginRequest = new Request("loginform", this.state.login, this.state.password)
-    this.ws.send(JSON.stringify(loginRequest))
+    // var loginRequest = new Request("loginform", this.state.login, this.state.password)
+    var formatted = JSON.stringify({name:"loginform", data:{"login":this.state.login, "password": this.state.password}});
+    this.ws.send(formatted);
     this.setState({login: "", password: ""});
   },
 
@@ -66,8 +58,8 @@ var LoginForm = React.createClass({
     if (event.target.name === "login") {
       this.setState({login: event.target.value});
     } else {
-      this.setState({password: event.target.value})
-    }
+      this.setState({password: event.target.value});
+    };
   },
 
   render:function() {

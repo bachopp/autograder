@@ -10,33 +10,41 @@ var Link = require("react-router").Link
 // react-bootstrap requires
 
 // local components requires
-var Topbar = require("./topbar/Topbar.jsx")
-var Student = require("./student/Student.jsx")
-var About = require("./about/About.jsx")
-var LoginForm = require("./login/LoginForm.jsx")
+var Topbar 		= require("./components/topbar/Topbar.jsx")
+var Courses 	= require("./components/courses/Courses.jsx")
+var About 		=	require("./components/about/About.jsx")
+var LoginForm = require("./components/login/LoginForm.jsx")
+var Knapp 		= require("./components/button/Knapp.jsx")
 
 // this class
 var App = React.createClass({
 
+	componentDidMount: function() {
+		// TODO: add listener from relevant stores
+	},
+
+	componentWillUnmount: function() {
+		// TODO: add listener from relevant stores
+	},
+
 	render: function(){
+
 		return (
 			<div>
 				<Topbar {...this.props} />
-
 				{this.props.children}
 			</div>
 		)
 	}
 });
 
-
 ReactDOM.render(
 	<Router history={browserHistory} >
 		<Route path="/" component={App}>
-			<Route path="student" component={Student}>
-		</Route>
-			<Route path="about" component={About}/>
-			<Route path="login" component={LoginForm} />
+			<Route path="/student" component={Courses}/>
+			<Route path="/about" component={About}/>
+			<Route path="/login" component={LoginForm}/>
+			<Route path="/oauth" component={Knapp}/>
 		</Route>
 	</Router>,
 	document.getElementById("container")

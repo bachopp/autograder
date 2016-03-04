@@ -7,15 +7,22 @@ var CardWrapper = require("./CardWrapper.jsx");
 
 var CenterWrapper = React.createClass({
   propTypes: {
-    courses: React.PropTypes.array
+    roles: React.PropTypes.array.isRequired,
   },
   render: function() {
     var self = this;
-    var courses = this.props.courses;
-    return(
-      <Col xs={12}>
-        <CardWrapper courses={courses}/>
-      </Col>
+    var roles = this.props.roles;
+    return (
+        <div>
+          {roles.map(function(role){
+            return(
+              <Col key={role.Mode} xs={12}>
+                <h4>{role.Mode}</h4>
+                <CardWrapper courses={role.Courses}/>
+              </Col>
+            );
+          })}
+      </div>
     );
   }
 })
