@@ -8,45 +8,29 @@ var Row = require("react-bootstrap").Row
 // react-router requires
 var Link = require("react-router").Link
 // local requires
-
 var CenterWrapper = require("../centerWrapper/CenterWrapper.jsx")
 
-var Student = React.createClass({
+var CoursesStore = require("../../stores/CoursesStore.js");
+
+function getStateFromStores() {
+  return {
+    roles: CoursesStore.getAllCourses(),
+  };
+}
+
+var Courses = React.createClass({
   getInitialState: function() {
-    return {
-      connected: false,
-      roles: []
-    }
+    return getStateFromStores();
   },
 
   componentDidMount: function() {
-    var ws = this.ws = new WebSocket("ws://localhost:8000/ws");
-    ws.onmessage = this.message;
-    ws.onopen = this.open;
-    ws.onclose = this.close;
+    CoursesStore.addChangeListener(this._onChange);
   },
-  message: function(response) {
-    if (this.state.connected===true) {
-      var response = JSON.parse(response.data);
-      var data = response.data
-      this.setState({roles: data.roles});
-    };
-  },
-  open: function() {
-    this.setState({connected: true});
-    this.getCourses();
-  },
-  close: function() {
-    this.setState({connected: false});
-  },
-
-  getCourses: function() {
-    var formatted = JSON.stringify({name:'student', data:{"username": "thomas"}});
-    this.ws.send(formatted);
+  componentWillUnmount: function() {
+    CoursesStore.removeChangeListener(this._onChange);
   },
 
   render: function() {
-    var self = this;
     var courses = this.state.courses;
     var roles = this.state.roles;
 
@@ -61,8 +45,11 @@ var Student = React.createClass({
           {this.props.children}
       </Col>
     )
-  }
+  },
+  _onChange: function() {
+    this.setState(getStateFromStores());
+  },
 })
 
 
-module.exports = Student;
+module.exports = Courses;

@@ -11,7 +11,7 @@ var Link = require("react-router").Link
 
 // local components requires
 var Topbar 		= require("./components/topbar/Topbar.jsx")
-var Student 	= require("./components/student/Student.jsx")
+var Courses 	= require("./components/courses/Courses.jsx")
 var About 		=	require("./components/about/About.jsx")
 var LoginForm = require("./components/login/LoginForm.jsx")
 var Knapp 		= require("./components/button/Knapp.jsx")
@@ -41,7 +41,7 @@ var App = React.createClass({
 ReactDOM.render(
 	<Router history={browserHistory} >
 		<Route path="/" component={App}>
-			<Route path="/student" component={Student}/>
+			<Route path="/student" component={Courses}/>
 			<Route path="/about" component={About}/>
 			<Route path="/login" component={LoginForm}/>
 			<Route path="/oauth" component={Knapp}/>

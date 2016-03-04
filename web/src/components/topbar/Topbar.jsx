@@ -38,12 +38,6 @@ var Topbar = React.createClass({
     TopBarStore.removeChangeListener(this._onChange);
   },
 
-
-  getTopBar: function() {
-    var formatted = JSON.stringify({name:'navbar', data:{"username": "thomas"}});
-    this.ws.send(formatted);
-},
-
   // TODO : iterate over buttons available fo user
   render:function() {
     var self = this;
