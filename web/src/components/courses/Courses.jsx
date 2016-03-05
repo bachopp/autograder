@@ -11,6 +11,8 @@ var Link = require("react-router").Link
 var CenterWrapper = require("../centerWrapper/CenterWrapper.jsx")
 
 var CoursesStore = require("../../stores/CoursesStore.js");
+CoursesAPIUtils = require("../../utils/CoursesAPIUtils.js")
+
 
 function getStateFromStores() {
   return {
@@ -20,6 +22,9 @@ function getStateFromStores() {
 
 var Courses = React.createClass({
   getInitialState: function() {
+    // Calls for initial data from server on first render cycle only.
+    CoursesAPIUtils.getAllCourses();
+    
     return getStateFromStores();
   },
 

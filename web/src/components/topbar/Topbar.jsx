@@ -15,8 +15,6 @@ var TopBarStore = require("../../stores/TopBarStore.js");
 // utils
 var TopBarAPIUtils = require("../../utils/TopBarAPIUtils");
 
-// Calls for initial data from server on first render cycle only.
-TopBarAPIUtils.getAllRoles();
 
 function getStateFromStores() {
   return {
@@ -27,6 +25,8 @@ function getStateFromStores() {
 // this class
 var Topbar = React.createClass({
   getInitialState: function() {
+    // Calls for initial data from server on first render cycle only.
+    TopBarAPIUtils.getAllRoles();
     return getStateFromStores();
   },
 

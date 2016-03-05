@@ -9,10 +9,12 @@ var ActionTypes = AGConstants.ActionTypes;
 
 var CHANGE_EVENT = 'change';
 
-var _roles = [];
+// this is temporary the same as TopBarStore, but will incorporate more Courses
+// like course description and number of students
+var _courses = [];
 
-function _addRoles(rawRoles) {
-  _roles = rawRoles;
+function _newCourses(newCourses) {
+  _courses = newCourses;
 }
 
 var CoursesStore = assign({}, EventEmitter.prototype, {
@@ -30,7 +32,7 @@ var CoursesStore = assign({}, EventEmitter.prototype, {
   },
 
   getAllCourses: function() {
-    return _roles;
+    return _courses;
   }
 });
 
@@ -40,10 +42,10 @@ CoursesStore.dispachToken = AGDispatcher.register(function(action) {
   switch(action.type) {
     // TODO: finish switch statement for different actions
 
-     case ActionTypes.RECEIVE_RAW_ROLES:
-      _addRoles(action.rawRoles);
+     case ActionTypes.RECEIVE_RAW_COURSES:
+      _newCourses(action.newCourses);
       CoursesStore.emitChange();
-
+      break;
      default:
      // no action
   }

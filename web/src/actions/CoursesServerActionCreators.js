@@ -5,10 +5,10 @@ var ActionTypes = AGConstants.ActionTypes;
 
 module.exports = {
   // TODO: methods for receieveing topbar data from server
-  receiveAll: function(rawRoles) {
+  receiveAll: function(newCourses) {
     AGDispatcher.dispatch({
-      type: ActionTypes.RECEIVE_RAW_ROLES,
-      rawRoles: rawRoles,
+      type: ActionTypes.RECEIVE_RAW_COURSES,
+      newCourses: newCourses,
     });
   },
 };

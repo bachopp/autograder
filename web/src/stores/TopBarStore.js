@@ -44,7 +44,7 @@ TopBarStore.dispachToken = AGDispatcher.register(function(action) {
      case ActionTypes.RECEIVE_RAW_ROLES:
       _addRoles(action.rawRoles);
       TopBarStore.emitChange();
-
+      break;
      default:
      // no action
   }
