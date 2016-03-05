@@ -11,6 +11,12 @@ import (
 	"github.com/gorilla/websocket"
 )
 
+// Constants for communication through websocket
+const (
+	ReceiveRawCourses = "RECEIVE_RAW_COURSES"
+	ReceiveRawRoles   = "RECEIVE_RAW_ROLES"
+)
+
 var webroot = "/var/www/autograder/web/public"
 
 var upgrader = websocket.Upgrader{
@@ -27,28 +33,32 @@ func handleRequest(socket *websocket.Conn) {
 			return
 		}
 
+		// Creates go struct from received websocket payload
 		var request jsonify.Request
 		err = json.Unmarshal(msg, &request)
 		if err != nil {
 			fmt.Println(err)
 		}
-		name := request.Name
-		payload := request.Data.(map[string]interface{})
-		fmt.Println(string(msg))
-		switch name {
-		case "navbar":
 
-			data := database.GetUserRoles(payload["username"].(string))
-			response := jsonify.Request{Name: name, Data: data}
+		actionType := request.ActionType
+		payload := request.Payload.(map[string]interface{})
+
+		fmt.Println(string(msg))
+
+		switch actionType {
+		case ReceiveRawRoles:
+
+			payload := database.GetUserRoles(payload["username"].(string))
+			response := jsonify.Request{ActionType: actionType, Payload: payload}
 
 			resp, err := jsonify.Unstructify(response)
 			if err != nil {
 				log.Fatal(err)
 			}
 			socket.WriteMessage(msgType, resp)
-		case "student":
-			data := database.GetUserRoles(payload["username"].(string))
-			response := jsonify.Request{Name: name, Data: data}
+		case ReceiveRawCourses:
+			payload := database.GetUserRoles(payload["username"].(string))
+			response := jsonify.Request{ActionType: actionType, Payload: payload}
 
 			resp, err := jsonify.Unstructify(response)
 			if err != nil {
@@ -72,6 +82,7 @@ func handleRequest(socket *websocket.Conn) {
 	}
 }
 
+// AGSocket delegates websocket to clients
 func AGSocket(w http.ResponseWriter, r *http.Request) {
 	socket, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {

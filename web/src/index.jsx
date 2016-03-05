@@ -41,7 +41,7 @@ var App = React.createClass({
 ReactDOM.render(
 	<Router history={browserHistory} >
 		<Route path="/" component={App}>
-			<Route path="/student" component={Courses}/>
+			<Route path="/courses" component={Courses}/>
 			<Route path="/about" component={About}/>
 			<Route path="/login" component={LoginForm}/>
 			<Route path="/oauth" component={Knapp}/>

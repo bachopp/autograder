@@ -2,6 +2,9 @@ var TopBarAPIUtils = require("./TopBarAPIUtils");
 var TopBarServerActionCreators = require("../actions/TopBarServerActionCreators");
 var CoursesServerActionCreators = require("../actions/CoursesServerActionCreators");
 
+var AGConstants = require("../constants/AGConstants");
+var ActionTypes = AGConstants.ActionTypes;
+
 var Socket =  function() {
 
   this.ws = new WebSocket("ws://localhost:8000/ws");
@@ -12,12 +15,14 @@ var Socket =  function() {
     var data = JSON.parse(payload.data);
     var pivot = data.name;
 
+    console.log(data);
+
     switch(pivot) {
-      case "navbar":
-        TopBarServerActionCreators.receiveAll(data.data.roles);
+      case ActionTypes.RECEIVE_RAW_ROLES:
+        TopBarServerActionCreators.receiveAll(data.payload.roles);
         break;
-      case "student":
-        CoursesServerActionCreators.receiveAll(data.data.roles)
+      case ActionTypes.RECEIVE_RAW_COURSES:
+        CoursesServerActionCreators.receiveAll(data.payload.roles)
         break;
       default:
       // no action
