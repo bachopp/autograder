@@ -8,18 +8,28 @@ var Row = require("react-bootstrap").Row
 // react-router requires
 var Link = require("react-router").Link
 // local requires
-
 var CenterWrapper = require("../centerWrapper/CenterWrapper.jsx")
 
-var Student = React.createClass({
+var CoursesStore = require("../../stores/CoursesStore.js");
+CoursesAPIUtils = require("../../utils/CoursesAPIUtils.js")
+
+
+function getStateFromStores() {
+  return {
+    roles: CoursesStore.getAllCourses(),
+  };
+}
+
+var Courses = React.createClass({
   getInitialState: function() {
-    return {
-      connected: false,
-      roles: []
-    }
+    // Calls for initial data from server on first render cycle only.
+    CoursesAPIUtils.getAllCourses();
+    
+    return getStateFromStores();
   },
   componentWillMount: function() {
 
+<<<<<<< HEAD:web/src/components/student/Student.jsx
     console.log(this.props);
 
 
@@ -39,9 +49,15 @@ var Student = React.createClass({
   message: function(response) {
     var data = JSON.parse(response.data).data;
     this.setState({roles: data.roles});
+=======
+  componentDidMount: function() {
+    CoursesStore.addChangeListener(this._onChange);
+  },
+  componentWillUnmount: function() {
+    CoursesStore.removeChangeListener(this._onChange);
+>>>>>>> dev:web/src/components/courses/Courses.jsx
   },
   render: function() {
-    var self = this;
     var courses = this.state.courses;
     var roles = this.state.roles;
 
@@ -53,11 +69,14 @@ var Student = React.createClass({
         <Col xs={12} md={12}>
           <CenterWrapper roles={roles}/>
         </Col>
-
+          {this.props.children}
       </Col>
     )
-  }
+  },
+  _onChange: function() {
+    this.setState(getStateFromStores());
+  },
 })
 
 
-module.exports = Student;
+module.exports = Courses;

@@ -10,14 +10,14 @@ var Link = require("react-router").Link
 // react-bootstrap requires
 
 // local components requires
-var Topbar = require("./topbar/Topbar.jsx")
-var Student = require("./student/Student.jsx")
-var About = require("./about/About.jsx")
-var LoginForm = require("./login/LoginForm.jsx")
-
-var Knapp = require("./button/Knapp.jsx")
+var Topbar 		= require("./components/topbar/Topbar.jsx")
+var Courses 	= require("./components/courses/Courses.jsx")
+var About 		=	require("./components/about/About.jsx")
+var LoginForm = require("./components/login/LoginForm.jsx")
+var Knapp 		= require("./components/button/Knapp.jsx")
 
 var App = React.createClass({
+<<<<<<< HEAD:web/src/components/index.jsx
 	getInitalState: function() {
 		return{
 			connected: false
@@ -41,10 +41,26 @@ var App = React.createClass({
 		var data = JSON.parse(response.data);
 		console.log(data);
 	},
+=======
+
+	componentDidMount: function() {
+		// TODO: add listener from relevant stores
+	},
+
+	componentWillUnmount: function() {
+		// TODO: add listener from relevant stores
+	},
+
+>>>>>>> dev:web/src/index.jsx
 	render: function(){
+
 		return (
 			<div>
+<<<<<<< HEAD:web/src/components/index.jsx
 				<Topbar {...this.props}/>
+=======
+				<Topbar {...this.props} />
+>>>>>>> dev:web/src/index.jsx
 				{this.props.children}
 			</div>
 		)
@@ -52,12 +68,21 @@ var App = React.createClass({
 });
 
 ReactDOM.render(
+<<<<<<< HEAD:web/src/components/index.jsx
 	<Router history={browserHistory}>
 			<Route path="/" component={App}>
 			<Route path="student" {...this.props} component={Student}/>
 			<Route path="about" component={About}/>
 			<Route path="login" component={LoginForm}/>
 			<Route path="oauth" component={Knapp}/>
+=======
+	<Router history={browserHistory} >
+		<Route path="/" component={App}>
+			<Route path="/courses" component={Courses}/>
+			<Route path="/about" component={About}/>
+			<Route path="/login" component={LoginForm}/>
+			<Route path="/oauth" component={Knapp}/>
+>>>>>>> dev:web/src/index.jsx
 		</Route>
 	</Router>,
 	document.getElementById("container")

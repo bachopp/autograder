@@ -13,7 +13,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
-// var webroot = "/var/www/autograder/web/public"
+var webroot = "/var/www/autograder/web/public/"
 
 func serveSingle(pattern string, filename string) {
 	http.HandleFunc(pattern, func(w http.ResponseWriter, r *http.Request) {
@@ -22,7 +22,7 @@ func serveSingle(pattern string, filename string) {
 }
 func Handler(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("I am handling %s now\n", r.URL)
-	http.ServeFile(w, r, "../web/public")
+	http.ServeFile(w, r, webroot)
 }
 
 func main() {
@@ -31,9 +31,9 @@ func main() {
 	r.HandleFunc("/ws", agsocket.AGSocket)
 	r.HandleFunc("/login", Handler)
 	r.HandleFunc("/about", Handler)
-	r.HandleFunc("/student", Handler)
+	r.HandleFunc("/courses", Handler)
 
-	r.PathPrefix("/").Handler(http.FileServer(http.Dir("../web/public")))
+	r.PathPrefix("/").Handler(http.FileServer(http.Dir(webroot)))
 	http.Handle("/", r)
 
 	http.ListenAndServe(":8000", nil)

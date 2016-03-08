@@ -1,20 +1,31 @@
-var React = require("react")
+var React = require("react");
 
 // react-bootstrap requires
-var Navbar = require("react-bootstrap").Navbar
-var NavItem = require("react-bootstrap").NavItem
-var Nav = require("react-bootstrap").Nav
+var Navbar = require("react-bootstrap").Navbar;
+var NavItem = require("react-bootstrap").NavItem;
+var Nav = require("react-bootstrap").Nav;
 
 // react-router requires
-var Link = require("react-router").Link
-// local requires
-var Dropdown = require("./Dropdown.jsx")
-var LoginForm = require("../login/LoginForm.jsx")
+var Link = require("react-router").Link;
+// components
+var Dropdown = require("./Dropdown.jsx");
+var LoginForm = require("../login/LoginForm.jsx");
+// stores
+var TopBarStore = require("../../stores/TopBarStore.js");
+// utils
+var TopBarAPIUtils = require("../../utils/TopBarAPIUtils");
+
+function getStateFromStores() {
+  return {
+    roles: TopBarStore.getAllRoles(),
+  };
+}
 
 // this class
 var Topbar = React.createClass({
 
   getInitialState: function() {
+<<<<<<< HEAD
     return {
       roles: [],
       choosen: this.props.choosen,
@@ -41,6 +52,19 @@ var Topbar = React.createClass({
   message: function(response) {
     var data = JSON.parse(response.data).data;
     this.setState({roles: data.roles});
+=======
+    // Calls for initial data from server on first render cycle only.
+    TopBarAPIUtils.getAllRoles();
+    return getStateFromStores();
+  },
+
+  componentDidMount: function() {
+    TopBarStore.addChangeListener(this._onChange);
+  },
+
+  componentWillUnmount: function() {
+    TopBarStore.removeChangeListener(this._onChange);
+>>>>>>> dev
   },
 
   // TODO : iterate over buttons available fo user
@@ -62,23 +86,27 @@ var Topbar = React.createClass({
             />
           <Nav pullRight>
             <li>
-              <Link to="student">Student</Link>
+              <Link to="/courses">Student</Link>
             </li>
             <li>
-              <Link to="about">About</Link>
+              <Link to="/about">About</Link>
             </li>
             <li>
-              <Link to="login">Log in</Link>
+              <Link to="/login">Log in</Link>
             </li>
             <li>
-              <Link to = "oauth">Github Login</Link>
+              <Link to="/oauth">Github Login</Link>
             </li>
           </Nav>
 
         </Navbar.Collapse>
       </Navbar>
     )
-  }
+  },
+
+  _onChange: function() {
+    this.setState(getStateFromStores());
+  },
 })
 
 module.exports = Topbar;
