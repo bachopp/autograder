@@ -13,9 +13,7 @@ var Socket =  function() {
     // TODO: emit that message has arrived
     // figure out what ActionCreator to call with new data?
     var data = JSON.parse(payload.data);
-    var pivot = data.name;
-
-    console.log(data);
+    var pivot = data.actionType;
 
     switch(pivot) {
       case ActionTypes.RECEIVE_RAW_ROLES:
@@ -25,7 +23,7 @@ var Socket =  function() {
         CoursesServerActionCreators.receiveAll(data.payload.roles)
         break;
       default:
-      // no action
+        // do nothing
     }
   };
 
@@ -34,7 +32,7 @@ var Socket =  function() {
   };
 
   this.close = function() {
-
+    // TODO:
   };
 
   this.ws.onmessage = this.message;
@@ -44,7 +42,6 @@ var Socket =  function() {
   this.test = function()  {
     console.log("GOT HERE ");
   };
-
   // This is not good at all, but temp fix, see this.open
   this.waitForSocketConnection = function waitForSocketConnection(socket, callback){
     setTimeout(
