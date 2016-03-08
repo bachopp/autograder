@@ -18,33 +18,28 @@ var Student = React.createClass({
       roles: []
     }
   },
+  componentWillMount: function() {
 
-  componentDidMount: function() {
-    var ws = this.ws = new WebSocket("ws://localhost:8000/ws");
-    ws.onmessage = this.message;
-    ws.onopen = this.open;
-    ws.onclose = this.close;
-  },
-  message: function(response) {
-    if (this.state.connected===true) {
-      var response = JSON.parse(response.data);
-      var data = response.data
-      this.setState({roles: data.roles});
-    };
+    console.log(this.props);
+
+
+    this.websocket = new WebSocket("ws://localhost:8000/ws");
+    this.websocket.onopen = this.open;
+    this.websocket.onclose = this.close;
+    this.websocket.onmessage = this.message;
   },
   open: function() {
     this.setState({connected: true});
-    this.getCourses();
+    var formatted = JSON.stringify({name:'student', data:{'username':'thomas'}});
+    this.websocket.send(formatted);
   },
   close: function() {
     this.setState({connected: false});
   },
-
-  getCourses: function() {
-    var formatted = JSON.stringify({name:'student', data:{"username": "thomas"}});
-    this.ws.send(formatted);
+  message: function(response) {
+    var data = JSON.parse(response.data).data;
+    this.setState({roles: data.roles});
   },
-
   render: function() {
     var self = this;
     var courses = this.state.courses;

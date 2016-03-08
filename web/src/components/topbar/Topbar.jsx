@@ -13,42 +13,35 @@ var LoginForm = require("../login/LoginForm.jsx")
 
 // this class
 var Topbar = React.createClass({
+
   getInitialState: function() {
     return {
+      roles: [],
+      choosen: this.props.choosen,
       connected: false,
-      roles: []
-    };
+    }
   },
   chooseCourse: function(e) {
       this.setState({choosen: choosen});
-      console.log(e);
   },
-
-  componentDidMount: function() {
-    var ws = this.ws = new WebSocket("ws://localhost:8000/ws");
-    ws.onmessage = this.message;
-    ws.onopen = this.open;
-    ws.onclose = this.close;
-  },
-  message: function(response) {
-    if (this.state.connected===true) {
-      var response = JSON.parse(response.data);
-      var data = response.data
-      this.setState({roles: data.roles});
-    };
+  componentWillMount: function() {
+    this.websocket = new WebSocket("ws://localhost:8000/ws");
+    this.websocket.onopen = this.open;
+    this.websocket.onclose = this.close;
+    this.websocket.onmessage = this.message;
   },
   open: function() {
     this.setState({connected: true});
-    this.getTopBar();
+    var formatted = JSON.stringify({name:'navbar', data:{"username": "thomas"}});
+    this.websocket.send(formatted);
   },
   close: function() {
     this.setState({connected: false});
   },
-
-  getTopBar: function() {
-    var formatted = JSON.stringify({name:'navbar', data:{"username": "thomas"}});
-    this.ws.send(formatted);
-},
+  message: function(response) {
+    var data = JSON.parse(response.data).data;
+    this.setState({roles: data.roles});
+  },
 
   // TODO : iterate over buttons available fo user
   render:function() {
