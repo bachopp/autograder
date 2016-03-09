@@ -34,7 +34,7 @@ var StudentSelector = React.createClass({
   render: function() {
     self = this;
     return(
-      <Row>
+      <Col>
         <Col xs={2} className="whitebox">
           side navbar placeholder
         </Col>
@@ -61,7 +61,7 @@ var StudentSelector = React.createClass({
         <Col xs={3} xsOffset={1} className="whitebox">
           show groups placeholder
         </Col>
-      </Row>
+      </Col>
 
     );
   },

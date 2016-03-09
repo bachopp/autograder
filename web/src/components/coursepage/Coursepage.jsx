@@ -20,7 +20,7 @@ var Coursepage = React.createClass({
   render: function() {
     const innerSearch = <Glyphicon glyph="search"/>;
     return(
-      <Col xs={12}>
+      <Col>
         <Col xs={2} className="whitebox">
           <ButtonGroup vertical block>
             <Button>Members</Button>
