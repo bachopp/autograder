@@ -4,6 +4,8 @@ var React = require("react");
 
 var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
+var Table = require("react-bootstrap").Table;
+var ListGroupItem = require("react-bootstrap").ListGroupItem;
 
 var StudentSelectorElement = require("./StudentSelectorElement.jsx");
 var StudentSelectorStudents = require("./StudentSelectorStudents.jsx");
@@ -11,7 +13,7 @@ var StudentSelectorSearch = require("./StudentSelectorSearch.jsx");
 
 function stnr() {
   var arr = [];
-  for (var i = 0; i < 50; i++) {
+  for (var i = 0; i < 10; i++) {
     var test = {username:"tokams", firstName: "Tomasz", lastName: "Gliniecki", studentNumber:  Math.floor((Math.random()+1) * 200000)};
     arr.push(test);
   };
@@ -43,17 +45,19 @@ var StudentSelector = React.createClass({
 
           <StudentSelectorSearch />
 
-          <Row>
-            <Col lg={3} xsHidden={true} smHidden={true} mdHidden={true}>
-              Username
-            </Col>
-            <Col lg={3} md={4} sm={6} xs={6}>
-              Full name
-            </Col>
-            <Col lg={3} md={4} xsHidden={true} smHidden={true}>
-              Student number
-            </Col>
-          </Row>
+            <ListGroupItem>
+              <Row>
+                <Col lg={3} xsHidden={true} smHidden={true} mdHidden={true}>
+                  <b>Username</b>
+                </Col>
+                <Col lg={3} md={4} sm={6} xs={6}>
+                  <b>Full name</b>
+                </Col>
+                <Col lg={3} md={4} xsHidden={true} smHidden={true}>
+                  <b>Student number</b>
+                </Col>
+              </Row>
+            </ListGroupItem>
 
           <StudentSelectorStudents users={self.state.users}/>
         </Col>

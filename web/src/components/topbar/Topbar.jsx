@@ -59,7 +59,10 @@ var Topbar = React.createClass({
               <Link to="/coursepage">Coursepage</Link>
             </li>
             <li>
-              <Link to="/courses">Student</Link>
+              <Link to="/groups">Group management</Link>
+            </li>
+            <li>
+              <Link to="/courses">Courses</Link>
             </li>
             <li>
               <Link to="/about">About</Link>
