@@ -42,7 +42,7 @@ var Topbar = React.createClass({
     var self = this;
 
     return (
-      <Navbar inverse>
+      <Navbar className="myNavbar">
         <Navbar.Header>
           <Navbar.Brand>
             <Link to="/">Autograder</Link>
@@ -55,6 +55,9 @@ var Topbar = React.createClass({
             roles={self.state.roles}
             />
           <Nav pullRight>
+            <li>
+              <Link to="/coursepage">Coursepage</Link>
+            </li>
             <li>
               <Link to="/courses">Student</Link>
             </li>
