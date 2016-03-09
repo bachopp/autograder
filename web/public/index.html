@@ -20,13 +20,53 @@ html, body {
 	padding-bottom: 1.5em;
 	padding-left: 1em;
 	padding-right: 1em;
-	border-radius:7px;
-	border:1px solid #a5a5a5;
+	border-radius:4px;
 	box-shadow:1px 1px 1px rgba(0,0,0,0.1);
 
 	margin-bottom: 2em;
 }
 
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+color: #000;  /*Sets the text hover color on navbar*/
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active >
+ a:hover, .navbar-default .navbar-nav > .active > a:focus {
+color: white; /*BACKGROUND color for active*/
+background-color: #030033;
+}
+
+  .navbar-default {
+    background-color: #2C3E50;
+    border-color: #2C3E50;
+}
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+color: #262626;
+text-decoration: none;
+background-color: #66CCFF;  /*change color of links in drop down here*/
+}
+
+.nav > li > a:hover,
+.nav > li > a:focus {
+text-decoration: none;
+background-color: silver; /*Change rollover cell color here*/
+}
+
+
+.navbar-default .navbar-nav > li > a {
+color: white; /*Change active text color here*/
+}
+
+.buildLog p{
+	color:#2980B9;
+	font-size:0.8em;
+}
+
+.cleanTable th, .table td {
+     border-top: none !important;
+ }
 .gutterRight {
   margin-right:20px;
 }
