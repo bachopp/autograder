@@ -8,8 +8,7 @@ var DropdownList = require("./DropdownList.jsx")
 
 var Dropdown = React.createClass({
   propTypes: {
-    courses: React.PropTypes.array,
-    roles: React.PropTypes.array.isRequired
+    roles: React.PropTypes.array.isRequired,
   },
 
   render:function() {
@@ -22,7 +21,9 @@ var Dropdown = React.createClass({
             <DropdownList
               key={role.Mode}
               title={role.Mode}
-              courses={role.Courses}/>
+              mode={role.Mode}
+              courses={role.Courses}
+              />
           );
         })}
         </Nav>

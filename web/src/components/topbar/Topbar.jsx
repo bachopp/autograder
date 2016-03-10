@@ -56,12 +56,6 @@ var Topbar = React.createClass({
             />
           <Nav pullRight>
             <li>
-              <Link to="/coursepage">Coursepage</Link>
-            </li>
-            <li>
-              <Link to="/groups">Group management</Link>
-            </li>
-            <li>
               <Link to="/courses">Courses</Link>
             </li>
             <li>

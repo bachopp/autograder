@@ -24,7 +24,7 @@ var Courses = React.createClass({
   getInitialState: function() {
     // Calls for initial data from server on first render cycle only.
     CoursesAPIUtils.getAllCourses();
-    
+
     return getStateFromStores();
   },
 
@@ -38,17 +38,16 @@ var Courses = React.createClass({
   render: function() {
     var courses = this.state.courses;
     var roles = this.state.roles;
-
     return (
-      <Col>
-        <Col xs={12} md={12}>
-          <h1>View courses</h1>
-        </Col>
-        <Col xs={12} md={12}>
-          <CenterWrapper roles={roles}/>
-        </Col>
-          {this.props.children}
+      <div>
+      <Col xs={12} md={12}>
+        <h1>View courses</h1>
       </Col>
+      <Row>
+          <CenterWrapper roles={roles}/>
+          {this.props.children}
+      </Row>
+      </div>
     )
   },
   _onChange: function() {

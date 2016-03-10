@@ -7,9 +7,12 @@ var Col = require("react-bootstrap").Col;
 var Table = require("react-bootstrap").Table;
 var ListGroupItem = require("react-bootstrap").ListGroupItem;
 
+// local
 var StudentSelectorElement = require("./StudentSelectorElement.jsx");
 var StudentSelectorStudents = require("./StudentSelectorStudents.jsx");
 var StudentSelectorSearch = require("./StudentSelectorSearch.jsx");
+
+var GroupSelector = require("./GroupSelector.jsx");
 
 function stnr() {
   var arr = [];
@@ -63,7 +66,7 @@ var StudentSelector = React.createClass({
         </Col>
 
         <Col xs={3} xsOffset={1} className="whitebox">
-          show groups placeholder
+          <GroupSelector/>
         </Col>
       </Col>
 

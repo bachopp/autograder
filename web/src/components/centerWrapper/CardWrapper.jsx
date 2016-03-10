@@ -7,7 +7,8 @@ var CourseCard = require("./CourseCard.jsx");
 
 var CardWrapper = React.createClass({
   propTypes: {
-    courses: React.PropTypes.array.isRequired
+    courses: React.PropTypes.array.isRequired,
+    role: React.PropTypes.string.isRequired,
   },
   render: function() {
     var self = this;
@@ -25,10 +26,10 @@ var CardWrapper = React.createClass({
     */
     return(
       <Row>
-        <Col xs={12} sm={8} md={6} lg={3}>
+        <Col xs={10}>
           {courses.map(function(course){
             return(
-              <CourseCard key={course.Courseid} course={course} />
+              <CourseCard key={course.Courseid} course={course} role={self.props.role}/>
             );
           })}
         </Col>
