@@ -18,6 +18,7 @@ var webroot = "/var/www/autograder/web/public/"
 func serveSingle(pattern string, filename string) {
 	http.HandleFunc(pattern, func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, filename)
+		i := nil
 	})
 }
 func Handler(w http.ResponseWriter, r *http.Request) {

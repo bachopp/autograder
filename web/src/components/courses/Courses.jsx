@@ -8,7 +8,7 @@ var Row = require("react-bootstrap").Row
 // react-router requires
 var Link = require("react-router").Link
 // local requires
-var CenterWrapper = require("../centerWrapper/CenterWrapper.jsx")
+var CenterWrapper = require("./CenterWrapper.jsx")
 
 var CoursesStore = require("../../stores/CoursesStore.js");
 CoursesAPIUtils = require("../../utils/CoursesAPIUtils.js")
