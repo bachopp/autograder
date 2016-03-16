@@ -23,7 +23,6 @@ var TeacherGroup = require("web/src/views/TeacherGroup.jsx")
 var Coursepage= require("./components/coursepage/Coursepage.jsx")
 // this class
 
-
 var App = React.createClass({
 
 	componentDidMount: function() {
