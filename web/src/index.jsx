@@ -13,14 +13,14 @@ var Jumbotron = require("react-bootstrap").Jumbotron
 var Button 		= require("react-bootstrap").Button
 // local components requires
 var Topbar 		= require("./components/topbar/Topbar.jsx")
-var Courses 	= require("./components/courses/Courses.jsx")
+var Welcome		= require("./components/root/Welcome.jsx")
 var About 		=	require("./components/about/About.jsx")
 var LoginForm = require("./components/login/LoginForm.jsx")
 var Knapp 		= require("./components/button/Knapp.jsx")
-var Welcome		= require("./components/root/Welcome.jsx")
 
-var TeacherGroup = require("web/src/views/TeacherGroup.jsx")
+var TeacherGroup = require("./views/TeacherGroup.jsx")
 var Coursepage= require("./components/coursepage/Coursepage.jsx")
+var AllCourses = require("./views/AllCourses.jsx")
 // this class
 
 var App = React.createClass({
@@ -48,7 +48,7 @@ ReactDOM.render(
 	<Router history={browserHistory} >
 		<Route path="/" component={App}>
 		<IndexRoute component={Welcome}/>
-			<Route path="/courses" component={Courses}/>
+			<Route path="/courses" component={AllCourses}/>
 
 			<Route path="/admin">
 				<Route path=":coursename" component={Coursepage}/>
