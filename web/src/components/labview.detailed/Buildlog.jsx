@@ -1,7 +1,7 @@
 var React = require("react");
 var Col = require("react-bootstrap").Col;
 var Well = require("react-bootstrap").Well;
-var CourseLog = React.createClass({
+var Buildlog = React.createClass({
   render: function() {
     return(
       <Well className="buildLog">
@@ -22,4 +22,4 @@ var CourseLog = React.createClass({
   }
 });
 
-module.exports = CourseLog;
+module.exports = Buildlog;

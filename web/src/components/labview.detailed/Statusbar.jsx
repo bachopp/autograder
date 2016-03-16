@@ -3,7 +3,7 @@ var React = require("react");
 // React components
 var ProgressBar = require("react-bootstrap").ProgressBar;
 
-var StatusBar = React.createClass({
+var Statusbar = React.createClass({
   render: function() {
     var percent = this.props.percent;
     if(percent < 60) {
@@ -19,4 +19,4 @@ var StatusBar = React.createClass({
   }
 });
 
-module.exports = StatusBar;
+module.exports = Statusbar;

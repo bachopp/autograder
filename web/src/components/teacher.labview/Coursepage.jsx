@@ -11,16 +11,16 @@ var Table = require("react-bootstrap").Table;
 var ProgressBar = require("react-bootstrap").ProgressBar;
 
 
-
-var Statusbar = require("../labview.detailed/Statusbar.jsx");
-var Buildlog = require("../labview.detailed/Buildlog.jsx");
 // local components
+var Buildlog = require("../labview.detailed/Buildlog.jsx");
 
 var Coursepage = React.createClass({
   render: function() {
     const innerSearch = <Glyphicon glyph="search"/>;
     return(
       <Col>
+        <LeftSidePanel />
+
         <Col xs={2} className="whitebox">
           <ButtonGroup vertical block>
             <Button>Members</Button>
@@ -74,30 +74,7 @@ var Coursepage = React.createClass({
           </Col>
         </Col>
         <Col xs={3} xsOffset={1} className="whitebox">
-          <h4>
-            Lab 1 - Ola Nordmann
-          </h4>
-          <Col xs={12}>
-            <Statusbar percent={40}/>
-            <p>Status: <span>Not approved</span></p>
-            <ButtonToolbar>
-              <Button bsStyle="default">Approve</Button>
-              <Button bsStyle="info">Rebuild</Button>
-            </ButtonToolbar>
 
-        </Col>
-        <Col xs={12}>
-          <h5>Latest build</h5>
-          <p>Number of passed tests: 1</p>
-          <p>Number of failed tests: 3</p>
-          <p>Excecution time: 00 min 12.94 sec</p>
-          <p>Build date: 12/10/2015 11:58:66</p>
-          <p>Build ID: 1234</p>
-        </Col>
-        <Col xs={12}>
-          <Buildlog/>
-        </Col>
-        </Col>
       </Col>
     );
   }
