@@ -11,14 +11,15 @@ var DropdownElement = require("./DropdownElement.jsx")
 var DropdownList = React.createClass({
 
   propTypes: {
-    courses: React.PropTypes.array,
-    title: React.PropTypes.string,
+    courses: React.PropTypes.array.isRequired,
+    mode: React.PropTypes.string.isRequired,
+    title: React.PropTypes.string.isRequired,
   },
 
   render:function() {
     var self = this;
     var courses = this.props.courses;
-    //console.log(courses);
+    var mode = this.props.mode;
     return (
       <NavDropdown title={this.props.title} id="basic-nav-dropdown">
         {
@@ -26,6 +27,7 @@ var DropdownList = React.createClass({
             return(
             <DropdownElement
               course={course}
+              mode={mode}
               key={course.Courseid}
             />
           );

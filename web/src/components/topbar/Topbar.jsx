@@ -15,7 +15,6 @@ var TopBarStore = require("../../stores/TopBarStore.js");
 // utils
 var TopBarAPIUtils = require("../../utils/TopBarAPIUtils");
 
-
 function getStateFromStores() {
   return {
     roles: TopBarStore.getAllRoles(),
@@ -43,7 +42,7 @@ var Topbar = React.createClass({
     var self = this;
 
     return (
-      <Navbar inverse>
+      <Navbar className="myNavbar">
         <Navbar.Header>
           <Navbar.Brand>
             <Link to="/">Autograder</Link>
@@ -57,7 +56,7 @@ var Topbar = React.createClass({
             />
           <Nav pullRight>
             <li>
-              <Link to="/student">Student</Link>
+              <Link to="/courses">Courses</Link>
             </li>
             <li>
               <Link to="/about">About</Link>

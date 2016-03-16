@@ -14,7 +14,7 @@ var About = React.createClass({
     var self = this;
     return (
       <div>
-          <Button>Close</Button>
+          <Link to="/"><Button>Close</Button></Link>
       </div>
     )
   }

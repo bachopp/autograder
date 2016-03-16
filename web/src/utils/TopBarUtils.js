@@ -1,5 +1,5 @@
 module.exports = {
-  // TODO: Create helper methods for type conversion ets
+  // TODO: These are used in stores to convert received data from API to whatever we need
   convertRawRole: function(rawRole) {
     return {
       mode: rawRole.Mode,
