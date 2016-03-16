@@ -37,7 +37,7 @@ var GroupSelectorElement = React.createClass({
         <Button onClick={this.handleClick} block>
           Group 1
         </Button>
-        <Panel collapsible expanded={this.state.activeGroup}>
+        <Panel className="groupmanager" collapsible expanded={this.state.activeGroup}>
           Group 1 users
         </Panel>
       </div>

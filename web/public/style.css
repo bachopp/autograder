@@ -59,3 +59,7 @@ color: white; /*Change active text color here*/
 .gutterRight {
   margin-right:20px;
 }
+.groupmanager {
+	border: none;
+	padding-bottom:6px;
+}

@@ -14,6 +14,9 @@ var StudentSelectorSearch = require("../components/student.group.selector/Studen
 
 var GroupSelector = require("../components/group.manager/GroupSelector.jsx");
 
+// mock data
+var mock = require("./mock.js");
+
 function stnr() {
   var arr = [];
   for (var i = 0; i < 10; i++) {
@@ -26,7 +29,7 @@ function stnr() {
 function getStateFromStores() {
   return {
     // TODO: get users from store
-    users: stnr()
+    users: mock.stnr()
   };
 }
 
