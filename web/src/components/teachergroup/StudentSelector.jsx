@@ -16,7 +16,7 @@ var GroupSelector = require("./GroupSelector.jsx");
 
 function stnr() {
   var arr = [];
-  for (var i = 0; i < 10; i++) {
+  for (var i = 0; i < 20; i++) {
     var test = {username:"tokams", firstName: "Tomasz", lastName: "Gliniecki", studentNumber:  Math.floor((Math.random()+1) * 200000)};
     arr.push(test);
   };

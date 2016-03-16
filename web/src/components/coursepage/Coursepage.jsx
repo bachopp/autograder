@@ -198,7 +198,228 @@ var students = [
       {id:5, percent:randomNumber()},
       {id:6, percent:randomNumber()},
     ]
+  },
+  {
+    username: randomUsername(),
+    fullName: randomName(),
+    slipdays: randomNumber(),
+    labs: [
+      {id:1, percent:randomNumber()},
+      {id:2, percent:randomNumber()},
+      {id:3, percent:randomNumber()},
+      {id:4, percent:randomNumber()},
+      {id:5, percent:randomNumber()},
+      {id:6, percent:randomNumber()},
+    ]
+  },
+  {
+    username: randomUsername(),
+    fullName: randomName(),
+    slipdays: randomNumber(),
+    labs: [
+      {id:1, percent:randomNumber()},
+      {id:2, percent:randomNumber()},
+      {id:3, percent:randomNumber()},
+      {id:4, percent:randomNumber()},
+      {id:5, percent:randomNumber()},
+      {id:6, percent:randomNumber()},
+    ]
+  },
+  {
+    username: randomUsername(),
+    fullName: randomName(),
+    slipdays: randomNumber(),
+    labs: [
+      {id:1, percent:randomNumber()},
+      {id:2, percent:randomNumber()},
+      {id:3, percent:randomNumber()},
+      {id:4, percent:randomNumber()},
+      {id:5, percent:randomNumber()},
+      {id:6, percent:randomNumber()},
+    ]
+  },
+  {
+    username: randomUsername(),
+    fullName: randomName(),
+    slipdays: randomNumber(),
+    labs: [
+      {id:1, percent:randomNumber()},
+      {id:2, percent:randomNumber()},
+      {id:3, percent:randomNumber()},
+      {id:4, percent:randomNumber()},
+      {id:5, percent:randomNumber()},
+      {id:6, percent:randomNumber()},
+    ]
+  },
+  {
+    username: randomUsername(),
+    fullName: randomName(),
+    slipdays: randomNumber(),
+    labs: [
+      {id:1, percent:randomNumber()},
+      {id:2, percent:randomNumber()},
+      {id:3, percent:randomNumber()},
+      {id:4, percent:randomNumber()},
+      {id:5, percent:randomNumber()},
+      {id:6, percent:randomNumber()},
+    ]
+  },
+  {
+    username: randomUsername(),
+    fullName: randomName(),
+    slipdays: randomNumber(),
+    labs: [
+      {id:1, percent:randomNumber()},
+      {id:2, percent:randomNumber()},
+      {id:3, percent:randomNumber()},
+      {id:4, percent:randomNumber()},
+      {id:5, percent:randomNumber()},
+      {id:6, percent:randomNumber()},
+    ]
+  },
+  {
+    username: randomUsername(),
+    fullName: randomName(),
+    slipdays: randomNumber(),
+    labs: [
+      {id:1, percent:randomNumber()},
+      {id:2, percent:randomNumber()},
+      {id:3, percent:randomNumber()},
+      {id:4, percent:randomNumber()},
+      {id:5, percent:randomNumber()},
+      {id:6, percent:randomNumber()},
+    ]
+  },
+  {
+    username: randomUsername(),
+    fullName: randomName(),
+    slipdays: randomNumber(),
+    labs: [
+      {id:1, percent:randomNumber()},
+      {id:2, percent:randomNumber()},
+      {id:3, percent:randomNumber()},
+      {id:4, percent:randomNumber()},
+      {id:5, percent:randomNumber()},
+      {id:6, percent:randomNumber()},
+    ]
+  },
+  {
+    username: randomUsername(),
+    fullName: randomName(),
+    slipdays: randomNumber(),
+    labs: [
+      {id:1, percent:randomNumber()},
+      {id:2, percent:randomNumber()},
+      {id:3, percent:randomNumber()},
+      {id:4, percent:randomNumber()},
+      {id:5, percent:randomNumber()},
+      {id:6, percent:randomNumber()},
+    ]
+  },
+  {
+    username: randomUsername(),
+    fullName: randomName(),
+    slipdays: randomNumber(),
+    labs: [
+      {id:1, percent:randomNumber()},
+      {id:2, percent:randomNumber()},
+      {id:3, percent:randomNumber()},
+      {id:4, percent:randomNumber()},
+      {id:5, percent:randomNumber()},
+      {id:6, percent:randomNumber()},
+    ]
+  },
+  {
+    username: randomUsername(),
+    fullName: randomName(),
+    slipdays: randomNumber(),
+    labs: [
+      {id:1, percent:randomNumber()},
+      {id:2, percent:randomNumber()},
+      {id:3, percent:randomNumber()},
+      {id:4, percent:randomNumber()},
+      {id:5, percent:randomNumber()},
+      {id:6, percent:randomNumber()},
+    ]
+  },
+  {
+    username: randomUsername(),
+    fullName: randomName(),
+    slipdays: randomNumber(),
+    labs: [
+      {id:1, percent:randomNumber()},
+      {id:2, percent:randomNumber()},
+      {id:3, percent:randomNumber()},
+      {id:4, percent:randomNumber()},
+      {id:5, percent:randomNumber()},
+      {id:6, percent:randomNumber()},
+    ]
+  },
+  {
+    username: randomUsername(),
+    fullName: randomName(),
+    slipdays: randomNumber(),
+    labs: [
+      {id:1, percent:randomNumber()},
+      {id:2, percent:randomNumber()},
+      {id:3, percent:randomNumber()},
+      {id:4, percent:randomNumber()},
+      {id:5, percent:randomNumber()},
+      {id:6, percent:randomNumber()},
+    ]
+  },
+  {
+    username: randomUsername(),
+    fullName: randomName(),
+    slipdays: randomNumber(),
+    labs: [
+      {id:1, percent:randomNumber()},
+      {id:2, percent:randomNumber()},
+      {id:3, percent:randomNumber()},
+      {id:4, percent:randomNumber()},
+      {id:5, percent:randomNumber()},
+      {id:6, percent:randomNumber()},
+    ]
+  },
+  {
+    username: randomUsername(),
+    fullName: randomName(),
+    slipdays: randomNumber(),
+    labs: [
+      {id:1, percent:randomNumber()},
+      {id:2, percent:randomNumber()},
+      {id:3, percent:randomNumber()},
+      {id:4, percent:randomNumber()},
+      {id:5, percent:randomNumber()},
+      {id:6, percent:randomNumber()},
+    ]
+  },
+  {
+    username: randomUsername(),
+    fullName: randomName(),
+    slipdays: randomNumber(),
+    labs: [
+      {id:1, percent:randomNumber()},
+      {id:2, percent:randomNumber()},
+      {id:3, percent:randomNumber()},
+      {id:4, percent:randomNumber()},
+      {id:5, percent:randomNumber()},
+      {id:6, percent:randomNumber()},
+    ]
+  },
+  {
+    username: randomUsername(),
+    fullName: randomName(),
+    slipdays: randomNumber(),
+    labs: [
+      {id:1, percent:randomNumber()},
+      {id:2, percent:randomNumber()},
+      {id:3, percent:randomNumber()},
+      {id:4, percent:randomNumber()},
+      {id:5, percent:randomNumber()},
+      {id:6, percent:randomNumber()},
+    ]
   }
-  ];
+];
 
 module.exports = Coursepage;
