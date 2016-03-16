@@ -21,6 +21,8 @@ var Coursepage = React.createClass({
     const innerSearch = <Glyphicon glyph="search"/>;
     return(
       <Col>
+        <LeftSidePanel />
+
         <Col xs={2} className="whitebox">
           <ButtonGroup vertical block>
             <Button>Members</Button>
@@ -116,8 +118,16 @@ function randomUsername() {
 }
 
 
+
+
+
+
 var names = ["Thomas Darvik","Tomasz Glinecki","Ole Hansen", "Andreas Kverneland"];
 var usernames = ["thomas","olebrumm","haxor", "lollipop"];
+
+
+
+
 
 
 var students = [
