@@ -19,7 +19,7 @@ var LoginForm = require("./components/login/LoginForm.jsx")
 var Knapp 		= require("./components/button/Knapp.jsx")
 var Welcome		= require("./components/root/Welcome.jsx")
 
-var StudentSelector = require("./components/teachergroup/StudentSelector.jsx")
+var TeacherGroup = require("web/src/views/TeacherGroup.jsx")
 var Coursepage= require("./components/coursepage/Coursepage.jsx")
 // this class
 
@@ -53,15 +53,15 @@ ReactDOM.render(
 
 			<Route path="/admin">
 				<Route path=":coursename" component={Coursepage}/>
-				<Route path=":coursename/groups" component={StudentSelector}/>
+				<Route path=":coursename/groups" component={TeacherGroup}/>
 			</Route>
 			<Route path="/teacher">
 				<Route path=":coursename" component={Coursepage}/>
-				<Route path=":coursename/groups" component={StudentSelector}/>
+				<Route path=":coursename/groups" component={TeacherGroup}/>
 			</Route>
 			<Route path="/student">
 				<Route path=":coursename" component={Coursepage}/>
-				<Route path=":coursename/groups" component={StudentSelector}/>
+				<Route path=":coursename/groups" component={TeacherGroup}/>
 			</Route>
 
 			<Route path="/about" component={About}/>
