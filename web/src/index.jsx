@@ -19,7 +19,7 @@ var LoginForm = require("./components/login/LoginForm.jsx")
 var Knapp 		= require("./components/button/Knapp.jsx")
 var Welcome		= require("./components/root/Welcome.jsx")
 
-var TeacherGroup = require("web/src/views/TeacherGroup.jsx")
+var TeacherGroup = require("./views/TeacherGroup.jsx")
 var Coursepage= require("./components/coursepage/Coursepage.jsx")
 // this class
 
