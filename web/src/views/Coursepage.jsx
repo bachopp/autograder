@@ -9,10 +9,13 @@ var Input = require("react-bootstrap").Input;
 var Glyphicon = require("react-bootstrap").Glyphicon;
 var Table = require("react-bootstrap").Table;
 var ProgressBar = require("react-bootstrap").ProgressBar;
+var Row = require("react-bootstrap").Row;
 
 
 var Sidepanel = require("../components/side.navigation/Sidepanel.jsx");
 var Listview = require("../components/student.listview/Listview.jsx");
+var Coursetabs = require("../components/coursenavigation/Coursetabs.jsx");
+
 
 var Labview = require("../components/labview.detailed/Labview.jsx");
 // local components
@@ -22,18 +25,17 @@ var Coursepage = React.createClass({
     const innerSearch = <Glyphicon glyph="search"/>;
 
     return(
-      <Col xs={12}>
-        <Col xs={2} className="whitebox">
+      <Row>
+        <Col xs={2}>
           <Sidepanel/>
         </Col>
-
-        <Col xs={5} xsOffset={1} className="whitebox">
+        <Col xs={6}>
           <Listview/>
         </Col>
-        <Col xs={3} xsOffset={1} className="whitebox">
+        <Col xs={4}>
           <Labview/>
         </Col>
-      </Col>
+      </Row>
     );
   }
 });
