@@ -11,10 +11,10 @@ var Table = require("react-bootstrap").Table;
 var ProgressBar = require("react-bootstrap").ProgressBar;
 
 
-var Sidepanel = require("./components/side.navigation/Sidepanel.jsx");
-var Listview = require("./components/student.listview/Listview.jsx");
+var Sidepanel = require("../side.navigation/Sidepanel.jsx");
+var Listview = require("../student.listview/Listview.jsx");
 
-var Labview = require("./components/labview.detailed/Labview.jsx");
+var Labview = require("../labview.detailed/Labview.jsx");
 // local components
 
 var Coursepage = React.createClass({
