@@ -1,4 +1,4 @@
-var EventEmitter = requrie("events").EventEmitter;
+var EventEmitter = require("events").EventEmitter;
 var assign = require("object-assign");
 
 // local

@@ -9,42 +9,20 @@ var ListGroupItem = require("react-bootstrap").ListGroupItem;
 
 // local
 var StudentSelectorElement = require("../components/student.group.selector/StudentSelectorElement.jsx");
-var StudentSelectorStudents = require("../components/student.group.selector/StudentSelectorStudents.jsx");
 var StudentSelectorSearch = require("../components/student.group.selector/StudentSelectorSearch.jsx");
 
+var Sidepanel = require("../components/side.navigation/Sidepanel.jsx");
+var StudentSelector = require("../components/student.group.selector/StudentSelector.jsx");
 var GroupSelector = require("../components/group.manager/GroupSelector.jsx");
 
-// mock data
-var mock = require("./mock.js");
-
-function stnr() {
-  var arr = [];
-  for (var i = 0; i < 10; i++) {
-    var test = {username:"tokams", firstName: "Tomasz", lastName: "Gliniecki", studentNumber:  Math.floor((Math.random()+1) * 200000)};
-    arr.push(test);
-  };
-  return arr;
-};
-
-function getStateFromStores() {
-  return {
-    // TODO: get users from store
-    users: mock.stnr()
-  };
-}
-
-var StudentSelector = React.createClass({
-
-  getInitialState: function() {
-    return getStateFromStores();
-  },
+var TeacherGroup = React.createClass({
 
   render: function() {
     self = this;
     return(
       <Col>
         <Col xs={2} className="whitebox">
-          side navbar placeholder
+          <Sidepanel />
         </Col>
 
         <Col xs={5} xsOffset={1} className="whitebox">
@@ -65,7 +43,7 @@ var StudentSelector = React.createClass({
               </Row>
             </ListGroupItem>
 
-          <StudentSelectorStudents users={self.state.users}/>
+          <StudentSelector />
         </Col>
 
         <Col xs={3} xsOffset={1} className="whitebox">
@@ -77,4 +55,4 @@ var StudentSelector = React.createClass({
   },
 });
 
-module.exports = StudentSelector;
+module.exports = TeacherGroup;

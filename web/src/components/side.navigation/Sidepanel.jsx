@@ -1,4 +1,5 @@
 var React = require("react");
+var Col = require("react-bootstrap");
 
 var Sidepanel = React.createClass({
   render: function() {

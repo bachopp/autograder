@@ -17,7 +17,7 @@ var GroupSelectorAdd = React.createClass({
   render: function() {
 
     return (
-        <Button block onClick={this.handleClick}><h4>+</h4></Button>
+        <Button className="groupselectoradd" block onClick={this.handleClick}>+</Button>
     );
   }
 });

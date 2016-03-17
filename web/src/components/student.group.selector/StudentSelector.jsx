@@ -5,18 +5,37 @@ var ListGroupItem = require("react-bootstrap").ListGroupItem;
 
 var StudentSelectorElement = require("./StudentSelectorElement.jsx");
 
+// mock data
+var mock = require("./mock.js");
+
+function stnr() {
+  var arr = [];
+  for (var i = 0; i < 10; i++) {
+    var test = {username:"tokams", firstName: "Tomasz", lastName: "Gliniecki", studentNumber:  Math.floor((Math.random()+1) * 200000)};
+    arr.push(test);
+  };
+  return arr;
+};
+
+function getStateFromStores() {
+  return {
+    users: mock.stnr(),
+  };
+}
+
 var StudentSelectorStudents = React.createClass({
 
-  propTypes: {
-    users: React.PropTypes.array.isRequired,
+  getInitialState: function() {
+    return getStateFromStores();
   },
 
   render: function() {
-    users = this.props.users;
+    var usrs = this.state.users;
+    console.log(usrs);
     return(
           <ListGroup>
           {
-            users.map( function(user) {
+            usrs.map( function(user) {
               return(
                   <StudentSelectorElement key={user.studentNumber} user={user}/>
               );
