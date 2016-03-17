@@ -1,5 +1,4 @@
 var React = require("react");
-var Col = require("react-bootstrap");
 
 var Col = require("react-bootstrap").Col;
 var ButtonGroup = require("react-bootstrap").ButtonGroup;
