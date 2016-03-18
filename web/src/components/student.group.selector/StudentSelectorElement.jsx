@@ -4,30 +4,32 @@ var ListGroupItem = require("react-bootstrap").ListGroupItem;
 var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
 
-var StudentSelectorEmlementAdd = require("./StudentSelectorElementAdd.jsx");
+var StudentSelectorElementAdd = require("./StudentSelectorElementAdd.jsx");
 
 var StudentSelectorElement = React.createClass({
 
   propTypes: {
-    user: React.PropTypes.object.isRequired
+    student: React.PropTypes.object.isRequired,
+    handleClick: React.PropTypes.func.isRequired,
   },
 
   render: function() {
-    var user = this.props.user;
+    var student = this.props.student;
+    var handleClick = this.props.handleClick;
     return (
     <ListGroupItem>
   		<Row>
   			<Col lg={3} xsHidden={true} smHidden={true} mdHidden={true}>
-  				{user.username}
+  				{student.username}
   			</Col>
   			<Col lg={3} md={4} sm={6} xs={6}>
-  				{user.firstName} {user.lastName}
+  				{student.firstName} {student.lastName}
   			</Col>
   			<Col lg={3} md={4} xsHidden={true} smHidden={true}>
-  				{user.studentNumber}
+  				{student.studentNumber}
   			</Col>
   			<Col lg={3} md={4} sm={6} xs={6}>
-  					<StudentSelectorEmlementAdd />
+  					<StudentSelectorElementAdd handleClick={handleClick}/>
   			</Col>
   		</Row>
   	</ListGroupItem>

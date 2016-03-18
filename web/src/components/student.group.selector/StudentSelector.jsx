@@ -3,47 +3,62 @@ var React = require("react");
 var ListGroup = require("react-bootstrap").ListGroup;
 var ListGroupItem = require("react-bootstrap").ListGroupItem;
 
+// stores
+var StudentSelectorStore = require("../../stores/StudentSelectorStore.js");
+
+// actions
+var StudentSelectionActionCreators = require("../../actions/StudentSelectorActionCreators.js");
+
+// API
+var StudentSelectorAPI = require("../../utils/StudentSelectorAPI.js");
+
+// local
 var StudentSelectorElement = require("./StudentSelectorElement.jsx");
-
-// mock data
-var mock = require("./mock.js");
-
-function stnr() {
-  var arr = [];
-  for (var i = 0; i < 10; i++) {
-    var test = {username:"tokams", firstName: "Tomasz", lastName: "Gliniecki", studentNumber:  Math.floor((Math.random()+1) * 200000)};
-    arr.push(test);
-  };
-  return arr;
-};
 
 function getStateFromStores() {
   return {
-    users: mock.stnr(),
+    students: StudentSelectorStore.getAllStudents(),
   };
-}
+};
 
-var StudentSelectorStudents = React.createClass({
+var StudentSelector = React.createClass({
 
   getInitialState: function() {
+    StudentSelectorAPI.getAllStudents();
     return getStateFromStores();
   },
 
+  componentDidMount: function() {
+    StudentSelectorStore.addChangeListener(this._onChange);
+  },
+
+  componentWillunmount: function() {
+    StudentSelectorStore.addChangeListener(this._onChange);
+  },
+
   render: function() {
-    var usrs = this.state.users;
-    console.log(usrs);
+    var students = this.state.students;
+    var self = this;
     return(
           <ListGroup>
           {
-            usrs.map( function(user) {
+            students.map( function(student) {
               return(
-                  <StudentSelectorElement key={user.studentNumber} user={user}/>
+                  <StudentSelectorElement key={student.studentNumber} student={student} handleClick={self._onAddToGroup.bind(self, student)}/>
               );
             })
           }
           </ListGroup>
     );
   },
+
+  _onChange: function() {
+    this.setState(getStateFromStores());
+  },
+
+  _onAddToGroup: function(student) {
+    StudentSelectionActionCreators.addStudentToGroup(student)
+  }
 });
 
-module.exports = StudentSelectorStudents;
+module.exports = StudentSelector;

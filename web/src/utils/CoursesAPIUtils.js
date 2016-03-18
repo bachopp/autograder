@@ -1,4 +1,4 @@
-var CoursesServerActionCreators = require("../actions/TopBarServerActionCreators");
+var CoursesServerActionCreators = require("../actions/TopBarServerActionCreators.js");
 var RequestAPI = require("./RequestAPI.js");
 
 var AGConstants = require("../constants/AGConstants");

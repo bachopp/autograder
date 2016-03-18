@@ -22,7 +22,7 @@ var Coursepage = React.createClass({
     const innerSearch = <Glyphicon glyph="search"/>;
 
     return(
-      <Col xs={12}>
+      <Col>
         <Col xs={2} className="whitebox">
           <Sidepanel/>
         </Col>

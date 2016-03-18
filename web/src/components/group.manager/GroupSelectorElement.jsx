@@ -15,7 +15,7 @@ var GroupSelectorAdd = require("./GroupSelectorAdd.jsx");
 var GroupSelectorElement = React.createClass({
 
   propTypes: {
-    user: React.PropTypes.object.isRequired,
+    group: React.PropTypes.object.isRequired,
     activeGroup: React.PropTypes.bool,
   },
 
@@ -25,23 +25,24 @@ var GroupSelectorElement = React.createClass({
     };
   },
 
-  handleClick: function() {
-    this.setState({activeGroup: !this.state.activeGroup});
-  },
 
   render: function() {
     var activeGroup = this.props.activeGroup;
-    var user = this.props.user;
+    var group = this.props.group;
+    var users = group.users;
+    var self = this;
     return (
       <div>
-        <Button onClick={this.handleClick} block>
-          Group 1
-        </Button>
-        <Panel className="groupselectorelement" collapsible expanded={this.state.activeGroup}>
-          <Button block>{user.firstName} {user.studentNumber}</Button>
-        </Panel>
+      {
+        users.map(function(user) {
+          return (
+            <Button block  key={user.studentNumber}>
+              {user.firstName} {user.studentNumber}
+            </Button>
+          );
+        })
+      }
       </div>
-
     );
   }
 });

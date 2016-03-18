@@ -4,10 +4,15 @@ var Button = require("react-bootstrap").Button;
 
 var StudentSelectorElementAdd = React.createClass({
 
+  propTypes: {
+    handleClick: React.PropTypes.func.isRequired,
+  },
+
   render: function() {
-      return (
-          <a>Add to group</a>
-      );
+    var handleClick = this.props.handleClick;
+    return (
+        <Button block onClick={handleClick}>Add to group</Button>
+    );
   },
 });
 

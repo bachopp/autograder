@@ -39,9 +39,6 @@ var Socket =  function() {
   this.ws.onopen = this.open;
   this.ws.onclose = this.close;
 
-  this.test = function()  {
-    console.log("GOT HERE ");
-  };
   // This is not good at all, but temp fix, see this.open
   this.waitForSocketConnection = function waitForSocketConnection(socket, callback){
     setTimeout(

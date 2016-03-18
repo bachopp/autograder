@@ -20,7 +20,6 @@ var LoginButton = React.createClass({
 // class methods
   handleClick: function(e) {
     e.preventDefault();
-    console.log(e);
     var login = this.props.login;
     var password = this.props.password;
     var handleSubmit = this.props.handleSubmit;

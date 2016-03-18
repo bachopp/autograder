@@ -5,12 +5,11 @@ var ActionTypes = AGConstants.ActionTypes;
 
 module.exports = {
 
-  addStudentToGroup: function(rawStudent) {
+  receiveGroups: function(rawGroups) {
     AGDispatcher.dispatch({
-      type: ActionTypes.ADD_TO_GROUP,
-      rawStudent: rawStudent,
+      type: ActionTypes.RECEIVE_RAW_GROUPS,
+      rawGroups: rawGroups,
     });
-
-    // TODO: send the data to server
   },
+
 };

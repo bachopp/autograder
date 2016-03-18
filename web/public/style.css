@@ -59,11 +59,18 @@ color: white; /*Change active text color here*/
 .gutterRight {
   margin-right:20px;
 }
-.groupselectorelement {
+
+/*
+	components/group.manager
+*/
+.groupelement {
 	border: none;
-	padding-bottom:6px;
+	background-color: #e5e5e5;
+}
+.groupelementbutton {
+	margin-bottom: 5px;
+	margin-top: 5px;
 }
 
 .groupselectoradd {
-	background-color: #e5e5e5;
 }
