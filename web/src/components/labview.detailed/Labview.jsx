@@ -5,6 +5,7 @@ var Col = require("react-bootstrap").Col;
 var ButtonGroup = require("react-bootstrap").ButtonGroup;
 var ButtonToolbar = require("react-bootstrap").ButtonToolbar;
 var Button = require("react-bootstrap").Button;
+var Alert = require("react-bootstrap").Alert;
 var Input = require("react-bootstrap").Input;
 var Glyphicon = require("react-bootstrap").Glyphicon;
 var Table = require("react-bootstrap").Table;
@@ -16,13 +17,13 @@ var Buildlog = require("./Buildlog.jsx");
 
 var theLog = [
   {id: 1, text: "Starting log"},
-  {id: 2, text: "Starting log"},
-  {id: 3, text: "Starting log"},
-  {id: 4, text: "Starting log"},
-  {id: 5, text: "Starting log"},
-  {id: 6, text: "Starting log"},
-  {id: 7, text: "Starting log"},
-  {id: 8, text: "Starting log"}
+  {id: 2, text: "Running: test.go"},
+  {id: 3, text: "Building..."},
+  {id: 4, text: "Test case 1: OK"},
+  {id: 5, text: "Test case 2: OK"},
+  {id: 6, text: "Test case 3: FAIL"},
+  {id: 7, text: "Test case 4: OK"},
+  {id: 8, text: "Lab total cases: OK"}
 ];
 
 
@@ -31,17 +32,21 @@ var Labview = React.createClass({
     return null
   },
   render: function() {
-    const innerSearch = <Glyphicon glyph="search"/>;
+    const successIcon = <i className="fa fa-check fa-fw"></i>;
     return(
-      <Col xs={12}>
+      <Col xs={12} className="whitebox">
         <h3>Lab 1 - Ola Nordmann</h3>
         <Statusbar percent={65}/>
-        <p>Not approved</p>
-        <ButtonToolbar>
-          <Button bsStyle="default">Approve</Button>
-          <Button bsStyle="info">Rebuild</Button>
-        </ButtonToolbar>
-        <Buildlog log={theLog}/>
+        <Alert bsStyle="success">{successIcon} Approved</Alert>
+        <Col className="bottomPadding">
+          <ButtonToolbar>
+            <Button bsStyle="danger">Remove approval</Button>
+            <Button bsStyle="info">Rebuild</Button>
+          </ButtonToolbar>
+        </Col>
+        <Col>
+          <Buildlog log={theLog}/>
+        </Col>
       </Col>
     );
   },

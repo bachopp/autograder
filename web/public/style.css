@@ -14,6 +14,41 @@ html, body {
 	margin-bottom: 2em;
 }
 
+.selectedCourse {
+	background-color:#222222;
+	color:#FFF;
+}
+
+.bottomPadding {
+	margin-bottom:0.5em;
+}
+
+.navButton {
+	font-weight:bold;
+	border:none;
+	float:left;
+	text-align: left;
+}
+
+.tableDevider {
+	background-color:#FFF;
+}
+
+.tableDevider td{
+	background-color:#f9f9f9;
+	border-top:1px solid #f9f9f9;
+	margin-bottom:0.2em;
+	height:3px;
+}
+
+.navButtonSelected {
+	font-weight:bold;
+	border:none;
+	float:left;
+	text-align: left;
+	background-color:#e5e5e5;
+}
+
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
 color: #a5a5a5;  /*Sets the text hover color on navbar*/
 
