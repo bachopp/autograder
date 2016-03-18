@@ -36,9 +36,9 @@ var GroupSelectorElement = React.createClass({
       {
         users.map(function(user) {
           return (
-            <Button block  key={user.studentNumber}>
+            <Panel className="groupelementbutton" block  key={user.studentNumber}>
               {user.firstName} {user.studentNumber}
-            </Button>
+            </Panel>
           );
         })
       }

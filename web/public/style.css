@@ -98,14 +98,19 @@ color: white; /*Change active text color here*/
 /*
 	components/group.manager
 */
+.groupelementbutton {
+	border: 0px;
+	padding: 2px;
+	background-color: #e5e5e5;
+	cursor: pointer;
+}
+.groupelementbutton:hover {
+	background-color: #e5e5e0;
+}
 .groupelement {
 	border: none;
-	background-color: #e5e5e5;
+	padding: 2px;
 }
-.groupelementbutton {
-	margin-bottom: 5px;
-	margin-top: 5px;
-}
-
 .groupselectoradd {
+	margin-top: 10px;
 }

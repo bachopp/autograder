@@ -20,36 +20,39 @@ var TeacherGroup = React.createClass({
   render: function() {
     self = this;
     return(
-      <Col>
-        <Col xs={2} className="whitebox">
-          <Sidepanel />
-        </Col>
+      <Row>
+          <Col xs={2}>
+            <Sidepanel/>
+          </Col>
 
-        <Col xs={5} xsOffset={1} className="whitebox">
+          <Col xs={6}>
+            <Col xs={12} className="whitebox">
+              <StudentSelectorSearch />
 
-          <StudentSelectorSearch />
+                <ListGroupItem>
+                  <Row>
+                    <Col lg={3} xsHidden={true} smHidden={true} mdHidden={true}>
+                      <b>Username</b>
+                    </Col>
+                    <Col lg={3} md={4} sm={6} xs={6}>
+                      <b>Full name</b>
+                    </Col>
+                    <Col lg={3} md={4} xsHidden={true} smHidden={true}>
+                      <b>Student number</b>
+                    </Col>
+                  </Row>
+                </ListGroupItem>
 
-            <ListGroupItem>
-              <Row>
-                <Col lg={3} xsHidden={true} smHidden={true} mdHidden={true}>
-                  <b>Username</b>
-                </Col>
-                <Col lg={3} md={4} sm={6} xs={6}>
-                  <b>Full name</b>
-                </Col>
-                <Col lg={3} md={4} xsHidden={true} smHidden={true}>
-                  <b>Student number</b>
-                </Col>
-              </Row>
-            </ListGroupItem>
+              <StudentSelector />
+            </Col>
+          </Col>
 
-          <StudentSelector />
-        </Col>
-
-        <Col xs={3} xsOffset={1} className="whitebox">
-          <GroupSelector/>
-        </Col>
-      </Col>
+          <Col xs={4}>
+            <Col xs={12} className="whitebox">
+              <GroupSelector/>
+            </Col>
+          </Col>
+      </Row>
 
     );
   },

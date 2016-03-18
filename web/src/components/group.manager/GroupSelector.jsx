@@ -73,8 +73,9 @@ var GroupSelector = React.createClass({
               groups.map(function(group) {
                 return (
                   <div key={group.number}>
-                    <Button className="groupelementbutton" block onClick={self.activateGroup.bind(self, group)} > {group.name} </Button>
+                    <Panel className="groupelementbutton" collapsible expanded={!group.active} block onClick={self.activateGroup.bind(self, group)} > <b>{group.name}</b> </Panel>
                     <Panel className="groupelement" collapsible expanded={group.active}>
+                      <b>{group.name}</b>
                       <GroupSelectorElement group={group}/>
                     </Panel>
                   </div>
