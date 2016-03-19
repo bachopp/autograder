@@ -2,7 +2,7 @@ module.exports = {
   stnr: function() {
     var arr = [];
     for (var i = 0; i < 5; i++) {
-      var test = {name:"group_"+i, number: i, users:this._stnw(2)};
+      var test = {name:"group_"+i, number: i, users:[]};
       arr.push(test);
     };
     return arr;

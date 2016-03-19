@@ -7,6 +7,7 @@ module.exports = {
     ADD_TO_GROUP: null,
     TOGGLE_GROUP: null,
     RECEIVE_RAW_GROUPS: null,
+    ADD_NEW_GROUP: null,
 
     RECEIVE_RAW_COURSES: null,
     RECEIVE_RAW_ROLES: null,

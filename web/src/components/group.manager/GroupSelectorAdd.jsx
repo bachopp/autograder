@@ -10,14 +10,16 @@ var Button = require("react-bootstrap").Button;
 
 var GroupSelectorAdd = React.createClass({
 
-  handleClick: function() {
-    console.log("add group");
+  propTypes: {
+    addNewGroup: React.PropTypes.func.isRequired,
   },
 
   render: function() {
 
+    var addNewGroup = this.props.addNewGroup;
+
     return (
-        <Button className="groupselectoradd" block onClick={this.handleClick}>+</Button>
+        <Button className="groupselectoradd" block onClick={addNewGroup}>+</Button>
     );
   }
 });

@@ -11,4 +11,11 @@ module.exports = {
       group: group,
     });
   },
+
+  addNewGroup: function() {
+    AGDispatcher.dispatch({
+      type: ActionTypes.ADD_NEW_GROUP,
+    });
+    // TODO call GroupSelectorAPI to inser group to DB
+  },
 };

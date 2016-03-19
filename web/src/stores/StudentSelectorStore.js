@@ -48,7 +48,7 @@ StudentSelectorStore.dispachToken = AGDispatcher.register(function(action) {
   switch(action.type) {
     // TODO: finish switch statement for different actions
     case ActionTypes.ADD_TO_GROUP:
-     // TODO: use Util to make rawStudent into whatever you want (a lot of reduntatn fields probably)
+     // TODO: if no group selected the student disappears, needs fix
       var student = action.rawStudent;
       _removeStudent(student);
       StudentSelectorStore.emitChange();

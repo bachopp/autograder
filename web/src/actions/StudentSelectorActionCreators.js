@@ -10,7 +10,6 @@ module.exports = {
       type: ActionTypes.ADD_TO_GROUP,
       rawStudent: rawStudent,
     });
-
-    // TODO: send the data to server
+    // TODO: call StudentSelectorAPI to send data to DB
   },
 };

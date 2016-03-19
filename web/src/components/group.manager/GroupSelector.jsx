@@ -30,7 +30,6 @@ propTypes: {
 function getStateFromStores() {
   return {
     groups: GroupSelectorStore.getAllGroups(),
-    // groups: mock.stnr(),
   };
 }
 // this className
@@ -53,8 +52,8 @@ var GroupSelector = React.createClass({
     GroupSelectorActionCreators.activateGroup(group);
   },
 
-  handleClick: function(event) {
-    this.setState({activeGroup: !this.state.activeGroup});
+  addNewGroup: function() {
+    GroupSelectorActionCreators.addNewGroup();
   },
 
   render: function() {
@@ -82,7 +81,7 @@ var GroupSelector = React.createClass({
                 );
               })
             }
-            <GroupSelectorAdd/>
+            <GroupSelectorAdd addNewGroup={self.addNewGroup}/>
           </PanelGroup>
     );
   },
