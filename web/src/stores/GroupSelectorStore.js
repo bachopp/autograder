@@ -81,9 +81,11 @@ GroupSelectorStore.dispachToken = AGDispatcher.register(function(action) {
     case ActionTypes.ADD_TO_GROUP:
       _addStudentToActiveGroup(action.rawStudent);
       GroupSelectorStore.emitChange();
+      break;
     case ActionTypes.ADD_NEW_GROUP:
       _addGroup();
       GroupSelectorStore.emitChange();
+      break;
     default:
      // no action
   }
