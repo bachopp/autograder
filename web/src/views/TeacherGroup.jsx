@@ -9,7 +9,6 @@ var ListGroupItem = require("react-bootstrap").ListGroupItem;
 
 // local
 var StudentSelectorElement = require("../components/student.group.selector/StudentSelectorElement.jsx");
-var StudentSelectorSearch = require("../components/student.group.selector/StudentSelectorSearch.jsx");
 
 var Sidepanel = require("../components/side.navigation/Sidepanel.jsx");
 var StudentSelector = require("../components/student.group.selector/StudentSelector.jsx");
@@ -27,22 +26,6 @@ var TeacherGroup = React.createClass({
 
           <Col xs={6}>
             <Col xs={12} className="whitebox">
-              <StudentSelectorSearch />
-
-                <ListGroupItem>
-                  <Row>
-                    <Col lg={3} xsHidden={true} smHidden={true} mdHidden={true}>
-                      <b>Username</b>
-                    </Col>
-                    <Col lg={3} md={4} sm={6} xs={6}>
-                      <b>Full name</b>
-                    </Col>
-                    <Col lg={3} md={4} xsHidden={true} smHidden={true}>
-                      <b>Student number</b>
-                    </Col>
-                  </Row>
-                </ListGroupItem>
-
               <StudentSelector />
             </Col>
           </Col>

@@ -8,13 +8,23 @@ var Col = require("react-bootstrap").Col;
 
 var StudentSelectorSearch = React.createClass({
 
+  propTypes: {
+    searchFor: React.PropTypes.func.isRequired, // search and setstate of query
+    query: React.PropTypes.string.isRequired,
+  },
+
   render: function() {
-    const searchs = <Glyphicon glyph="search"/>;
+    var self = this;
+    const searchs = <Glyphicon glyph="search" />;
 
     return (
       <Row>
         <Col xs={7}>
-          <Input type="text" addonBefore={searchs} placeholder="Search for students"/>
+          <Input type="text"
+          addonBefore={searchs}
+          placeholder="Search for students"
+          onChange={self.props.searchFor}
+          />
         </Col>
       </Row>
     );

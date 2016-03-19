@@ -14,6 +14,7 @@ module.exports = {
     RECEIVE_RAW_STUDENTS: null,
     RECEIVE_RAW_GROUPS: null,
 
+    QUERY_FOR_STUDENT: null,
 
   })
 };
