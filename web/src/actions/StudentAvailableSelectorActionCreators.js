@@ -10,7 +10,7 @@ module.exports = {
       type: ActionTypes.ADD_TO_GROUP,
       rawStudent: rawStudent,
     });
-    // TODO: call StudentSelectorAPI to send data to DB
+    // TODO: call StudentAvailableSelectorAPI to send data to DB
   },
   searchForStudent: function(query) {
     AGDispatcher.dispatch({

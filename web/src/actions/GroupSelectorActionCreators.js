@@ -18,4 +18,18 @@ module.exports = {
     });
     // TODO call GroupSelectorAPI to inser group to DB
   },
+  removeGroup: function(group) {
+    AGDispatcher.dispatch({
+      type: ActionTypes.REMOVE_GROUP,
+      group: group,
+    });
+    // TODO call GroupSelectorAPI to release students from group update DB
+  },
+  removeUser: function(student, group) {
+    AGDispatcher.dispatch({
+      type: ActionTypes.REMOVE_STUDENT_FROM_GROUP,
+      student: student,
+      group: group,
+    });
+  }
 };

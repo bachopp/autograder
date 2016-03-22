@@ -18,7 +18,7 @@ var About 		=	require("./components/about/About.jsx")
 var LoginForm = require("./components/login/LoginForm.jsx")
 var Knapp 		= require("./components/button/Knapp.jsx")
 
-var TeacherGroup = require("./views/TeacherGroup.jsx")
+var GroupManager = require("./views/GroupManager.jsx")
 var Coursepage= require("./views/Coursepage.jsx")
 var AllCourses = require("./views/AllCourses.jsx")
 // this class
@@ -52,15 +52,15 @@ ReactDOM.render(
 
 			<Route path="/admin">
 				<Route path=":coursename" component={Coursepage}/>
-				<Route path=":coursename/groups" component={TeacherGroup}/>
+				<Route path=":coursename/groups" component={GroupManager}/>
 			</Route>
 			<Route path="/teacher">
 				<Route path=":coursename" component={Coursepage}/>
-				<Route path=":coursename/groups" component={TeacherGroup}/>
+				<Route path=":coursename/groups" component={GroupManager}/>
 			</Route>
 			<Route path="/student">
 				<Route path=":coursename" component={Coursepage}/>
-				<Route path=":coursename/groups" component={TeacherGroup}/>
+				<Route path=":coursename/groups" component={GroupManager}/>
 			</Route>
 
 			<Route path="/about" component={About}/>

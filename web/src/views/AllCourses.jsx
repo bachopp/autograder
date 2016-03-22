@@ -5,7 +5,7 @@ var React = require("react");
 // local
 var Courses = require("../components/courses/Courses.jsx");
 
-var StudentSelector = React.createClass({
+var StudentAvailableSelector = React.createClass({
 
   render: function() {
       return (
@@ -14,4 +14,4 @@ var StudentSelector = React.createClass({
   },
 });
 
-module.exports = StudentSelector;
+module.exports = StudentAvailableSelector;

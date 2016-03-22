@@ -2,7 +2,7 @@ var React = require("react");
 
 var Button = require("react-bootstrap").Button;
 
-var StudentSelectorElementAdd = React.createClass({
+var StudentAvailableSelectorElementAdd = React.createClass({
 
   propTypes: {
     handleClick: React.PropTypes.func.isRequired,
@@ -16,4 +16,4 @@ var StudentSelectorElementAdd = React.createClass({
   },
 });
 
-module.exports = StudentSelectorElementAdd;
+module.exports = StudentAvailableSelectorElementAdd;

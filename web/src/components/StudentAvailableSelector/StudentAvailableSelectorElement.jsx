@@ -4,9 +4,9 @@ var ListGroupItem = require("react-bootstrap").ListGroupItem;
 var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
 
-var StudentSelectorElementAdd = require("./StudentSelectorElementAdd.jsx");
+var StudentAvailableSelectorElementAdd = require("./StudentAvailableSelectorElementAdd.jsx");
 
-var StudentSelectorElement = React.createClass({
+var StudentAvailableSelectorElement = React.createClass({
 
   propTypes: {
     student: React.PropTypes.object.isRequired,
@@ -29,7 +29,7 @@ var StudentSelectorElement = React.createClass({
   				{student.studentNumber}
   			</Col>
   			<Col lg={3} md={4} sm={6} xs={6}>
-  					<StudentSelectorElementAdd handleClick={handleClick}/>
+  					<StudentAvailableSelectorElementAdd handleClick={handleClick}/>
   			</Col>
   		</Row>
   	</ListGroupItem>
@@ -39,4 +39,4 @@ var StudentSelectorElement = React.createClass({
 });
 
 
-module.exports = StudentSelectorElement;
+module.exports = StudentAvailableSelectorElement;

@@ -6,7 +6,7 @@ var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
 
 
-var StudentSelectorSearch = React.createClass({
+var StudentAvailableSelectorSearch = React.createClass({
 
   propTypes: {
     searchFor: React.PropTypes.func.isRequired, // search and setstate of query
@@ -32,4 +32,4 @@ var StudentSelectorSearch = React.createClass({
 });
 
 
-module.exports = StudentSelectorSearch;
+module.exports = StudentAvailableSelectorSearch;

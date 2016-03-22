@@ -96,7 +96,7 @@ color: white; /*Change active text color here*/
 }
 
 /*
-	components/group.manager
+	components/GroupSelector
 */
 .groupelementbutton {
 	border: 0px;
@@ -116,5 +116,5 @@ color: white; /*Change active text color here*/
 }
 
 /*
-	components/student.group.selector
+	components/StudentAvailableSelector
 */

@@ -8,6 +8,8 @@ module.exports = {
     TOGGLE_GROUP: null,
     RECEIVE_RAW_GROUPS: null,
     ADD_NEW_GROUP: null,
+    REMOVE_GROUP: null,
+    REMOVE_STUDENT_FROM_GROUP: null,
 
     RECEIVE_RAW_COURSES: null,
     RECEIVE_RAW_ROLES: null,

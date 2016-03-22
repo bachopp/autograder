@@ -8,39 +8,39 @@ var Col = require("react-bootstrap").Col;
 var Table = require("react-bootstrap").Table;
 
 // stores
-var StudentSelectorStore = require("../../stores/StudentSelectorStore.js");
+var GroupManagerStore = require("../../stores/GroupManagerStore.js");
 
 // actions
-var StudentSelectorActionCreators = require("../../actions/StudentSelectorActionCreators.js");
+var StudentAvailableSelectorActionCreators = require("../../actions/StudentAvailableSelectorActionCreators.js");
 
 // API
-var StudentSelectorAPI = require("../../utils/StudentSelectorAPI.js");
+var StudentAvailableSelectorAPI = require("../../utils/StudentAvailableSelectorAPI.js");
 
 // local
-var StudentSelectorElement = require("./StudentSelectorElement.jsx");
-var StudentSelectorSearch = require("./StudentSelectorSearch.jsx");
+var StudentAvailableSelectorElement = require("./StudentAvailableSelectorElement.jsx");
+var StudentAvailableSelectorSearch = require("./StudentAvailableSelectorSearch.jsx");
 
 
-function getStateFromStores() {
-  return {
+ function getStateFromStores() {
+   return {
     query: '',
-    students: StudentSelectorStore.getAllStudents(),
+    students: GroupManagerStore.getAllStudents(),
   };
 };
 
-var StudentSelector = React.createClass({
+ StudentAvailableSelector = React.createClass({
 
   getInitialState: function() {
-    StudentSelectorAPI.getAllStudents();
+    StudentAvailableSelectorAPI.getAllStudents();
     return getStateFromStores();
   },
 
   componentDidMount: function() {
-    StudentSelectorStore.addChangeListener(this._onChange);
+    GroupManagerStore.addChangeListener(this._onChange);
   },
 
   componentWillunmount: function() {
-    StudentSelectorStore.addChangeListener(this._onChange);
+    GroupManagerStore.removeChangeListener(this._onChange);
   },
 
   render: function() {
@@ -48,7 +48,7 @@ var StudentSelector = React.createClass({
     var self = this;
     return(
       <div>
-        <StudentSelectorSearch
+        <StudentAvailableSelectorSearch
         query={self.state.query}
         searchFor={self._searchFor}
         />
@@ -70,7 +70,7 @@ var StudentSelector = React.createClass({
           {
             students.map( function(student) {
               return(
-                  <StudentSelectorElement
+                  <StudentAvailableSelectorElement
                   key={student.studentNumber}
                   student={student}
                   handleClick={self._onAddToGroup.bind(self, student)}
@@ -88,13 +88,13 @@ var StudentSelector = React.createClass({
   },
 
   _onAddToGroup: function(student) {
-    StudentSelectorActionCreators.addStudentToGroup(student);
+    StudentAvailableSelectorActionCreators.addStudentToGroup(student);
   },
 
   _searchFor: function(event) {
     this.setState({query: event.target.value})
-    StudentSelectorActionCreators.searchForStudent(event.target.value);
+    StudentAvailableSelectorActionCreators.searchForStudent(event.target.value);
   }
 });
 
-module.exports = StudentSelector;
+module.exports = StudentAvailableSelector;

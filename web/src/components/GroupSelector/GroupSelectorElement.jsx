@@ -8,6 +8,8 @@ var React = require("react");
 var PanelGroup = require("react-bootstrap").PanelGroup;
 var Panel = require("react-bootstrap").Panel;
 var Button = require("react-bootstrap").Button;
+var Row = require("react-bootstrap").Row;
+var Col = require("react-bootstrap").Col;
 // local
 var GroupSelectorAdd = require("./GroupSelectorAdd.jsx");
 // this className
@@ -17,6 +19,7 @@ var GroupSelectorElement = React.createClass({
   propTypes: {
     group: React.PropTypes.object.isRequired,
     activeGroup: React.PropTypes.bool,
+    removeUser: React.PropTypes.func.isRequired,
   },
 
   getInitialState: function() {
@@ -25,6 +28,9 @@ var GroupSelectorElement = React.createClass({
     };
   },
 
+  removeUser: function(user, group) {
+    this.props.removeUser(user, group);
+  },
 
   render: function() {
     var activeGroup = this.props.activeGroup;
@@ -37,7 +43,14 @@ var GroupSelectorElement = React.createClass({
         users.map(function(user) {
           return (
             <Panel className="groupelementbutton" block  key={user.studentNumber}>
-              {user.firstName} {user.studentNumber}
+              <Row>
+                <Col xs={10}>
+                  {user.firstName} {user.studentNumber}
+                </Col>
+                <Col xs={2}>
+                  <Button onClick={self.props.removeUser.bind(null, user, group)} bsSize="xsmall">-</Button>
+                </Col>
+              </Row>
             </Panel>
           );
         })
