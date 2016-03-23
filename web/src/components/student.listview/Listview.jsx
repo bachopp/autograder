@@ -13,7 +13,7 @@ var Listview = React.createClass({
     const innerSearch = <Glyphicon glyph="search"/>;
 
   return(
-      <Col xs={12} className="whitebox">
+      <Col>
         <Col xs={12}>
           <Input
             type="text"

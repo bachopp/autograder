@@ -15,23 +15,15 @@ var Button 		= require("react-bootstrap").Button
 var Topbar 		= require("./components/topbar/Topbar.jsx")
 var Welcome		= require("./components/root/Welcome.jsx")
 var About 		=	require("./components/about/About.jsx")
-var LoginForm = require("./components/login/LoginForm.jsx")
 var Knapp 		= require("./components/button/Knapp.jsx")
 
 var GroupManager = require("./views/GroupManager.jsx")
 var Coursepage= require("./views/Coursepage.jsx")
 var AllCourses = require("./views/AllCourses.jsx")
+var StudentList = require("./views/StudentList.jsx")
 // this class
 
 var App = React.createClass({
-
-	componentDidMount: function() {
-		// TODO: add listener from relevant stores
-	},
-
-	componentWillUnmount: function() {
-		// TODO: add listener from relevant stores
-	},
 
 	render: function(){
 
@@ -64,8 +56,7 @@ ReactDOM.render(
 			</Route>
 
 			<Route path="/about" component={About}/>
-			<Route path="/login" component={LoginForm}/>
-			<Route path="/oauth" component={Knapp}/>
+			<Route path="/oauth" component={StudentList}/>
 		</Route>
 	</Router>,
 	document.getElementById("container")

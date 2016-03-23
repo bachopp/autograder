@@ -32,6 +32,7 @@ func main() {
 	r.HandleFunc("/login", Handler)
 	r.HandleFunc("/about", Handler)
 	r.HandleFunc("/courses", Handler)
+	r.HandleFunc("/oauth", Handler)
 
 	r.PathPrefix("/").Handler(http.FileServer(http.Dir(webroot)))
 	http.Handle("/", r)

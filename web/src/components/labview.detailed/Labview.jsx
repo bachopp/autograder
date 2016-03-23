@@ -34,7 +34,7 @@ var Labview = React.createClass({
   render: function() {
     const successIcon = <i className="fa fa-check fa-fw"></i>;
     return(
-      <Col xs={12} className="whitebox">
+      <Col>
         <h3>Lab 1 - Ola Nordmann</h3>
         <Statusbar percent={65}/>
         <Alert bsStyle="success">{successIcon} Approved</Alert>

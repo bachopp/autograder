@@ -9,7 +9,6 @@ var Nav = require("react-bootstrap").Nav;
 var Link = require("react-router").Link;
 // components
 var Dropdown = require("./Dropdown.jsx");
-var LoginForm = require("../login/LoginForm.jsx");
 // stores
 var TopBarStore = require("../../stores/TopBarStore.js");
 // utils
@@ -60,9 +59,6 @@ var Topbar = React.createClass({
             </li>
             <li>
               <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/login">Log in</Link>
             </li>
             <li>
               <Link to="/oauth">Github Login</Link>

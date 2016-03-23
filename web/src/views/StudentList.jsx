@@ -28,17 +28,7 @@ var GroupManager = React.createClass({
 
           <Col xs={12}>
               <Col xs={7} className="infoboxleft">
-                <Col cs={12}>
-                  <Col xs={4}>
-                  DAT100
-                  </Col>
-                  <Col xs={4}>
-                  DAT200
-                  </Col>
-                  <Col xs={4}>
-                  DAT300
-                  </Col>
-                </Col>
+                COURSE
               </Col>
               <Col xs={5} className="infoboxright">
                 INFO
@@ -47,10 +37,10 @@ var GroupManager = React.createClass({
 
           <Col xs={12}>
           <Col xs={7} className="infoboxleft">
-              <StudentAvailableSelector />
+              StudentList
           </Col>
           <Col xs={5} className="infoboxright">
-              <GroupSelector/>
+              StudentList
           </Col>
           </Col>
         </Col>

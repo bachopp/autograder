@@ -1,0 +1,29 @@
+<Row>
+
+  <Col xs={2}>
+    <Sidepanel/>
+  </Col>
+
+  <Col xs={10}>
+
+    <Col xs={12}>
+        <Col xs={7} className="infoboxleft">
+          COURSE NAVIGATOR
+        </Col>
+        <Col xs={5} className="infoboxright">
+          THIS PAGE INFO
+        </Col>
+    </Col>
+
+    <Col xs={12}>
+      <Col xs={7} className="infoboxleft">
+          MAIN CONTENT
+      </Col>
+      <Col xs={5} className="infoboxright">
+          SIDECONTENT
+      </Col>
+    </Col>
+
+  </Col>
+
+</Row>
