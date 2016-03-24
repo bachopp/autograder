@@ -22,31 +22,14 @@ var GroupManager = React.createClass({
   render: function() {
     self = this;
     return(
-      <Row>
-        <Col xs={2}>
-          <StudentSideNav/>
+      <Col xs={12}>
+        <Col xs={7} className="infoboxleft">
+            StudentList
         </Col>
-        <Col xs={10}>
-
-          <Col xs={12}>
-              <Col xs={7} className="infoboxleft">
-                COURSE
-              </Col>
-              <Col xs={5} className="infoboxright">
-                INFO
-              </Col>
-          </Col>
-
-          <Col xs={12}>
-          <Col xs={7} className="infoboxleft">
-              StudentList
-          </Col>
-          <Col xs={5} className="infoboxright">
-              StudentList
-          </Col>
-          </Col>
+        <Col xs={5} className="infoboxright">
+            StudentList
         </Col>
-      </Row>
+      </Col>
     );
   },
 });

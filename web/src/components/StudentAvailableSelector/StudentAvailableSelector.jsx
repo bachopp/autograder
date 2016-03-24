@@ -42,7 +42,6 @@ var StudentAvailableSelector = React.createClass({
 
 // three hours of debugging becouse componentWill/u/Unmount
   componentWillUnmount: function() {
-    console.log("StudentAvailableSelector.jsx unmounted");
     GroupManagerStore.removeChangeListener(this._onChange);
   },
 

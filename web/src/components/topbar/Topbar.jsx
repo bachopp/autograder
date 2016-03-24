@@ -9,6 +9,7 @@ var Nav = require("react-bootstrap").Nav;
 var Link = require("react-router").Link;
 // components
 var Dropdown = require("./Dropdown.jsx");
+var Navigation = require("./Navigation.jsx");
 // stores
 var TopBarStore = require("../../stores/TopBarStore.js");
 // utils
@@ -50,9 +51,7 @@ var Topbar = React.createClass({
         </Navbar.Header>
 
         <Navbar.Collapse>
-            <Dropdown
-            roles={self.state.roles}
-            />
+            <Navigation roles={self.state.roles}/>
           <Nav pullRight>
             <li>
               <Link to="/courses">Courses</Link>

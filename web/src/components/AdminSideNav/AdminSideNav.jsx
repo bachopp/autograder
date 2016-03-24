@@ -22,7 +22,7 @@ var AdminSideNav = React.createClass({
         <Button className="navButton" block>{groupIcon} Groups</Button>
         <Button className="navButton" block>{infoIcon} Course info</Button>
         <Button className="navButton" block>{settingsIcon} Settings</Button>
-        <Button className="navButton" block>{unlockIcon} Admin options</Button>
+        <Button className="navButton" bsStyle="danger" block>{unlockIcon} Admin options</Button>
 
       </Col>
     );

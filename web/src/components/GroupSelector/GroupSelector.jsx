@@ -43,7 +43,6 @@ var GroupSelector = React.createClass({
     GroupManagerStore.addChangeListener(this._onChange);
   },
   componentWillUnmount: function() {
-    console.log("GroupSelector.jsx unmounted");
     GroupManagerStore.removeChangeListener(this._onChange);
   },
 

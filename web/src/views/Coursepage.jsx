@@ -30,31 +30,14 @@ var Coursepage = React.createClass({
     const innerSearch = <Glyphicon glyph="search"/>;
 
     return(
-      <Row>
-        <Col xs={2}>
-          <TeacherSideNav/>
+      <Col xs={12}>
+        <Col xs={7} className="infoboxleft">
+            <Listview/>
         </Col>
-        <Col xs={10}>
-
-          <Col xs={12}>
-              <Col xs={7} className="infoboxleft">
-                COURSE
-              </Col>
-              <Col xs={5} className="infoboxright">
-                INFO
-              </Col>
-          </Col>
-
-          <Col xs={12}>
-          <Col xs={7} className="infoboxleft">
-              <Listview/>
-          </Col>
-          <Col xs={5} className="infoboxright">
-              <Labview/>
-          </Col>
-          </Col>
+        <Col xs={5} className="infoboxright">
+            <Labview/>
         </Col>
-      </Row>
+      </Col>
     );
   }
 });

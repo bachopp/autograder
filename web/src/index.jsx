@@ -13,10 +13,16 @@ var Jumbotron = require("react-bootstrap").Jumbotron
 var Button 		= require("react-bootstrap").Button
 // local components requires
 var Topbar 		= require("./components/topbar/Topbar.jsx")
-var Welcome		= require("./components/root/Welcome.jsx")
+var Welcome		= require("./components/Welcome/Welcome.jsx")
 var About 		=	require("./components/about/About.jsx")
 var Knapp 		= require("./components/button/Knapp.jsx")
 
+// static components
+var TeacherMode = require("./views/TeacherMode.jsx");
+var StudentMode = require("./views/StudentMode.jsx");
+var AdminMode = require("./views/AdminMode.jsx");
+
+// views
 var GroupManager = require("./views/GroupManager.jsx")
 var Coursepage= require("./views/Coursepage.jsx")
 var AllCourses = require("./views/AllCourses.jsx")
@@ -42,24 +48,23 @@ ReactDOM.render(
 	<Router history={browserHistory} >
 		<Route path="/" component={App}>
 			<IndexRoute component={Welcome}/>
-			<Route path="/courses" component={AllCourses}/>
+			<Route path="courses" components={AllCourses}/>
 
-			<Route path="admin">
+			<Route path="admin" component={AdminMode}>
 				<Route path=":coursename">
 					<Route path="results" component={Coursepage}/>
 					<Route path="groups" component={GroupManager}/>
 				</Route>
 			</Route>
 
-			<Route path="teacher">
+			<Route path="teacher" component={TeacherMode}>
 				<Route path=":coursename">
 					<Route path="results" component={Coursepage}/>
 					<Route path="groups" component={GroupManager}/>
-					<Route path="settings" component={GroupManager}/>
 				</Route>
 			</Route>
 
-			<Route path="student">
+			<Route path="student" component={StudentMode}>
 				<Route path=":coursename">
 					<Route path="results" component={Coursepage}/>
 					<Route path="groups" component={GroupManager}/>

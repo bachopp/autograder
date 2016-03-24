@@ -7,10 +7,6 @@ var Courses = require("../components/courses/Courses.jsx");
 
 var StudentAvailableSelector = React.createClass({
 
-  componentWillUnmount: function() {
-    console.log("AllCourses.jsx unmounted");
-  },
-
   render: function() {
       return (
         <Courses />

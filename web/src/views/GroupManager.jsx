@@ -16,48 +16,17 @@ var GroupSelector = require("../components/GroupSelector/GroupSelector.jsx");
 
 var GroupManager = React.createClass({
 
-  componentWillUnmount: function() {
-    console.log("GroupManager.jsx unmounted PARENT");
-  },
-
   render: function() {
     self = this;
     return(
-      <Row>
-        <Col xs={2}>
-          <TeacherSideNav/>
+      <Col xs={12}>
+        <Col xs={7} className="infoboxleft">
+            <StudentAvailableSelector />
         </Col>
-        <Col xs={10}>
-
-          <Col xs={12}>
-              <Col xs={7} className="infoboxleft">
-                <Col cs={12}>
-                  <Col xs={4}>
-                  DAT100
-                  </Col>
-                  <Col xs={4}>
-                  DAT200
-                  </Col>
-                  <Col xs={4}>
-                  DAT300
-                  </Col>
-                </Col>
-              </Col>
-              <Col xs={5} className="infoboxright">
-                INFO
-              </Col>
-          </Col>
-
-          <Col xs={12}>
-          <Col xs={7} className="infoboxleft">
-              <StudentAvailableSelector />
-          </Col>
-          <Col xs={5} className="infoboxright">
-              <GroupSelector/>
-          </Col>
-          </Col>
+        <Col xs={5} className="infoboxright">
+            <GroupSelector/>
         </Col>
-      </Row>
+      </Col>
     );
   },
 });
