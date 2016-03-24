@@ -31,6 +31,8 @@ var Labview = React.createClass({
   getInitialState: function() {
     return null
   },
+  componentWillUnmount: function() {
+  },
   render: function() {
     const successIcon = <i className="fa fa-check fa-fw"></i>;
     return(

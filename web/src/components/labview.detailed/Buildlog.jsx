@@ -8,7 +8,6 @@ var Buildlog = React.createClass({
     }
   },
   render: function() {
-    console.log(this.props.log);
     return(
       <Well className="buildLog">
         {this.state.log.map(function(entry, index) {

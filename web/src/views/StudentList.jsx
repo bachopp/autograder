@@ -9,20 +9,22 @@ var ListGroupItem = require("react-bootstrap").ListGroupItem;
 var Panel = require("react-bootstrap").Panel;
 
 // local
-var StudentAvailableSelectorElement = require("../components/StudentAvailableSelector/StudentAvailableSelectorElement.jsx");
 
-var Sidepanel = require("../components/side.navigation/Sidepanel.jsx");
-var StudentAvailableSelector = require("../components/StudentAvailableSelector/StudentAvailableSelector.jsx");
+var StudentSideNav = require("../components/StudentSideNav/StudentSideNav.jsx");
 var GroupSelector = require("../components/GroupSelector/GroupSelector.jsx");
 
 var GroupManager = React.createClass({
+
+  componentWillUnmount: function() {
+    console.log("StudentList.jsx unmounted");
+  },
 
   render: function() {
     self = this;
     return(
       <Row>
         <Col xs={2}>
-          <Sidepanel/>
+          <StudentSideNav/>
         </Col>
         <Col xs={10}>
 

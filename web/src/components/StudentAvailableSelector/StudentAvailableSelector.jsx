@@ -21,14 +21,15 @@ var StudentAvailableSelectorElement = require("./StudentAvailableSelectorElement
 var StudentAvailableSelectorSearch = require("./StudentAvailableSelectorSearch.jsx");
 
 
- function getStateFromStores() {
+function getStateFromStores() {
    return {
     query: '',
     students: GroupManagerStore.getAllStudents(),
   };
 };
 
- StudentAvailableSelector = React.createClass({
+// this className
+var StudentAvailableSelector = React.createClass({
 
   getInitialState: function() {
     StudentAvailableSelectorAPI.getAllStudents();
@@ -39,19 +40,21 @@ var StudentAvailableSelectorSearch = require("./StudentAvailableSelectorSearch.j
     GroupManagerStore.addChangeListener(this._onChange);
   },
 
-  componentWillunmount: function() {
+// three hours of debugging becouse componentWill/u/Unmount
+  componentWillUnmount: function() {
+    console.log("StudentAvailableSelector.jsx unmounted");
     GroupManagerStore.removeChangeListener(this._onChange);
   },
 
   render: function() {
     var students = this.state.students;
     var self = this;
-    return(
-      <div>
-        <StudentAvailableSelectorSearch
-        query={self.state.query}
-        searchFor={self._searchFor}
-        />
+    return (
+        <div>
+          <StudentAvailableSelectorSearch
+          query={self.state.query}
+          searchFor={self._searchFor}
+          />
 
           <ListGroupItem>
             <Row>
@@ -66,6 +69,7 @@ var StudentAvailableSelectorSearch = require("./StudentAvailableSelectorSearch.j
               </Col>
             </Row>
           </ListGroupItem>
+
           <ListGroup>
           {
             students.map( function(student) {
@@ -79,7 +83,7 @@ var StudentAvailableSelectorSearch = require("./StudentAvailableSelectorSearch.j
             })
           }
           </ListGroup>
-      </div>
+        </div>
     );
   },
 

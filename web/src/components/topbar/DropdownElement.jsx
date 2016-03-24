@@ -20,7 +20,7 @@ var DropdownElement = React.createClass({
   render: function() {
     var course = this.props.course;
     var mode = this.props.mode;
-    var roleCourse = "/"+mode +"/"+ course.CourseName;
+    var roleCourse = "/"+mode +"/"+ course.CourseName+"/results";
     return (
       <li onClick={this.onClick}>
         <Link to={roleCourse}>{course.CourseName}</Link>

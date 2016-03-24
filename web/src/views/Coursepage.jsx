@@ -12,7 +12,7 @@ var ProgressBar = require("react-bootstrap").ProgressBar;
 var Row = require("react-bootstrap").Row;
 
 
-var Sidepanel = require("../components/side.navigation/Sidepanel.jsx");
+var TeacherSideNav = require("../components/TeacherSideNav/TeacherSideNav.jsx");
 var Listview = require("../components/student.listview/Listview.jsx");
 var Coursetabs = require("../components/coursenavigation/Coursetabs.jsx");
 
@@ -21,13 +21,18 @@ var Labview = require("../components/labview.detailed/Labview.jsx");
 // local components
 
 var Coursepage = React.createClass({
+
+  componentWillUnmount: function() {
+    console.log("Coursepage.jsx unmounted");
+  },
+
   render: function() {
     const innerSearch = <Glyphicon glyph="search"/>;
 
     return(
       <Row>
         <Col xs={2}>
-          <Sidepanel/>
+          <TeacherSideNav/>
         </Col>
         <Col xs={10}>
 

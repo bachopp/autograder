@@ -34,6 +34,24 @@ func main() {
 	r.HandleFunc("/courses", Handler)
 	r.HandleFunc("/oauth", Handler)
 
+	r.HandleFunc("/teacher", Handler)
+	r.HandleFunc("/teacher/{course}", Handler)
+	r.HandleFunc("/teacher/{course}/{groups}", Handler)
+	r.HandleFunc("/teacher/{course}/{settings}", Handler)
+	r.HandleFunc("/teacher/{course}/{students}", Handler)
+
+	r.HandleFunc("/student", Handler)
+	r.HandleFunc("/student/{course}", Handler)
+	r.HandleFunc("/student/{course}/{groups}", Handler)
+	r.HandleFunc("/student/{course}/{settings}", Handler)
+	r.HandleFunc("/student/{course}/{students}", Handler)
+
+	r.HandleFunc("/admin", Handler)
+	r.HandleFunc("/admin/{course}", Handler)
+	r.HandleFunc("/admin/{course}/{groups}", Handler)
+	r.HandleFunc("/admin/{course}/{settings}", Handler)
+	r.HandleFunc("/admin/{course}/{students}", Handler)
+
 	r.PathPrefix("/").Handler(http.FileServer(http.Dir(webroot)))
 	http.Handle("/", r)
 

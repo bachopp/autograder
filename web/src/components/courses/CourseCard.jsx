@@ -15,7 +15,7 @@ var CourseCard = React.createClass({
     var self = this;
     var course = this.props.course;
     var role = this.props.role;
-    var roleCourse =  role +"/"+ course.CourseName;
+    var roleCourse =  role +"/"+ course.CourseName + "/results";
     var roleCourseGroup = role +"/"+ course.CourseName + "/groups";
     return(
       <Col xs={12} sm={12} md={12} lg={12} className="whitebox">

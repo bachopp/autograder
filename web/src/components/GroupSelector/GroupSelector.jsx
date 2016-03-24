@@ -25,9 +25,6 @@ var GroupSelectorActionCreators = require("../../actions/GroupSelectorActionCrea
 var mock = require("./mock.js");
 // var GroupManagerStore = require("../../stores/GroupManagerStore.js");
 
-propTypes: {
-  activeGroup: React.PropTypes.bool.isRequired;
-}
 
 function getStateFromStores() {
   return {
@@ -46,6 +43,7 @@ var GroupSelector = React.createClass({
     GroupManagerStore.addChangeListener(this._onChange);
   },
   componentWillUnmount: function() {
+    console.log("GroupSelector.jsx unmounted");
     GroupManagerStore.removeChangeListener(this._onChange);
   },
 
@@ -67,8 +65,6 @@ var GroupSelector = React.createClass({
   render: function() {
     var self = this;
     var groups = this.state.groups;
-
-    var text = this.state.activeGroup ? true : false;
 
     return (
         // TODO : map function for GroupSelectorElement

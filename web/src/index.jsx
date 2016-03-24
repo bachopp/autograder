@@ -21,6 +21,8 @@ var GroupManager = require("./views/GroupManager.jsx")
 var Coursepage= require("./views/Coursepage.jsx")
 var AllCourses = require("./views/AllCourses.jsx")
 var StudentList = require("./views/StudentList.jsx")
+
+var NotFound = require("./components/NotFound/NotFound.jsx")
 // this class
 
 var App = React.createClass({
@@ -39,24 +41,34 @@ var App = React.createClass({
 ReactDOM.render(
 	<Router history={browserHistory} >
 		<Route path="/" component={App}>
-		<IndexRoute component={Welcome}/>
+			<IndexRoute component={Welcome}/>
 			<Route path="/courses" component={AllCourses}/>
 
-			<Route path="/admin">
-				<Route path=":coursename" component={Coursepage}/>
-				<Route path=":coursename/groups" component={GroupManager}/>
+			<Route path="admin">
+				<Route path=":coursename">
+					<Route path="results" component={Coursepage}/>
+					<Route path="groups" component={GroupManager}/>
+				</Route>
 			</Route>
-			<Route path="/teacher">
-				<Route path=":coursename" component={Coursepage}/>
-				<Route path=":coursename/groups" component={GroupManager}/>
+
+			<Route path="teacher">
+				<Route path=":coursename">
+					<Route path="results" component={Coursepage}/>
+					<Route path="groups" component={GroupManager}/>
+					<Route path="settings" component={GroupManager}/>
+				</Route>
 			</Route>
-			<Route path="/student">
-				<Route path=":coursename" component={Coursepage}/>
-				<Route path=":coursename/groups" component={GroupManager}/>
+
+			<Route path="student">
+				<Route path=":coursename">
+					<Route path="results" component={Coursepage}/>
+					<Route path="groups" component={GroupManager}/>
+				</Route>
 			</Route>
 
 			<Route path="/about" component={About}/>
 			<Route path="/oauth" component={StudentList}/>
+
 		</Route>
 	</Router>,
 	document.getElementById("container")

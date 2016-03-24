@@ -58,6 +58,19 @@ html, body {
 	float:left;
 	text-align: left;
 }
+.navButtonSelected {
+	font-weight:bold;
+	border:none;
+	float:left;
+	text-align: left;
+	background-color:#e5e5e5;
+}
+
+.navButtonDivider {
+	background-color: #e5e5e5;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
 
 .tableDevider {
 	background-color:#FFF;
@@ -70,13 +83,6 @@ html, body {
 	height:3px;
 }
 
-.navButtonSelected {
-	font-weight:bold;
-	border:none;
-	float:left;
-	text-align: left;
-	background-color:#e5e5e5;
-}
 
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
 color: #a5a5a5;  /*Sets the text hover color on navbar*/

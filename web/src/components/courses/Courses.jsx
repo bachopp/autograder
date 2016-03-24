@@ -11,7 +11,7 @@ var Link = require("react-router").Link
 var CenterWrapper = require("./CenterWrapper.jsx")
 
 var CoursesStore = require("../../stores/CoursesStore.js");
-CoursesAPIUtils = require("../../utils/CoursesAPIUtils.js")
+var CoursesAPIUtils = require("../../utils/CoursesAPIUtils.js")
 
 
 function getStateFromStores() {
