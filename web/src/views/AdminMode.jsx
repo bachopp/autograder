@@ -10,14 +10,35 @@ var Button = require("react-bootstrap").Button;
 // local
 var AdminSideNav = require("../components/AdminSideNav/AdminSideNav.jsx");
 var CourseNav = require("../components/CourseNav/CourseNav.jsx");
+// actions
+var TopBarActionCreators = require("../actions/TopBarActionCreators.js");
 
-// mock
-const courses = [{name:"DAT100"},{name:"DAT200"},{name:"DAT300"},{name:"DAT400"}];
+// stores
+var CoursesStore = require("../stores/CoursesStore.js");
+
+function getStateFromStores() {
+  return {
+    courses: CoursesStore.getCoursesForMode(),
+  };
+}
 
 var AdminMode = React.createClass({
+
+  getInitialState: function() {
+    return getStateFromStores();
+  },
+
+  componentDidMount: function() {
+    CoursesStore.addChangeListener(this._onChange);
+  },
+
+  componentWillUnmount: function() {
+    CoursesStore.removeChangeListener(this._onChange);
+  },
+
   render: function() {
     var self = this;
-    var crss = [{name:"DAT100"},{name:"DAT200"},{name:"DAT300"},{name:"DAT400"}];
+    var courses = this.state.courses;
     return(
       <Row>
         <Col xs={2}>
@@ -26,7 +47,7 @@ var AdminMode = React.createClass({
         <Col xs={10}>
           <Col xs={12}>
               <Col xs={7} className="infoboxleft">
-                <CourseNav courses={crss}/>
+                <CourseNav courses={courses}/>
               </Col>
               <Col xs={5} className="infoboxright">
                 INFO
@@ -38,6 +59,9 @@ var AdminMode = React.createClass({
       </Row>
     );
   },
+  _onChange: function() {
+    this.setState(getStateFromStores());
+  }
 });
 
 module.exports = AdminMode;

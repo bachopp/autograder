@@ -24,7 +24,6 @@ var Courses = React.createClass({
   getInitialState: function() {
     // Calls for initial data from server on first render cycle only.
     CoursesAPIUtils.getAllCourses();
-
     return getStateFromStores();
   },
 

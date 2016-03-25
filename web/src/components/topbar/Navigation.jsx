@@ -9,6 +9,9 @@ var Link = require("react-router").Link;
 // local components requries
 var DropdownList = require("./DropdownList.jsx")
 
+// stores
+var TopBarActionCreators = require("../../actions/TopBarActionCreators.js");
+
 var Navigation = React.createClass({
   propTypes: {
     roles: React.PropTypes.array.isRequired,
@@ -16,6 +19,7 @@ var Navigation = React.createClass({
 
   handleClick: function(mode) {
     console.log("animate click " + mode);
+    TopBarActionCreators.receiveUserCourses(mode);
   },
 
   render:function() {

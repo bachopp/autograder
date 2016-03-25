@@ -13,17 +13,6 @@ var CardWrapper = React.createClass({
   render: function() {
     var self = this;
     var courses = this.props.courses;
-    /*
-    <Col xs={12} sm={6} md={3} lg={1} className="whitebox">
-      <CourseCard course={courses[0]}/>
-    </Col>
-    <Col xs={12} sm={6} md={3} lg={1} className="whitebox">
-      <CourseCard course={courses[1]}/>
-    </Col>
-    <Col xs={12} sm={6} md={3} lg={1} className="whitebox">
-      <CourseCard course={courses[2]}/>
-    </Col>
-    */
     return(
       <Row>
         <Col xs={10}>

@@ -11,29 +11,33 @@ var Button = require("react-bootstrap").Button;
 var CourseNav = React.createClass({
 
   propTypes: {
-    courses: React.PropTypes.array.isRequired
+    courses: React.PropTypes.array.isRequired,
+  },
+
+  getInitialState: function() {
+    
   },
 
   render: function() {
     var self = this;
     var courses = this.props.courses;
-    console.log(courses[0].name);
     var size = Math.floor(12/courses.length);
-    console.log(size);
-    return(
+    return (
       <Col xs={12}>
-        {
-          courses.map(function(course) {
-            <Col xs={size}>
+      {
+        courses.map(function(course) {
+          return (
+            <Col xs={size} key={course}>
               <Link to="#">
-                <Button className="navButton" >{course.name}</Button>
+                <Button className="navButton" >{course}</Button>
               </Link>
             </Col>
-          })
-        }
+          );
+        })
+      }
       </Col>
     );
-  },
+    },
 });
 
 module.exports = CourseNav;

@@ -18,7 +18,7 @@ var AdminSideNav = React.createClass({
 
     return(
       <Col xs={12} className="whitebox">
-        <Button className="navButtonSelected" block>{userIcon} Members</Button>
+        <Button className="navButtonSelected" block>{userIcon} Users</Button>
         <Button className="navButton" block>{groupIcon} Groups</Button>
         <Button className="navButton" block>{infoIcon} Course info</Button>
         <Button className="navButton" block>{settingsIcon} Settings</Button>

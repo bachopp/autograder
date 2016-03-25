@@ -4,11 +4,11 @@ var AGConstants = require("../constants/AGConstants");
 var ActionTypes = AGConstants.ActionTypes;
 
 module.exports = {
-  // TODO: methods for receieveing topbar data from server
-  receiveAll: function(rawCourses) {
+
+  receiveUserCourses: function(mode) {
     AGDispatcher.dispatch({
-      type: ActionTypes.RECEIVE_RAW_COURSES,
-      rawCourses: rawCourses,
+      type: ActionTypes.SWITCH_MODE,
+      mode: mode,
     });
   },
 };

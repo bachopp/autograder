@@ -22,10 +22,6 @@ var Labview = require("../components/labview.detailed/Labview.jsx");
 
 var Coursepage = React.createClass({
 
-  componentWillUnmount: function() {
-    console.log("Coursepage.jsx unmounted");
-  },
-
   render: function() {
     const innerSearch = <Glyphicon glyph="search"/>;
 

@@ -21,6 +21,7 @@ var CourseCard = React.createClass({
       <Col xs={12} sm={12} md={12} lg={12} className="whitebox">
         <h4>{course.CourseName}</h4>
         <p>
+          Course ID: <b>{course.Courseid}</b><br/>
           Dummy desciption and status
           <br/>
           Approved

@@ -11,13 +11,32 @@ var Button = require("react-bootstrap").Button;
 var TeacherSideNav = require("../components/TeacherSideNav/TeacherSideNav.jsx");
 var CourseNav = require("../components/CourseNav/CourseNav.jsx");
 
-// mock
-const courses = [{name:"DAT100"},{name:"DAT200"},{name:"DAT300"},{name:"DAT400"}];
+// stores
+var CoursesStore = require("../stores/CoursesStore.js");
+
+function getStateFromStores(mode) {
+  return {
+    courses: CoursesStore.getCoursesForMode(mode),
+  };
+}
 
 var TeacherMode = React.createClass({
 
+  getInitialState: function() {
+    return getStateFromStores("teacher");
+  },
+
+  componentDidMount: function() {
+    CoursesStore.addChangeListener(this._onChange);
+  },
+
+  componentWillUnmount: function() {
+    CoursesStore.removeChangeListener(this._onChange);
+  },
+
   render: function() {
-    self = this;
+    var self = this;
+    var courses = this.state.courses;
     return(
       <Row>
         <Col xs={2}>
@@ -38,6 +57,9 @@ var TeacherMode = React.createClass({
       </Row>
     );
   },
+  _onChange: function() {
+    this.setState(getStateFromStores("teacher"));
+  }
 });
 
 module.exports = TeacherMode;
