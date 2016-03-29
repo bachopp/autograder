@@ -7,7 +7,7 @@ var Table = require("react-bootstrap").Table;
 var Button = require("react-bootstrap").Button;
 var ButtonGroup = require("react-bootstrap").ButtonGroup;
 
-var Listview = React.createClass({
+var StudentResultsList = React.createClass({
   render: function() {
 
     const innerSearch = <Glyphicon glyph="search"/>;
@@ -129,4 +129,4 @@ var Listview = React.createClass({
   }
 });
 
-module.exports = Listview;
+module.exports = StudentResultsList;

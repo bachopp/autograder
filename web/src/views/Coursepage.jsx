@@ -11,13 +11,9 @@ var Table = require("react-bootstrap").Table;
 var ProgressBar = require("react-bootstrap").ProgressBar;
 var Row = require("react-bootstrap").Row;
 
+var StudentResultsList = require("../components/StudentResultsList/StudentResultsList.jsx");
 
-var TeacherSideNav = require("../components/TeacherSideNav/TeacherSideNav.jsx");
-var Listview = require("../components/student.listview/Listview.jsx");
-var Coursetabs = require("../components/coursenavigation/Coursetabs.jsx");
-
-
-var Labview = require("../components/labview.detailed/Labview.jsx");
+var Labview = require("../components/Labview/Labview.jsx");
 // local components
 
 var Coursepage = React.createClass({
@@ -28,7 +24,7 @@ var Coursepage = React.createClass({
     return(
       <Col xs={12}>
         <Col xs={7} className="infoboxleft">
-            <Listview/>
+            <StudentResultsList/>
         </Col>
         <Col xs={5} className="infoboxright">
             <Labview/>

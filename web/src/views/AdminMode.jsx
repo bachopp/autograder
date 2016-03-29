@@ -6,6 +6,7 @@ var Link = require("react-router").Link;
 var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
 var Button = require("react-bootstrap").Button;
+var ButtonToolbar = require("react-bootstrap").ButtonToolbar;
 
 // local
 var AdminSideNav = require("../components/AdminSideNav/AdminSideNav.jsx");
@@ -49,11 +50,11 @@ var AdminMode = React.createClass({
               <Col xs={7} className="infoboxleft">
                 <CourseNav courses={courses}/>
               </Col>
-              <Col xs={5} className="infoboxright">
-                INFO
+              <Col xs={5} className="infoboxrightadmin">
+                <Col xs={6}><b>Admin Panel</b></Col>
+                <Col xs={6}><b>Mar 29, 12:21</b></Col>
               </Col>
           </Col>
-
           {this.props.children}
         </Col>
       </Row>

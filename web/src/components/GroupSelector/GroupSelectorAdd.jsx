@@ -15,11 +15,12 @@ var GroupSelectorAdd = React.createClass({
   },
 
   render: function() {
+    const addGroupIcon = <i className="fa fa-plus"></i>;
 
     var addNewGroup = this.props.addNewGroup;
 
     return (
-        <Button className="groupselectoradd" block onClick={addNewGroup}>+</Button>
+        <Button className="groupselectoradd" block onClick={addNewGroup}>{addGroupIcon}</Button>
     );
   }
 });

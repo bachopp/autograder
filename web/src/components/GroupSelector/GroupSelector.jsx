@@ -62,6 +62,8 @@ var GroupSelector = React.createClass({
   },
 
   render: function() {
+    const removeGroupIcon = <i className="groupmanagericons fa fa-times fa-fw fa-lg fa-border"></i>;
+
     var self = this;
     var groups = this.state.groups;
 
@@ -85,7 +87,9 @@ var GroupSelector = React.createClass({
                         <b>{group.name}</b>
                       </Col>
                       <Col xs={2}>
-                        <Button onClick={self.removeGroup.bind(self, group)} bsSize="xsmall">-</Button>
+                        <i onClick={self.removeGroup.bind(self, group)} bsSize="xsmall">
+                        {removeGroupIcon}
+                        </i>
                       </Col>
                     </Row>
                     </Panel>

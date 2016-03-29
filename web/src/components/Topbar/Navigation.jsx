@@ -25,16 +25,39 @@ var Navigation = React.createClass({
   render:function() {
     var self = this;
     var roles = this.props.roles;
+
+    var lastCourse = "";
+    var defaultPage = "";
     // change last course to get DB
-    var lastCourse = "DAT100";
     var i = 0;
     return(
       <Nav>
         {roles.map(function(role) {
           i++;
+          var modeLink = "/";
+
+          switch (role.Mode) {
+            case "admin":
+              modeLink += "admin";
+              break;
+            case "teacher":
+              lastCourse = "/DAT100";
+              defaultPage = "/results";
+              modeLink += role.Mode + lastCourse + defaultPage;
+              break;
+            case "student":
+              lastCourse = "/DAT100";
+              lastLab = "/lab1id";
+              defaultPage = "/results";
+              modeLink += role.Mode + lastCourse + defaultPage + lastLab;
+              break;
+            default:
+            // noop
+          }
+
           return(
             <li key={i} onClick={self.handleClick.bind(self, role.Mode)}>
-              <Link to={"/" + role.Mode + "/" + lastCourse + "/results"}>{role.Mode}</Link>
+              <Link to={modeLink}>{role.Mode}</Link>
             </li>
           );
         })}
