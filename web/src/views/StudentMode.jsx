@@ -49,7 +49,8 @@ var StudentMode = React.createClass({
                 <CourseNav courses={courses}/>
               </Col>
               <Col xs={5} className="infoboxright">
-                INFO
+                <Col xs={6}><b>Student DAT100</b></Col>
+                <Col xs={6}><b>Mar 29, 12:21</b></Col>
               </Col>
           </Col>
 

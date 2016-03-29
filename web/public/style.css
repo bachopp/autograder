@@ -43,6 +43,20 @@ html, body {
 	left: 14px;
 }
 
+.infoboxrightadmin {
+	background-color: #d9534f;
+	color: white;
+	padding-top: 1em;
+	padding-bottom: 1em;
+	padding-left: 1em;
+	padding-right: 1em;
+	border-radius:4px;
+	box-shadow:1px 1px 1px rgba(0,0,0,0.1);
+
+	margin-bottom: 2em;
+	left: 14px;
+}
+
 .selectedCourse {
 	background-color:#222222;
 	color:#FFF;
@@ -53,6 +67,7 @@ html, body {
 }
 
 .navButton {
+	margin-bottom: 5px;
 	font-weight:bold;
 	border:none;
 	float:left;
@@ -60,6 +75,7 @@ html, body {
 }
 
 .navButtonSelected {
+	margin-bottom: 5px;
 	font-weight:bold;
 	border:none;
 	float:left;
@@ -151,6 +167,22 @@ color: white; /*Change active text color here*/
 	margin-top: 10px;
 }
 
+.groupmanagericons:hover {
+	background-color: white;
+}
+
 /*
 	components/StudentAvailableSelector
 */
+
+/*
+	Admin specific
+*/
+.scrolluserlist {
+	height: 10em;
+	padding: "100px 0";
+	overflow-y:  scroll;
+}
+
+.floatingtablehead {
+}

@@ -33,6 +33,8 @@ var GroupSelectorElement = React.createClass({
   },
 
   render: function() {
+    const removeUserIcon = <i className="groupmanagericons fa fa-times fa-fw fa-lg fa-border"></i>;
+
     var activeGroup = this.props.activeGroup;
     var group = this.props.group;
     var users = group.users;
@@ -48,7 +50,9 @@ var GroupSelectorElement = React.createClass({
                   {user.firstName} {user.studentNumber}
                 </Col>
                 <Col xs={2}>
-                  <Button onClick={self.props.removeUser.bind(null, user, group)} bsSize="xsmall">-</Button>
+                  <i onClick={self.props.removeUser.bind(null, user, group)}>
+                  {removeUserIcon}
+                  </i>
                 </Col>
               </Row>
             </Panel>

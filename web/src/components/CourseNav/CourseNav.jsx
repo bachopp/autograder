@@ -1,6 +1,7 @@
 var React = require("react");
 // react-router
 var Link = require("react-router").Link;
+var browserHistory = require("react-router").browserHistory;
 
 // react-bootstrap
 var Row = require("react-bootstrap").Row;
@@ -14,9 +15,9 @@ var CourseNav = React.createClass({
     courses: React.PropTypes.array.isRequired,
   },
 
-  getInitialState: function() {
-    
-  },
+  // getInitialState: function() {
+    // return
+  // },
 
   render: function() {
     var self = this;
@@ -28,8 +29,8 @@ var CourseNav = React.createClass({
         courses.map(function(course) {
           return (
             <Col xs={size} key={course}>
-              <Link to="#">
-                <Button className="navButton" >{course}</Button>
+              <Link to={"\/student\/" + course + "\/results/lab1id"}>
+                {course}
               </Link>
             </Col>
           );
