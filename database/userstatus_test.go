@@ -7,16 +7,24 @@ func TestUser(t *testing.T) {
 	InsertTestUser("thomasUserId1")
 	InsertTestUser("thomas")
 
-	AddCourse("DAT300")
-	ida := 1
 	AddCourse("DAT100")
+	ida := 1
+	AddCourse("DAT200")
 	idb := 2
-	AddCourse("DAT310")
+	AddCourse("DAT210")
 	idc := 3
+	AddCourse("DAT220")
+	// ide := 4
+	// AddCourse("DAT230")
+	// idf := 5
+	// AddCourse("DAT310")
+	// idg := 6
+	AddCourse("DAT320")
+	idh := 7
 
-	a := Role{"student", []courses{{ida, "DAT300"}, {idc, "DAT310"}}}
-	b := Role{"teacher", []courses{{idb, "DAT100"}}}
-	c := Role{"admin", []courses{{idb, "DAT100"}}}
+	a := Role{"admin", []courses{{ida, "DAT100"}, {idb, "DAT200"}, {idc, "DAT210"}}}
+	b := Role{"teacher", []courses{{ida, "DAT100"}, {idb, "DAT200"}}}
+	c := Role{"student", []courses{{idh, "DAT320"}}}
 
 	UpgradeUser("thomas", a, b, c)
 
