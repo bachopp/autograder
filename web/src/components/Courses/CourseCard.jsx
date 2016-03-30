@@ -22,7 +22,7 @@ var CourseCard = React.createClass({
     var roleCourse =  role +"/"+ course.CourseName + "/results";
     return(
       <div onClick={this.handleClick.bind(this, roleCourse)} >
-      <Col xs={5} xsOffset={1} className="whitebox">
+      <Col xs={12} xsOffset={0} className="whitebox">
         <h4>{course.CourseName}</h4>
         <p>
           Course ID: <b>{course.Courseid}</b><br/>
