@@ -7,7 +7,7 @@ var browserHistory = require("react-router").browserHistory;
 var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
 var Button = require("react-bootstrap").Button;
-
+var ButtonGroup = require("react-bootstrap").ButtonGroup;
 // local
 var CourseNav = React.createClass({
 
@@ -19,24 +19,36 @@ var CourseNav = React.createClass({
     // return
   // },
 
+  handleClick: function(here) {
+    browserHistory.push(here);
+  },
+
   render: function() {
     var self = this;
     var courses = this.props.courses;
     var size = Math.floor(12/courses.length);
+    var isActive = "" // courseactive
     return (
-      <Col xs={12}>
+      <Row>
+      <ButtonGroup justified>
       {
         courses.map(function(course) {
+          var navigate = "\/student\/" + course + "\/results/lab1id";
+          var classes = "buttonyfy infoboxleft " + isActive;
           return (
-            <Col xs={size} key={course}>
-              <Link to={"\/student\/" + course + "\/results/lab1id"}>
+            <Col
+            xs={size}
+            key={course}
+            onClick={self.handleClick.bind(self, navigate)}
+            className={classes}
+            >
                 {course}
-              </Link>
             </Col>
           );
         })
       }
-      </Col>
+      </ButtonGroup>
+      </Row>
     );
     },
 });

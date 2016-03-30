@@ -5,20 +5,24 @@ var Button = require("react-bootstrap").Button
 var Col = require("react-bootstrap").Col
 
 var Link = require("react-router").Link;
+var browserHistory = require("react-router").browserHistory;
 
 var CourseCard = React.createClass({
   propTypes: {
     course: React.PropTypes.object.isRequired,
     role: React.PropTypes.string.isRequired,
   },
+  handleClick: function(there) {
+    browserHistory.push(there);
+  },
   render: function() {
     var self = this;
     var course = this.props.course;
     var role = this.props.role;
     var roleCourse =  role +"/"+ course.CourseName + "/results";
-    var roleCourseGroup = role +"/"+ course.CourseName + "/groups";
     return(
-      <Col xs={12} sm={12} md={12} lg={12} className="whitebox">
+      <div onClick={this.handleClick.bind(this, roleCourse)} >
+      <Col xs={5} xsOffset={1} className="whitebox">
         <h4>{course.CourseName}</h4>
         <p>
           Course ID: <b>{course.Courseid}</b><br/>
@@ -26,9 +30,8 @@ var CourseCard = React.createClass({
           <br/>
           Approved
         </p>
-        <Link to={roleCourse} ><Button>View course</Button></Link>
-        <Link to={roleCourseGroup} ><Button>Manage groups</Button></Link>
       </Col>
+      </div>
     );
   }
 })

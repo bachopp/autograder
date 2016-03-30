@@ -18,10 +18,11 @@ var CenterWrapper = React.createClass({
             return(
               <Col key={role.Mode} xs={4}>
                 <h4>{role.Mode}</h4>
-                <CardWrapper courses={role.Courses} role={role.Mode}/>
+                  <CardWrapper courses={role.Courses} role={role.Mode}/>
               </Col>
             );
           })}
+
       </div>
     );
   }

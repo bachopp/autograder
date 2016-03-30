@@ -188,5 +188,25 @@ color: white; /*Change active text color here*/
 	overflow-y:  scroll;
 }
 
-.floatingtablehead {
+/**/
+.makebuttony {
+	cursor: pointer;
+	border-bottom: solid 2px #e5e5e5;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.makebuttony:hover {
+	background-color: #e5e5e5;
+}
+
+.buttonyfy {
+	text-align: center;
+	color:black;
+	cursor: pointer;
+}
+.buttonyfy:hover {
+	background-color: #f2f2f2;
+}
+.courseactive {
+	background-color: #f2f2f2;
 }
