@@ -135,9 +135,13 @@ background-color: silver; /*Change rollover cell color here*/
 color: white; /*Change active text color here*/
 }
 
+/*.buildLog {
+	background-color: red;
+}*/
+
 .buildLog p{
 	color:#2980B9;
-	font-size:0.8em;
+	font-size: 0.8em;
 }
 
 .cleanTable th, .table td {

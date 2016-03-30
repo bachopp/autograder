@@ -26,6 +26,7 @@ var TopBarStore = assign({}, EventEmitter.prototype, {
   },
 
   getCoursesForUser: function(mode) {
+
     return _usersCourses[mode];
   }
 });

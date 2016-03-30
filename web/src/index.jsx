@@ -15,6 +15,8 @@ var Button 		= require("react-bootstrap").Button
 var Topbar 		= require("./components/Topbar/Topbar.jsx")
 var Welcome		= require("./components/Welcome/Welcome.jsx")
 
+var CourseSettings = require("./components/CourseSettings/CourseSettings.jsx")
+
 // admin
 var UserList = require("./components/UserList/UserList.jsx");
 
@@ -57,7 +59,7 @@ ReactDOM.render(
 				<Route path=":coursename">
 					<Route path="results" component={Coursepage}/>
 					<Route path="groups" component={GroupManager}/>
-					<Route path="settings" component={NotFound}/>
+					<Route path="settings" component={CourseSettings}/>
 					<Route path="info"component={NotFound}/>
 				</Route>
 			</Route>
@@ -66,7 +68,7 @@ ReactDOM.render(
 				<Route path=":coursename">
 					<Route path="results" component={Coursepage}/>
 					<Route path="groups" component={GroupManager}/>
-					<Route path="settings" component={NotFound}/>
+					<Route path="settings" component={CourseSettings}/>
 					<Route path="info"component={NotFound}/>
 				</Route>
 			</Route>
