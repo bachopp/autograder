@@ -2,6 +2,8 @@ html, body {
 	background-color:#e5e5e5;
 }
 
+
+
 .whitebox {
 	background-color:#FFF;
 	padding-top: 1em;
@@ -225,5 +227,13 @@ color: white; /*Change active text color here*/
 	background-color: #f2f2f2;
 }
 .courseactive {
+	background-color: #f2f2f2;
+}
+
+.coursecardbutton {
+	cursor: pointer;
+}
+
+.coursecardbutton:hover {
 	background-color: #f2f2f2;
 }
