@@ -20,164 +20,161 @@ var UserList = React.createClass({
     const sortArrows = <i className="fa fa-sort fa-fw"></i>
     const sortArrowsAsc = <i className="fa fa-sort-asc fa-fw"></i>
     return (
-
+      <Col xs={12}>
+        <Col xs={7} className="infoboxleft">
         <Col xs={12}>
-          <Col>
-            <Row>
-              <Col xs={12}>
-                <Input
-                  type="text"
-                  addonBefore={innerSearch}
-                  placeholder="Search for students"
-                />
-              </Col>
-              <Col xs={12}>
-                <Table className="cleanTable" striped={true} responsive>
-                  <thead className="floatingtablehead">
-                    <tr>
-                      <th>Name</th>
-                      <th>Slipdays</th>
-                      <th>Admin{sortArrowsAsc}</th>
-                      <th>Teacher{sortArrows}</th>
-                      <th>Student{sortArrows}</th>
-                    </tr>
-                  </thead>
-                  <tbody className="scrolluserlist">
-                    <tr>
-                      <td>Name Surname</td>
-                      <td>{xMark}</td>
-                      <td>{checkMark}</td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>Name Surname</td>
-                      <td>{xMark}</td>
-                      <td>{checkMark}</td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>Name Surname</td>
-                      <td>{xMark}</td>
-                      <td>{checkMark}</td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>Name Surname</td>
-                      <td>5</td>
-                      <td></td>
-                      <td></td>
-                      <td>{checkMark}</td>
-                    </tr>
-                    <tr>
-                      <td>Name Surname</td>
-                      <td>5</td>
-                      <td></td>
-                      <td></td>
-                      <td>{checkMark}</td>
-                    </tr>
-                    <tr>
-                      <td>Name Surname</td>
-                      <td>5</td>
-                      <td></td>
-                      <td></td>
-                      <td>{checkMark}</td>
-                    </tr>
-                    <tr>
-                      <td>Name Surname</td>
-                      <td>5</td>
-                      <td></td>
-                      <td></td>
-                      <td>{checkMark}</td>
-                    </tr>
-                    <tr>
-                      <td>Name Surname</td>
-                      <td>5</td>
-                      <td></td>
-                      <td></td>
-                      <td>{checkMark}</td>
-                    </tr>
-                    <tr>
-                      <td>Name Surname</td>
-                      <td>5</td>
-                      <td></td>
-                      <td>{checkMark}</td>
-                      <td>{checkMark}</td>
-                    </tr>
-                    <tr>
-                      <td>Name Surname</td>
-                      <td>5</td>
-                      <td></td>
-                      <td>{checkMark}</td>
-                      <td>{checkMark}</td>
-                    </tr>
-                    <tr>
-                      <td>Name Surname</td>
-                      <td>5</td>
-                      <td></td>
-                      <td></td>
-                      <td>{checkMark}</td>
-                    </tr>
-                    <tr>
-                      <td>Name Surname</td>
-                      <td>5</td>
-                      <td></td>
-                      <td></td>
-                      <td>{checkMark}</td>
-                    </tr>
-                    <tr>
-                      <td>Name Surname</td>
-                      <td>5</td>
-                      <td></td>
-                      <td>{checkMark}</td>
-                      <td>{checkMark}</td>
-                    </tr>
-                    <tr>
-                      <td>Name Surname</td>
-                      <td>5</td>
-                      <td></td>
-                      <td></td>
-                      <td>{checkMark}</td>
-                    </tr>
-                    <tr>
-                      <td>Name Surname</td>
-                      <td>5</td>
-                      <td></td>
-                      <td></td>
-                      <td>{checkMark}</td>
-                    </tr>
-                    <tr>
-                      <td>Name Surname</td>
-                      <td>5</td>
-                      <td></td>
-                      <td></td>
-                      <td>{checkMark}</td>
-                    </tr>
-                    <tr>
-                      <td>Name Surname</td>
-                      <td>5</td>
-                      <td></td>
-                      <td></td>
-                      <td>{checkMark}</td>
-                    </tr>
-                    <tr>
-                      <td>Name Surname</td>
-                      <td>5</td>
-                      <td></td>
-                      <td></td>
-                      <td>{checkMark}</td>
-                    </tr>
-                  </tbody>
-                </Table>
-              </Col>
-
-            </Row>
-            </Col>
+          <Input
+            type="text"
+            addonBefore={innerSearch}
+            placeholder="Search for students"
+          />
         </Col>
-
-
+          <Col xs={12}>
+            <Table className="cleanTable" striped={true} responsive>
+              <thead className="floatingtablehead">
+                <tr>
+                  <th>Name</th>
+                  <th>Slipdays</th>
+                  <th>Admin{sortArrowsAsc}</th>
+                  <th>Teacher{sortArrows}</th>
+                  <th>Student{sortArrows}</th>
+                </tr>
+              </thead>
+              <tbody className="scrolluserlist">
+                <tr>
+                  <td>Name Surname</td>
+                  <td>{xMark}</td>
+                  <td>{checkMark}</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Name Surname</td>
+                  <td>{xMark}</td>
+                  <td>{checkMark}</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Name Surname</td>
+                  <td>{xMark}</td>
+                  <td>{checkMark}</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Name Surname</td>
+                  <td>5</td>
+                  <td></td>
+                  <td></td>
+                  <td>{checkMark}</td>
+                </tr>
+                <tr>
+                  <td>Name Surname</td>
+                  <td>5</td>
+                  <td></td>
+                  <td></td>
+                  <td>{checkMark}</td>
+                </tr>
+                <tr>
+                  <td>Name Surname</td>
+                  <td>5</td>
+                  <td></td>
+                  <td></td>
+                  <td>{checkMark}</td>
+                </tr>
+                <tr>
+                  <td>Name Surname</td>
+                  <td>5</td>
+                  <td></td>
+                  <td></td>
+                  <td>{checkMark}</td>
+                </tr>
+                <tr>
+                  <td>Name Surname</td>
+                  <td>5</td>
+                  <td></td>
+                  <td></td>
+                  <td>{checkMark}</td>
+                </tr>
+                <tr>
+                  <td>Name Surname</td>
+                  <td>5</td>
+                  <td></td>
+                  <td>{checkMark}</td>
+                  <td>{checkMark}</td>
+                </tr>
+                <tr>
+                  <td>Name Surname</td>
+                  <td>5</td>
+                  <td></td>
+                  <td>{checkMark}</td>
+                  <td>{checkMark}</td>
+                </tr>
+                <tr>
+                  <td>Name Surname</td>
+                  <td>5</td>
+                  <td></td>
+                  <td></td>
+                  <td>{checkMark}</td>
+                </tr>
+                <tr>
+                  <td>Name Surname</td>
+                  <td>5</td>
+                  <td></td>
+                  <td></td>
+                  <td>{checkMark}</td>
+                </tr>
+                <tr>
+                  <td>Name Surname</td>
+                  <td>5</td>
+                  <td></td>
+                  <td>{checkMark}</td>
+                  <td>{checkMark}</td>
+                </tr>
+                <tr>
+                  <td>Name Surname</td>
+                  <td>5</td>
+                  <td></td>
+                  <td></td>
+                  <td>{checkMark}</td>
+                </tr>
+                <tr>
+                  <td>Name Surname</td>
+                  <td>5</td>
+                  <td></td>
+                  <td></td>
+                  <td>{checkMark}</td>
+                </tr>
+                <tr>
+                  <td>Name Surname</td>
+                  <td>5</td>
+                  <td></td>
+                  <td></td>
+                  <td>{checkMark}</td>
+                </tr>
+                <tr>
+                  <td>Name Surname</td>
+                  <td>5</td>
+                  <td></td>
+                  <td></td>
+                  <td>{checkMark}</td>
+                </tr>
+                <tr>
+                  <td>Name Surname</td>
+                  <td>5</td>
+                  <td></td>
+                  <td></td>
+                  <td>{checkMark}</td>
+                </tr>
+              </tbody>
+            </Table>
+          </Col>
+        </Col>
+        <Col xs={5} className="infoboxright">
+          <b>Info bout user?</b>
+        </Col>
+      </Col>
 
 
     );

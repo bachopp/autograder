@@ -39,13 +39,13 @@ var Courses = React.createClass({
     var roles = this.state.roles;
     return (
       <div>
-      <Col xs={12}>
+      <Col xs={8} xsOffset={2}>
         <h1>View courses</h1>
       </Col>
-      <Row>
+      <Col xs={8} xsOffset={2}>
           <CenterWrapper roles={roles}/>
           {this.props.children}
-      </Row>
+      </Col>
       </div>
     )
   },
