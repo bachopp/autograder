@@ -70,7 +70,7 @@ ReactDOM.render(
 				<Route path=":coursename">
 					<Route path="results" component={Coursepage}/>
 					<Route path="groups" component={GroupManager}/>
-					<Route path="settings" component={NotFound}/>
+					<Route path="settings" component={CourseSettings}/>
 					<Route path="users" component={UserManager}/>
 					<Route path="info"component={NotFound}/>
 				</Route>
