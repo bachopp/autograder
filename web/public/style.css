@@ -155,17 +155,20 @@ color: white; /*Change active text color here*/
 	components/GroupSelector
 */
 .groupelementbutton {
-	border: 0px;
-	padding: 2px;
 	background-color: #e5e5e5;
 	cursor: pointer;
+	margin-top: 10px;
+	box-shadow: none;
 }
 .groupelementbutton:hover {
 	background-color: #e5e5e0;
 }
 .groupelement {
-	border: none;
-	padding: 2px;
+	/*border: solid white 1px;*/
+	box-shadow: none;
+	background-color: #e5e5e5;
+ 	background-clip: content-box;
+	margin-top: 10px;
 }
 .groupselectoradd {
 	margin-top: 10px;
@@ -175,6 +178,20 @@ color: white; /*Change active text color here*/
 	background-color: white;
 }
 
+.userelementbutton {
+	background-color: white;
+}
+.userelementbutton:hover {
+	cursor: pointer;
+	background-color: #f2f2f2;
+}
+
+.groupcontainer {
+	border-left: solid #e5e5e5 1px;
+	border-right: solid #e5e5e5 1px;
+	background-color: #e5e5e5;
+	border-radius: 5px;
+}
 /*
 	components/StudentAvailableSelector
 */

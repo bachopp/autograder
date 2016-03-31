@@ -70,16 +70,32 @@ var GroupSelector = React.createClass({
     return (
         // TODO : map function for GroupSelectorElement
           <PanelGroup accordion>
-            <b><p>
-            New groups
-            </p></b>
+          <Row>
+            <Col xs={4}>
+              <b><p>
+              New groups
+              </p></b>
+            </Col>
+            <Col xs={4}>
+              <Button><b>Expand all</b></Button>
+            </Col>
+            <Col xs={4}>
+              <Button bsStyle="success"><b>Approve</b></Button>
+            </Col>
+          </Row>
             {
               groups.map(function(group) {
+                var groupName = '';
+                var len = group.users.length;
+                if (len === 0) {
+                  groupName = "(empty)";
+                } else {
+                  groupName = "Students in " + group.name;
+                }
                 return (
-                  <div key={group.number}>
+                  <div key={group.number} className="groupcontainer">
                     <Panel
                     className="groupelementbutton"
-                    collapsible expanded={!group.active}
                     block onClick={self.activateGroup.bind(self, group)}
                     >
                     <Row>
@@ -94,7 +110,7 @@ var GroupSelector = React.createClass({
                     </Row>
                     </Panel>
                     <Panel className="groupelement" collapsible expanded={group.active}>
-                      <b>{group.name}</b>
+                      <b>{groupName}</b>
                       <GroupSelectorElement group={group} removeUser={self.removeUser}/>
                     </Panel>
                   </div>

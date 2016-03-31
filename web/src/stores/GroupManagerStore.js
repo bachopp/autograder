@@ -25,6 +25,9 @@ var _selectedStudent = '';
 function _removeGroup(group) {
   for (var i = 0; i < _groups.length; i++) {
     if (_groups[i] === group) {
+      group.users.forEach(function(user){
+        _students.push(user);
+      })
       _groups.splice(i, 1);
       // TODO: hope for feedback from the server ... on adding students back to the student store
       break;
@@ -53,6 +56,10 @@ function _isAnyGroupActive() {
   return _activeGroup;
 }
 
+function _expandAllGroups() {
+
+}
+
 function _addStudentToActiveGroup(student) {
   _groups.forEach(function(grp) {
     if (grp.active) {
@@ -72,11 +79,16 @@ function _selectStudent(student) {
 function _removeStudent(student) {
   for (var i = 0; i < _students.length; i++) {
     if (_students[i] === student) {
+      _students[i].hasGroup = true;
       _students.splice(i, 1);
       _selectedStudent = student;
       break;
     }
   }
+}
+
+function _studentHasGroup(student) {
+  return false;
 }
 
 function _newStudents(newStudents) {
@@ -108,6 +120,7 @@ function _removeStudentFromGroup(student, group) {
       var users = grp.users;
       for (var i = 0; i < users.length; i++) {
         if (users[i] === student) {
+          _students.push(student);
           users.splice(i, 1);
           break;
         }
@@ -169,11 +182,11 @@ GroupManagerStore.dispachToken = AGDispatcher.register(function(action) {
       break;
     case ActionTypes.ADD_TO_GROUP:
       _selectStudent(action.rawStudent);
-      if (_isAnyGroupActive()) {
+      if (_isAnyGroupActive() && !_studentHasGroup(action.rawStudent)) {
         _removeStudent(action.rawStudent);
         _addStudentToActiveGroup(action.rawStudent);
       } else {
-        alert("DUDE NO GROUP SELECTED, CHOOSE GROUP FIRST");
+        alert("CHOOSE GROUP FIRST");
       }
       GroupManagerStore.emitChange();
       break;
