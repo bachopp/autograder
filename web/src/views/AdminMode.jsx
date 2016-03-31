@@ -48,14 +48,14 @@ var AdminMode = React.createClass({
         <Col xs={10}>
           <Col xs={12}>
               <Col xs={7} className="infoboxleft">
-                {this.props.children}
+
               </Col>
               <Col xs={5} className="infoboxrightadmin">
                 <Col xs={6}><b>Admin Panel</b></Col>
                 <Col xs={6}><b>Mar 29, 12:21</b></Col>
               </Col>
           </Col>
-
+            {this.props.children}
         </Col>
       </Row>
     );
