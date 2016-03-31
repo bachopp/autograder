@@ -1,3 +1,7 @@
+html {
+	overflow-y:scroll;
+}
+
 html, body {
 	background-color:#e5e5e5;
 }
@@ -60,9 +64,21 @@ html, body {
 }
 
 .selectedCourse {
-	background-color:#222222;
+	background-color:#5BC0DE;
+	border-color:#46b8da;
 	color:#FFF;
 }
+
+.pending {
+	background-color:#CED1D4;
+}
+.pending tr {
+	background-color:#CED1D4;
+}
+.pending td {
+	background-color:#CED1D4;
+}
+
 
 .bottomPadding {
 	margin-bottom:0.5em;

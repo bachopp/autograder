@@ -14,6 +14,8 @@ var Button 		= require("react-bootstrap").Button
 // local components requires
 var Topbar 		= require("./components/Topbar/Topbar.jsx")
 var Welcome		= require("./components/Welcome/Welcome.jsx")
+var UserManager = require("./components/UserManager/UserManager.jsx");
+var UserSettings = require("./components/UserSettings/UserSettings.jsx");
 
 var CourseSettings = require("./components/CourseSettings/CourseSettings.jsx")
 var CourseInfo = require("./components/CourseInfo/CourseInfo.jsx")
@@ -32,7 +34,6 @@ var Coursepage= require("./views/Coursepage.jsx");
 var AllCourses = require("./views/AllCourses.jsx");
 var StudentList = require("./views/StudentList.jsx");
 var StudentResult = require("./views/StudentResult.jsx");
-
 var NotFound = require("./components/NotFound/NotFound.jsx")
 // this class
 
@@ -69,8 +70,9 @@ ReactDOM.render(
 				<Route path=":coursename">
 					<Route path="results" component={Coursepage}/>
 					<Route path="groups" component={GroupManager}/>
-					<Route path="settings" component={CourseSettings}/>
-					<Route path="info"component={CourseInfo}/>
+					<Route path="settings" component={NotFound}/>
+					<Route path="users" component={UserManager}/>
+					<Route path="info"component={NotFound}/>
 				</Route>
 			</Route>
 
@@ -78,8 +80,8 @@ ReactDOM.render(
 				<Route path=":coursename">
 					<Route path="members" component={NotFound}/>
 					<Route path="groups" component={NotFound}/>
-					<Route path="settings" component={NotFound}/>
 					<Route path="info"component={CourseInfo}/>
+					<Route path="settings" component={UserSettings}/>
 
 					<Route path="results">
 						<Route path=":labid" component={StudentResult}/>

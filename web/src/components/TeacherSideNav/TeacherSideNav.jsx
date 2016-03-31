@@ -35,6 +35,10 @@ var TeacherSideNav = React.createClass({
           <Button className="navButton" block>{groupIcon} Group Manager</Button>
         </Link>
 
+        <Link to={"\/teacher" + lastCourse + "\/users"}>
+          <Button className="navButton" block>{settingsIcon} User Manager</Button>
+        </Link>
+
         <Link to={"\/teacher" + lastCourse + "\/settings"}>
           <Button className="navButton" block>{settingsIcon} Settings</Button>
         </Link>
