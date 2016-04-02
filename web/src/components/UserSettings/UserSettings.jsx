@@ -88,7 +88,6 @@ var UserSettings = React.createClass({
                     {el1}
                     {el2}
                     {el3}
-
                     {fullButtonGroup}
                   </Col>
               </Col>

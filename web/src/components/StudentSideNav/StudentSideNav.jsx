@@ -53,10 +53,6 @@ var StudentSideNav = React.createClass({
         <Button className="navButton" block>{groupIcon} Groups</Button>
       </Link>
 
-      <Link to={"\/student" + lastCourse + "\/settings"}>
-        <Button className="navButton" block>{settingsIcon} Settings Student</Button>
-      </Link>
-
       <Link to={"\/student" + lastCourse + "\/info"}>
       <Button className="navButton" block>{infoIcon} Course info</Button>
       </Link>
