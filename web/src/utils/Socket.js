@@ -13,13 +13,10 @@ var Socket =  function() {
     // TODO: emit that message has arrived
     // figure out what ActionCreator to call with new data?
     var data = JSON.parse(payload.data);
-    var pivot = data.actionType;
 
-    switch(pivot) {
+    switch(data.actionType) {
       case ActionTypes.RECEIVE_RAW_ROLES:
         TopBarServerActionCreators.receiveAll(data.payload.roles);
-        break;
-      case ActionTypes.RECEIVE_RAW_COURSES:
         CoursesServerActionCreators.receiveAll(data.payload.roles)
         break;
       default:
@@ -28,7 +25,7 @@ var Socket =  function() {
   };
 
   this.open = function() {
-    // TODO: emit connected on open instead of wait
+    // TODO: emit connected on open instead of wait ?
   };
 
   this.close = function() {
@@ -39,7 +36,7 @@ var Socket =  function() {
   this.ws.onopen = this.open;
   this.ws.onclose = this.close;
 
-  // This is not good at all, but temp fix, see this.open
+  // see this.open
   this.waitForSocketConnection = function waitForSocketConnection(socket, callback){
     setTimeout(
       function(){

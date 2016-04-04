@@ -10,13 +10,15 @@ var Button = require("react-bootstrap").Button;
 // local
 var StudentSideNav = require("../components/StudentSideNav/StudentSideNav.jsx");
 var CourseNav = require("../components/CourseNav/CourseNav.jsx");
+var InfoBar = require("../components/InfoBar/InfoBar.jsx");
+
 
 // stores
-var CoursesStore = require("../stores/CoursesStore.js");
+var CourseNavStore = require("../stores/CourseNavStore.js");
 
 function getStateFromStores(mode) {
   return {
-    courses: CoursesStore.getCoursesForMode(mode),
+    courses: CourseNavStore.getCoursesForMode(mode),
   };
 }
 
@@ -28,11 +30,11 @@ var StudentMode = React.createClass({
   },
 
   componentDidMount: function() {
-    CoursesStore.addChangeListener(this._onChange);
+    CourseNavStore.addChangeListener(this._onChange);
   },
 
   componentWillUnmount: function() {
-    CoursesStore.removeChangeListener(this._onChange);
+    CourseNavStore.removeChangeListener(this._onChange);
   },
 
   render: function() {
@@ -49,8 +51,7 @@ var StudentMode = React.createClass({
                 <CourseNav courses={courses}/>
               </Col>
               <Col xs={5} className="infoboxright">
-                <Col xs={6}><b>Student DAT100</b></Col>
-                <Col xs={6}><b>Mar 29, 12:21</b></Col>
+                <InfoBar infoType="Student DAT100"/>
               </Col>
           </Col>
 

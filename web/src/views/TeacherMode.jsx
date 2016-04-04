@@ -13,28 +13,33 @@ var TopBarActionCreators = require("../actions/TopBarActionCreators.js");
 // local
 var TeacherSideNav = require("../components/TeacherSideNav/TeacherSideNav.jsx");
 var CourseNav = require("../components/CourseNav/CourseNav.jsx");
+var InfoBar = require("../components/InfoBar/InfoBar.jsx");
 
 // stores
+var CourseNavStore = require("../stores/CourseNavStore.js");
 var CoursesStore = require("../stores/CoursesStore.js");
 
 function getStateFromStores() {
   return {
-    courses: CoursesStore.getCoursesForMode(),
+    courses: CourseNavStore.getCoursesForMode(),
   };
 }
+
+const mode = "teacher";
 
 var TeacherMode = React.createClass({
 
   getInitialState: function() {
+    TopBarActionCreators.receiveUserCourses(mode);
     return getStateFromStores();
   },
 
   componentDidMount: function() {
-    CoursesStore.addChangeListener(this._onChange);
+    CourseNavStore.addChangeListener(this._onChange);
   },
 
   componentWillUnmount: function() {
-    CoursesStore.removeChangeListener(this._onChange);
+    CourseNavStore.removeChangeListener(this._onChange);
   },
 
   render: function() {
@@ -51,8 +56,7 @@ var TeacherMode = React.createClass({
                 <CourseNav courses={courses}/>
               </Col>
               <Col xs={5} className="infoboxright">
-                <Col xs={6}><b>Teacher DAT100</b></Col>
-                <Col xs={6}><b>Mar 29, 12:21</b></Col>
+                <InfoBar infoType="Teacher DAT100"/>
               </Col>
           </Col>
 

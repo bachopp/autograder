@@ -11,15 +11,16 @@ var ButtonToolbar = require("react-bootstrap").ButtonToolbar;
 // local
 var AdminSideNav = require("../components/AdminSideNav/AdminSideNav.jsx");
 var CourseNav = require("../components/CourseNav/CourseNav.jsx");
+var InfoBar = require("../components/InfoBar/InfoBar.jsx");
 // actions
 var TopBarActionCreators = require("../actions/TopBarActionCreators.js");
 
 // stores
-var CoursesStore = require("../stores/CoursesStore.js");
+var CourseNavStore = require("../stores/CourseNavStore.js");
 
 function getStateFromStores() {
   return {
-    courses: CoursesStore.getCoursesForMode(),
+    courses: CourseNavStore.getCoursesForMode(),
   };
 }
 
@@ -30,11 +31,11 @@ var AdminMode = React.createClass({
   },
 
   componentDidMount: function() {
-    CoursesStore.addChangeListener(this._onChange);
+    CourseNavStore.addChangeListener(this._onChange);
   },
 
   componentWillUnmount: function() {
-    CoursesStore.removeChangeListener(this._onChange);
+    CourseNavStore.removeChangeListener(this._onChange);
   },
 
   render: function() {
@@ -47,8 +48,7 @@ var AdminMode = React.createClass({
         </Col>
         <Col xs={10}>
           <Col xs={12} className="admininfobox">
-                <Col xs={6}><b>Admin Panel</b></Col>
-                <Col xs={6}><b>Mar 29, 12:21</b></Col>
+                <InfoBar infoType="Admin page" />
           </Col>
             {this.props.children}
         </Col>

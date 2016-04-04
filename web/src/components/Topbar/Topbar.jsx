@@ -40,7 +40,7 @@ var Topbar = React.createClass({
   // TODO : iterate over buttons available fo user
   render:function() {
     var self = this;
-    
+
     return (
       <Navbar className="myNavbar">
         <Navbar.Header>
