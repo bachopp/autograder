@@ -1,10 +1,10 @@
 DROP SCHEMA IF EXISTS agdatabase;
 CREATE SCHEMA agdatabase;
 USE agdatabase;
-CREATE TABLE user (userid int NOT NULL PRIMARY KEY AUTO_INCREMENT, github VARCHAR(255), last_name VARCHAR(255), first_name VARCHAR(255));
-CREATE TABLE admin (userid INT NOT NULL PRIMARY KEY, FOREIGN KEY (userid) REFERENCES user(userid));
-CREATE TABLE teacher (userid INT NOT NULL PRIMARY KEY, FOREIGN KEY (userid) REFERENCES user(userid));
-CREATE TABLE student (userid INT NOT NULL PRIMARY KEY, student_number INT NOT NULL, FOREIGN KEY (userid) REFERENCES user(userid));
+CREATE TABLE user (userid int NOT NULL PRIMARY KEY AUTO_INCREMENT, github VARCHAR(255), last_name VARCHAR(255), first_name VARCHAR(255), last_mode VARCHAR(255));
+CREATE TABLE admin (userid INT NOT NULL PRIMARY KEY, last_course VARCHAR(10), FOREIGN KEY (userid) REFERENCES user(userid));
+CREATE TABLE teacher (userid INT NOT NULL PRIMARY KEY, last_course VARCHAR(255), FOREIGN KEY (userid) REFERENCES user(userid));
+CREATE TABLE student (userid INT NOT NULL PRIMARY KEY, student_number INT NOT NULL,last_course VARCHAR(255), FOREIGN KEY (userid) REFERENCES user(userid));
 CREATE TABLE course (courseid INT NOT NULL PRIMARY KEY AUTO_INCREMENT, course_name VARCHAR(255) NOT NULL);
 CREATE TABLE admin_course (userid INT NOT NULL, courseid INT NOT NULL, FOREIGN KEY (userid) REFERENCES admin(userid),FOREIGN KEY (courseid) REFERENCES course(courseid), PRIMARY KEY (userid, courseid));
 CREATE TABLE teacher_course (userid INT NOT NULL, courseid INT NOT NULL, FOREIGN KEY (userid) REFERENCES teacher(userid), FOREIGN KEY (courseid) REFERENCES course(courseid), PRIMARY KEY (userid, courseid));

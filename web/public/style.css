@@ -49,7 +49,7 @@ html, body {
 	left: 14px;
 }
 
-.infoboxrightadmin {
+.admininfobox {
 	background-color: #d9534f;
 	color: white;
 	padding-top: 1em;
@@ -60,7 +60,6 @@ html, body {
 	box-shadow:1px 1px 1px rgba(0,0,0,0.1);
 
 	margin-bottom: 2em;
-	left: 14px;
 }
 
 .selectedCourse {

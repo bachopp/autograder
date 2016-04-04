@@ -1,6 +1,9 @@
 package database
 
-import "log"
+import (
+	"log"
+	"strconv"
+)
 
 type courses struct {
 	Courseid   int
@@ -9,8 +12,9 @@ type courses struct {
 
 // Role references usertype and courses associated with it
 type Role struct {
-	Mode    string
-	Courses []courses
+	Mode       string
+	Courses    []courses
+	LastCourse string
 }
 
 // Roles wraps all the roles to send as json through websocket
@@ -28,14 +32,18 @@ func InsertTestUser(github string) {
 		log.Fatal(err)
 	}
 	defer tx.Rollback()
-	stmt, err := tx.Prepare("INSERT INTO user (github, last_name, first_name) VALUES (?, ?, ?)")
+	stmt, err := tx.Prepare("INSERT INTO user (github, last_name, first_name, last_mode) VALUES (?, ?, ?, ?)")
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer stmt.Close() // danger!
+
+	// test data:
 	lastName := "TestLast"
 	firstName := "TersFirst"
-	_, err = stmt.Exec(github, lastName, firstName)
+	lastMode := "teacher"
+	_, err = stmt.Exec(github, lastName, firstName, lastMode)
+
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -84,6 +92,7 @@ func UpgradeUser(username string, roles ...Role) {
 	tx, err := con.Begin()
 	if err != nil {
 		log.Fatal(err)
+
 	}
 	defer tx.Rollback()
 
@@ -137,6 +146,16 @@ func makeUpdate(username string, role Role) {
 			log.Fatal(err)
 		}
 	}
+	// TODO : prepare transaction
+	stmt2, err := tx.Prepare("UPDATE " + role.Mode + " SET last_course = (?) WHERE userid = " + strconv.Itoa(userid))
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer stmt2.Close()
+	_, err = stmt2.Exec(role.LastCourse)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	err = tx.Commit()
 	if err != nil {
@@ -157,12 +176,13 @@ func GetUserRoles(username string) Roles {
 	roles := make([]Role, 0, 3)
 	modes := []string{"admin", "teacher", "student"}
 	crses := make([]courses, 0, 32)
+	var lastCourse string
 	var course string
 	var courseid int
 	for _, mode := range modes {
 		//TODO: collect courses in each mode
 		stmt, err := con.Prepare(
-			"SELECT course.courseid, course_name " +
+			"SELECT course.courseid, course_name, last_course " +
 				"FROM " + mode + "_course " +
 				"INNER JOIN " + mode + " " +
 				"ON " + mode + ".userid = " + mode + "_course.userid " +
@@ -179,13 +199,13 @@ func GetUserRoles(username string) Roles {
 		}
 		defer rows.Close()
 		for rows.Next() {
-			err := rows.Scan(&courseid, &course)
+			err := rows.Scan(&courseid, &course, &lastCourse)
 			if err != nil {
 				log.Fatal(err)
 			}
 			crses = append(crses, courses{courseid, course})
 		}
-		role := Role{mode, crses}
+		role := Role{mode, crses, lastCourse}
 		// if rows is empty there is no courses associated with mode, therefore no append
 		if len(crses) > 0 {
 			roles = append(roles, role)
