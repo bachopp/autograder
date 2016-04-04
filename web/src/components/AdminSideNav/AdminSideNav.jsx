@@ -28,22 +28,12 @@ var AdminSideNav = React.createClass({
           <Button className="navButton" bsStyle="danger" block>{unlockIcon} Admin options</Button>
         </Link>
 
-        <Col xs={12} className="navButtonDivider"><b>Course panel</b></Col>
-
-        <Link to={"\/admin" + lastCourse + "\/results"}>
-          <Button className="navButton" block>{resultsIcon} Results</Button>
-        </Link>
-
-        <Link to={"\/admin" + lastCourse + "\/groups"}>
-          <Button className="navButton" block>{groupIcon} Group manager</Button>
-        </Link>
-
-        <Link to={"\/admin" + lastCourse + "\/settings"}>
+        <Link to={"\/admin\/settings"}>
           <Button className="navButton" block>{settingsIcon} Settings</Button>
         </Link>
 
-        <Link to={"\/admin" + lastCourse + "\/info"}>
-        <Button className="navButton" block>{infoIcon} Course info</Button>
+        <Link to={"\/admin\/info"}>
+          <Button className="navButton" block>{infoIcon} Course info</Button>
         </Link>
 
       </Col>

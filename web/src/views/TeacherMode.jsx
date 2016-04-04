@@ -7,6 +7,9 @@ var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
 var Button = require("react-bootstrap").Button;
 
+// actions
+var TopBarActionCreators = require("../actions/TopBarActionCreators.js");
+
 // local
 var TeacherSideNav = require("../components/TeacherSideNav/TeacherSideNav.jsx");
 var CourseNav = require("../components/CourseNav/CourseNav.jsx");
@@ -14,16 +17,16 @@ var CourseNav = require("../components/CourseNav/CourseNav.jsx");
 // stores
 var CoursesStore = require("../stores/CoursesStore.js");
 
-function getStateFromStores(mode) {
+function getStateFromStores() {
   return {
-    courses: CoursesStore.getCoursesForMode(mode),
+    courses: CoursesStore.getCoursesForMode(),
   };
 }
 
 var TeacherMode = React.createClass({
 
   getInitialState: function() {
-    return getStateFromStores("teacher");
+    return getStateFromStores();
   },
 
   componentDidMount: function() {
@@ -59,7 +62,7 @@ var TeacherMode = React.createClass({
     );
   },
   _onChange: function() {
-    this.setState(getStateFromStores("teacher"));
+    this.setState(getStateFromStores());
   }
 });
 

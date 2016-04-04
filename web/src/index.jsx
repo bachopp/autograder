@@ -51,44 +51,32 @@ var App = React.createClass({
 });
 
 ReactDOM.render(
-	<Router history={browserHistory} >
+	<Router history={browserHistory}>
 		<Route path="/" component={App}>
 			<IndexRoute component={Welcome}/>
 			<Route path="courses" component={AllCourses}/>
 
 			<Route path="admin" component={AdminMode}>
 				<IndexRoute component={UserList} />
-				<Route path=":coursename">
-					<Route path="results" component={Coursepage}/>
-					<Route path="groups" component={GroupManager}/>
-					<Route path="settings" component={CourseSettings}/>
-					<Route path="info"component={CourseInfo}/>
-				</Route>
+					<Route path="settings" component={NotFound}/>
+					<Route path="info"component={NotFound}/>
 			</Route>
 
 			<Route path="teacher" component={TeacherMode}>
-				<Route path=":coursename">
-					<Route path="results" component={Coursepage}/>
-					<Route path="groups" component={GroupManager}/>
-					<Route path="settings" component={CourseSettings}/>
-					<Route path="users" component={UserManager}/>
-					<Route path="info"component={NotFound}/>
-				</Route>
+					<Route path="results/:coursename" component={Coursepage}/>
+					<Route path="groups/:coursename" component={GroupManager}/>
+					<Route path="settings/:coursename" component={CourseSettings}/>
+					<Route path="users/:coursename" component={UserManager}/>
+					<Route path="info/:coursename" component={NotFound}/>
 			</Route>
 
 			<Route path="student" component={StudentMode}>
-				<Route path=":coursename">
-					<Route path="members" component={NotFound}/>
-					<Route path="groups" component={NotFound}/>
-					<Route path="info"component={CourseInfo}/>
-					<Route path="settings" component={UserSettings}/>
-
-					<Route path="results">
-						<Route path=":labid" component={StudentResult}/>
-					</Route>
-				</Route>
+					<Route path="members/:coursename" component={NotFound}/>
+					<Route path="groups/:coursename" component={NotFound}/>
+					<Route path="info/:coursename" component={CourseInfo}/>
+					<Route path="settings/:coursename" component={UserSettings}/>
+					<Route path="results/:coursename" component={StudentResult}/>
 			</Route>
-
 
 			<Route path="/about" component={NotFound}/>
 			<Route path="/oauth" component={StudentList}/>

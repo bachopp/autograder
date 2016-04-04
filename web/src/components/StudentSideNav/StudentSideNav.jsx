@@ -27,7 +27,7 @@ var StudentSideNav = React.createClass({
     return(
       <Col xs={12} className="whitebox">
 
-      <Link to={"\/student" + lastCourse + "\/results"+ lastLab}>
+      <Link to={"\/student\/results\/" + lastCourse}>
         <Button className="navButtonSelected" block>{taskIcon} Lab 1</Button>
       </Link>
 
@@ -45,19 +45,19 @@ var StudentSideNav = React.createClass({
 
       <Col xs={12} className="navButtonDivider"><b>Course panel</b></Col>
 
-      <Link to={"\/student" + lastCourse + "\/members"}>
+      <Link to={"\/student\/members\/" + lastCourse}>
         <Button className="navButton" block>{userIcon} Members</Button>
       </Link>
 
-      <Link to={"\/student" + lastCourse + "\/groups"}>
+      <Link to={"\/student\/groups\/" + lastCourse}>
         <Button className="navButton" block>{groupIcon} Groups</Button>
       </Link>
 
-      <Link to={"\/student" + lastCourse + "\/settings"}>
+      <Link to={"\/student\/settings\/" + lastCourse}>
         <Button className="navButton" block>{settingsIcon} Settings Student</Button>
       </Link>
 
-      <Link to={"\/student" + lastCourse + "\/info"}>
+      <Link to={"\/student\/info\/" + lastCourse}>
       <Button className="navButton" block>{infoIcon} Course info</Button>
       </Link>
 

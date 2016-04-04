@@ -6,6 +6,7 @@ var AGDispatcher = require('../dispatcher/AGDispatcher');
 var AGConstants = require('../constants/AGConstants.js');
 
 var ActionTypes = AGConstants.ActionTypes;
+var CoursesAPIUtils = require("../utils/CoursesAPIUtils.js")
 
 // utils
 var CoursesUtils = require('../utils/CoursesUtils.js');
@@ -51,12 +52,18 @@ CoursesStore.dispachToken = AGDispatcher.register(function(action) {
 
     case ActionTypes.RECEIVE_RAW_COURSES:
       // var courses = CoursesUtils.convertRawCourses(action.rawCourses);
+      console.log(action.type);
       _newCourses(action.rawCourses);
       CoursesStore.emitChange();
       break;
     case ActionTypes.SWITCH_MODE:
+      if (_courses.length < 1 ) {
+        CoursesAPIUtils.getAllCourses();
+        break;
+      }
       var courses = CoursesUtils.convertRawCourses(_courses, action.mode);
       _navCourses = courses;
+      console.log(courses);
       CoursesStore.emitChange();
       break;
     default:

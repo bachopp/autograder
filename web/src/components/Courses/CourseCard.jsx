@@ -19,7 +19,7 @@ var CourseCard = React.createClass({
     var self = this;
     var course = this.props.course;
     var role = this.props.role;
-    var roleCourse =  role +"/"+ course.CourseName + "/results";
+    var roleCourse =  role +"/results/"+ course.CourseName;
     return(
       <div onClick={this.handleClick.bind(this, roleCourse)} >
       <Col xs={12} xsOffset={0} className="whitebox coursecardbutton" >

@@ -27,23 +27,23 @@ var TeacherSideNav = React.createClass({
     return(
       <Col xs={12} className="whitebox">
 
-        <Link to={"\/teacher" + lastCourse + "\/results"}>
+        <Link to={"\/teacher\/results/" + lastCourse}>
           <Button className="navButtonSelected" block>{resultsIcon} Results</Button>
         </Link>
 
-        <Link to={"\/teacher" + lastCourse + "\/groups"}>
+        <Link to={"\/teacher\/groups/" + lastCourse}>
           <Button className="navButton" block>{groupIcon} Group Manager</Button>
         </Link>
 
-        <Link to={"\/teacher" + lastCourse + "\/users"}>
+        <Link to={"\/teacher\/users\/" + lastCourse}>
           <Button className="navButton" block>{settingsIcon} User Manager</Button>
         </Link>
 
-        <Link to={"\/teacher" + lastCourse + "\/settings"}>
+        <Link to={"\/teacher\/settings\/" + lastCourse}>
           <Button className="navButton" block>{settingsIcon} Settings</Button>
         </Link>
 
-        <Link to={"\/teacher" + lastCourse + "\/info"}>
+        <Link to={"\/teacher\/info\/" + lastCourse}>
         <Button className="navButton" block>{infoIcon} Course info</Button>
         </Link>
 

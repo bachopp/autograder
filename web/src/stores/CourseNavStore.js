@@ -9,7 +9,7 @@ var ActionTypes = AGConstants.ActionTypes;
 
 var CHANGE_EVENT = 'change';
 
-var _usersCourses = {admin:["DAT100", "DAT200"], teacher:["DAT200", "DAT510", "DAT543","DAT204", "DAT134", "DAT541"], student: ["DAT120"]};
+var _links = [];
 
 var TopBarStore = assign({}, EventEmitter.prototype, {
 
