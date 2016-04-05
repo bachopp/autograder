@@ -1,6 +1,7 @@
 var TopBarAPIUtils = require("./TopBarAPIUtils");
 var TopBarServerActionCreators = require("../actions/TopBarServerActionCreators");
 var CoursesServerActionCreators = require("../actions/CoursesServerActionCreators");
+var CourseNavServerActionCreators = require("../actions/CourseNavServerActionCreators");
 
 var AGConstants = require("../constants/AGConstants");
 var ActionTypes = AGConstants.ActionTypes;
@@ -17,8 +18,10 @@ var Socket =  function() {
     switch(data.actionType) {
       case ActionTypes.RECEIVE_RAW_ROLES:
         TopBarServerActionCreators.receiveAll(data.payload.roles);
-        CoursesServerActionCreators.receiveAll(data.payload.roles)
+        CoursesServerActionCreators.receiveAll(data.payload.roles);
         break;
+      case ActionTypes.RECEIVE_COURSES_FOR_MODE:
+        CourseNavServerActionCreators.receiveModeCourses(data.payload.roles);
       default:
         // do nothing
     }

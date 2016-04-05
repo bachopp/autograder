@@ -5,8 +5,7 @@ var assign = require('object-assign');
 var AGDispatcher = require('../dispatcher/AGDispatcher');
 var AGConstants = require('../constants/AGConstants.js');
 
-var CoursesUtils = require('../utils/CoursesUtils.js');
-var CoursesStore = require('./CoursesStore.js');
+var CourseNavUtils = require('../utils/CoursesUtils.js');
 
 var ActionTypes = AGConstants.ActionTypes;
 
@@ -23,6 +22,7 @@ var CourseNavStore = assign({}, EventEmitter.prototype, {
   emitChange: function() {
     this.emit(CHANGE_EVENT);
   },
+
   addChangeListener: function(callback) {
     this.on(CHANGE_EVENT, callback);
   },
@@ -41,24 +41,31 @@ var CourseNavStore = assign({}, EventEmitter.prototype, {
   },
   getRole: function() {
     return _currentRole;
-  }
-});
+  },
 
+});
 
 CourseNavStore.dispatchToken = AGDispatcher.register(function(action) {
 
   switch(action.type) {
     // TODO: finish switch statement for different actions
 
-    case ActionTypes.SWITCH_MODE:
-      AGDispatcher.waitFor([CoursesStore.dispatchToken]);
-      var courses = CoursesUtils.convertRawCourses(CoursesStore.getAllCourses(), action.mode);
+    case ActionTypes.RECEIVE_COURSES_FOR_MODE:
+      var courses = CourseNavUtils.convertRawCourses(action.modeCourses, action.mode);
+
       _navCourses = courses;
       _currentRole = action.mode;
-      CoursesStore.emitChange();
+
+      CourseNavStore.emitChange();
+      break;
+    case ActionTypes.SWITCH_MODE:
+
       break;
     case ActionTypes.SWITCH_COURSE:
       // TODO: create constant, create action and call for actions in CourseNav!
+      break;
+    case ActionTypes.SWITCH_SIDE_NAV:
+      // TODO:
       break;
     default:
       // no action

@@ -12,21 +12,26 @@ var StudentSideNav = require("../components/StudentSideNav/StudentSideNav.jsx");
 var CourseNav = require("../components/CourseNav/CourseNav.jsx");
 var InfoBar = require("../components/InfoBar/InfoBar.jsx");
 
-
+// actions
+var TopBarActionCreators = require("../actions/TopBarActionCreators.js");
+// API
+var CourseNavAPI = require("../utils/CourseNavAPI.js");
 // stores
 var CourseNavStore = require("../stores/CourseNavStore.js");
 
-function getStateFromStores(mode) {
+function getStateFromStores() {
   return {
-    courses: CourseNavStore.getCoursesForMode(mode),
+    courses: CourseNavStore.getCoursesForMode(),
   };
 }
+
+const mode = "student";
 
 var StudentMode = React.createClass({
 
   getInitialState: function() {
-
-    return getStateFromStores("student");
+    CourseNavAPI.getCoursesForMode(mode);
+    return getStateFromStores();
   },
 
   componentDidMount: function() {
@@ -61,7 +66,7 @@ var StudentMode = React.createClass({
     );
   },
   _onChange: function() {
-    this.setState(getStateFromStores("student"));
+    this.setState(getStateFromStores());
   }
 });
 

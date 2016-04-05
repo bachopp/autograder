@@ -25,5 +25,8 @@ module.exports = {
     RECEIVE_USER_MODE_COURSES: null,
     SWITCH_MODE: null,
 
+    // CourseNav
+    RECEIVE_COURSES_FOR_MODE: null,
+
   })
 };

@@ -10,6 +10,9 @@ var Button = require("react-bootstrap").Button;
 // actions
 var TopBarActionCreators = require("../actions/TopBarActionCreators.js");
 
+// API
+var CourseNavAPI = require("../utils/CourseNavAPI.js");
+
 // local
 var TeacherSideNav = require("../components/TeacherSideNav/TeacherSideNav.jsx");
 var CourseNav = require("../components/CourseNav/CourseNav.jsx");
@@ -19,18 +22,18 @@ var InfoBar = require("../components/InfoBar/InfoBar.jsx");
 var CourseNavStore = require("../stores/CourseNavStore.js");
 var CoursesStore = require("../stores/CoursesStore.js");
 
+const mode = "teacher";
+
 function getStateFromStores() {
   return {
     courses: CourseNavStore.getCoursesForMode(),
   };
 }
 
-const mode = "teacher";
-
 var TeacherMode = React.createClass({
 
   getInitialState: function() {
-    TopBarActionCreators.receiveUserCourses(mode);
+    CourseNavAPI.getCoursesForMode(mode);
     return getStateFromStores();
   },
 

@@ -15,6 +15,8 @@ var ButtonGroup = require("react-bootstrap").ButtonGroup;
 var CoursesStore = require("../../stores/CoursesStore.js");
 var CourseNavStore = require("../../stores/CourseNavStore.js");
 
+var TopBarActionCreators = require("../../actions/TopBarActionCreators.js");
+
 function getStateFromStores() {
   return {
     role: CourseNavStore.getRole(),
@@ -22,6 +24,7 @@ function getStateFromStores() {
     activeCourse: CourseNavStore.getActiveCourse(),
   }
 }
+
 
 // local
 var CourseNav = React.createClass({
@@ -31,16 +34,18 @@ var CourseNav = React.createClass({
   },
 
   getInitialState: function() {
-    // Calls for initial data from server on first render cycle only.
+    // Calls for initial data from server on first render cycle only when mounted.
     return getStateFromStores();
   },
 
   componentDidMount: function() {
     CoursesStore.addChangeListener(this._onChange);
+    CourseNavStore.addChangeListener(this._onChange);
   },
 
   componentWillUnmount: function() {
     CoursesStore.removeChangeListener(this._onChange);
+    CourseNavStore.removeChangeListener(this._onChange);
   },
 
   handleClick: function(here) {
@@ -61,7 +66,7 @@ var CourseNav = React.createClass({
     var activeCourse = this.state.activeCourse.name;
 
     var size = Math.floor(12/courses.length);
-    var isActive = "" // courseactive
+    var isActive = ""; // courseactive
 
     return (
       <Row>

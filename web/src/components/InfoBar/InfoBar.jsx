@@ -46,12 +46,12 @@ var InfoBar = React.createClass({
     this.setTime();
   },
   componentDidMount: function(){
-     window.setInterval(function () {
-      this.setTime();
-    }.bind(this), 60000);
+    //  window.setInterval(function () {
+    //   this.setTime();
+    // }.bind(this), 60000);
   },
   componentWillUnmount: function() {
-    console.log("test");
+    // console.log("test");
   },
   render: function() {
 
@@ -59,7 +59,6 @@ var InfoBar = React.createClass({
       <div>
         <Col xs={6}><b>{this.props.infoType}</b></Col>
         <Col xs={6}><b>
-        {this.state.month}, {this.state.day} - {this.state.hours}:{this.state.minutes}
         </b></Col>
       </div>
     )
@@ -67,3 +66,4 @@ var InfoBar = React.createClass({
 });
 
 module.exports = InfoBar;
+// {this.state.month}, {this.state.day} - {this.state.hours}:{this.state.minutes}

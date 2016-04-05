@@ -46,7 +46,6 @@ CoursesStore.dispatchToken = AGDispatcher.register(function(action) {
     // TODO: finish switch statement for different actions
     case ActionTypes.RECEIVE_RAW_COURSES:
       _newCourses(action.rawCourses);
-      console.log(_courses);
       CoursesStore.emitChange();
       break;
     default:
