@@ -12,6 +12,8 @@ var Table = require("react-bootstrap").Table;
 var ProgressBar = require("react-bootstrap").ProgressBar;
 
 
+var LabViewStore = require("../../stores/LabViewStore.js");
+
 var Statusbar = require("./Statusbar.jsx");
 var Buildlog = require("./Buildlog.jsx");
 
@@ -29,18 +31,41 @@ var theLog = [
 
 
 var Labview = React.createClass({
+  _getSelectedLabFromStore: function() {
+    return {
+      lab: LabViewStore.getSelectedStudentLab()
+    }
+  },
+  _onChange: function() {
+    this.setState(this._getSelectedLabFromStore);
+  },
   getInitialState: function() {
-    return null
+    return this._getSelectedLabFromStore()
+  },
+  componentDidMount: function() {
+    LabViewStore.addChangeListener(this._onChange);
   },
   componentWillUnmount: function() {
+    LabViewStore.removeChangeListener(this._onChange);
   },
   render: function() {
     const successIcon = <i className="fa fa-check fa-fw"></i>;
+    const dangerIcon = <i className="fa fa-times fa-fw"></i>;
+    var theLab = this.state.lab;
+
+    console.log(theLab.approved);
+
+    if(theLab.approved) {
+      labApproval = <Alert bsStyle="success">{successIcon} Approved</Alert>;
+    } else {
+      labApproval = <Alert bsStyle="danger">{dangerIcon} Not approved</Alert>;
+    }
+
     return(
       <Col>
-        <h3>Lab 1 - Ola Nordmann</h3>
-        <Statusbar percent={65}/>
-        <Alert bsStyle="success">{successIcon} Approved</Alert>
+        <h3>{theLab.title} - Ola Nordmann</h3>
+        <Statusbar percent={theLab.percent}/>
+        {labApproval}
         <Col className="bottomPadding">
           <ButtonToolbar>
             <Button bsStyle="danger">Remove approval</Button>
@@ -48,7 +73,7 @@ var Labview = React.createClass({
           </ButtonToolbar>
         </Col>
         <Col>
-          <Buildlog log={theLog}/>
+          <Buildlog log={theLab.log}/>
         </Col>
       </Col>
     );
