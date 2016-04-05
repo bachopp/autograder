@@ -13,8 +13,9 @@ import (
 
 // Constants for communication through websocket
 const (
-	ReceiveRawCourses = "RECEIVE_RAW_COURSES"
-	ReceiveRawRoles   = "RECEIVE_RAW_ROLES"
+	ReceiveRawCourses     = "RECEIVE_RAW_COURSES"
+	ReceiveRawRoles       = "RECEIVE_RAW_ROLES"
+	ReceiveCoursesForMode = "RECEIVE_COURSES_FOR_MODE"
 )
 
 var webroot = "/var/www/autograder/web/public"
@@ -65,19 +66,17 @@ func handleRequest(socket *websocket.Conn) {
 				log.Fatal(err)
 			}
 			socket.WriteMessage(msgType, resp)
-		case "centerWrapper":
-			//TODO: Handle centerwrapper
-			return
-		case "leftWrapper":
-			//TODO: Handle leftwrapper
-			return
-		case "rightWrapper":
-			//TODO: Handle rightwrapper
-			return
-		case "loginform":
-			// TODO: fix test
-			fmt.Printf("user : %s logged in!", "test")
-			socket.WriteMessage(msgType, []byte("logged in"))
+		case ReceiveCoursesForMode:
+			dbresponse := database.GetUserRoles(payload["username"].(string))
+			fmt.Println(dbresponse["admin"])
+			response := jsonify.Request{ActionType: actionType, Payload: dbresponse}
+			resp, err := jsonify.Unstructify(response)
+			if err != nil {
+				log.Fatal(err)
+			}
+			socket.WriteMessage(msgType, resp)
+		default:
+			//no op
 		}
 	}
 }

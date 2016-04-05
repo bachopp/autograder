@@ -14,9 +14,9 @@ type Role struct {
 }
 
 // Roles wraps all the roles to send as json through websocket
-type Roles struct {
-	Roles []Role `json:"roles"`
-}
+// type Roles struct {
+// 	Roles []Role `json:"roles"`
+// }
 
 // InsertTestUser inserts test user
 func InsertTestUser(github string) {
@@ -148,7 +148,7 @@ func makeUpdate(username string, role Role) {
 }
 
 // GetUserRoles returns Roles
-func GetUserRoles(username string) Roles {
+func GetUserRoles(username string) []Role {
 	connectDb()
 	defer con.Close()
 	//TODO: Return roles of user from database as Roles
@@ -157,7 +157,7 @@ func GetUserRoles(username string) Roles {
 		log.Fatal(err)
 	}
 
-	roles := make([]Role, 0, 3)
+	roles := make(map[string][]Role)
 	modes := []string{"admin", "teacher", "student"}
 	crses := make([]courses, 0, 32)
 	var course string
@@ -191,11 +191,11 @@ func GetUserRoles(username string) Roles {
 		role := Role{mode, crses}
 		// if rows is empty there is no courses associated with mode, therefore no append
 		if len(crses) > 0 {
-			roles = append(roles, role)
+			roles[mode] = role
 		}
 		crses = nil
 	}
-	rls := Roles{roles}
+	rls := roles
 	// TODO: Combine result to one slice size <= 3
 	return rls
 }
