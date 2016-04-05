@@ -16,12 +16,13 @@ var StudentRow = React.createClass({
   render: function() {
     var student = this.state.student;
     var labs = student.labs;
+    var studentId = student.id;
     return(
       <tr>
         <td>{student.firstName} {student.lastName}</td>
         <td>{student.slipDays}</td>
         {labs.map(function(lab,index){
-          return <StudentElement key={"studentElement" + index} text={lab.percent}/>
+          return <StudentElement key={"studentElement" + index} studentId={studentId} lab={lab}/>
         })}
       </tr>
     );

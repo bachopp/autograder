@@ -28,5 +28,6 @@ module.exports = {
     // Teacher lab view Actions (teacher can view all students and their labs):
     RECEIVE_RAW_STUDENTLABS: null,
     RECEIVE_SELECTED_LAB: null,
+    SET_SELECTED_STUDENTLAB: null,
   })
 };
