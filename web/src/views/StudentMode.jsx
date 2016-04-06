@@ -22,6 +22,8 @@ var CourseNavStore = require("../stores/CourseNavStore.js");
 function getStateFromStores() {
   return {
     courses: CourseNavStore.getCoursesForMode(),
+    currentCourse: CourseNavStore.getActiveCourse(),
+    lastCourse: CourseNavStore.getActiveCourse(),
   };
 }
 
@@ -45,18 +47,21 @@ var StudentMode = React.createClass({
   render: function() {
     var self = this;
     var courses = this.state.courses;
+    var infoType = "Student " + this.state.currentCourse;
+    var lastCourse = this.state.lastCourse;
+    
     return(
       <Row>
         <Col xs={2}>
-          <StudentSideNav/>
+          <StudentSideNav lastCourse={lastCourse}/>
         </Col>
         <Col xs={10}>
           <Col xs={12}>
               <Col xs={7}>
-                <CourseNav courses={courses}/>
+                <CourseNav courses={courses} mode={mode}/>
               </Col>
               <Col xs={5} className="infoboxright">
-                <InfoBar infoType="Student DAT100"/>
+                <InfoBar infoType={infoType}/>
               </Col>
           </Col>
 

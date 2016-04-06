@@ -28,5 +28,8 @@ module.exports = {
     // CourseNav
     RECEIVE_COURSES_FOR_MODE: null,
 
+    // SideNav
+    SWITCH_SIDE_NAV: null,
+
   })
 };

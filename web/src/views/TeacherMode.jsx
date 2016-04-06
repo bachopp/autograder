@@ -21,12 +21,15 @@ var InfoBar = require("../components/InfoBar/InfoBar.jsx");
 // stores
 var CourseNavStore = require("../stores/CourseNavStore.js");
 var CoursesStore = require("../stores/CoursesStore.js");
+var SideNavStore = require("../stores/SideNavStore.js");
 
 const mode = "teacher";
 
 function getStateFromStores() {
   return {
     courses: CourseNavStore.getCoursesForMode(),
+    currentCourse: CourseNavStore.getActiveCourse(),
+    lastCourse: CourseNavStore.getActiveCourse(),
   };
 }
 
@@ -39,27 +42,32 @@ var TeacherMode = React.createClass({
 
   componentDidMount: function() {
     CourseNavStore.addChangeListener(this._onChange);
+    SideNavStore.addChangeListener(this._onChange);
   },
 
   componentWillUnmount: function() {
     CourseNavStore.removeChangeListener(this._onChange);
+    SideNavStore.removeChangeListener(this._onChange);
   },
 
   render: function() {
     var self = this;
     var courses = this.state.courses;
+    var infoType = "Teacher " + this.state.currentCourse;
+    var activeElement = this.state.activeElement;
+    var lastCourse = this.state.lastCourse;
     return(
       <Row>
         <Col xs={2}>
-          <TeacherSideNav/>
+          <TeacherSideNav lastCourse={lastCourse}/>
         </Col>
         <Col xs={10}>
           <Col xs={12}>
               <Col xs={7}>
-                <CourseNav courses={courses}/>
+                <CourseNav courses={courses} mode={mode}/>
               </Col>
               <Col xs={5} className="infoboxright">
-                <InfoBar infoType="Teacher DAT100"/>
+                <InfoBar infoType={infoType}/>
               </Col>
           </Col>
 

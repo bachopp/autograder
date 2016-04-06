@@ -49,8 +49,9 @@ func handleRequest(socket *websocket.Conn) {
 		switch actionType {
 		case ReceiveRawRoles:
 
-			payload := database.GetUserRoles(payload["username"].(string))
-			response := jsonify.Request{ActionType: actionType, Payload: payload}
+			dbresponse := database.GetUserRoles(payload["username"].(string))
+
+			response := jsonify.Request{ActionType: actionType, Payload: dbresponse}
 
 			resp, err := jsonify.Unstructify(response)
 			if err != nil {
@@ -58,8 +59,8 @@ func handleRequest(socket *websocket.Conn) {
 			}
 			socket.WriteMessage(msgType, resp)
 		case ReceiveRawCourses:
-			payload := database.GetUserRoles(payload["username"].(string))
-			response := jsonify.Request{ActionType: actionType, Payload: payload}
+			dbresponse := database.GetUserRoles(payload["username"].(string))
+			response := jsonify.Request{ActionType: actionType, Payload: dbresponse}
 
 			resp, err := jsonify.Unstructify(response)
 			if err != nil {
@@ -68,8 +69,8 @@ func handleRequest(socket *websocket.Conn) {
 			socket.WriteMessage(msgType, resp)
 		case ReceiveCoursesForMode:
 			dbresponse := database.GetUserRoles(payload["username"].(string))
-			fmt.Println(dbresponse["admin"])
-			response := jsonify.Request{ActionType: actionType, Payload: dbresponse}
+			moderesponse := dbresponse[payload["mode"].(string)]
+			response := jsonify.Request{ActionType: actionType, Payload: moderesponse}
 			resp, err := jsonify.Unstructify(response)
 			if err != nil {
 				log.Fatal(err)

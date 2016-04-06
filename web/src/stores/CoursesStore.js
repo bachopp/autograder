@@ -15,7 +15,7 @@ var CHANGE_EVENT = 'change';
 
 // this is temporary the same as TopBarStore, but will incorporate more Courses
 // like course description and number of students
-var _courses = [];
+var _courses = {};
 
 function _newCourses(newCourses) {
   _courses = newCourses;

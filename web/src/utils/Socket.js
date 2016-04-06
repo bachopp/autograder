@@ -17,11 +17,11 @@ var Socket =  function() {
 
     switch(data.actionType) {
       case ActionTypes.RECEIVE_RAW_ROLES:
-        TopBarServerActionCreators.receiveAll(data.payload.roles);
-        CoursesServerActionCreators.receiveAll(data.payload.roles);
+        TopBarServerActionCreators.receiveAll(data.payload);
+        CoursesServerActionCreators.receiveAll(data.payload);
         break;
       case ActionTypes.RECEIVE_COURSES_FOR_MODE:
-        CourseNavServerActionCreators.receiveModeCourses(data.payload.roles);
+        CourseNavServerActionCreators.receiveModeCourses(data.payload);
       default:
         // do nothing
     }

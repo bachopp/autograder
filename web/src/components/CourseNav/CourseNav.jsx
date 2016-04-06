@@ -14,13 +14,14 @@ var ButtonGroup = require("react-bootstrap").ButtonGroup;
 // local requires
 var CoursesStore = require("../../stores/CoursesStore.js");
 var CourseNavStore = require("../../stores/CourseNavStore.js");
+var SideNavStore = require("../../stores/SideNavStore.js");
 
 var TopBarActionCreators = require("../../actions/TopBarActionCreators.js");
+var CourseNavActionCreators = require("../../actions/CourseNavActionCreators.js");
 
 function getStateFromStores() {
   return {
-    role: CourseNavStore.getRole(),
-    sidenav: CourseNavStore.getCurrentSideNav(),
+    sidenav: SideNavStore.getActiveElement(),
     activeCourse: CourseNavStore.getActiveCourse(),
   }
 }
@@ -31,6 +32,7 @@ var CourseNav = React.createClass({
 
   propTypes: {
     courses: React.PropTypes.array.isRequired,
+    mode: React.PropTypes.string.isRequired,
   },
 
   getInitialState: function() {
@@ -39,30 +41,28 @@ var CourseNav = React.createClass({
   },
 
   componentDidMount: function() {
-    CoursesStore.addChangeListener(this._onChange);
     CourseNavStore.addChangeListener(this._onChange);
+    SideNavStore.addChangeListener(this._onChange);
   },
 
   componentWillUnmount: function() {
-    CoursesStore.removeChangeListener(this._onChange);
     CourseNavStore.removeChangeListener(this._onChange);
+    SideNavStore.removeChangeListener(this._onChange);
   },
 
-  handleClick: function(here) {
-    browserHistory.push(here);
-  },
-
-  componentDidMount: function() {
-    var a = this.props;
+  handleClick: function(url, course) {
+    CourseNavActionCreators.changeActiveCourse(course);
+    browserHistory.push(url);
   },
 
   render: function() {
     var self = this;
 
     var courses = this.props.courses;
+    var mode = this.props.mode;
 
-    var role = this.state.role;
     var sidenav = this.state.sidenav;
+    console.log(this.state);
     var activeCourse = this.state.activeCourse.name;
 
     var size = Math.floor(12/courses.length);
@@ -74,12 +74,12 @@ var CourseNav = React.createClass({
       {
         courses.map(function(course) {
           var classes = "buttonyfy infoboxleft " + isActive;
-          var url = "\/" + role + sidenav + "/" + course
+          var url = "\/" + mode + "\/" + sidenav + "/" + course
           return (
             <Col
             xs={size}
             key={course}
-            onClick={self.handleClick.bind(self, url)}
+            onClick={self.handleClick.bind(self, url, course)}
             className={classes}
             >
                 {course}

@@ -148,7 +148,7 @@ func makeUpdate(username string, role Role) {
 }
 
 // GetUserRoles returns Roles
-func GetUserRoles(username string) []Role {
+func GetUserRoles(username string) map[string]Role {
 	connectDb()
 	defer con.Close()
 	//TODO: Return roles of user from database as Roles
@@ -157,7 +157,7 @@ func GetUserRoles(username string) []Role {
 		log.Fatal(err)
 	}
 
-	roles := make(map[string][]Role)
+	roles := make(map[string]Role)
 	modes := []string{"admin", "teacher", "student"}
 	crses := make([]courses, 0, 32)
 	var course string

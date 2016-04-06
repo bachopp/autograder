@@ -1,14 +1,10 @@
 module.exports = {
   // TODO: These are used in stores to convert received data from API to whatever we need
-  convertRawCourses: function(rawCourses, mode) {
+  convertRawCourses: function(rawCourses) {
     var courses = [];
-    rawCourses.forEach(function(course) {
-      if (course.Mode === mode) {
-        course.Courses.forEach(function(str){
-          courses.push(str.CourseName);
-        });
-      }
-    });
+    for (var i = 0; i < rawCourses.length; i++) {
+      courses.push(rawCourses[i].CourseName);
+    }
     return courses;
   },
 };
