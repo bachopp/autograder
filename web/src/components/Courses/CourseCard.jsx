@@ -22,9 +22,9 @@ var CourseCard = React.createClass({
     var roleCourse =  role +"/results/"+ course.CourseName;
     return(
       <div onClick={this.handleClick.bind(this, roleCourse)} >
-      <Col xs={12} xsOffset={0} className="whitebox coursecardbutton" >
-        <h4>{course.CourseName}</h4>
-        <p>
+      <Col xs={12} xsOffset={0} className="whitebox whiteboxWithHover coursecardbutton" >
+        <h4 className="colouredHeader">{course.CourseName}</h4>
+        <p className="fadedText">
           Course ID: <b>{course.Courseid}</b><br/>
           Dummy desciption and status
           <br/>

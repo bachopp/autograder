@@ -12,7 +12,7 @@ var Buildlog = React.createClass({
       <Well className="buildLog">
         {this.state.log.map(function(entry, index) {
           return(
-            <p key={"point" + index}>{entry.id}. {entry.text}</p>
+            <p key={"point" + index}>{entry}</p>
           );
         })}
       </Well>

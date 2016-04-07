@@ -25,5 +25,10 @@ module.exports = {
     RECEIVE_USER_MODE_COURSES: null,
     SWITCH_MODE: null,
 
+    // Teacher lab view Actions (teacher can view all students and their labs):
+    RECEIVE_RAW_STUDENTLABS: null,
+    RECEIVE_SELECTED_LAB: null,
+    SET_SELECTED_STUDENTLAB: null,
+    TOGGLE_APPROVAL_STUDENTLAB: null,
   })
 };
