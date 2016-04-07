@@ -67,7 +67,6 @@ var CourseNav = React.createClass({
 
     var size = Math.floor(12/courses.length);
     var active = this.state.activeCourse; // courseactive
-
     return (
       <Row>
       <ButtonGroup justified>

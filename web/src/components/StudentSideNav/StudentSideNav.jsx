@@ -41,7 +41,7 @@ var StudentSideNav = React.createClass({
       <Col xs={12} className="whitebox">
 
       <Link to={"\/student\/results\/" + lastCourse}>
-        <Button onClick={self.handleClick.bind(self,"results")} className="navButtonSelected" block>{taskIcon} Lab 1</Button>
+        <Button onClick={self.handleClick.bind(self,"results")} className="navButton" block>{taskIcon} Lab 1</Button>
       </Link>
 
         <Button className="navButton" disabled block>{taskIcon} Lab 2</Button>

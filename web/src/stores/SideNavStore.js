@@ -11,7 +11,6 @@ var CHANGE_EVENT = 'change';
 var _activeElement = '';
 var _sideElements = [];
 
-
 var SideNavStore = assign({}, EventEmitter.prototype, {
 
   emitChange: function() {

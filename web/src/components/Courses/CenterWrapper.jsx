@@ -16,7 +16,6 @@ var CenterWrapper = React.createClass({
     for (var key in roles) {
       array.push(roles[key]);
     }
-    console.log(array);
     return (
       <div>
         {array.map(function(role){
