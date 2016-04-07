@@ -4,22 +4,14 @@ var assign = require('object-assign');
 // local
 var AGDispatcher = require('../dispatcher/AGDispatcher');
 var AGConstants = require('../constants/AGConstants.js');
-
-var TopBarUtils = require('../utils/TopBarUtils');
 var ActionTypes = AGConstants.ActionTypes;
 
 var CHANGE_EVENT = 'change';
 
-var _roles = [];
-var _activeRole = '';
+var _activeElement = '';
+var _sideElements = [];
 
-function _addRoles(rawRoles) {
-  for (var key in rawRoles) {
-    _roles.push(rawRoles[key]);
-  }
-}
-
-var TopBarStore = assign({}, EventEmitter.prototype, {
+var SideNavStore = assign({}, EventEmitter.prototype, {
 
   emitChange: function() {
     this.emit(CHANGE_EVENT);
@@ -33,27 +25,24 @@ var TopBarStore = assign({}, EventEmitter.prototype, {
     this.removeListener(CHANGE_EVENT, callback);
   },
 
-  getAllRoles: function() {
-    return _roles;
-  },
-  getActiveRole: function() {
-    return _activeRole;
+  getActiveElement: function() {
+    return _activeElement;
   }
+
 });
 
 
-TopBarStore.dispachToken = AGDispatcher.register(function(action) {
+SideNavStore.dispachToken = AGDispatcher.register(function(action) {
 
   switch(action.type) {
     // TODO: finish switch statement for different actions
 
-     case ActionTypes.RECEIVE_RAW_ROLES:
-      _addRoles(action.rawRoles);
-      TopBarStore.emitChange();
+     case ActionTypes.SWITCH_MODE:
+      console.log(action.type + " from SideNavStore");
       break;
-    case ActionTypes.SWITCH_MODE:
-      _activeRole = action.mode;
-      TopBarStore.emitChange();
+     case ActionTypes.SWITCH_SIDE_NAV:
+      _activeElement = action.element;
+      SideNavStore.emitChange();
       break;
      default:
      // no action
@@ -61,4 +50,4 @@ TopBarStore.dispachToken = AGDispatcher.register(function(action) {
 
 });
 
-module.exports = TopBarStore;
+module.exports = SideNavStore;

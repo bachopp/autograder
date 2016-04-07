@@ -8,11 +8,11 @@ var Socket = require("./Socket.js");
 
 module.exports = {
   // TODO:  remove waifFor when it's fixed
-  // TODO:  structurize payload better
+  // TODO:  call for more data, like course description
   getAllCourses: function() {
     Socket.waitForSocketConnection(Socket.ws, function() {
-      var payload = RequestAPI.send(ActionTypes.RECEIVE_RAW_COURSES, {"username": "thomas"});
-      Socket.ws.send(payload);
+      // var payload = RequestAPI.send(ActionTypes.RECEIVE_RAW_COURSES, {"username": "thomas"});
+      // Socket.ws.send(payload);
     });
   }
 };

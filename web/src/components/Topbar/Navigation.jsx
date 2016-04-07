@@ -15,27 +15,33 @@ var TopBarActionCreators = require("../../actions/TopBarActionCreators.js");
 var Navigation = React.createClass({
   propTypes: {
     roles: React.PropTypes.array.isRequired,
+    activeRole: React.PropTypes.string.isRequired,
   },
 
   handleClick: function(mode) {
-    console.log("animate click " + mode);
     TopBarActionCreators.receiveUserCourses(mode);
   },
 
   render:function() {
     var self = this;
     var roles = this.props.roles;
+    var activeRole = this.props.activeRole;
 
     var lastCourse = "";
     var defaultPage = "";
     // change last course to get DB
+    var isActive = "";
     var i = 0;
     return(
       <Nav>
         {roles.map(function(role) {
+          if (activeRole === role.Mode) {
+            isActive = "buttonyfy buttonactive";
+          } else {
+            isActive = "buttonyfy";
+          }
           i++;
           var modeLink = "/";
-
           switch (role.Mode) {
             case "admin":
               modeLink += "admin";
@@ -46,7 +52,7 @@ var Navigation = React.createClass({
               modeLink += role.Mode + defaultPage + lastCourse;
               break;
             case "student":
-              lastCourse = "/DAT100";
+              lastCourse = "/DAT220";
               lastLab = "/lab1id";
               defaultPage = "/results";
               modeLink += role.Mode + defaultPage + lastCourse;
@@ -56,7 +62,7 @@ var Navigation = React.createClass({
           }
 
           return(
-            <li key={i} onClick={self.handleClick.bind(self, role.Mode)}>
+            <li className={isActive} key={i} onClick={self.handleClick.bind(self, role.Mode)}>
               <Link to={modeLink}>{role.Mode}</Link>
             </li>
           );

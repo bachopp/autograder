@@ -10,49 +10,67 @@ var Button = require("react-bootstrap").Button;
 // actions
 var TopBarActionCreators = require("../actions/TopBarActionCreators.js");
 
+// API
+var CourseNavAPI = require("../utils/CourseNavAPI.js");
+
 // local
 var TeacherSideNav = require("../components/TeacherSideNav/TeacherSideNav.jsx");
 var CourseNav = require("../components/CourseNav/CourseNav.jsx");
+var InfoBar = require("../components/InfoBar/InfoBar.jsx");
 
 // stores
+var CourseNavStore = require("../stores/CourseNavStore.js");
 var CoursesStore = require("../stores/CoursesStore.js");
+var SideNavStore = require("../stores/SideNavStore.js");
+
+const mode = "teacher";
 
 function getStateFromStores() {
   return {
-    courses: CoursesStore.getCoursesForMode(),
+    courses: CourseNavStore.getCoursesForMode(),
+    currentCourse: CourseNavStore.getActiveCourse(),
+    lastCourse: CourseNavStore.getActiveCourse(),
+    activeElement: SideNavStore.getActiveElement(),
   };
 }
 
 var TeacherMode = React.createClass({
 
   getInitialState: function() {
+    CourseNavAPI.getCoursesForMode(mode);
     return getStateFromStores();
   },
 
   componentDidMount: function() {
-    CoursesStore.addChangeListener(this._onChange);
+    CourseNavStore.addChangeListener(this._onChange);
+    SideNavStore.addChangeListener(this._onChange);
+
+    TopBarActionCreators.receiveUserCourses(mode);
   },
 
   componentWillUnmount: function() {
-    CoursesStore.removeChangeListener(this._onChange);
+    CourseNavStore.removeChangeListener(this._onChange);
+    SideNavStore.removeChangeListener(this._onChange);
   },
 
   render: function() {
     var self = this;
     var courses = this.state.courses;
+    var infoType = "Teacher " + this.state.currentCourse;
+    var activeElement = this.state.activeElement;
+    var lastCourse = this.state.lastCourse;
     return(
       <Row>
         <Col xs={2}>
-          <TeacherSideNav/>
+          <TeacherSideNav lastCourse={lastCourse} activeElement={activeElement}/>
         </Col>
         <Col xs={10}>
           <Col xs={12}>
               <Col xs={7}>
-                <CourseNav courses={courses}/>
+                <CourseNav courses={courses} mode={mode}/>
               </Col>
               <Col xs={5} className="infoboxright">
-                <Col xs={6}><b>Teacher DAT100</b></Col>
-                <Col xs={6}><b>Mar 29, 12:21</b></Col>
+                <InfoBar infoType={infoType}/>
               </Col>
           </Col>
 

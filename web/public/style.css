@@ -302,10 +302,13 @@ color: white; /*Change active text color here*/
 	cursor: pointer;
 }
 .buttonyfy:hover {
-	background-color: #f2f2f2;
+	box-shadow: inset 0px 0px 40px 40px rgba(0,0,0,0.05);
 }
-.courseactive {
-	background-color: #f2f2f2;
+.buttonactive {
+	box-shadow: inset 0px 0px 40px 40px rgba(0,0,0,0.2);
+}
+.buttonactive:hover {
+	box-shadow: inset 0px 0px 40px 40px rgba(0,0,0,0.2);
 }
 
 .coursecardbutton {

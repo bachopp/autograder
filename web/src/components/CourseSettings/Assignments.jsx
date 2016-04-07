@@ -31,8 +31,8 @@ var Assignments = React.createClass({
 
 						{/* the labs are mapped info got from store -> db */}
 							<Panel header="Lab 1" eventKey="1">
-								<Input type="text" label="Folder name lab 1" />
-								<Input type="text" label="Deadline lab 1" />
+								<Input type="text" label="Folder name" />
+								<Input type="text" label="Deadline" />
 								<Dropdown id="dropdown-custom-2">
 						      <Button bsStyle="info">
 						        Primary language lab 1
@@ -59,8 +59,8 @@ var Assignments = React.createClass({
 
 						{/* the labs are mapped info got from store -> db */}
 							<Panel header="Lab 1" eventKey="1">
-								<Input type="text" label="Folder name lab 1" />
-								<Input type="text" label="Deadline lab 1" />
+								<Input type="text" label="Folder name" />
+								<Input type="text" label="Deadline" />
 								<Dropdown id="dropdown-custom-2">
 									<Button bsStyle="info">
 										Primary language lab 1

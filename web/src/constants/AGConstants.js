@@ -30,5 +30,12 @@ module.exports = {
     RECEIVE_SELECTED_LAB: null,
     SET_SELECTED_STUDENTLAB: null,
     TOGGLE_APPROVAL_STUDENTLAB: null,
+    
+    // CourseNav
+    RECEIVE_COURSES_FOR_MODE: null,
+
+    // SideNav
+    SWITCH_SIDE_NAV: null,
+
   })
 };

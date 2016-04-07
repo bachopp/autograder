@@ -18,6 +18,7 @@ var TopBarAPIUtils = require("../../utils/TopBarAPIUtils");
 function getStateFromStores() {
   return {
     roles: TopBarStore.getAllRoles(),
+    activeRole: TopBarStore.getActiveRole(),
   };
 }
 
@@ -40,7 +41,7 @@ var Topbar = React.createClass({
   // TODO : iterate over buttons available fo user
   render:function() {
     var self = this;
-    
+    var activeRole = this.state.activeRole;
     return (
       <Navbar className="myNavbar">
         <Navbar.Header>
@@ -51,7 +52,7 @@ var Topbar = React.createClass({
         </Navbar.Header>
 
         <Navbar.Collapse>
-            <Navigation roles={self.state.roles}/>
+            <Navigation roles={self.state.roles} activeRole={activeRole}/>
           <Nav pullRight>
             <li>
               <Link to="/courses">Courses</Link>

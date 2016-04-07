@@ -10,47 +10,59 @@ var Button = require("react-bootstrap").Button;
 // local
 var StudentSideNav = require("../components/StudentSideNav/StudentSideNav.jsx");
 var CourseNav = require("../components/CourseNav/CourseNav.jsx");
+var InfoBar = require("../components/InfoBar/InfoBar.jsx");
 
+// actions
+var TopBarActionCreators = require("../actions/TopBarActionCreators.js");
+// API
+var CourseNavAPI = require("../utils/CourseNavAPI.js");
 // stores
-var CoursesStore = require("../stores/CoursesStore.js");
+var CourseNavStore = require("../stores/CourseNavStore.js");
 
-function getStateFromStores(mode) {
+function getStateFromStores() {
   return {
-    courses: CoursesStore.getCoursesForMode(mode),
+    courses: CourseNavStore.getCoursesForMode(),
+    currentCourse: CourseNavStore.getActiveCourse(),
+    lastCourse: CourseNavStore.getActiveCourse(),
   };
 }
+
+const mode = "student";
 
 var StudentMode = React.createClass({
 
   getInitialState: function() {
-
-    return getStateFromStores("student");
+    CourseNavAPI.getCoursesForMode(mode);
+    return getStateFromStores();
   },
 
   componentDidMount: function() {
-    CoursesStore.addChangeListener(this._onChange);
+    CourseNavStore.addChangeListener(this._onChange);
+    TopBarActionCreators.receiveUserCourses(mode);
   },
 
   componentWillUnmount: function() {
-    CoursesStore.removeChangeListener(this._onChange);
+    CourseNavStore.removeChangeListener(this._onChange);
   },
 
   render: function() {
     var self = this;
     var courses = this.state.courses;
+    var infoType = "Student " + this.state.currentCourse;
+    var lastCourse = this.state.lastCourse;
+
     return(
       <Row>
         <Col xs={2}>
-          <StudentSideNav/>
+          <StudentSideNav lastCourse={lastCourse}/>
         </Col>
         <Col xs={10}>
           <Col xs={12}>
               <Col xs={7}>
-                <CourseNav courses={courses}/>
+                <CourseNav courses={courses} mode={mode}/>
               </Col>
               <Col xs={5} className="infoboxright">
-                <Col xs={6}><b>Student DAT100</b></Col>
-                <Col xs={6}><b>Mar 29, 12:21</b></Col>
+                <InfoBar infoType={infoType}/>
               </Col>
           </Col>
 
@@ -60,7 +72,7 @@ var StudentMode = React.createClass({
     );
   },
   _onChange: function() {
-    this.setState(getStateFromStores("student"));
+    this.setState(getStateFromStores());
   }
 });
 
