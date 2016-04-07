@@ -11,7 +11,6 @@ var LabViewCourseActions = require("../../actions/LabViewCourseActions.js");
 
 var StudentRow = require("./StudentRow.jsx");
 
-
 var PropTypes = React.PropTypes;
 var StudentResultsList = React.createClass({
   PropTypes: {
@@ -21,7 +20,7 @@ var StudentResultsList = React.createClass({
   _getStudentsFromStore: function() {
     return {
       students: LabViewStore.getStudentLabs(),
-      classLabView: LabViewStore.getSelectedStudentLabIndex(),
+      indexesFromStore: LabViewStore.getSelectedStudentLabIndex(),
     }
   },
   _handleClick: function() {
@@ -43,6 +42,9 @@ var StudentResultsList = React.createClass({
   const innerSearch = <Glyphicon glyph="search"/>;
   var students = this.state.students;
   var self = this;
+
+  var _selectedIndexes = this.state.indexesFromStore;
+
   return(
       <Col>
         <Col xs={12}>
@@ -69,7 +71,13 @@ var StudentResultsList = React.createClass({
             <tbody>
 
               {students.map(function(student,index) {
-                return <StudentRow key={"studentRow" + index} student={student}/>
+                // the current row has the selected student lab
+
+                if(student.id == _selectedIndexes.studentIndex) {
+                  return <StudentRow key={"studentRow" + index} selected={_selectedIndexes} student={student}/>
+                } else {
+                  return <StudentRow key={"studentRow" + index} selected={null} student={student}/>
+                }
               },this)}
             </tbody>
           </Table>

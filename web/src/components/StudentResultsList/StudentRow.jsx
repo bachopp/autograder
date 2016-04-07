@@ -7,7 +7,8 @@ var StudentElement = require("./StudentElement.jsx");
 
 var StudentRow = React.createClass({
   PropTypes: {
-    student: PropTypes.object
+    student: PropTypes.object.isRequired,
+    selected: PropTypes.object.isRequired,
   },
   getInitialState: function() {
     return {
@@ -16,27 +17,26 @@ var StudentRow = React.createClass({
       selectedLab: this.props.selectedLab,
     }
   },
-  handleClick: function(labIndex) {
+  handleClick: function(index) {
+    console.log(index);
+
     _studentIndex = this.state.student.id;
-    _labIndex = labIndex;
+    _labIndex = index;
     LabViewCourseActions.setSelectedStudentLab(_studentIndex,_labIndex);
   },
   render: function() {
+
     var student = this.state.student;
     var labs = student.labs;
-    var studentId = student.id;
 
-    // the current element is the selected one
-    if(!this.state.selectedLab) {
-
-    }
     return(
       <tr>
         <td>{student.firstName} {student.lastName}</td>
         <td>{student.slipDays}</td>
         {labs.map(function(lab,index){
           var boundClick = this.handleClick.bind(null,index);
-          return <StudentElement class={"hello"} onClick={boundClick} key={"studentElement" + index} studentId={studentId} lab={lab}/>
+          console.log("hello");
+          return <StudentElement class={"hello"} onClick={boundClick} key={"studentElement" + index} lab={lab}/>
         },this)}
       </tr>
     );
