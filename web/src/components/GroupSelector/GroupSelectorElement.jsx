@@ -20,6 +20,7 @@ var GroupSelectorElement = React.createClass({
     group: React.PropTypes.object.isRequired,
     activeGroup: React.PropTypes.bool,
     removeUser: React.PropTypes.func.isRequired,
+    groupClass: React.PropTypes.string.isRequired,
   },
 
   getInitialState: function() {
@@ -44,7 +45,7 @@ var GroupSelectorElement = React.createClass({
       {
         users.map(function(user) {
           return (
-            <Panel className="userelementbutton" block  key={user.studentNumber}>
+            <Panel className="groupelement" block  key={user.studentNumber}>
               <Row>
                 <Col xs={10}>
                   {user.firstName} {user.studentNumber}

@@ -234,22 +234,6 @@ color: white; /*Change active text color here*/
 /*
 	components/GroupSelector
 */
-.groupelementbutton {
-	background-color: #e5e5e5;
-	cursor: pointer;
-	margin-top: 10px;
-	box-shadow: none;
-}
-.groupelementbutton:hover {
-	background-color: #e5e5e0;
-}
-.groupelement {
-	/*border: solid white 1px;*/
-	box-shadow: none;
-	background-color: #e5e5e5;
- 	background-clip: content-box;
-	margin-top: 10px;
-}
 .groupselectoradd {
 	margin-top: 10px;
 }
@@ -257,24 +241,6 @@ color: white; /*Change active text color here*/
 .groupmanagericons:hover {
 	background-color: white;
 }
-
-.userelementbutton {
-	background-color: white;
-}
-.userelementbutton:hover {
-	cursor: pointer;
-	background-color: #f2f2f2;
-}
-
-.groupcontainer {
-	border-left: solid #e5e5e5 1px;
-	border-right: solid #e5e5e5 1px;
-	background-color: #e5e5e5;
-	border-radius: 5px;
-}
-/*
-	components/StudentAvailableSelector
-*/
 
 /*
 	Admin specific
@@ -284,24 +250,34 @@ color: white; /*Change active text color here*/
 	padding: "100px 0";
 	overflow-y:  scroll;
 }
-
 /**/
-.makebuttony {
-	cursor: pointer;
-	border-bottom: solid 2px #e5e5e5;
-	padding-top: 5px;
-	padding-bottom: 5px;
+
+
+.gropuwrapper {
+	background-color:#f5f5f5;
+	border: solid #f5f5f5 1px;
+	margin-bottom: 5px;
 }
-.makebuttony:hover {
-	background-color: #e5e5e5;
+.groupwrapper.wrapperactive {
+	box-shadow: inset 0px 0px 40px 40px rgba(0,0,0,0.24);
+	margin-bottom: 5px;
+	border-radius: 4px;
+}
+.groupelement {
+	border: none;
+	background-color: #b8b8b8;
+}
+.group {
+	border: none;
+	background-color: #f2f2f2;
 }
 
-.buttonyfy {
+.buttonify {
 	text-align: center;
 	color:black;
 	cursor: pointer;
 }
-.buttonyfy:hover {
+.buttonify:hover {
 	box-shadow: inset 0px 0px 40px 40px rgba(0,0,0,0.05);
 }
 .buttonactive {

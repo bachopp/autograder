@@ -16,7 +16,7 @@ var ActionTypes = AGConstants.ActionTypes;
 var CHANGE_EVENT = 'change';
 
 var _groups = [];
-var _activeGroup = null;
+var _activeGroup = false;
 
 var _students = [];
 var _query = [];
@@ -42,6 +42,7 @@ function _addGroup() {
 }
 
 function _setOneGroupActive(group) {
+  _activeGroup = false;
   _groups.forEach(function(grp) {
     if (grp === group) {
       grp.active = true;
@@ -178,6 +179,8 @@ GroupManagerStore.dispachToken = AGDispatcher.register(function(action) {
       break;
     case ActionTypes.REMOVE_GROUP:
       _removeGroup(action.group);
+      _setOneGroupActive();
+      console.log(_groups);
       GroupManagerStore.emitChange();
       break;
     case ActionTypes.ADD_TO_GROUP:
