@@ -4,7 +4,9 @@ var React = require("react");
 var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
 
+var blinkclass = "";
 var InfoBar = React.createClass({
+
 
   propTypes: {
     infoType: React.PropTypes.string.isRequired,
@@ -43,23 +45,24 @@ var InfoBar = React.createClass({
       });
   },
   componentWillMount: function(){
-    this.setTime();
+    // this.setTime();
   },
   componentDidMount: function(){
-     window.setInterval(function () {
-      this.setTime();
-    }.bind(this), 60000);
+    //  window.setInterval(function () {
+      // this.setTime();
+    // }.bind(this), 60000);
   },
   componentWillUnmount: function() {
+    // blinkclass = "";
     // console.log("test");
   },
-  render: function() {
 
+  render: function() {
     return(
-      <div>
+      <div className={blinkclass}>
         <Col xs={6}><b>{this.props.infoType}</b></Col>
         <Col xs={6}><b>
-          {this.state.month}, {this.state.day} - {this.state.hours}:{this.state.minutes}
+          {/*{this.state.month}, {this.state.day} - {this.state.hours}:{this.state.minutes}*/}
         </b></Col>
       </div>
     )

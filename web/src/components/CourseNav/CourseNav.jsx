@@ -51,6 +51,7 @@ var CourseNav = React.createClass({
   },
 
   handleClick: function(url, course) {
+    // var courseObj = {name: course};
     CourseNavActionCreators.changeActiveCourse(course);
     browserHistory.push(url);
   },
@@ -62,17 +63,21 @@ var CourseNav = React.createClass({
     var mode = this.props.mode;
 
     var sidenav = this.state.sidenav;
-    console.log(this.state);
     var activeCourse = this.state.activeCourse.name;
 
     var size = Math.floor(12/courses.length);
-    var isActive = ""; // courseactive
+    var active = this.state.activeCourse; // courseactive
 
     return (
       <Row>
       <ButtonGroup justified>
       {
         courses.map(function(course) {
+          if (active === course) {
+            isActive = "buttonactive";
+          } else {
+            isActive = "";
+          }
           var classes = "buttonyfy infoboxleft " + isActive;
           var url = "\/" + mode + "\/" + sidenav + "/" + course
           return (

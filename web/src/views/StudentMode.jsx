@@ -38,6 +38,7 @@ var StudentMode = React.createClass({
 
   componentDidMount: function() {
     CourseNavStore.addChangeListener(this._onChange);
+    TopBarActionCreators.receiveUserCourses(mode);
   },
 
   componentWillUnmount: function() {
@@ -49,7 +50,7 @@ var StudentMode = React.createClass({
     var courses = this.state.courses;
     var infoType = "Student " + this.state.currentCourse;
     var lastCourse = this.state.lastCourse;
-    
+
     return(
       <Row>
         <Col xs={2}>

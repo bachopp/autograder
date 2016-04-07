@@ -30,6 +30,7 @@ function getStateFromStores() {
     courses: CourseNavStore.getCoursesForMode(),
     currentCourse: CourseNavStore.getActiveCourse(),
     lastCourse: CourseNavStore.getActiveCourse(),
+    activeElement: SideNavStore.getActiveElement(),
   };
 }
 
@@ -43,6 +44,8 @@ var TeacherMode = React.createClass({
   componentDidMount: function() {
     CourseNavStore.addChangeListener(this._onChange);
     SideNavStore.addChangeListener(this._onChange);
+
+    TopBarActionCreators.receiveUserCourses(mode);
   },
 
   componentWillUnmount: function() {
@@ -59,7 +62,7 @@ var TeacherMode = React.createClass({
     return(
       <Row>
         <Col xs={2}>
-          <TeacherSideNav lastCourse={lastCourse}/>
+          <TeacherSideNav lastCourse={lastCourse} activeElement={activeElement}/>
         </Col>
         <Col xs={10}>
           <Col xs={12}>

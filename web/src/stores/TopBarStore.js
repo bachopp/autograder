@@ -11,6 +11,7 @@ var ActionTypes = AGConstants.ActionTypes;
 var CHANGE_EVENT = 'change';
 
 var _roles = [];
+var _activeRole = '';
 
 function _addRoles(rawRoles) {
   for (var key in rawRoles) {
@@ -34,6 +35,9 @@ var TopBarStore = assign({}, EventEmitter.prototype, {
 
   getAllRoles: function() {
     return _roles;
+  },
+  getActiveRole: function() {
+    return _activeRole;
   }
 });
 
@@ -45,6 +49,10 @@ TopBarStore.dispachToken = AGDispatcher.register(function(action) {
 
      case ActionTypes.RECEIVE_RAW_ROLES:
       _addRoles(action.rawRoles);
+      TopBarStore.emitChange();
+      break;
+    case ActionTypes.SWITCH_MODE:
+      _activeRole = action.mode;
       TopBarStore.emitChange();
       break;
      default:

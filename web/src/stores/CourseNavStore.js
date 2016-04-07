@@ -58,6 +58,7 @@ CourseNavStore.dispatchToken = AGDispatcher.register(function(action) {
       break;
     case ActionTypes.SWITCH_MODE:
       _currentRole = action.mode;
+      CourseNavStore.emitChange();
       break;
     case ActionTypes.SWITCH_COURSE:
       _activeCourse = action.course;

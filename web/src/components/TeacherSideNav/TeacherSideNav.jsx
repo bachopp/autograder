@@ -9,6 +9,7 @@ var ButtonGroup = require("react-bootstrap").ButtonGroup;
 var Button = require("react-bootstrap").Button;
 var Glyphicon = require("react-bootstrap").Glyphicon;
 var FontAwesome = require('react-fontawesome');
+
 const resultsIcon = <i className="fa fa-bar-chart fa-fw"></i>;
 const userIcon = <i className="fa fa-user fa-fw"></i>;
 const groupIcon = <i className="fa fa-users fa-fw"></i>;
@@ -22,6 +23,7 @@ var TeacherSideNav = React.createClass({
 
   propTypes: {
     lastCourse: React.PropTypes.string.isRequired,
+    activeElement: React.PropTypes.string.isRequired,
   },
 
   handleClick: function(activeElement) {
@@ -33,7 +35,8 @@ var TeacherSideNav = React.createClass({
     var self = this;
 
     var lastCourse = this.props.lastCourse;
-
+    var activeElement = this.props.activeElement;
+    
     return(
       <Col xs={12} className="whitebox">
 
@@ -54,7 +57,7 @@ var TeacherSideNav = React.createClass({
         </Link>
 
         <Link to={"\/teacher\/info\/" + lastCourse}>
-        <Button onClick={self.handleClick.bind(self,"info")} className="navButton" block>{infoIcon} Info</Button>
+          <Button onClick={self.handleClick.bind(self,"info")} className="navButton" block>{infoIcon} Info</Button>
         </Link>
 
         {this.props.children}
