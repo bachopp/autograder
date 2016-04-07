@@ -1,20 +1,24 @@
 var React = require("react");
 var Col = require("react-bootstrap").Col;
 
+var PropTypes = React.PropTypes;
+
 var StudentElement = React.createClass({
+
   getInitialState: function() {
     return {
       lab: this.props.lab,
-      studentId: this.props.studentId
+      studentId: this.props.studentId,
+      class: this.props.class
     }
   },
-  _handleClick: function() {
-    console.log(this.state.studentId + " : " + this.state.lab.id);
+  _onChange: function() {
+
   },
   render: function() {
     var percent = this.state.lab.percent;
     return(
-      <td className="labview" onClick={this._handleClick}>
+      <td className="labView" onClick={this.props.onClick}>
         <Col className="labTableButton" xs={2}>{percent}%</Col>
       </td>
     );

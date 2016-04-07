@@ -16,10 +16,12 @@ var PropTypes = React.PropTypes;
 var StudentResultsList = React.createClass({
   PropTypes: {
     students: PropTypes.array,
+    selectedStudent: PropTypes.object,
   },
   _getStudentsFromStore: function() {
     return {
-      students: LabViewStore.getStudentLabs()
+      students: LabViewStore.getStudentLabs(),
+      classLabView: LabViewStore.getSelectedStudentLabIndex(),
     }
   },
   _handleClick: function() {
@@ -38,9 +40,9 @@ var StudentResultsList = React.createClass({
     LabViewStore.removelistener(this._onChange);
   },
   render: function() {
-
   const innerSearch = <Glyphicon glyph="search"/>;
   var students = this.state.students;
+  var self = this;
   return(
       <Col>
         <Col xs={12}>
@@ -58,7 +60,7 @@ var StudentResultsList = React.createClass({
                 <th>Slipdays</th>
                 <th>Lab 1</th>
                 <th>Lab 2</th>
-                <th>Lab 3 </th>
+                <th>Lab 3</th>
                 <th>Lab 4</th>
                 <th>Lab 5</th>
                 <th>Lab 6</th>
@@ -68,7 +70,7 @@ var StudentResultsList = React.createClass({
 
               {students.map(function(student,index) {
                 return <StudentRow key={"studentRow" + index} student={student}/>
-              })}
+              },this)}
             </tbody>
           </Table>
         </Col>

@@ -13,5 +13,19 @@ module.exports = {
     AGDispatcher.dispatch({
       type: ActionTypes.RECEIVE_SELECTED_LAB,
     })
-  }
+  },
+  setSelectedStudentLab: function(studentIndex, labIndex) {
+    AGDispatcher.dispatch({
+      type: ActionTypes.SET_SELECTED_STUDENTLAB,
+      studentIndex: studentIndex,
+      labIndex: labIndex,
+    })
+  },
+  toggleApprovalStudentLab: function() {
+    AGDispatcher.dispatch({
+      type: ActionTypes.TOGGLE_APPROVAL_STUDENTLAB,
+      //studentIndex: studentIndex,
+      //labIndex: labIndex
+    })
+  },
 };

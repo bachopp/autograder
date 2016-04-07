@@ -29,5 +29,6 @@ module.exports = {
     RECEIVE_RAW_STUDENTLABS: null,
     RECEIVE_SELECTED_LAB: null,
     SET_SELECTED_STUDENTLAB: null,
+    TOGGLE_APPROVAL_STUDENTLAB: null,
   })
 };
