@@ -14,7 +14,7 @@ CREATE TABLE student_group (userid INT NOT NULL, groupid INT NOT NULL, FOREIGN K
 CREATE TABLE asmt (asmtid INT NOT NULL PRIMARY KEY, number INT NOT NULL, course_name VARCHAR(255) NOT NULL, courseid INT NOT NULL, FOREIGN KEY (courseid) REFERENCES course(courseid));
 CREATE TABLE student_asmt (userid INT NOT NULL, asmtid INT NOT NULL,FOREIGN KEY (userid) REFERENCES student(userid),FOREIGN KEY (asmtid) REFERENCES asmt(asmtid), PRIMARY KEY (userid, asmtid));
 CREATE TABLE group_asmt (groupid INT NOT NULL, asmtid INT NOT NULL,FOREIGN KEY (groupid) REFERENCES groups(groupid),FOREIGN KEY (asmtid) REFERENCES asmt(asmtid), PRIMARY KEY (groupid, asmtid));
-CREATE TABLE org (orgid INT NOT NULL PRIMARY KEY, url VARCHAR(255) NOT NULL);
+CREATE TABLE org (orgid INT NOT NULL PRIMARY KEY AUTO_INCREMENT,name VARCHAR(255) NOT NULL, url VARCHAR(255) NOT NULL);
 CREATE TABLE course_organization (courseid INT NOT NULL, orgid INT NOT NULL,FOREIGN KEY (courseid) REFERENCES course(courseid),FOREIGN KEY (orgid) REFERENCES org(orgid), PRIMARY KEY (courseid, orgid));
 CREATE TABLE repo (repoid INT NOT NULL PRIMARY KEY, name VARCHAR(255) NOT NULL, url VARCHAR(255) NOT NULL, group_name VARCHAR(255) NOT NULL, groupid INT NOT NULL,FOREIGN KEY (groupid) REFERENCES groups(groupid));
 CREATE TABLE org_repo (orgid INT NOT NULL, repoid INT NOT NULL,FOREIGN KEY (orgid) REFERENCES org(orgid),FOREIGN KEY (repoid) REFERENCES repo(repoid), PRIMARY KEY (orgid, repoid));

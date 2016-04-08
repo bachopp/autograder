@@ -7,19 +7,19 @@ func TestUser(t *testing.T) {
 	InsertTestUser("thomasUserId1")
 	InsertTestUser("thomas")
 
-	AddCourse("DAT100")
+	CreateCourse("DAT100")
 	ida := 1
-	AddCourse("DAT200")
+	CreateCourse("DAT200")
 	idb := 2
-	AddCourse("DAT210")
+	CreateCourse("DAT210")
 	idc := 3
-	AddCourse("DAT220")
+	CreateCourse("DAT220")
 	ide := 3
-	AddCourse("DAT310")
+	CreateCourse("DAT310")
 	idg := 6
-	AddCourse("DAT320")
+	CreateCourse("DAT320")
 	idh := 4
-	AddCourse("DAT230")
+	CreateCourse("DAT230")
 	idf := 5
 
 	a := Role{"admin", []courses{{idf, "DAT230"}}}
