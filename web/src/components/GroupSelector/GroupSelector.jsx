@@ -29,6 +29,7 @@ var mock = require("./mock.js");
 function getStateFromStores() {
   return {
     groups: GroupManagerStore.getAllGroups(),
+    isGroupsExpanded: GroupManagerStore.isGroupsExpanded(),
   };
 }
 // this className
@@ -60,43 +61,64 @@ var GroupSelector = React.createClass({
   removeUser: function(student, group) {
     GroupSelectorActionCreators.removeUser(student, group);
   },
+  expandAll: function() {
+    GroupSelectorActionCreators.expandeAll();
+  },
 
   render: function() {
     const removeGroupIcon = <i className="groupmanagericons fa fa-times fa-fw fa-lg fa-border"></i>;
+    const plusIcon = <i className="fa fa-plus fa-fw"></i>;
+    const minusIcon = <i className="fa fa-minus fa-fw"></i>
+    const addGroupIcon = <i className="fa fa-plus"></i>;
+
 
     var self = this;
     var groups = this.state.groups;
-
+    var isGroupsExpanded = this.state.isGroupsExpanded;
+    var expandToggle = "Expand";
+    if (isGroupsExpanded) {
+      expandToggle = "Collapse";
+    }
     return (
         // TODO : map function for GroupSelectorElement
           <PanelGroup accordion>
           <Row>
-            <Col xs={4}>
-              <b><p>
-              New groups
-              </p></b>
-            </Col>
-            <Col xs={4}>
-              <Button><b>Expand all</b></Button>
-            </Col>
-            <Col xs={4}>
-              <Button bsStyle="success"><b>Approve</b></Button>
+            <Col xs={12}>
+              <Col xs={4}>
+                <Button onClick={this.addNewGroup}>New {addGroupIcon}</Button>
+              </Col>
+              <Col xs={4}>
+                <Button onClick={this.expandAll}><b>{expandToggle}</b></Button>
+              </Col>
+              <Col xs={4}>
+                <Button bsStyle="success"><b>Approve</b></Button>
+              </Col>
             </Col>
           </Row>
+          <br/>
             {
               groups.map(function(group) {
+                var isExpanded = false;
                 var wrapperClass = "groupwrapper "
                 var groupClass = "group buttonify ";
-                var groupName = '';
+                var elementClass = "groupelement ";
+                var emptyToken = '';
                 var len = group.users.length;
                 if (len === 0) {
-                  groupName = "(empty)";
+                  emptyToken = "(empty)";
                 } else {
-                  // groupName = "Students in " + group.name;
+                  emptyToken = "Students: " + len;
+                }
+                if (group.active || group.expanded) {
+                  groupClass += "buttonactive aggray";
+                  wrapperClass += "wrapperactive aggray";
+                  elementClass = "aggray";
+                  isExpanded = true;
                 }
                 if (group.active) {
-                  groupClass += "buttonactive";
-                  wrapperClass += "wrapperactive";
+                  groupClass += "buttonactive agdarkgray";
+                  wrapperClass += "wrapperactive agdarkgray";
+                  elementClass = "agdarkgray";
                 }
                 console.log(wrapperClass);
                 return (
@@ -106,8 +128,11 @@ var GroupSelector = React.createClass({
                     block onClick={self.activateGroup.bind(self, group)}
                     >
                     <Row>
-                      <Col xs={10}>
+                      <Col xs={5}>
                         <b>{group.name}</b>
+                      </Col>
+                      <Col xs={5}>
+                        {emptyToken}
                       </Col>
                       <Col xs={2}>
                         <i onClick={self.removeGroup.bind(self, group)} bsSize="xsmall">
@@ -116,15 +141,13 @@ var GroupSelector = React.createClass({
                       </Col>
                     </Row>
                     </Panel>
-                    <Panel className={groupClass} collapsible expanded={group.active}>
-                      <b>{groupName}</b>
-                      <GroupSelectorElement group={group} removeUser={self.removeUser}/>
+                    <Panel className={groupClass} collapsible expanded={isExpanded}>
+                      <GroupSelectorElement elementClass={elementClass} group={group} removeUser={self.removeUser}/>
                     </Panel>
                   </div>
                 );
               })
             }
-            <GroupSelectorAdd addNewGroup={self.addNewGroup}/>
           </PanelGroup>
     );
   },
