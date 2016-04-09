@@ -4,22 +4,39 @@ import "log"
 
 // Organization represents db table
 type Organization struct {
-	id   string
-	name string
-	url  string
+	id     int    `db:"orgid"`
+	name   string `db:"name"`
+	url    string `db:"url"`
+	course *Course
 }
 
-// NewOrganization creates new struct via db
-func NewOrganization(name string, url string) *Organization {
-	err := orgInsert(name, url)
+// NewOrganization retrieves organization data from db and returns a struct
+func NewOrganization(orgname string) (*Organization, error) {
+	connectDb()
+	defer con.Close()
+
+	var id int
+	var name, url string
+	stmt, err := con.Prepare("SELECT * FROM org WHERE name = (?)")
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
-	org, err := orgRetrieve(name)
-	return org
+
+	err = stmt.QueryRow(orgname).Scan(&id, &name, &url)
+	if err != nil {
+		return nil, err
+	}
+	o := new(Organization)
+	o.id = id
+	o.name = name
+	o.url = url
+	return o, nil
 }
 
-func orgInsert(name string, url string) error {
+// InsertOrganization creates new db row
+func InsertOrganization(name string, url string) error {
+	connectDb()
+	defer con.Close()
 	// TODO: SQL insert
 	tx, err := con.Begin()
 	if err != nil {
@@ -28,7 +45,7 @@ func orgInsert(name string, url string) error {
 	defer tx.Rollback()
 
 	// prepare statements
-	stmt, err := tx.Prepare("INSERT INTO org VALUES (?,?)")
+	stmt, err := tx.Prepare("INSERT INTO org (name, url) VALUES (?,?)")
 	if err != nil {
 		return err
 	}
@@ -43,18 +60,19 @@ func orgInsert(name string, url string) error {
 	if err != nil {
 		return err
 	}
-	return err
+	return nil
 }
 
-func orgRetrieve(orgname string) (*Organization, error) {
-	var id, name, url string
-	stmt, err := con.Prepare("SELECT * FROM org WHERE name = (?)")
+// OrgID return organization id from db
+func OrgID(name string) int {
+	var id int
+	stmt, err := con.Prepare("SELECT orgid FROM org WHERE name = (?)")
 	if err != nil {
-		return nil, err
+		log.Fatal(err)
 	}
-	err = stmt.QueryRow(orgname).Scan(&id, &name, &url)
+	err = stmt.QueryRow(name).Scan(&id)
 	if err != nil {
-		return nil, err
+		log.Fatal(err)
 	}
-	return new(Organization), nil
+	return id
 }

@@ -4,8 +4,9 @@ import "testing"
 
 func TestUser(t *testing.T) {
 	InitializeDb()
-	InsertTestUser("thomasUserId1")
-	InsertTestUser("thomas")
+
+	InsertUser("tokams", "Gliniecki", "Tomasz")
+	InsertUser("thomasdarvik", "Darvik", "Thomas")
 
 	createCourse("DAT100")
 	ida := 1
@@ -26,6 +27,6 @@ func TestUser(t *testing.T) {
 	b := Role{"teacher", []courses{{ida, "DAT100"}, {idb, "DAT200"}, {idc, "DAT210"}, {idg, "DAT310"}}}
 	c := Role{"student", []courses{{idh, "DAT320"}, {ide, "DAT220"}}}
 
-	UpgradeUser("thomas", a, b, c)
+	UpgradeUser("tokams", a, b, c)
 
 }
