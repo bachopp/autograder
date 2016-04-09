@@ -18,9 +18,9 @@ var StudentResultsList = React.createClass({
     selectedStudent: PropTypes.object,
   },
   _getStudentsFromStore: function() {
+    // more methods should be added here
     return {
       students: LabViewStore.getStudentLabs(),
-      indexesFromStore: LabViewStore.getSelectedStudentLabIndex(),
     }
   },
   _handleClick: function() {
@@ -39,53 +39,42 @@ var StudentResultsList = React.createClass({
     LabViewStore.removelistener(this._onChange);
   },
   render: function() {
+
   const innerSearch = <Glyphicon glyph="search"/>;
-  var students = this.state.students;
-  var self = this;
+    return(
+          <Col>
+            <Col xs={12}>
+              <Input
+                type="text"
+                addonBefore={innerSearch}
+                placeholder="Search for students"
+              />
+            </Col>
+            <Col xs={12}>
+              <Table className="cleanTable" striped={true}>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Slipdays</th>
+                    <th>Lab 1</th>
+                    <th>Lab 2</th>
+                    <th>Lab 3</th>
+                    <th>Lab 4</th>
+                    <th>Lab 5</th>
+                    <th>Lab 6</th>
+                  </tr>
+                </thead>
+                <tbody>
 
-  var _selectedIndexes = this.state.indexesFromStore;
+                  {this.state.students.map(function(student,index) {
+                    return <StudentRow key={"studentRow" + index} student={student}/>
+                  },this)}
+                </tbody>
+              </Table>
+            </Col>
 
-  return(
-      <Col>
-        <Col xs={12}>
-          <Input
-            type="text"
-            addonBefore={innerSearch}
-            placeholder="Search for students"
-          />
-        </Col>
-        <Col xs={12}>
-          <Table className="cleanTable" striped={true}>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Slipdays</th>
-                <th>Lab 1</th>
-                <th>Lab 2</th>
-                <th>Lab 3</th>
-                <th>Lab 4</th>
-                <th>Lab 5</th>
-                <th>Lab 6</th>
-              </tr>
-            </thead>
-            <tbody>
-
-              {students.map(function(student,index) {
-                // the current row has the selected student lab
-
-                if(student.id == _selectedIndexes.studentIndex) {
-                  return <StudentRow key={"studentRow" + index} selected={_selectedIndexes} student={student}/>
-                } else {
-                  return <StudentRow key={"studentRow" + index} selected={null} student={student}/>
-                }
-              },this)}
-            </tbody>
-          </Table>
-        </Col>
-
-      </Col>
-    );
-  }
+          </Col>
+    )}
 });
 
 module.exports = StudentResultsList;

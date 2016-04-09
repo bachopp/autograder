@@ -22,8 +22,14 @@ function getStudentLabs() {
 }
 
 function setSelectedStudentLab(studentIndex,labIndex) {
+
+  // first- remove the old selected lab
+  _students[_selectedStudentIndex].labs[_selectedLabIndex].isSelected = false;
   _selectedStudentIndex = studentIndex;
   _selectedLabIndex = labIndex;
+  _students[_selectedStudentIndex].labs[_selectedLabIndex].isSelected = true;
+
+
 }
 
 // Toggle currently selected student's lab
@@ -61,12 +67,8 @@ var LabViewStore = assign({},EventEmitter.prototype, {
   getSelectedStudentLab: function() {
     return getSelectedStudentLab();
   },
-  getSelectedStudentLabIndex: function() {
-    return {studentIndex: _selectedStudentIndex, labIndex: _selectedLabIndex};
-  },
   setSelectedStudentLab: function(studentIndex,labIndex) {
     setSelectedStudentLab(studentIndex,labIndex);
-    console.log("HELLO");
   },
 });
 LabViewStore.dispatchToken = AGDispatcher.register(function(action) {
