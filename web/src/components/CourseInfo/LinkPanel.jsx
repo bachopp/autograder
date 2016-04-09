@@ -20,16 +20,16 @@ var LinkPanel = React.createClass({
 		return (
       <div>
         <h3><b>Github links</b></h3>
-        <div className="makebuttony">
+        <div className="buttonify">
         </div>
 
-        <div className="makebuttony">
+        <div className="buttonify">
         {githubIcon} Course information
         </div>
-        <div className="makebuttony">
+        <div className="buttonify">
         {githubIcon} Individual labs
         </div>
-        <div className="makebuttony">
+        <div className="buttonify">
         {githubIcon} Group labs
         </div>
       </div>

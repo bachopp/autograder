@@ -77,7 +77,7 @@ var CourseNav = React.createClass({
           } else {
             isActive = "";
           }
-          var classes = "buttonyfy infoboxleft " + isActive;
+          var classes = "buttonify infoboxleft " + isActive;
           var url = "\/" + mode + "\/" + sidenav + "/" + course
           return (
             <Col

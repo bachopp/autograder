@@ -85,17 +85,24 @@ var GroupSelector = React.createClass({
           </Row>
             {
               groups.map(function(group) {
+                var wrapperClass = "groupwrapper "
+                var groupClass = "group buttonify ";
                 var groupName = '';
                 var len = group.users.length;
                 if (len === 0) {
                   groupName = "(empty)";
                 } else {
-                  groupName = "Students in " + group.name;
+                  // groupName = "Students in " + group.name;
                 }
+                if (group.active) {
+                  groupClass += "buttonactive";
+                  wrapperClass += "wrapperactive";
+                }
+                console.log(wrapperClass);
                 return (
-                  <div key={group.number} className="groupcontainer">
+                  <div key={group.number} className={wrapperClass}>
                     <Panel
-                    className="groupelementbutton"
+                    className={groupClass}
                     block onClick={self.activateGroup.bind(self, group)}
                     >
                     <Row>
@@ -109,7 +116,7 @@ var GroupSelector = React.createClass({
                       </Col>
                     </Row>
                     </Panel>
-                    <Panel className="groupelement" collapsible expanded={group.active}>
+                    <Panel className={groupClass} collapsible expanded={group.active}>
                       <b>{groupName}</b>
                       <GroupSelectorElement group={group} removeUser={self.removeUser}/>
                     </Panel>
