@@ -7,7 +7,7 @@ type Course struct {
 	id           int    `db:"courseid"`
 	name         string `db:"course_name"`
 	singleAssm   int    `db:"single_assignments"`
-	groupAssm    int    `db:"group_assignments"`
+	groupAssm    int    `db:"groups_assignments"`
 	description  string `db:"description"`
 	slipdays     int    `db:"number_of_slipdays"`
 	isSlipdays   bool   `db:"is_slipdays"`
@@ -34,7 +34,7 @@ func NewCourse(courseName string) (*Course, error) {
 
 	stmt, err := con.Prepare("SELECT " +
 		"course.courseid, course_name,single_assignments, " +
-		"group_assignments, description, " +
+		"groups_assignments, description, " +
 		"number_of_slipdays, is_slipdays, " +
 		"is_private_repositories, is_code_review, org.name " +
 		"FROM course_organization " +
@@ -84,7 +84,7 @@ func InsertCourse(orgName string, name string, singleAssm int, groupAssm int, de
 
 	// prepare statements
 	stmt, err := tx.Prepare("INSERT INTO course " +
-		"(course_name, single_assignments, group_assignments, " +
+		"(course_name, single_assignments, groups_assignments, " +
 		"description, number_of_slipdays, is_slipdays, " +
 		"is_private_repositories, is_code_review) " +
 		" VALUES (?,?,?,?,?,?,?,?)")

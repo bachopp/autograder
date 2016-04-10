@@ -38,6 +38,7 @@ func InsertOrganization(name string, url string) error {
 	connectDb()
 	defer con.Close()
 	// TODO: SQL insert
+
 	tx, err := con.Begin()
 	if err != nil {
 		return err

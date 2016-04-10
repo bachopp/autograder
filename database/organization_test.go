@@ -14,7 +14,6 @@ func TestOrganization(t *testing.T) {
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	o, err := NewOrganization(inname)
 	if err != nil {
 		log.Fatal(err)

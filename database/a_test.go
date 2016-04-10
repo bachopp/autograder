@@ -10,4 +10,5 @@ func TestInitializeDb(t *testing.T) {
 	// correct order
 	TestOrganization(t)
 	TestCourse(t)
+	TestUser(t)
 }
