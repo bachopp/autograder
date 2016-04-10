@@ -11,7 +11,7 @@ module.exports = {
   // TODO:  call for more data, like course description
   getCoursesForMode: function(mode) {
     Socket.waitForSocketConnection(Socket.ws, function() {
-      var payload = RequestAPI.send(ActionTypes.RECEIVE_COURSES_FOR_MODE, {"username": "thomas", "mode": mode});
+      var payload = RequestAPI.send(ActionTypes.RECEIVE_COURSES_FOR_MODE, {"username": "tokams", "mode": mode});
       Socket.ws.send(payload);
     });
   }

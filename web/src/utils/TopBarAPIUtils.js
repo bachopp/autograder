@@ -11,7 +11,7 @@ module.exports = {
   // TODO:  structurize payload better
   getAllRoles: function() {
     Socket.waitForSocketConnection(Socket.ws, function() {
-      var payload = RequestAPI.send(ActionTypes.RECEIVE_RAW_ROLES, {"username": "thomas"});
+      var payload = RequestAPI.send(ActionTypes.RECEIVE_RAW_ROLES, {"username": "tokams"});
       Socket.ws.send(payload);
     });
   }

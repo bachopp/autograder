@@ -39,7 +39,7 @@ function _removeGroup(group) {
 
 function _addGroup() {
   var len = _groups.length + 1;
-  var newGroup = {name:"group_"+ len, number: len, users:[]};
+  var newGroup = {name:"groups_"+ len, number: len, users:[]};
   _groups.push(newGroup);
 }
 

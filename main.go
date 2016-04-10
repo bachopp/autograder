@@ -20,7 +20,7 @@ func serveSingle(pattern string, filename string) {
 		http.ServeFile(w, r, filename)
 	})
 }
-func Handler(w http.ResponseWriter, r *http.Request) {
+func handler(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("I am handling %s now\n", r.URL)
 	http.ServeFile(w, r, webroot)
 }
@@ -29,28 +29,28 @@ func main() {
 
 	r := mux.NewRouter()
 	r.HandleFunc("/ws", agsocket.AGSocket)
-	r.HandleFunc("/login", Handler)
-	r.HandleFunc("/about", Handler)
-	r.HandleFunc("/courses", Handler)
-	r.HandleFunc("/oauth", Handler)
+	r.HandleFunc("/login", handler)
+	r.HandleFunc("/about", handler)
+	r.HandleFunc("/courses", handler)
+	r.HandleFunc("/oauth", handler)
 
-	r.HandleFunc("/teacher", Handler)
-	r.HandleFunc("/teacher/{course}", Handler)
-	r.HandleFunc("/teacher/{course}/{groups}", Handler)
-	r.HandleFunc("/teacher/{course}/{settings}", Handler)
-	r.HandleFunc("/teacher/{course}/{students}", Handler)
+	r.HandleFunc("/teacher", handler)
+	r.HandleFunc("/teacher/{course}", handler)
+	r.HandleFunc("/teacher/{course}/{groups}", handler)
+	r.HandleFunc("/teacher/{course}/{settings}", handler)
+	r.HandleFunc("/teacher/{course}/{students}", handler)
 
-	r.HandleFunc("/student", Handler)
-	r.HandleFunc("/student/{course}", Handler)
-	r.HandleFunc("/student/{course}/{groups}", Handler)
-	r.HandleFunc("/student/{course}/{settings}", Handler)
-	r.HandleFunc("/student/{course}/{students}", Handler)
+	r.HandleFunc("/student", handler)
+	r.HandleFunc("/student/{course}", handler)
+	r.HandleFunc("/student/{course}/{groups}", handler)
+	r.HandleFunc("/student/{course}/{settings}", handler)
+	r.HandleFunc("/student/{course}/{students}", handler)
 
-	r.HandleFunc("/admin", Handler)
-	r.HandleFunc("/admin/{course}", Handler)
-	r.HandleFunc("/admin/{course}/{groups}", Handler)
-	r.HandleFunc("/admin/{course}/{settings}", Handler)
-	r.HandleFunc("/admin/{course}/{students}", Handler)
+	r.HandleFunc("/admin", handler)
+	r.HandleFunc("/admin/{course}", handler)
+	r.HandleFunc("/admin/{course}/{groups}", handler)
+	r.HandleFunc("/admin/{course}/{settings}", handler)
+	r.HandleFunc("/admin/{course}/{students}", handler)
 
 	r.PathPrefix("/").Handler(http.FileServer(http.Dir(webroot)))
 	http.Handle("/", r)
