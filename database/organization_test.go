@@ -10,11 +10,7 @@ func TestOrganization(t *testing.T) {
 	inname := "uis-dat320"
 	inurl := "https://github.com/uis-dat320/"
 
-	err := InsertOrganization(inname, inurl)
-	if err != nil {
-		log.Fatal(err)
-	}
-	o, err := NewOrganization(inname)
+	o, err := InsertOrganization(inname, inurl)
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -12,16 +12,15 @@ func TestCourse(t *testing.T) {
 	isPrivRepo := false
 	isCodeReview := false
 	orgName := "uis-dat320"
-	err := InsertCourse(orgName, name, singleAssm, groupAssm, description, slipdays, isSlipdays, isPrivRepo, isCodeReview)
+	org, err := NewOrganization(orgName)
 	if err != nil {
 		t.Error(err)
 	}
-
-	c, err := NewCourse(name)
+	c, err := InsertCourse(org, name, singleAssm, groupAssm, description, slipdays, isSlipdays, isPrivRepo, isCodeReview)
 	if err != nil {
 		t.Error(err)
 	}
-	if c.org.name != orgName {
-		t.Errorf("Expected %v, got %v", orgName, c.org.name)
+	if c.org.name != org.name {
+		t.Errorf("Expected %v, got %v", org.name, c.org.name)
 	}
 }

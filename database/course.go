@@ -71,14 +71,14 @@ func NewCourse(courseName string) (*Course, error) {
 }
 
 // InsertCourse creates new struct via db
-func InsertCourse(orgName string, name string, singleAssm int, groupAssm int, description string, slipdays int, isSlipDay bool, isPrivRepo bool, isCoreReview bool) error {
+func InsertCourse(org *Organization, name string, singleAssm int, groupAssm int, description string, slipdays int, isSlipDay bool, isPrivRepo bool, isCoreReview bool) (*Course, error) {
 	// TODO: SQL insert into
 	connectDb()
 	defer con.Close()
 
 	tx, err := con.Begin()
 	if err != nil {
-		return err
+		return nil, err
 	}
 	defer tx.Rollback()
 
@@ -89,27 +89,32 @@ func InsertCourse(orgName string, name string, singleAssm int, groupAssm int, de
 		"is_private_repositories, is_code_review) " +
 		" VALUES (?,?,?,?,?,?,?,?)")
 	if err != nil {
-		return err
+		return nil, err
 	}
 	defer stmt.Close()
 
 	_, err = stmt.Exec(name, singleAssm, groupAssm, description, slipdays, isSlipDay, isPrivRepo, isCoreReview)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	// commit transaction
 	err = tx.Commit()
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	// TODO: this should be done by getting the ID directly from the client,
 	// to enable courses with same names and archiving of old courses
-	err = joinOrganization(name, orgName)
+	err = joinOrganization(name, org.name)
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
-	return nil
+	c, err := NewCourse(name)
+	if err != nil {
+		return nil, err
+	}
+
+	return c, nil
 }
 
 func joinOrganization(course string, org string) error {

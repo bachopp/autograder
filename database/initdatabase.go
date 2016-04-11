@@ -11,6 +11,9 @@ import (
 
 var con sql.DB
 
+func init() {
+}
+
 func connectDb() {
 	// database name in sql.Open is required, as a result one needs to create a database before starting the server.
 	// name of the database should be "agdatabase"

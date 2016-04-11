@@ -34,34 +34,38 @@ func NewOrganization(orgname string) (*Organization, error) {
 }
 
 // InsertOrganization creates new db row
-func InsertOrganization(name string, url string) error {
+func InsertOrganization(name string, url string) (*Organization, error) {
 	connectDb()
 	defer con.Close()
 	// TODO: SQL insert
 
 	tx, err := con.Begin()
 	if err != nil {
-		return err
+		return nil, err
 	}
 	defer tx.Rollback()
 
 	// prepare statements
 	stmt, err := tx.Prepare("INSERT INTO org (name, url) VALUES (?,?)")
 	if err != nil {
-		return err
+		return nil, err
 	}
 	defer stmt.Close()
 
 	_, err = stmt.Exec(name, url)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	// commit transaction
 	err = tx.Commit()
 	if err != nil {
-		return err
+		return nil, err
 	}
-	return nil
+	o, err := NewOrganization(name)
+	if err != nil {
+		return nil, err
+	}
+	return o, nil
 }
 
 // OrgID return organization id from db

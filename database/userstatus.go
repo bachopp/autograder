@@ -158,7 +158,7 @@ func GetUserRoles(username string) map[string]Role {
 	}
 
 	roles := make(map[string]Role)
-	modes := []string{"admin", "teacher", "student"}
+	modes := []string{admin, teacher, student}
 	crses := make([]courses, 0, 32)
 	var course string
 	var courseid int

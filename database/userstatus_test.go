@@ -2,7 +2,7 @@ package database
 
 import "testing"
 
-func TestUser(t *testing.T) {
+func TestUserStat(t *testing.T) {
 	InitializeDb()
 
 	InsertUser("tokams", "Gliniecki", "Tomasz")
@@ -28,5 +28,6 @@ func TestUser(t *testing.T) {
 	c := Role{"student", []courses{{idh, "DAT320"}, {ide, "DAT220"}}}
 
 	UpgradeUser("tokams", a, b, c)
+	UpgradeUser("thomasdarvik", b, c)
 
 }
