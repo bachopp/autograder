@@ -14,16 +14,23 @@ var StudentElement = React.createClass({
   render: function() {
     var lab = this.props.lab;
     var self = this;
+    var classname = "";
 
     if(lab.isSelected) {
-      classname = "labviewSelected";
+      classname += "selected ";
     } else {
-      classname = "labview";
+      classname += "notSelected ";
+    }
+
+    if(lab.approved) {
+      classname += "approved ";
+    } else {
+      classname += "notApproved ";
     }
 
     return(
-      <td className={classname} onClick={this.props.onClick}>
-        <Col className="labTableButton" xs={2}>{lab.percent}%</Col>
+      <td className={"labview " + classname} onClick={this.props.onClick}>
+        {lab.percent}%
       </td>
     );
   }

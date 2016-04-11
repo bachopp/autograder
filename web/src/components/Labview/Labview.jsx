@@ -49,7 +49,7 @@ var Labview = React.createClass({
       labApproval = <Alert bsStyle="success">{successIcon} Approved</Alert>;
       statusButton = <Button onClick={this._handleClick} bsStyle="danger">Remove approval</Button>;
     } else if(!theLab.approved) {
-      labApproval = <Alert bsStyle="danger">{dangerIcon} Not approved</Alert>;
+      labApproval = <Alert className="redColor" bsStyle="danger">{dangerIcon} Not approved</Alert>;
       statusButton = <Button onClick={this._handleClick} bsStyle="success">Approve</Button>
     }
 

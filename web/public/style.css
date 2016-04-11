@@ -26,49 +26,92 @@ html, body {
 	color:#444444;
 	font-style:italic;
 }
-
-.labTableButton {
-	color:#5bc0de;
-}
-
-.selectedLabTableButton {
-	color:#5cb85c;
-}
-
+/*
 .cleanTable td, table td {
 	border:none !important;
- }
+	box-shadow: inset 0px 0px 40px 40px rgba(0,0,0,0.05);
+	text-align: center;
+	padding:20px;
+	}
+
+.redColor {
+	background-color:#DB5461;
+	color:#FFF;
+}
 
 .cleanTable .labview {
 	cursor:pointer;
-	text-align: center;
+	color:#000;
+
+
+}
+.cleanTable .notApproved {
+	background-color:#DB5461;
+	color:#FFF;
+}
+.cleanTable .approved {
 }
 .cleanTable .labview:hover {
-	background-color:#e5e5e5;
+	background-color:#3b3a36;
+	color:#FFF;
 	cursor:pointer;
-	border-radius:5px;
 }
 .cleanTable .labview:active {
 	box-shadow:inset 1px 1px 1px rgba(0,0,0,0.5);
-	color:#FFF;
 	background-color:#a5a5a5;
+	color:#FFF;
 }
 
 .cleanTable .labviewSelected {
-	background-color:#e5e5e5;
+	background-color:#FFF;
+	box-shadow: inset 1px 1px 1px 1px rgba(0,0,0,0.1);
 	cursor:pointer;
-	border-radius:5px;
+	color:#000;
 }
 
 .cleanTable .labviewSelected:hover {
-	background-color:#e5e5e5;
+	background-color:#3b3a36;
 	cursor:pointer;
-	border-radius:5px;
 }
 .cleanTable .labviewSelected:active {
 	box-shadow:inset 1px 1px 1px rgba(0,0,0,0.5);
-	color:#FFF;
 	background-color:#a5a5a5;
+}
+
+.border_bottom {
+}
+
+*/
+
+
+
+.tables {
+}
+.labview {
+	text-align: center;
+	cursor:pointer;
+}
+.symbols {
+	font-weight:bold;
+	margin-bottom:0.4em;
+}
+.symbolApproved {
+	color: #dff0d8;
+}
+.symbolNotApproved {
+	color:#f69988;
+}
+
+.approved {
+	background-color:#dff0d8;
+}
+.notApproved {
+	background-color:#f69988;
+}
+.selected {
+	text-shadow:1px 1px 1px rgba(0,0,0,0.1);
+	background-color:rgba(0, 0, 0,0.5);
+	color:#FFF;
 }
 
 .colouredHeader {

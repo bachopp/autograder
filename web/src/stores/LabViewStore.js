@@ -14,11 +14,37 @@ var CHANGE_EVENT = "change";
 var _selectedStudentIndex = 0;    // default 0 - first student
 var _selectedLabIndex = 0;        // default 0 - first lab of student 0
 
-_students = mockData.students;    // from the mockData.js file
+
+var _rawData = mockData.students;
+var _students = _rawData;
+
+function queryStudents(query) {
+  _query = [];
+  _theStudents = _students;
+  var query = query.toLowerCase();
+  if(!query) {
+    console.log(_theStudents);
+    return _rawData;
+  }
+  console.log("NOT EMPTY");
+  _theStudents.forEach(function(currentStud) {
+    var uname = currentStud.username.toLowerCase().search(query);
+    var fname = currentStud.firstName.toLowerCase().search(query);
+    var lname = currentStud.lastName.toLowerCase().search(query);
+
+    if(uname >= 0 || fname >= 0 || lname >= 0) {
+      _query.push(currentStud);
+    }
+  });
+  return _query;
+}
 
 function getStudentLabs() {
-  console.log("students");
   return _students;
+}
+
+function updateStudentList(newList) {
+  _students = newList;
 }
 
 function setSelectedStudentLab(studentIndex,labIndex) {
@@ -28,7 +54,6 @@ function setSelectedStudentLab(studentIndex,labIndex) {
   _selectedStudentIndex = studentIndex;
   _selectedLabIndex = labIndex;
   _students[_selectedStudentIndex].labs[_selectedLabIndex].isSelected = true;
-
 
 }
 
@@ -90,6 +115,12 @@ LabViewStore.dispatchToken = AGDispatcher.register(function(action) {
       // change this to an input from the element?
       toggleApprovalStudentLab();
       LabViewStore.emitChange();
+      break;
+    case ActionTypes.SEARCH_FOR_STUDENT:
+      var keep = queryStudents(action.query);
+      updateStudentList(keep);
+      LabViewStore.emitChange();
+      updateStudentList(keep);
       break;
     default:
       // do nothing here

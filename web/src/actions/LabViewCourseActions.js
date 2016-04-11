@@ -28,4 +28,10 @@ module.exports = {
       //labIndex: labIndex
     })
   },
+  searchStudentTable: function(query) {
+    AGDispatcher.dispatch({
+      type: ActionTypes.SEARCH_FOR_STUDENT,
+      query: query
+    })
+  },
 };

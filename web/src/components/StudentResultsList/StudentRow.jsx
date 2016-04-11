@@ -19,7 +19,7 @@ var StudentRow = React.createClass({
   var self = this;
 
   return(
-      <tr>
+      <tr className="border_bottom">
         <td>{_student.firstName} {_student.lastName}</td>
         <td>{_student.slipDays}</td>
         {_student.labs.map(function(currentLab, index) {

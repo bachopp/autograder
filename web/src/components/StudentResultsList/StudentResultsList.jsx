@@ -10,6 +10,8 @@ var LabViewStore = require("../../stores/LabViewStore.js");
 var LabViewCourseActions = require("../../actions/LabViewCourseActions.js");
 
 var StudentRow = require("./StudentRow.jsx");
+var SearchField = require("./SearchField.jsx");
+
 
 var PropTypes = React.PropTypes;
 var StudentResultsList = React.createClass({
@@ -39,19 +41,18 @@ var StudentResultsList = React.createClass({
     LabViewStore.removelistener(this._onChange);
   },
   render: function() {
-
-  const innerSearch = <Glyphicon glyph="search"/>;
     return(
           <Col>
             <Col xs={12}>
-              <Input
-                type="text"
-                addonBefore={innerSearch}
-                placeholder="Search for students"
-              />
+              <SearchField />
+            </Col>
+            <Col xs={12} className="symbols">
+              <Glyphicon className="symbolApproved" glyph="glyphicon glyphicon-stop"/> Approved
+              <br/>
+              <Glyphicon className="symbolNotApproved" glyph="glyphicon glyphicon-stop"/> Not approved
             </Col>
             <Col xs={12}>
-              <Table className="cleanTable" striped={true}>
+              <Table className="tables" striped={true} responsive={true} bordered={true}>
                 <thead>
                   <tr>
                     <th>Name</th>
@@ -61,11 +62,9 @@ var StudentResultsList = React.createClass({
                     <th>Lab 3</th>
                     <th>Lab 4</th>
                     <th>Lab 5</th>
-                    <th>Lab 6</th>
                   </tr>
                 </thead>
                 <tbody>
-
                   {this.state.students.map(function(student,index) {
                     return <StudentRow key={"studentRow" + index} student={student}/>
                   },this)}
