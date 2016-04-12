@@ -32,7 +32,7 @@ func TestBruker(t *testing.T) {
 	fmt.Println(u1.isTeacher)
 	fmt.Println(u1.isStudent)
 
-	if u1.github != u1n && u2.github != u2n {
-		t.Errorf("Expected %s : %s but got %s : %s", u1n, u2n, u1.github, u2.github)
+	if u1.Github != u1n && u2.Github != u2n {
+		t.Errorf("Expected %s : %s but got %s : %s", u1n, u2n, u1.Github, u2.Github)
 	}
 }

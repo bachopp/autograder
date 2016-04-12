@@ -4,19 +4,19 @@ import "log"
 
 // Course  represents db table
 type Course struct {
-	id           int    `db:"courseid"`
-	name         string `db:"course_name"`
-	singleAssm   int    `db:"single_assignments"`
-	groupAssm    int    `db:"groups_assignments"`
-	description  string `db:"description"`
-	slipdays     int    `db:"number_of_slipdays"`
-	isSlipdays   bool   `db:"is_slipdays"`
-	isPrivRepo   bool   `db:"is_private_repositories"`
-	isCodeReview bool   `db:"is_code_review"`
-	assignments  []*Assignment
-	org          *Organization
-	teachers     []*Teacher
-	students     []*Student
+	ID           int    `db:"courseid"`
+	Name         string `db:"course_name"`
+	SingleAssm   int    `db:"single_assignments"`
+	GroupAssm    int    `db:"groups_assignments"`
+	Description  string `db:"description"`
+	Slipdays     int    `db:"number_of_slipdays"`
+	IsSlipdays   bool   `db:"is_slipdays"`
+	IsPrivRepo   bool   `db:"is_private_repositories"`
+	IsCodeReview bool   `db:"is_code_review"`
+	Assignments  []*Assignment
+	Org          *Organization
+	Teachers     []*Teacher
+	Students     []*Student
 }
 
 // NewCourse returns struct based on db data
@@ -56,16 +56,16 @@ func NewCourse(courseName string) (*Course, error) {
 	}
 
 	c := new(Course)
-	c.id = id
-	c.name = name
-	c.singleAssm = singleAssm
-	c.groupAssm = groupAssm
-	c.description = description
-	c.slipdays = slipdays
-	c.isSlipdays = isSlipdays
-	c.isPrivRepo = isPrivRepo
-	c.isCodeReview = isCodeReview
-	c.org = o
+	c.ID = id
+	c.Name = name
+	c.SingleAssm = singleAssm
+	c.GroupAssm = groupAssm
+	c.Description = description
+	c.Slipdays = slipdays
+	c.IsSlipdays = isSlipdays
+	c.IsPrivRepo = isPrivRepo
+	c.IsCodeReview = isCodeReview
+	c.Org = o
 
 	return c, nil
 }
