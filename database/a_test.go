@@ -1,9 +1,6 @@
 package database
 
-import (
-	"fmt"
-	"testing"
-)
+import "testing"
 
 func TestInitializeDb(t *testing.T) {
 	err := InitializeDb()
@@ -57,16 +54,10 @@ func TestDummyData(t *testing.T) {
 	if err := u1.MakeAdmin(); err != nil {
 		t.Error(err)
 	}
-	if err := u1.AddToCourse(c1, teacher); err != nil {
+	if err := u1.AddToCourse(c1, teacher, student); err != nil {
 		t.Error(err)
 	}
-	if err := u1.AddToCourse(c2, student); err != nil {
+	if err := u1.AddToCourse(c2, student, teacher); err != nil {
 		t.Error(err)
 	}
-	fmt.Printf("\n\n%v\n\n", u1)
-	fmt.Printf("\n\n%v\n\n", u1.Student)
-	fmt.Printf("\n\n%v\n\n", u1.Student.courses)
-	fmt.Printf("\n\n%v\n\n", u1.Teacher)
-	fmt.Printf("\n\n%v\n\n", u1.Teacher.courses)
-	fmt.Printf("\n\n%v\n\n", u1.Admin)
 }

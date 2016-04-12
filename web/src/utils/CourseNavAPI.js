@@ -9,9 +9,9 @@ var Socket = require("./Socket.js");
 module.exports = {
   // TODO:  remove waifFor when it's fixed
   // TODO:  call for more data, like course description
-  getCoursesForMode: function(mode) {
+  getCoursesForMode: function(mode, user) {
     Socket.waitForSocketConnection(Socket.ws, function() {
-      var payload = RequestAPI.send(ActionTypes.RECEIVE_COURSES_FOR_MODE, {"username": "tokams", "mode": mode});
+      var payload = RequestAPI.send(ActionTypes.RECEIVE_COURSES_FOR_MODE, {"username": user, "mode": mode});
       Socket.ws.send(payload);
     });
   }

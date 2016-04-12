@@ -56,13 +56,13 @@ ReactDOM.render(
 			<IndexRoute component={Welcome}/>
 			<Route path="courses" component={AllCourses}/>
 
-			<Route path="admin" component={AdminMode}>
+			<Route path="Admin" component={AdminMode}>
 				<IndexRoute component={UserList} />
 					<Route path="settings" component={NotFound}/>
 					<Route path="info"component={NotFound}/>
 			</Route>
 
-			<Route path="teacher" component={TeacherMode}>
+			<Route path="Teacher" component={TeacherMode}>
 					<Route path="results/:coursename" component={Coursepage}/>
 					<Route path="groups/:coursename" component={GroupManager}/>
 					<Route path="settings/:coursename" component={CourseSettings}/>
@@ -70,7 +70,7 @@ ReactDOM.render(
 					<Route path="info/:coursename" component={NotFound}/>
 			</Route>
 
-			<Route path="student" component={StudentMode}>
+			<Route path="Student" component={StudentMode}>
 					<Route path="members/:coursename" component={NotFound}/>
 					<Route path="groups/:coursename" component={NotFound}/>
 					<Route path="info/:coursename" component={CourseInfo}/>

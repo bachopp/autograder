@@ -33,7 +33,6 @@ var Courses = React.createClass({
   },
 
   render: function() {
-    var courses = this.state.courses;
     var roles = this.state.roles;
     return (
       <div>

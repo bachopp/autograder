@@ -12,6 +12,10 @@ var DropdownList = require("./DropdownList.jsx")
 // stores
 var TopBarActionCreators = require("../../actions/TopBarActionCreators.js");
 
+// constants
+var constants = require("../../constants/constants.js");
+var mode = constants.mode;
+
 var Navigation = React.createClass({
   propTypes: {
     roles: React.PropTypes.array.isRequired,
@@ -43,15 +47,15 @@ var Navigation = React.createClass({
           i++;
           var modeLink = "/";
           switch (role.Mode) {
-            case "admin":
-              modeLink += "admin";
+            case mode.Admin:
+              modeLink += mode.Admin;
               break;
-            case "teacher":
+            case mode.Teacher:
               lastCourse = "/DAT100";
               defaultPage = "/results";
               modeLink += role.Mode + defaultPage + lastCourse;
               break;
-            case "student":
+            case mode.Student:
               lastCourse = "/DAT220";
               lastLab = "/lab1id";
               defaultPage = "/results";

@@ -51,10 +51,9 @@ CourseNavStore.dispatchToken = AGDispatcher.register(function(action) {
     // TODO: finish switch statement for different actions
 
     case ActionTypes.RECEIVE_COURSES_FOR_MODE:
+      console.log(action);
       _navCourses = CourseNavUtils.convertRawCourses(action.modeCourses.Courses);
       _currentRole = action.modeCourses.Mode;
-      // TODO: get active course from URL?
-      // _activeCourse = _navCourses[0];
       CourseNavStore.emitChange();
       break;
     case ActionTypes.SWITCH_MODE:

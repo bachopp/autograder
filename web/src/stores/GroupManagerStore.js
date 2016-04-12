@@ -5,7 +5,6 @@ var assign = require('object-assign');
 var AGDispatcher = require('../dispatcher/AGDispatcher');
 var AGConstants = require('../constants/AGConstants.js');
 
-var TopBarUtils = require('../utils/TopBarUtils.js');
 var GroupSelectorUtils = require('../utils/GroupSelectorUtils.js')
 
 // store dependencies

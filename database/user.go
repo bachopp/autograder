@@ -8,9 +8,10 @@ type User struct {
 	Github    string
 	LastName  string
 	FirstName string
+	IsAdmin   bool `json:"isAdmin"`
 	Teacher   `json:"Teacher"`
 	Student   `json:"Student"`
-	Admin     `json:"Admin"`
+	// Admin     `json:"Admin"`
 }
 
 // Teacher represents db table
@@ -27,9 +28,9 @@ type Student struct {
 }
 
 // Admin represents db table
-type Admin struct {
-	isAdmin bool
-}
+// type Admin struct {
+// 	IsAdmin bool
+// }
 
 // NewUser returns struct based on db data and argument provided
 func NewUser(name string) (*User, error) {
@@ -83,7 +84,7 @@ func NewUser(name string) (*User, error) {
 			return nil, err
 		}
 	}
-	u.isAdmin, err = checkMode(u.ID, admin)
+	u.IsAdmin, err = checkMode(u.ID, admin)
 	if err != nil {
 		return nil, err
 	}
@@ -225,21 +226,25 @@ func (user *User) AddToCourse(course *Course, modes ...string) error {
 	defer tx.Rollback()
 	for _, mode := range modes {
 		// ok, err := checkMode(user.ID, mode)
-		stmt, err := tx.Prepare("INSERT INTO " + mode + " (userid) " +
-			"VALUES (?)")
-		if err != nil {
-			return err
-		}
-		defer stmt.Close()
-		_, err = stmt.Exec(user.ID)
-		switch mode {
-		case teacher:
-			user.isTeacher = true
-		case student:
-			user.isStudent = true
-		}
-		if err != nil {
-			return err
+		isMode, err := checkMode(user.ID, mode)
+
+		if !isMode {
+			stmt, err := tx.Prepare("INSERT INTO " + mode + " (userid) " +
+				"VALUES (?)")
+			if err != nil {
+				return err
+			}
+			defer stmt.Close()
+			_, err = stmt.Exec(user.ID)
+			switch mode {
+			case teacher:
+				user.isTeacher = true
+			case student:
+				user.isStudent = true
+			}
+			if err != nil {
+				return err
+			}
 		}
 		stmt2, err := tx.Prepare("INSERT INTO " + mode + "_course " +
 			"VALUES (?,?)")
@@ -289,7 +294,7 @@ func (user *User) MakeAdmin() error {
 	if err != nil {
 		return err
 	}
-	user.isAdmin = true
+	user.IsAdmin = true
 
 	return nil
 

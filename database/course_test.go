@@ -20,7 +20,7 @@ func TestCourse(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	if c.org.name != org.name {
-		t.Errorf("Expected %v, got %v", org.name, c.org.name)
+	if c.Org.name != org.name {
+		t.Errorf("Expected %v, got %v", org.name, c.Org.name)
 	}
 }

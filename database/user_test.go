@@ -28,7 +28,7 @@ func TestBruker(t *testing.T) {
 	}
 
 	u1.MakeAdmin()
-	fmt.Println(u1.isAdmin)
+	fmt.Println(u1.IsAdmin)
 	fmt.Println(u1.isTeacher)
 	fmt.Println(u1.isStudent)
 

@@ -24,6 +24,7 @@ var CoursesStore = require("../stores/CoursesStore.js");
 var SideNavStore = require("../stores/SideNavStore.js");
 
 const mode = "teacher";
+const user = "tokams"
 
 function getStateFromStores() {
   return {
@@ -37,7 +38,7 @@ function getStateFromStores() {
 var TeacherMode = React.createClass({
 
   getInitialState: function() {
-    CourseNavAPI.getCoursesForMode(mode);
+    CourseNavAPI.getCoursesForMode(mode, user);
     return getStateFromStores();
   },
 

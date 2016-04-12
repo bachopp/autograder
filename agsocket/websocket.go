@@ -5,15 +5,17 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"reflect"
 
 	"github.com/bachopp/autograder/database"
-	"github.com/bachopp/autograder/jsonify"
 	"github.com/gorilla/websocket"
 )
 
 // Constants for communication through websocket
 const (
-	ReceiveRawCourses     = "RECEIVE_RAW_COURSES"
+	username = "username"
+	mode     = "mode"
+
 	ReceiveRawRoles       = "RECEIVE_RAW_ROLES"
 	ReceiveCoursesForMode = "RECEIVE_COURSES_FOR_MODE"
 )
@@ -26,6 +28,15 @@ var upgrader = websocket.Upgrader{
 	},
 }
 
+// AGSocket delegates websocket to clients
+func AGSocket(w http.ResponseWriter, r *http.Request) {
+	socket, err := upgrader.Upgrade(w, r, nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+	go handleRequest(socket)
+}
+
 func handleRequest(socket *websocket.Conn) {
 	for {
 		msgType, msg, err := socket.ReadMessage()
@@ -35,58 +46,56 @@ func handleRequest(socket *websocket.Conn) {
 		}
 
 		// Creates go struct from received websocket payload
-		var request jsonify.Request
+		var request Request
 		err = json.Unmarshal(msg, &request)
 		if err != nil {
 			fmt.Println(err)
 		}
 
 		actionType := request.ActionType
-		payload := request.Payload.(map[string]interface{})
-
-		fmt.Println(string(msg))
+		payload := request.Payload
 
 		switch actionType {
 		case ReceiveRawRoles:
-
-			dbresponse := database.GetUserRoles(payload["username"].(string))
-
-			response := jsonify.Request{ActionType: actionType, Payload: dbresponse}
-
-			resp, err := jsonify.Unstructify(response)
+			fmt.Println(string(msg))
+			var err error
+			user := payload.User
+			u, err := database.NewUser(user)
 			if err != nil {
-				log.Fatal(err)
+				arr := []byte(err.Error())
+				socket.WriteMessage(msgType, arr)
 			}
-			socket.WriteMessage(msgType, resp)
-		case ReceiveRawCourses:
-			dbresponse := database.GetUserRoles(payload["username"].(string))
-			response := jsonify.Request{ActionType: actionType, Payload: dbresponse}
-
-			resp, err := jsonify.Unstructify(response)
-			if err != nil {
-				log.Fatal(err)
-			}
-			socket.WriteMessage(msgType, resp)
+			msg, err := json.Marshal(Response{actionType, u})
+			socket.WriteMessage(msgType, msg)
 		case ReceiveCoursesForMode:
-			dbresponse := database.GetUserRoles(payload["username"].(string))
-			moderesponse := dbresponse[payload["mode"].(string)]
-			response := jsonify.Request{ActionType: actionType, Payload: moderesponse}
-			resp, err := jsonify.Unstructify(response)
+			fmt.Println(string(msg))
+			var err error
+			user := payload.User
+			u, err := database.NewUser(user)
 			if err != nil {
-				log.Fatal(err)
+				arr := []byte(err.Error())
+				socket.WriteMessage(msgType, arr)
 			}
-			socket.WriteMessage(msgType, resp)
+			msg, err := json.Marshal(Response{actionType, u})
+			socket.WriteMessage(msgType, msg)
 		default:
 			//no op
 		}
 	}
 }
 
-// AGSocket delegates websocket to clients
-func AGSocket(w http.ResponseWriter, r *http.Request) {
-	socket, err := upgrader.Upgrade(w, r, nil)
-	if err != nil {
-		log.Fatal(err)
+// returns payload values as an string array
+func payloadFields(payload Payload) []string {
+	v := reflect.ValueOf(payload)
+	// var fiedVal []string
+	values := make([]interface{}, v.NumField())
+	fieldVal := make([]string, v.NumField())
+
+	for i := 0; i < v.NumField(); i++ {
+		values[i] = v.Field(i).Interface()
+		fieldVal[i] = values[i].(string)
 	}
-	go handleRequest(socket)
+
+	return fieldVal
+
 }

@@ -1,6 +1,10 @@
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 
+// constants
+var constants = require('../constants/constants.js');
+var mode = constants.mode;
+
 // local
 var AGDispatcher = require('../dispatcher/AGDispatcher');
 var AGConstants = require('../constants/AGConstants.js');
@@ -14,9 +18,7 @@ var _roles = [];
 var _activeRole = '';
 
 function _addRoles(rawRoles) {
-  for (var key in rawRoles) {
-    _roles.push(rawRoles[key]);
-  }
+  _roles = rawRoles;
 }
 
 var TopBarStore = assign({}, EventEmitter.prototype, {
@@ -48,7 +50,8 @@ TopBarStore.dispachToken = AGDispatcher.register(function(action) {
     // TODO: finish switch statement for different actions
 
      case ActionTypes.RECEIVE_RAW_ROLES:
-      _addRoles(action.rawRoles);
+      roles = TopBarUtils.convertRawRole(action.rawRoles)
+      _addRoles(roles);
       TopBarStore.emitChange();
       break;
     case ActionTypes.SWITCH_MODE:

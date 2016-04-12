@@ -28,11 +28,12 @@ function getStateFromStores() {
 }
 
 const mode = "student";
+const user = "tokams";
 
 var StudentMode = React.createClass({
 
   getInitialState: function() {
-    CourseNavAPI.getCoursesForMode(mode);
+    CourseNavAPI.getCoursesForMode(mode, user);
     return getStateFromStores();
   },
 
