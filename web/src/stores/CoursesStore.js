@@ -13,7 +13,7 @@ var CoursesUtils = require('../utils/CoursesUtils.js');
 
 var CHANGE_EVENT = 'change';
 
-// this is temporary the same as TopBarStore, but will incorporate more Courses
+// this is temporary the same as UsersStore, but will incorporate more Courses
 // like course description and number of students
 var _courses = {};
 

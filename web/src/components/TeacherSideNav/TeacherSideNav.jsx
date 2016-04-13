@@ -22,7 +22,7 @@ var SideNavActionCreators = require("../../actions/SideNavActionCreators.js");
 var TeacherSideNav = React.createClass({
 
   propTypes: {
-    lastCourse: React.PropTypes.string.isRequired,
+    courses: React.PropTypes.array.isRequired,
     activeElement: React.PropTypes.string.isRequired,
   },
 
@@ -30,33 +30,39 @@ var TeacherSideNav = React.createClass({
     SideNavActionCreators.changeActiveSideElement(activeElement);
   },
 
+  getLastCourse: function(courses) {
+    // TODO: coockies
+    return courses[0];
+  },
+
   render: function() {
 
     var self = this;
 
-    var lastCourse = this.props.lastCourse;
     var activeElement = this.props.activeElement;
-    
+
+    var lastCourse = this.getLastCourse(this.props.courses);
+
     return(
       <Col xs={12} className="whitebox">
 
-        <Link to={"\/teacher\/results/" + lastCourse}>
+        <Link to={"\/Teacher\/results/" + lastCourse}>
           <Button onClick={self.handleClick.bind(self,"results")} className="navButton" block>{resultsIcon} Results</Button>
         </Link>
 
-        <Link to={"\/teacher\/groups/" + lastCourse}>
+        <Link to={"\/Teacher\/groups/" + lastCourse}>
           <Button onClick={self.handleClick.bind(self,"groups")} className="navButton" block>{groupIcon} Groups</Button>
         </Link>
 
-        <Link to={"\/teacher\/users\/" + lastCourse}>
+        <Link to={"\/Teacher\/users\/" + lastCourse}>
           <Button onClick={self.handleClick.bind(self,"users")} className="navButton" block>{settingsIcon} Users</Button>
         </Link>
 
-        <Link to={"\/teacher\/settings\/" + lastCourse}>
+        <Link to={"\/Teacher\/settings\/" + lastCourse}>
           <Button onClick={self.handleClick.bind(self,"settings")} className="navButton" block>{settingsIcon} Settings</Button>
         </Link>
 
-        <Link to={"\/teacher\/info\/" + lastCourse}>
+        <Link to={"\/Teacher\/info\/" + lastCourse}>
           <Button onClick={self.handleClick.bind(self,"info")} className="navButton" block>{infoIcon} Info</Button>
         </Link>
 

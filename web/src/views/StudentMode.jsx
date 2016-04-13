@@ -7,6 +7,9 @@ var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
 var Button = require("react-bootstrap").Button;
 
+// const
+var constants = require('../constants/constants.js');
+var mode = constants.mode;
 // local
 var StudentSideNav = require("../components/StudentSideNav/StudentSideNav.jsx");
 var CourseNav = require("../components/CourseNav/CourseNav.jsx");
@@ -17,53 +20,55 @@ var TopBarActionCreators = require("../actions/TopBarActionCreators.js");
 // API
 var CourseNavAPI = require("../utils/CourseNavAPI.js");
 // stores
-var CourseNavStore = require("../stores/CourseNavStore.js");
+var UsersStore = require("../stores/UsersStore.js");
+var SideNavStore = require("../stores/SideNavStore.js");
 
 function getStateFromStores() {
+
   return {
-    courses: CourseNavStore.getCoursesForMode(),
-    currentCourse: CourseNavStore.getActiveCourse(),
-    lastCourse: CourseNavStore.getActiveCourse(),
+    courses: UsersStore.getCoursesForMode(mode.Student),
+    currentCourse: UsersStore.getActiveCourse(),
+    nav: SideNavStore.getActiveElement(),
   };
 }
 
-const mode = "student";
+// const mode = "student";
 const user = "tokams";
 
 var StudentMode = React.createClass({
 
   getInitialState: function() {
-    CourseNavAPI.getCoursesForMode(mode, user);
+    // CourseNavAPI.getCoursesForMode(mode, user);
     return getStateFromStores();
   },
 
   componentDidMount: function() {
-    CourseNavStore.addChangeListener(this._onChange);
-    TopBarActionCreators.receiveUserCourses(mode);
+    TopBarActionCreators.receiveUserCourses(mode.Student);
+    UsersStore.addChangeListener(this._onChange);
+    SideNavStore.addChangeListener(this._onChange);
   },
 
   componentWillUnmount: function() {
-    CourseNavStore.removeChangeListener(this._onChange);
+    UsersStore.removeChangeListener(this._onChange);
+    SideNavStore.removeChangeListener(this._onChange);
   },
 
   render: function() {
     var self = this;
     var courses = this.state.courses;
     var infoType = "Student " + this.state.currentCourse;
-    var lastCourse = this.state.lastCourse;
-
     return(
       <Row>
         <Col xs={2}>
-          <StudentSideNav lastCourse={lastCourse}/>
+          <StudentSideNav courses={courses}/>
         </Col>
         <Col xs={10}>
           <Col xs={12}>
               <Col xs={7}>
-                <CourseNav courses={courses} mode={mode}/>
+                <CourseNav courses={courses} mode={mode.Student}/>
               </Col>
               <Col xs={5} className="infoboxright">
-                <InfoBar infoType={infoType}/>
+                <InfoBar infoType={infoType} nav={self.state.nav}/>
               </Col>
           </Col>
 

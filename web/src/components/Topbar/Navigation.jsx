@@ -26,12 +26,19 @@ var Navigation = React.createClass({
     TopBarActionCreators.receiveUserCourses(mode);
   },
 
+  getLastSideNav: function() {
+
+  },
+  getLastCourse: function(role) {
+    // TODO: coockies
+    return "/" + role.Courses.Courses[0].Name;
+  },
+
   render:function() {
     var self = this;
     var roles = this.props.roles;
     var activeRole = this.props.activeRole;
 
-    var lastCourse = "";
     var defaultPage = "";
     // change last course to get DB
     var isActive = "";
@@ -51,12 +58,12 @@ var Navigation = React.createClass({
               modeLink += mode.Admin;
               break;
             case mode.Teacher:
-              lastCourse = "/DAT100";
+              lastCourse = self.getLastCourse(role);
               defaultPage = "/results";
               modeLink += role.Mode + defaultPage + lastCourse;
               break;
             case mode.Student:
-              lastCourse = "/DAT220";
+              lastCourse = self.getLastCourse(role);
               lastLab = "/lab1id";
               defaultPage = "/results";
               modeLink += role.Mode + defaultPage + lastCourse;

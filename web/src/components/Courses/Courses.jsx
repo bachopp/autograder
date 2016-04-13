@@ -12,7 +12,7 @@ var CenterWrapper = require("./CenterWrapper.jsx")
 
 var CoursesStore = require("../../stores/CoursesStore.js");
 var CoursesAPIUtils = require("../../utils/CoursesAPIUtils.js")
-
+var NotFound = require("../NotFound/NotFound.jsx");
 
 function getStateFromStores() {
   return {
@@ -34,6 +34,9 @@ var Courses = React.createClass({
 
   render: function() {
     var roles = this.state.roles;
+    if (roles[0] == null) {
+      return (<i/>)
+    }
     return (
       <div>
       <Col xs={8} xsOffset={2}>

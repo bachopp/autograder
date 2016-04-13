@@ -11,14 +11,14 @@ var Link = require("react-router").Link;
 var Dropdown = require("./Dropdown.jsx");
 var Navigation = require("./Navigation.jsx");
 // stores
-var TopBarStore = require("../../stores/TopBarStore.js");
+var UsersStore = require("../../stores/UsersStore.js");
 // utils
 var TopBarAPIUtils = require("../../utils/TopBarAPIUtils");
 
 function getStateFromStores() {
   return {
-    roles: TopBarStore.getAllRoles(),
-    activeRole: TopBarStore.getActiveRole(),
+    roles: UsersStore.getAllRoles(),
+    activeRole: UsersStore.getCurrentRole(),
   };
 }
 
@@ -31,11 +31,11 @@ var Topbar = React.createClass({
   },
 
   componentDidMount: function() {
-    TopBarStore.addChangeListener(this._onChange);
+    UsersStore.addChangeListener(this._onChange);
   },
 
   componentWillUnmount: function() {
-    TopBarStore.removeChangeListener(this._onChange);
+    UsersStore.removeChangeListener(this._onChange);
   },
 
   // TODO : iterate over buttons available fo user

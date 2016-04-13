@@ -16,7 +16,6 @@ var CenterWrapper = React.createClass({
       <div>
         {roles.map(function(role){
             courses = role.Courses.Courses
-            console.log(courses);
             return(
               <Col key={role.Mode} xs={3}>
               <h4>{role.Mode}</h4>

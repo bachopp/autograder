@@ -10,6 +10,7 @@ var InfoBar = React.createClass({
 
   propTypes: {
     infoType: React.PropTypes.string.isRequired,
+    nav: React.PropTypes.string.isRequired,
   },
 
   setTime: function(){
@@ -60,8 +61,8 @@ var InfoBar = React.createClass({
   render: function() {
     return(
       <div className={blinkclass}>
-        <Col xs={6}><b>{this.props.infoType}</b></Col>
-        <Col xs={6}><b>
+        <Col xs={6}><b>{this.props.infoType} {this.props.nav} </b></Col>
+        <Col xs={6}>(data placeholder)<b>
         </b></Col>
       </div>
     )

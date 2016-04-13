@@ -11,17 +11,25 @@ var Button = require("react-bootstrap").Button;
 var Glyphicon = require("react-bootstrap").Glyphicon;
 var FontAwesome = require('react-fontawesome');
 
+// const
+var constants = require('../../constants/constants.js');
+var mode = constants.mode;
 // actions
 var SideNavActionCreators = require("../../actions/SideNavActionCreators.js");
 
 var StudentSideNav = React.createClass({
 
   propTypes: {
-    lastCourse: React.PropTypes.string.isRequired,
+    courses: React.PropTypes.array.isRequired,
   },
 
   handleClick: function(activeElement) {
     SideNavActionCreators.changeActiveSideElement(activeElement);
+  },
+
+  getLastCourse: function(courses) {
+    // TODO: coockies
+    return courses[0];
   },
 
   render: function() {
@@ -31,16 +39,12 @@ var StudentSideNav = React.createClass({
     const infoIcon = <i className="fa fa-info fa-fw"></i>;
     const settingsIcon = <i className="fa fa-cog fa-fw"></i>;
     const taskIcon = <i className="fa fa-tasks fa-fw"></i>;
-
-    // retrieve this from DB
-    var lastCourse = this.props.lastCourse;
-
-    var lastLab = "/lab1id"
+    var lastCourse = this.getLastCourse(this.props.courses);
 
     return(
       <Col xs={12} className="whitebox">
 
-      <Link to={"\/student\/results\/" + lastCourse}>
+      <Link to={"\/Student\/results\/" + lastCourse}>
         <Button onClick={self.handleClick.bind(self,"results")} className="navButton" block>{taskIcon} Lab 1</Button>
       </Link>
 
@@ -58,19 +62,19 @@ var StudentSideNav = React.createClass({
 
       <Col xs={12} className="navButtonDivider"><b>Course panel</b></Col>
 
-      <Link to={"\/student\/members\/" + lastCourse}>
+      <Link to={"\/Student\/members\/" + lastCourse}>
         <Button onClick={self.handleClick.bind(self,"members")} className="navButton" block>{userIcon} Members</Button>
       </Link>
 
-      <Link to={"\/student\/groups\/" + lastCourse}>
+      <Link to={"\/Student\/groups\/" + lastCourse}>
         <Button onClick={self.handleClick.bind(self,"groups")} className="navButton" block>{groupIcon} Groups</Button>
       </Link>
 
-      <Link to={"\/student\/settings\/" + lastCourse}>
+      <Link to={"\/Student\/settings\/" + lastCourse}>
         <Button onClick={self.handleClick.bind(self,"settings")} className="navButton" block>{settingsIcon} Settings Student</Button>
       </Link>
 
-      <Link to={"\/student\/info\/" + lastCourse}>
+      <Link to={"\/Student\/info\/" + lastCourse}>
       <Button onClick={self.handleClick.bind(self,"info")} className="navButton" block>{infoIcon} Course info</Button>
       </Link>
 

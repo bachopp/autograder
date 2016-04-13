@@ -17,7 +17,6 @@ var _selectedLabIndex = 0;        // default 0 - first lab of student 0
 _students = mockData.students;    // from the mockData.js file
 
 function getStudentLabs() {
-  console.log("students");
   return _students;
 }
 
