@@ -31,7 +31,7 @@ var StudentResultsList = React.createClass({
     this.setState(this._getStudentsFromStore());
   },
   getInitialState: function() {
-    LabViewCourseActions.receiveStudentlabs();
+    //LabViewCourseActions.receiveStudentlabs();
     return this._getStudentsFromStore();
   },
   componentWillMount: function() {
@@ -41,6 +41,32 @@ var StudentResultsList = React.createClass({
     LabViewStore.removelistener(this._onChange);
   },
   render: function() {
+
+    if(!this.state.students || this.state.students.length == 0) {
+      var ifElement = <h4>No students found</h4>;
+    } else {
+      var ifElement = <Table className="tables" striped={true} responsive={true} bordered={true}>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Slipdays</th>
+            <th>Lab 1</th>
+            <th>Lab 2</th>
+            <th>Lab 3</th>
+            <th>Lab 4</th>
+            <th>Lab 5</th>
+          </tr>
+        </thead>
+        <tbody>
+          {this.state.students.map(function(student,index) {
+            return <StudentRow key={"studentRow" + index} student={student}/>
+          },this)}
+        </tbody>
+      </Table>;
+    }
+
+
+
     return(
           <Col>
             <Col xs={12}>
@@ -52,24 +78,7 @@ var StudentResultsList = React.createClass({
               <Glyphicon className="symbolNotApproved" glyph="glyphicon glyphicon-stop"/> Not approved
             </Col>
             <Col xs={12}>
-              <Table className="tables" striped={true} responsive={true} bordered={true}>
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Slipdays</th>
-                    <th>Lab 1</th>
-                    <th>Lab 2</th>
-                    <th>Lab 3</th>
-                    <th>Lab 4</th>
-                    <th>Lab 5</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {this.state.students.map(function(student,index) {
-                    return <StudentRow key={"studentRow" + index} student={student}/>
-                  },this)}
-                </tbody>
-              </Table>
+              {ifElement}
             </Col>
 
           </Col>

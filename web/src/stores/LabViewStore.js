@@ -18,15 +18,19 @@ var _selectedLabIndex = 0;        // default 0 - first lab of student 0
 var _rawData = mockData.students;
 var _students = _rawData;
 
+function resetStudents() {
+  updateStudentList(_rawData);
+}
+
+
 function queryStudents(query) {
+  resetStudents();
   _query = [];
   _theStudents = _students;
   var query = query.toLowerCase();
   if(!query) {
-    console.log(_theStudents);
     return _rawData;
   }
-  console.log("NOT EMPTY");
   _theStudents.forEach(function(currentStud) {
     var uname = currentStud.username.toLowerCase().search(query);
     var fname = currentStud.firstName.toLowerCase().search(query);
@@ -34,21 +38,45 @@ function queryStudents(query) {
 
     if(uname >= 0 || fname >= 0 || lname >= 0) {
       _query.push(currentStud);
+    } else {
     }
   });
-  return _query;
+
+  if(_query.length == 0) {
+    // no results
+    return false;
+  } else {
+    return _query;
+  }
 }
 
 function getStudentLabs() {
   return _students;
 }
 
+/*
+  TODO: When the _selectedXX is not in the list,
+  the first list-item should be set as active
+
+  -- this is to prevent bugs when searching for students
+  and the selected student is not in the queried group
+*/
 function updateStudentList(newList) {
+
+  for(var i = 0; i<newList.length; i++){
+    if(newList[i] == _students[_selectedStudentIndex]) {
+      // the currently selected student is in the search
+    } else {
+      // else - the selected lab will be set to the searches queryResults[0].labs[0]
+      _selectedStudentIndex = 0;
+      _selectedLabIndex = 0;
+    }
+  }
   _students = newList;
+
 }
 
 function setSelectedStudentLab(studentIndex,labIndex) {
-
   // first- remove the old selected lab
   _students[_selectedStudentIndex].labs[_selectedLabIndex].isSelected = false;
   _selectedStudentIndex = studentIndex;
@@ -63,6 +91,7 @@ function toggleApprovalStudentLab() {
 }
 
 function getSelectedStudentLab() {
+  console.log(_selectedStudentIndex);
   return _students[_selectedStudentIndex].labs[_selectedLabIndex];
 }
 
@@ -118,10 +147,16 @@ LabViewStore.dispatchToken = AGDispatcher.register(function(action) {
       break;
     case ActionTypes.SEARCH_FOR_STUDENT:
       var keep = queryStudents(action.query);
-      updateStudentList(keep);
-      LabViewStore.emitChange();
-      updateStudentList(keep);
+      if(!keep) {
+        updateStudentList(keep);
+        LabViewStore.emitChange();
+        updateStudentList(keep);
+      } else {
+        updateStudentList([]);
+        LabViewStore.emitChange();
+      }
       break;
+
     default:
       // do nothing here
   }
