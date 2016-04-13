@@ -25,7 +25,11 @@ func TestDummyData(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	o2, err := InsertOrganization("dat-200", "https://github.com/dat-100")
+	o2, err := InsertOrganization("dat-200", "https://github.com/dat-200")
+	if err != nil {
+		t.Error(err)
+	}
+	o3, err := InsertOrganization("dat-310", "https://github.com/dat-310")
 	if err != nil {
 		t.Error(err)
 	}
@@ -50,14 +54,27 @@ func TestDummyData(t *testing.T) {
 	isCodeReview = false
 	c2, err := InsertCourse(o2, name, singleAssm, groupAssm, description, slipdays, isSlipdays, isPrivRepo, isCodeReview)
 
+	name = "DAT310"
+	singleAssm = 5
+	groupAssm = 2
+	description = "Databaser"
+	slipdays = 5
+	isSlipdays = true
+	isPrivRepo = false
+	isCodeReview = false
+	c3, err := InsertCourse(o3, name, singleAssm, groupAssm, description, slipdays, isSlipdays, isPrivRepo, isCodeReview)
+
 	// test inserts
 	if err := u1.MakeAdmin(); err != nil {
 		t.Error(err)
 	}
-	if err := u1.AddToCourse(c1, teacher, student); err != nil {
+	if err := u1.AddToCourse(c1, teacher); err != nil {
 		t.Error(err)
 	}
-	if err := u1.AddToCourse(c2, student, teacher); err != nil {
+	if err := u1.AddToCourse(c2, teacher); err != nil {
+		t.Error(err)
+	}
+	if err := u1.AddToCourse(c3, student); err != nil {
 		t.Error(err)
 	}
 }
