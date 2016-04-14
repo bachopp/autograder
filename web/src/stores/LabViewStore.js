@@ -11,49 +11,44 @@ var ActionTypes = AGConstants.ActionTypes;
 
 var CHANGE_EVENT = "change";
 
-var _selectedStudentIndex = 0;    // default 0 - first student
-var _selectedLabIndex = 0;        // default 0 - first lab of student 0
+var _selectedStudId = 0;
+var _selectedLabId = 0;
 
-
-var _rawData = mockData.students;
-var _students = _rawData;
+var allStudents = mockData.students;
+var selectedStudents = allStudents;   // default all students are selected
 
 function resetStudents() {
-  updateStudentList(_rawData);
+  console.log("--RESET STUDENTLIST");
+  selectedStudents = allStudents;
 }
-
 
 function queryStudents(query) {
   resetStudents();
-  _query = [];
-  _theStudents = _students;
-  var query = query.toLowerCase();
-  if(!query) {
-    return _rawData;
-  }
-  _theStudents.forEach(function(currentStud) {
-    var uname = currentStud.username.toLowerCase().search(query);
-    var fname = currentStud.firstName.toLowerCase().search(query);
-    var lname = currentStud.lastName.toLowerCase().search(query);
+  if(!query) return;
+  _queryResult = [];
+  _localStudents = selectedStudents;
+  query = query.toLowerCase();
+  _localStudents.forEach(function(cStud) {
+    var uname = cStud.username.toLowerCase().search(query);
+    var fname = cStud.firstName.toLowerCase().search(query);
+    var lname = cStud.lastName.toLowerCase().search(query);
 
-    if(uname >= 0 || fname >= 0 || lname >= 0) {
-      _query.push(currentStud);
-    } else {
-    }
+    (uname>=0 || fname>= 0 || lname>=0) ? _queryResult.push(cStud) : 0;
   });
 
-  if(_query.length == 0) {
-    // no results
+  if(_queryResult.length == 0) {
     return false;
   } else {
-    return _query;
+    return _queryResult;
   }
 }
 
 function getStudentLabs() {
-  return _students;
+  return selectedStudents;
 }
-
+function getSelectedStudentLab() {
+  return selectedStudents[_selectedStudId].labs[_selectedLabId];
+}
 /*
   TODO: When the _selectedXX is not in the list,
   the first list-item should be set as active
@@ -62,43 +57,30 @@ function getStudentLabs() {
   and the selected student is not in the queried group
 */
 function updateStudentList(newList) {
-
   for(var i = 0; i<newList.length; i++){
-    if(newList[i] == _students[_selectedStudentIndex]) {
+    if(newList[i] == selectedStudents[_selectedStudId]) {
       // the currently selected student is in the search
     } else {
       // else - the selected lab will be set to the searches queryResults[0].labs[0]
-      _selectedStudentIndex = 0;
-      _selectedLabIndex = 0;
+      _selectedStudId = 0;
+      _selectedLabId = 0;
     }
   }
-  _students = newList;
-
+  selectedStudents = newList;
 }
 
 function setSelectedStudentLab(studentIndex,labIndex) {
-  // first- remove the old selected lab
-  _students[_selectedStudentIndex].labs[_selectedLabIndex].isSelected = false;
-  _selectedStudentIndex = studentIndex;
-  _selectedLabIndex = labIndex;
-  _students[_selectedStudentIndex].labs[_selectedLabIndex].isSelected = true;
+  selectedStudents[_selectedStudId].labs[_selectedLabId].isSelected = false;
+  _selectedStudId = studentIndex;
+  _selectedLabId = labIndex;
 
+  selectedStudents[studentIndex].labs[labIndex].isSelected = true;
 }
 
-// Toggle currently selected student's lab
-function toggleApprovalStudentLab() {
-  toggleLabApproval(_selectedStudentIndex,_selectedLabIndex);
+function toggleSelectedLab() {
+  selectedStudents[_selectedStudId].labs[_selectedLabId].approved != selectedStudents[_selectedStudId].labs[_selectedLabId].approved;
 }
 
-function getSelectedStudentLab() {
-  console.log(_selectedStudentIndex);
-  return _students[_selectedStudentIndex].labs[_selectedLabIndex];
-}
-
-// Toggle lab using index of student and lab number
-function toggleLabApproval(sIndex,lIndex) {
-  _students[sIndex].labs[lIndex].approved = !_students[sIndex].labs[lIndex].approved;
-}
 
 
 var LabViewStore = assign({},EventEmitter.prototype, {
@@ -112,51 +94,36 @@ var LabViewStore = assign({},EventEmitter.prototype, {
     this.removeListener(CHANGE_EVENT,callback);
   },
   getStudentLabs: function() {
-    return _students;
+    return getStudentLabs();
   },
-
   getSelectedStudent: function() {
-    return _students[_selectedStudentIndex];
+    return getStudentLabs()[_selectedStudId];
   },
   getSelectedStudentLab: function() {
     return getSelectedStudentLab();
-  },
-  setSelectedStudentLab: function(studentIndex,labIndex) {
-    setSelectedStudentLab(studentIndex,labIndex);
-  },
+  }
 });
 LabViewStore.dispatchToken = AGDispatcher.register(function(action) {
   switch(action.type) {
-    case ActionTypes.RECEIVE_RAW_STUDENTLABS:
-      getStudentLabs();
-      LabViewStore.emitChange();
-      break;
-    case ActionTypes.RECEIVE_SELECTED_LAB:
-      getSelectedStudentLab();
-      LabViewStore.emitChange();
-      break;
     case ActionTypes.SET_SELECTED_STUDENTLAB:
       setSelectedStudentLab(action.studentIndex, action.labIndex);
       LabViewStore.emitChange();
       break;
     case ActionTypes.TOGGLE_APPROVAL_STUDENTLAB:
-      // toggle the lab based on _selected indexes. Might
-      // change this to an input from the element?
-      toggleApprovalStudentLab();
+      toggleSelectedLab();
       LabViewStore.emitChange();
       break;
     case ActionTypes.SEARCH_FOR_STUDENT:
       var keep = queryStudents(action.query);
-      if(!keep) {
+      if(keep) {
         updateStudentList(keep);
         LabViewStore.emitChange();
         updateStudentList(keep);
       } else {
-        updateStudentList([]);
+        updateStudentList([]);    // returns empty array if no results on search
         LabViewStore.emitChange();
       }
       break;
-
     default:
       // do nothing here
   }
