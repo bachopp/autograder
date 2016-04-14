@@ -32,8 +32,7 @@ func connectDb() {
 func InitializeDb() error {
 	connectDb()
 	defer con.Close()
-
-	f, err := os.Open("/var/www/autograder/database/database.sql")
+	f, err := os.Open(os.Getenv("GOPATH") + "/src/github.com/bachopp/autograder/database/database.sql")
 	if err != nil {
 		return err
 	}
