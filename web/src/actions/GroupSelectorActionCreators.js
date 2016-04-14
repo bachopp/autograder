@@ -31,5 +31,10 @@ module.exports = {
       student: student,
       group: group,
     });
-  }
+  },
+  expandeAll: function() {
+    AGDispatcher.dispatch({
+      type: ActionTypes.EXPANDE_ALL_GROUPS,
+    });
+  },
 };

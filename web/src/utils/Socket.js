@@ -10,10 +10,10 @@ var Socket =  function() {
 
   this.ws = new WebSocket("ws://localhost:8000/ws");
 
-  this.message = function(payload) {
+  this.message = function(m) {
     // TODO: emit that message has arrived
     // figure out what ActionCreator to call with new data?
-    var data = JSON.parse(payload.data);
+    var data = JSON.parse(m.data);
 
     switch(data.actionType) {
       case ActionTypes.RECEIVE_RAW_ROLES:
@@ -22,6 +22,7 @@ var Socket =  function() {
         break;
       case ActionTypes.RECEIVE_COURSES_FOR_MODE:
         CourseNavServerActionCreators.receiveModeCourses(data.payload);
+        break;
       default:
         // do nothing
     }

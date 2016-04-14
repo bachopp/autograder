@@ -18,37 +18,37 @@ type Role struct {
 // 	Roles []Role `json:"roles"`
 // }
 
-// InsertTestUser inserts test user
-func InsertTestUser(github string) {
-	connectDb()
-	defer con.Close()
-
-	tx, err := con.Begin()
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer tx.Rollback()
-	stmt, err := tx.Prepare("INSERT INTO user (github, last_name, first_name) VALUES (?, ?, ?)")
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer stmt.Close() // danger!
-
-	// test data:
-	lastName := "TestLast"
-	firstName := "TersFirst"
-	_, err = stmt.Exec(github, lastName, firstName)
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	err = tx.Commit()
-	if err != nil {
-		log.Fatal(err)
-	}
-	// stmt.Close() runs here!
-}
+// // InsertTestUser inserts test user
+// func InsertTestUser(github string) {
+// 	connectDb()
+// 	defer con.Close()
+//
+// 	tx, err := con.Begin()
+// 	if err != nil {
+// 		log.Fatal(err)
+// 	}
+// 	defer tx.Rollback()
+// 	stmt, err := tx.Prepare("INSERT INTO user (github, last_name, first_name) VALUES (?, ?, ?)")
+// 	if err != nil {
+// 		log.Fatal(err)
+// 	}
+// 	defer stmt.Close() // danger!
+//
+// 	// test data:
+// 	lastName := "TestLast"
+// 	firstName := "TersFirst"
+// 	_, err = stmt.Exec(github, lastName, firstName)
+//
+// 	if err != nil {
+// 		log.Fatal(err)
+// 	}
+//
+// 	err = tx.Commit()
+// 	if err != nil {
+// 		log.Fatal(err)
+// 	}
+// 	// stmt.Close() runs here!
+// }
 
 func getUserID(username string) (int, error) {
 	// TODO: username is candidate key, find primary key of `username`
@@ -158,7 +158,7 @@ func GetUserRoles(username string) map[string]Role {
 	}
 
 	roles := make(map[string]Role)
-	modes := []string{"admin", "teacher", "student"}
+	modes := []string{admin, teacher, student}
 	crses := make([]courses, 0, 32)
 	var course string
 	var courseid int

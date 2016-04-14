@@ -13,7 +13,7 @@ var CoursesUtils = require('../utils/CoursesUtils.js');
 
 var CHANGE_EVENT = 'change';
 
-// this is temporary the same as TopBarStore, but will incorporate more Courses
+// this is temporary the same as UsersStore, but will incorporate more Courses
 // like course description and number of students
 var _courses = {};
 
@@ -45,7 +45,8 @@ CoursesStore.dispatchToken = AGDispatcher.register(function(action) {
   switch(action.type) {
     // TODO: finish switch statement for different actions
     case ActionTypes.RECEIVE_RAW_COURSES:
-      _newCourses(action.rawCourses);
+      courses = CoursesUtils.convertRawRole(action.rawCourses);
+      _newCourses(courses);
       CoursesStore.emitChange();
       break;
     default:

@@ -12,6 +12,10 @@ var DropdownList = require("./DropdownList.jsx")
 // stores
 var TopBarActionCreators = require("../../actions/TopBarActionCreators.js");
 
+// constants
+var constants = require("../../constants/constants.js");
+var mode = constants.mode;
+
 var Navigation = React.createClass({
   propTypes: {
     roles: React.PropTypes.array.isRequired,
@@ -22,12 +26,19 @@ var Navigation = React.createClass({
     TopBarActionCreators.receiveUserCourses(mode);
   },
 
+  getLastSideNav: function() {
+
+  },
+  getLastCourse: function(role) {
+    // TODO: coockies
+    return "/" + role.Courses.Courses[0].Name;
+  },
+
   render:function() {
     var self = this;
     var roles = this.props.roles;
     var activeRole = this.props.activeRole;
 
-    var lastCourse = "";
     var defaultPage = "";
     // change last course to get DB
     var isActive = "";
@@ -43,18 +54,18 @@ var Navigation = React.createClass({
           i++;
           var modeLink = "/";
           switch (role.Mode) {
-            case "admin":
-              modeLink += "admin";
+            case mode.Admin:
+              modeLink += mode.Admin;
               break;
-            case "teacher":
-              lastCourse = "/DAT100";
-              defaultPage = "/results";
+            case mode.Teacher:
+              lastCourse = self.getLastCourse(role);
+              defaultPage = "/settings";
               modeLink += role.Mode + defaultPage + lastCourse;
               break;
-            case "student":
-              lastCourse = "/DAT220";
+            case mode.Student:
+              lastCourse = self.getLastCourse(role);
               lastLab = "/lab1id";
-              defaultPage = "/results";
+              defaultPage = "/settings";
               modeLink += role.Mode + defaultPage + lastCourse;
               break;
             default:

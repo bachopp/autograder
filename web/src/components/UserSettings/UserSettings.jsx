@@ -60,7 +60,6 @@ var UserSettings = React.createClass({
       </Col>
 
 
-      console.log(this.state.isEdit);
     } else {
       var el1 = <Input type="email" defaultValue={email} onChange={this.onChangeInput} />
       var el2 = <Input type="number" defaultValue={studentNumber} onChange={this.onChangeInput} />

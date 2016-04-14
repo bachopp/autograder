@@ -10,6 +10,7 @@ var InfoBar = React.createClass({
 
   propTypes: {
     infoType: React.PropTypes.string.isRequired,
+    nav: React.PropTypes.string.isRequired,
   },
 
   setTime: function(){
@@ -45,12 +46,12 @@ var InfoBar = React.createClass({
       });
   },
   componentWillMount: function(){
-    this.setTime();
+    // this.setTime();
   },
   componentDidMount: function(){
-     window.setInterval(function () {
-      this.setTime();
-    }.bind(this), 60000);
+    //  window.setInterval(function () {
+    //   this.setTime();
+    // }.bind(this), 60000);
   },
   componentWillUnmount: function() {
     // blinkclass = "";
@@ -60,9 +61,8 @@ var InfoBar = React.createClass({
   render: function() {
     return(
       <div className={blinkclass}>
-        <Col xs={6}><b>{this.props.infoType}</b></Col>
-        <Col xs={6}><b>
-          {this.state.month}, {this.state.day} - {this.state.hours}:{this.state.minutes}
+        <Col xs={6}><b>{this.props.infoType} {this.props.nav} </b></Col>
+        <Col xs={6}>(data placeholder)<b>
         </b></Col>
       </div>
     )
@@ -70,3 +70,4 @@ var InfoBar = React.createClass({
 });
 
 module.exports = InfoBar;
+// {this.state.month}, {this.state.day} - {this.state.hours}:{this.state.minutes}

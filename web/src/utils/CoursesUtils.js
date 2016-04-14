@@ -1,16 +1,18 @@
+var constants = require('../constants/constants.js');
+var mode = constants.mode;
+
 module.exports = {
   // TODO: These are used in stores to convert received data from API to whatever we need
 
-  // @Depricated
-  convertRawCourses: function(rawCourses, mode) {
-    var courses = [];
-    rawCourses.forEach(function(course) {
-      if (course.Mode === mode) {
-        course.Courses.forEach(function(str){
-          courses.push(str.CourseName);
-        });
+  convertRawRole: function(rawRoles) {
+
+    var roles = [];
+    for (var key in rawRoles) {
+      if (key === mode.Teacher || key === mode.Student) {
+        role = {Mode: key, Courses: rawRoles[key]};
+        roles.push(role);
       }
-    });
-    return courses;
+    }
+    return roles
   },
 };

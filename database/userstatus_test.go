@@ -2,30 +2,32 @@ package database
 
 import "testing"
 
-func TestUser(t *testing.T) {
+func TestUserStat(t *testing.T) {
 	InitializeDb()
-	InsertTestUser("thomasUserId1")
-	InsertTestUser("thomas")
 
-	AddCourse("DAT100")
+	InsertUser("tokams", "Gliniecki", "Tomasz")
+	InsertUser("thomasdarvik", "Darvik", "Thomas")
+
+	createCourse("DAT100")
 	ida := 1
-	AddCourse("DAT200")
+	createCourse("DAT200")
 	idb := 2
-	AddCourse("DAT210")
+	createCourse("DAT210")
 	idc := 3
-	AddCourse("DAT220")
+	createCourse("DAT220")
 	ide := 3
-	AddCourse("DAT310")
+	createCourse("DAT310")
 	idg := 6
-	AddCourse("DAT320")
+	createCourse("DAT320")
 	idh := 4
-	AddCourse("DAT230")
+	createCourse("DAT230")
 	idf := 5
 
 	a := Role{"admin", []courses{{idf, "DAT230"}}}
 	b := Role{"teacher", []courses{{ida, "DAT100"}, {idb, "DAT200"}, {idc, "DAT210"}, {idg, "DAT310"}}}
 	c := Role{"student", []courses{{idh, "DAT320"}, {ide, "DAT220"}}}
 
-	UpgradeUser("thomas", a, b, c)
+	UpgradeUser("tokams", a, b, c)
+	UpgradeUser("thomasdarvik", b, c)
 
 }

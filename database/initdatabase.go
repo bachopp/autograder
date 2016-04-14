@@ -11,7 +11,9 @@ import (
 
 var con sql.DB
 
-// ConnectDb connects to database
+func init() {
+}
+
 func connectDb() {
 	// database name in sql.Open is required, as a result one needs to create a database before starting the server.
 	// name of the database should be "agdatabase"
@@ -27,13 +29,13 @@ func connectDb() {
 }
 
 // InitializeDb creates all neccesary tables for autograder
-func InitializeDb() {
+func InitializeDb() error {
 	connectDb()
 	defer con.Close()
 
 	f, err := os.Open("/var/www/autograder/database/database.sql")
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 
 	scanner := bufio.NewScanner(f)
@@ -42,7 +44,8 @@ func InitializeDb() {
 		line := scanner.Text()
 		_, err := con.Exec(line)
 		if err != nil {
-			log.Fatal(err)
+			return err
 		}
 	}
+	return nil
 }

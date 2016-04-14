@@ -5,7 +5,6 @@ var assign = require('object-assign');
 var AGDispatcher = require('../dispatcher/AGDispatcher');
 var AGConstants = require('../constants/AGConstants.js');
 
-var TopBarUtils = require('../utils/TopBarUtils.js');
 var GroupSelectorUtils = require('../utils/GroupSelectorUtils.js')
 
 // store dependencies
@@ -22,6 +21,8 @@ var _students = [];
 var _query = [];
 var _selectedStudent = '';
 
+var _isGroupsExpanded = false;
+
 function _removeGroup(group) {
   for (var i = 0; i < _groups.length; i++) {
     if (_groups[i] === group) {
@@ -37,7 +38,7 @@ function _removeGroup(group) {
 
 function _addGroup() {
   var len = _groups.length + 1;
-  var newGroup = {name:"group_"+ len, number: len, users:[]};
+  var newGroup = {name:"groups_"+ len, number: len, users:[]};
   _groups.push(newGroup);
 }
 
@@ -58,6 +59,25 @@ function _isAnyGroupActive() {
 }
 
 function _expandAllGroups() {
+  isAnyExpanded = false;
+
+  for (var i = 0; i < _groups.length; i++) {
+    if (_groups[i].expanded) {
+      isAnyExpanded = true;
+      break;
+    }
+  }
+  if (isAnyExpanded){
+    _groups.forEach(function(grp){
+      grp.expanded = false;
+    });
+    _isGroupsExpanded = false;
+  } else {
+    _groups.forEach(function(grp){
+      grp.expanded = true;
+      _isGroupsExpanded = true;
+    });
+  }
 
 }
 
@@ -160,6 +180,10 @@ var GroupManagerStore = assign({}, EventEmitter.prototype, {
   getAllStudents: function() {
     return _students;
   },
+
+  isGroupsExpanded: function() {
+    return _isGroupsExpanded;
+  },
 });
 
 GroupManagerStore.dispachToken = AGDispatcher.register(function(action) {
@@ -180,7 +204,6 @@ GroupManagerStore.dispachToken = AGDispatcher.register(function(action) {
     case ActionTypes.REMOVE_GROUP:
       _removeGroup(action.group);
       _setOneGroupActive();
-      console.log(_groups);
       GroupManagerStore.emitChange();
       break;
     case ActionTypes.ADD_TO_GROUP:
@@ -204,7 +227,12 @@ GroupManagerStore.dispachToken = AGDispatcher.register(function(action) {
     case ActionTypes.QUERY_FOR_STUDENT:
       var keep = _newStudents(_searchFor(action.query));
       GroupManagerStore.emitChange();
-      var _ = _newStudents(keep)
+      var _ = _newStudents(keep);
+      break;
+    case ActionTypes.EXPANDE_ALL_GROUPS:
+      _expandAllGroups();
+      GroupManagerStore.emitChange();
+      break;
     default:
      // no action
   }

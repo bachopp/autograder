@@ -13,7 +13,7 @@ var ButtonGroup = require("react-bootstrap").ButtonGroup;
 
 // local requires
 var CoursesStore = require("../../stores/CoursesStore.js");
-var CourseNavStore = require("../../stores/CourseNavStore.js");
+var UsersStore = require("../../stores/UsersStore.js");
 var SideNavStore = require("../../stores/SideNavStore.js");
 
 var TopBarActionCreators = require("../../actions/TopBarActionCreators.js");
@@ -22,10 +22,9 @@ var CourseNavActionCreators = require("../../actions/CourseNavActionCreators.js"
 function getStateFromStores() {
   return {
     sidenav: SideNavStore.getActiveElement(),
-    activeCourse: CourseNavStore.getActiveCourse(),
+    activeCourse: UsersStore.getActiveCourse(),
   }
 }
-
 
 // local
 var CourseNav = React.createClass({
@@ -41,12 +40,12 @@ var CourseNav = React.createClass({
   },
 
   componentDidMount: function() {
-    CourseNavStore.addChangeListener(this._onChange);
+    UsersStore.addChangeListener(this._onChange);
     SideNavStore.addChangeListener(this._onChange);
   },
 
   componentWillUnmount: function() {
-    CourseNavStore.removeChangeListener(this._onChange);
+    UsersStore.removeChangeListener(this._onChange);
     SideNavStore.removeChangeListener(this._onChange);
   },
 
@@ -63,10 +62,16 @@ var CourseNav = React.createClass({
     var mode = this.props.mode;
 
     var sidenav = this.state.sidenav;
-    var activeCourse = this.state.activeCourse.name;
+    var activeCourse = this.state.activeCourse;
 
     var size = Math.floor(12/courses.length);
-    var active = this.state.activeCourse; // courseactive
+    var active = '';
+    if (activeCourse == '') {
+      active = courses[0];
+    }else {
+      active = activeCourse;
+    }
+
     return (
       <Row>
       <ButtonGroup justified>

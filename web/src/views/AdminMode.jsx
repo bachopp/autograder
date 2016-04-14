@@ -16,11 +16,13 @@ var InfoBar = require("../components/InfoBar/InfoBar.jsx");
 var TopBarActionCreators = require("../actions/TopBarActionCreators.js");
 
 // stores
-var CourseNavStore = require("../stores/CourseNavStore.js");
+var UsersStore = require("../stores/UsersStore.js");
+var SideNavStore = require("../stores/SideNavStore.js");
 
 function getStateFromStores() {
   return {
-    courses: CourseNavStore.getCoursesForMode(),
+    courses: UsersStore.getCoursesForMode(),
+    nav: SideNavStore.getActiveElement(),
   };
 }
 
@@ -31,11 +33,13 @@ var AdminMode = React.createClass({
   },
 
   componentDidMount: function() {
-    CourseNavStore.addChangeListener(this._onChange);
+    UsersStore.addChangeListener(this._onChange);
+    SideNavStore.addChangeListener(this._onChange);
   },
 
   componentWillUnmount: function() {
-    CourseNavStore.removeChangeListener(this._onChange);
+    UsersStore.removeChangeListener(this._onChange);
+    SideNavStore.removeChangeListener(this._onChange);
   },
 
   render: function() {
@@ -48,7 +52,7 @@ var AdminMode = React.createClass({
         </Col>
         <Col xs={10}>
           <Col xs={12} className="admininfobox">
-                <InfoBar infoType="Admin page" />
+                <InfoBar infoType="Admin page" nav={self.state.nav}/>
           </Col>
             {this.props.children}
         </Col>
