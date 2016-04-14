@@ -78,7 +78,7 @@ function setSelectedStudentLab(studentIndex,labIndex) {
 }
 
 function toggleSelectedLab() {
-  selectedStudents[_selectedStudId].labs[_selectedLabId].approved != selectedStudents[_selectedStudId].labs[_selectedLabId].approved;
+  selectedStudents[_selectedStudId].labs[_selectedLabId].approved = !selectedStudents[_selectedStudId].labs[_selectedLabId].approved;
 }
 
 
