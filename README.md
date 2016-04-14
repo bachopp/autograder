@@ -8,6 +8,13 @@
 	mysql> create database agdatabase;
 	mysql> grant all privileges on agdatabase.* to autograder@localhost;
 	mysql> set password for autograder@localhost = password("autograder");
+	
+	start server:
+	$ $GOPATH/bin/autograder
+	
+	open browser:
+	localhost:8000
+	
 
 developing frontend for autograder system @ UiS
 
