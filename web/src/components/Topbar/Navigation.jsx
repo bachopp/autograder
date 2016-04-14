@@ -59,13 +59,13 @@ var Navigation = React.createClass({
               break;
             case mode.Teacher:
               lastCourse = self.getLastCourse(role);
-              defaultPage = "/results";
+              defaultPage = "/settings";
               modeLink += role.Mode + defaultPage + lastCourse;
               break;
             case mode.Student:
               lastCourse = self.getLastCourse(role);
               lastLab = "/lab1id";
-              defaultPage = "/results";
+              defaultPage = "/settings";
               modeLink += role.Mode + defaultPage + lastCourse;
               break;
             default:

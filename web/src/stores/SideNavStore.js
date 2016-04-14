@@ -37,7 +37,6 @@ var SideNavStore = assign({}, EventEmitter.prototype, {
   },
 
   getActiveElement: function() {
-    console.log(_activeElement);
     return _activeElement;
   }
 

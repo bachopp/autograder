@@ -66,7 +66,6 @@ var CourseNav = React.createClass({
 
     var size = Math.floor(12/courses.length);
     var active = '';
-    console.log(activeCourse);
     if (activeCourse == '') {
       active = courses[0];
     }else {

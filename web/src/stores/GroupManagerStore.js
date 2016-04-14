@@ -204,7 +204,6 @@ GroupManagerStore.dispachToken = AGDispatcher.register(function(action) {
     case ActionTypes.REMOVE_GROUP:
       _removeGroup(action.group);
       _setOneGroupActive();
-      console.log(_groups);
       GroupManagerStore.emitChange();
       break;
     case ActionTypes.ADD_TO_GROUP:

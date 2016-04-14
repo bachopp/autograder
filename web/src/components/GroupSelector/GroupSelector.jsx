@@ -120,7 +120,6 @@ var GroupSelector = React.createClass({
                   wrapperClass += "wrapperactive agdarkgray";
                   elementClass = "agdarkgray";
                 }
-                console.log(wrapperClass);
                 return (
                   <div key={group.number} className={wrapperClass}>
                     <Panel

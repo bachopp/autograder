@@ -99,7 +99,6 @@ UsersStore.dispachToken = AGDispatcher.register(function(action) {
       UsersStore.emitChange();
       break;
     case ActionTypes.SWITCH_SIDE_NAV:
-      // console.log(action.mode);
       // _currentSideNav = action.mode;
       // UsersStore.emitChange();
       break;

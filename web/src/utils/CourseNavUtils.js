@@ -3,7 +3,6 @@ module.exports = {
   convertRawCourses: function(rawCourses) {
 
     var courses = [];
-    console.log(rawCourses);
 
     // for (var i = 0; i < rawCourses.length; i++) {
     //   courses.push(rawCourses[i].CourseName);
