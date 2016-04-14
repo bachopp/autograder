@@ -8,12 +8,13 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"os"
 
 	"github.com/bachopp/autograder/agsocket"
 	"github.com/gorilla/mux"
 )
 
-var webroot = "/var/www/autograder/web/public/"
+var webroot = os.Getenv("GOPATH") + "/src/github.com/bachopp/autograder/web/public/"
 
 func serveSingle(pattern string, filename string) {
 	http.HandleFunc(pattern, func(w http.ResponseWriter, r *http.Request) {
@@ -26,7 +27,6 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-
 	r := mux.NewRouter()
 	r.HandleFunc("/ws", agsocket.AGSocket)
 	r.HandleFunc("/login", handler)
