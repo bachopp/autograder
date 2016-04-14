@@ -1,10 +1,20 @@
 # autograder-fronend
 
+# demo installation steps
+
+	{install myslq-server}
+
+	$ go get github.com/bachopp/autograder
+	mysql> create database agdatabase;
+	mysql> grant all privileges on agdatabase.* to autograder@localhost;
+	mysql> set password for autograder@localhost = password("autograder");
+
 developing frontend for autograder system @ UiS
 
 # requirements:
 
 * mysql-server
+* go get
 * npm
 * node.js 
 
@@ -17,7 +27,7 @@ mymysql is diver for mysql-server, you need to have mysql-server instance runnin
 	$ go get github.com/ziutek/mymysql/thrsafe
 	$ go get github.com/ziutek/mymysql/autorc
 	$ go get github.com/ziutek/mymysql/godrv
-
+	
 # Instructions
 
 You need to install npm and run:
