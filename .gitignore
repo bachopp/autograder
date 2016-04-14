@@ -8,4 +8,4 @@ build/bundle.js
 // files ending in .private should have local passwords etc. eg. database config file.
 *.private*
 
-main.js
+//main.js
