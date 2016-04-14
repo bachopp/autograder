@@ -9,6 +9,8 @@
 	mysql> grant all privileges on agdatabase.* to autograder@localhost;
 	mysql> set password for autograder@localhost = password("autograder");
 	
+	$ go test -run TestD
+	
 	start server:
 	$ $GOPATH/bin/autograder
 	
