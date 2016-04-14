@@ -42,15 +42,27 @@ var Labview = React.createClass({
   render: function() {
     const successIcon = <i className="fa fa-check fa-fw"></i>;
     const dangerIcon = <i className="fa fa-times fa-fw"></i>;
+
+      if(this.state.lab.length == 0) {
+        console.log("EMPTY");
+      } else {
+
+      }
+
+
+
     var theLab = this.state.lab;
     var theStudent = this.state.student;
 
-    if(theLab.approved) {
-      labApproval = <Alert bsStyle="success">{successIcon} Approved</Alert>;
+    if(this.state.lab.approved && this.state.lab.length != 0) {
+      labApproval = <Alert className="approved" bsStyle="success">{successIcon} Approved</Alert>;
       statusButton = <Button onClick={this._handleClick} bsStyle="danger">Remove approval</Button>;
-    } else if(!theLab.approved) {
-      labApproval = <Alert className="redColor" bsStyle="danger">{dangerIcon} Not approved</Alert>;
+    } else if(!this.state.lab.approved && this.state.lab.length != 0) {
+      labApproval = <Alert className="notApproved" bsStyle="danger">{dangerIcon} Not approved</Alert>;
       statusButton = <Button onClick={this._handleClick} bsStyle="success">Approve</Button>
+    } else {
+      labApproval = <h4>EMPTY</h4>;
+        statusButton = <h4>EMPTY 2</h4>;
     }
 
     return(

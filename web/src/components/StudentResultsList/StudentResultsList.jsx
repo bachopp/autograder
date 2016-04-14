@@ -42,6 +42,7 @@ var StudentResultsList = React.createClass({
   },
   render: function() {
 
+    console.log(this.state.students);
     if(!this.state.students || this.state.students.length == 0) {
       var ifElement = <h4>No students found</h4>;
     } else {
@@ -64,9 +65,6 @@ var StudentResultsList = React.createClass({
         </tbody>
       </Table>;
     }
-
-
-
     return(
           <Col>
             <Col xs={12}>

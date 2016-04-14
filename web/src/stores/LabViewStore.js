@@ -47,7 +47,11 @@ function getStudentLabs() {
   return selectedStudents;
 }
 function getSelectedStudentLab() {
-  return selectedStudents[_selectedStudId].labs[_selectedLabId];
+  if(selectedStudents.length == 0) {
+    return false;
+  } else {
+    return selectedStudents[_selectedStudId].labs[_selectedLabId];
+  }
 }
 /*
   TODO: When the _selectedXX is not in the list,
@@ -100,7 +104,12 @@ var LabViewStore = assign({},EventEmitter.prototype, {
     return getStudentLabs()[_selectedStudId];
   },
   getSelectedStudentLab: function() {
-    return getSelectedStudentLab();
+    var lab = getSelectedStudentLab();
+    if(lab) {
+      return lab;
+    } else {
+      return [];
+    }
   }
 });
 LabViewStore.dispatchToken = AGDispatcher.register(function(action) {

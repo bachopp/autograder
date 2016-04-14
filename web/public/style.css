@@ -27,62 +27,6 @@ html, body {
 	color:#444444;
 	font-style:italic;
 }
-/*
-.cleanTable td, table td {
-	border:none !important;
-	box-shadow: inset 0px 0px 40px 40px rgba(0,0,0,0.05);
-	text-align: center;
-	padding:20px;
-	}
-
-.redColor {
-	background-color:#DB5461;
-	color:#FFF;
-}
-
-.cleanTable .labview {
-	cursor:pointer;
-	color:#000;
-
-
-}
-.cleanTable .notApproved {
-	background-color:#DB5461;
-	color:#FFF;
-}
-.cleanTable .approved {
-}
-.cleanTable .labview:hover {
-	background-color:#3b3a36;
-	color:#FFF;
-	cursor:pointer;
-}
-.cleanTable .labview:active {
-	box-shadow:inset 1px 1px 1px rgba(0,0,0,0.5);
-	background-color:#a5a5a5;
-	color:#FFF;
-}
-
-.cleanTable .labviewSelected {
-	background-color:#FFF;
-	box-shadow: inset 1px 1px 1px 1px rgba(0,0,0,0.1);
-	cursor:pointer;
-	color:#000;
-}
-
-.cleanTable .labviewSelected:hover {
-	background-color:#3b3a36;
-	cursor:pointer;
-}
-.cleanTable .labviewSelected:active {
-	box-shadow:inset 1px 1px 1px rgba(0,0,0,0.5);
-	background-color:#a5a5a5;
-}
-
-.border_bottom {
-}
-
-*/
 
 .tables {
 }
