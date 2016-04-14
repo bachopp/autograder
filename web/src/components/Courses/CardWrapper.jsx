@@ -13,16 +13,15 @@ var CardWrapper = React.createClass({
   render: function() {
     var self = this;
     var courses = this.props.courses;
+
     return(
-      <Row>
-        <Col xs={10}>
-          {courses.map(function(course){
-            return(
-              <CourseCard key={course.Courseid} course={course} role={self.props.role}/>
-            );
+        <div>
+          {courses.map(function(course) {
+              return(
+                <CourseCard key={course.ID} course={course} role={self.props.role}/>
+              );
           })}
-        </Col>
-      </Row>
+        </div>
     );
   }
 })

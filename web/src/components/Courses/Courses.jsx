@@ -12,7 +12,7 @@ var CenterWrapper = require("./CenterWrapper.jsx")
 
 var CoursesStore = require("../../stores/CoursesStore.js");
 var CoursesAPIUtils = require("../../utils/CoursesAPIUtils.js")
-
+var NotFound = require("../NotFound/NotFound.jsx");
 
 function getStateFromStores() {
   return {
@@ -22,8 +22,6 @@ function getStateFromStores() {
 
 var Courses = React.createClass({
   getInitialState: function() {
-    // Calls for initial data from server on first render cycle only.
-    CoursesAPIUtils.getAllCourses();
     return getStateFromStores();
   },
 
@@ -35,17 +33,19 @@ var Courses = React.createClass({
   },
 
   render: function() {
-    var courses = this.state.courses;
     var roles = this.state.roles;
+    if (roles[0] == null) {
+      return (<i/>)
+    }
     return (
       <div>
-      <Col xs={12} md={12}>
+      <Col xs={8} xsOffset={2}>
         <h1>View courses</h1>
       </Col>
-      <Row>
+      <Col xs={8} xsOffset={2}>
           <CenterWrapper roles={roles}/>
           {this.props.children}
-      </Row>
+      </Col>
       </div>
     )
   },

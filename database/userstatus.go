@@ -14,38 +14,41 @@ type Role struct {
 }
 
 // Roles wraps all the roles to send as json through websocket
-type Roles struct {
-	Roles []Role `json:"roles"`
-}
+// type Roles struct {
+// 	Roles []Role `json:"roles"`
+// }
 
-// InsertTestUser inserts test user
-func InsertTestUser(github string) {
-	connectDb()
-	defer con.Close()
-
-	tx, err := con.Begin()
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer tx.Rollback()
-	stmt, err := tx.Prepare("INSERT INTO user (github, last_name, first_name) VALUES (?, ?, ?)")
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer stmt.Close() // danger!
-	lastName := "TestLast"
-	firstName := "TersFirst"
-	_, err = stmt.Exec(github, lastName, firstName)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	err = tx.Commit()
-	if err != nil {
-		log.Fatal(err)
-	}
-	// stmt.Close() runs here!
-}
+// // InsertTestUser inserts test user
+// func InsertTestUser(github string) {
+// 	connectDb()
+// 	defer con.Close()
+//
+// 	tx, err := con.Begin()
+// 	if err != nil {
+// 		log.Fatal(err)
+// 	}
+// 	defer tx.Rollback()
+// 	stmt, err := tx.Prepare("INSERT INTO user (github, last_name, first_name) VALUES (?, ?, ?)")
+// 	if err != nil {
+// 		log.Fatal(err)
+// 	}
+// 	defer stmt.Close() // danger!
+//
+// 	// test data:
+// 	lastName := "TestLast"
+// 	firstName := "TersFirst"
+// 	_, err = stmt.Exec(github, lastName, firstName)
+//
+// 	if err != nil {
+// 		log.Fatal(err)
+// 	}
+//
+// 	err = tx.Commit()
+// 	if err != nil {
+// 		log.Fatal(err)
+// 	}
+// 	// stmt.Close() runs here!
+// }
 
 func getUserID(username string) (int, error) {
 	// TODO: username is candidate key, find primary key of `username`
@@ -84,6 +87,7 @@ func UpgradeUser(username string, roles ...Role) {
 	tx, err := con.Begin()
 	if err != nil {
 		log.Fatal(err)
+
 	}
 	defer tx.Rollback()
 
@@ -137,7 +141,6 @@ func makeUpdate(username string, role Role) {
 			log.Fatal(err)
 		}
 	}
-
 	err = tx.Commit()
 	if err != nil {
 		log.Fatal(err)
@@ -145,7 +148,7 @@ func makeUpdate(username string, role Role) {
 }
 
 // GetUserRoles returns Roles
-func GetUserRoles(username string) Roles {
+func GetUserRoles(username string) map[string]Role {
 	connectDb()
 	defer con.Close()
 	//TODO: Return roles of user from database as Roles
@@ -154,8 +157,8 @@ func GetUserRoles(username string) Roles {
 		log.Fatal(err)
 	}
 
-	roles := make([]Role, 0, 3)
-	modes := []string{"admin", "teacher", "student"}
+	roles := make(map[string]Role)
+	modes := []string{admin, teacher, student}
 	crses := make([]courses, 0, 32)
 	var course string
 	var courseid int
@@ -188,11 +191,11 @@ func GetUserRoles(username string) Roles {
 		role := Role{mode, crses}
 		// if rows is empty there is no courses associated with mode, therefore no append
 		if len(crses) > 0 {
-			roles = append(roles, role)
+			roles[mode] = role
 		}
 		crses = nil
 	}
-	rls := Roles{roles}
+	rls := roles
 	// TODO: Combine result to one slice size <= 3
 	return rls
 }

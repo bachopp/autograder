@@ -20,6 +20,7 @@ var GroupSelectorElement = React.createClass({
     group: React.PropTypes.object.isRequired,
     activeGroup: React.PropTypes.bool,
     removeUser: React.PropTypes.func.isRequired,
+    elementClass: React.PropTypes.string.isRequired,
   },
 
   getInitialState: function() {
@@ -35,6 +36,7 @@ var GroupSelectorElement = React.createClass({
   render: function() {
     const removeUserIcon = <i className="groupmanagericons fa fa-times fa-fw fa-lg fa-border"></i>;
 
+    var elementClass = "groupelement " + this.props.elementClass;
     var activeGroup = this.props.activeGroup;
     var group = this.props.group;
     var users = group.users;
@@ -44,7 +46,7 @@ var GroupSelectorElement = React.createClass({
       {
         users.map(function(user) {
           return (
-            <Panel className="groupelementbutton" block  key={user.studentNumber}>
+            <Panel className={elementClass} block  key={user.studentNumber}>
               <Row>
                 <Col xs={10}>
                   {user.firstName} {user.studentNumber}

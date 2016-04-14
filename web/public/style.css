@@ -1,17 +1,120 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700,900,300,300italic,400italic,500italic,700italic);
+
+* {
+	font-family:Roboto,sans-serif;
+}
+
+html {
+	overflow-y:scroll;
+}
+
 html, body {
-	background-color:#e5e5e5;
+	background-color:#f5f5f5;
 }
 
 .whitebox {
 	background-color:#FFF;
-	padding-top: 1em;
-	padding-bottom: 1em;
+	padding-top: 0.6em;
+	padding-bottom: 0.6em;
 	padding-left: 1em;
 	padding-right: 1em;
 	border-radius:4px;
-	box-shadow:1px 1px 1px rgba(0,0,0,0.1);
-
+	box-shadow:2px 2px 2px rgba(0,0,0,0.2);
+	border:1px solid #fff;
 	margin-bottom: 2em;
+}
+.whitebox .fadedText {
+	color:#444444;
+	font-style:italic;
+}
+/*
+.cleanTable td, table td {
+	border:none !important;
+	box-shadow: inset 0px 0px 40px 40px rgba(0,0,0,0.05);
+	text-align: center;
+	padding:20px;
+	}
+
+.redColor {
+	background-color:#DB5461;
+	color:#FFF;
+}
+
+.cleanTable .labview {
+	cursor:pointer;
+	color:#000;
+
+
+}
+.cleanTable .notApproved {
+	background-color:#DB5461;
+	color:#FFF;
+}
+.cleanTable .approved {
+}
+.cleanTable .labview:hover {
+	background-color:#3b3a36;
+	color:#FFF;
+	cursor:pointer;
+}
+.cleanTable .labview:active {
+	box-shadow:inset 1px 1px 1px rgba(0,0,0,0.5);
+	background-color:#a5a5a5;
+	color:#FFF;
+}
+
+.cleanTable .labviewSelected {
+	background-color:#FFF;
+	box-shadow: inset 1px 1px 1px 1px rgba(0,0,0,0.1);
+	cursor:pointer;
+	color:#000;
+}
+
+.cleanTable .labviewSelected:hover {
+	background-color:#3b3a36;
+	cursor:pointer;
+}
+.cleanTable .labviewSelected:active {
+	box-shadow:inset 1px 1px 1px rgba(0,0,0,0.5);
+	background-color:#a5a5a5;
+}
+
+.border_bottom {
+}
+
+*/
+
+.tables {
+}
+.labview {
+	text-align: center;
+	cursor:pointer;
+}
+.symbols {
+	font-weight:bold;
+	margin-bottom:0.4em;
+}
+.symbolApproved {
+	color: #dff0d8;
+}
+.symbolNotApproved {
+	color:#f69988;
+}
+
+.approved {
+	background-color:#dff0d8;
+}
+.notApproved {
+	background-color:#f69988;
+}
+.selected {
+	text-shadow:1px 1px 1px rgba(0,0,0,0.1);
+	background-color:rgba(0, 0, 0,0.5);
+	color:#FFF;
+}
+
+.colouredHeader {
+		color:#444444;
 }
 
 .infoboxleft {
@@ -22,8 +125,8 @@ html, body {
 	padding-left: 1em;
 	padding-right: 1em;
 	border-radius:4px;
-	box-shadow:1px 1px 1px rgba(0,0,0,0.1);
 
+	box-shadow:2px 2px 2px rgba(0,0,0,0.2);
 	margin-bottom: 2em;
 
 	right: 14px;
@@ -37,13 +140,13 @@ html, body {
 	padding-left: 1em;
 	padding-right: 1em;
 	border-radius:4px;
-	box-shadow:1px 1px 1px rgba(0,0,0,0.1);
+	box-shadow:2px 2px 2px rgba(0,0,0,0.2);
 
 	margin-bottom: 2em;
 	left: 14px;
 }
 
-.infoboxrightadmin {
+.admininfobox {
 	background-color: #d9534f;
 	color: white;
 	padding-top: 1em;
@@ -51,16 +154,37 @@ html, body {
 	padding-left: 1em;
 	padding-right: 1em;
 	border-radius:4px;
-	box-shadow:1px 1px 1px rgba(0,0,0,0.1);
+	box-shadow:2px 2px 2px rgba(0,0,0,0.2);
 
 	margin-bottom: 2em;
-	left: 14px;
 }
 
 .selectedCourse {
-	background-color:#222222;
+	background-color:#5BC0DE;
+	border-color:#46b8da;
 	color:#FFF;
 }
+.shownElement {
+	display:none;
+}
+.hiddenElement {
+	display:none;
+}
+.editBlue {
+	color:#2C3E50;
+	cursor:pointer;
+}
+
+.pending {
+	background-color:#CED1D4;
+}
+.pending tr {
+	background-color:#CED1D4;
+}
+.pending td {
+	background-color:#CED1D4;
+}
+
 
 .bottomPadding {
 	margin-bottom:0.5em;
@@ -135,14 +259,16 @@ background-color: silver; /*Change rollover cell color here*/
 color: white; /*Change active text color here*/
 }
 
+/*.buildLog {
+	background-color: red;
+}*/
+
 .buildLog p{
 	color:#2980B9;
-	font-size:0.8em;
+	font-size: 0.8em;
 }
 
-.cleanTable th, .table td {
-     border-top: none !important;
- }
+
 .gutterRight {
   margin-right:20px;
 }
@@ -150,30 +276,17 @@ color: white; /*Change active text color here*/
 /*
 	components/GroupSelector
 */
-.groupelementbutton {
-	border: 0px;
-	padding: 2px;
-	background-color: #e5e5e5;
-	cursor: pointer;
-}
-.groupelementbutton:hover {
-	background-color: #e5e5e0;
-}
-.groupelement {
-	border: none;
-	padding: 2px;
-}
 .groupselectoradd {
 	margin-top: 10px;
 }
 
-.groupmanagericons:hover {
-	background-color: white;
+.groupmanagericons {
+	border-radius: 10px;
+	border: none;
 }
-
-/*
-	components/StudentAvailableSelector
-*/
+.groupmanagericons:hover {
+	background-color:	#d9534f;
+}
 
 /*
 	Admin specific
@@ -183,6 +296,54 @@ color: white; /*Change active text color here*/
 	padding: "100px 0";
 	overflow-y:  scroll;
 }
+/**/
 
-.floatingtablehead {
+/* same colors
+box-shadow: inset 0px 0px 40px 40px rgba(0,0,0,0.24);
+background-color: #c1c1c1;
+*/
+.aggray {
+	background-color: #e6f2ff;
+}
+.agdarkgray {
+	background-color: #b3ffff;
+}
+.gropuwrapper {
+	border: solid #f5f5f5 1px;
+	margin-bottom: 5px;
+}
+.groupwrapper.wrapperactive {
+	box-shadow: inset 0px 0px 40px 40px rgba(0,0,0,0.24);
+	margin-bottom: 5px;
+	border-radius: 4px;
+}
+.groupelement {
+	border: none;
+	box-shadow: inset 0px 0px 40px 40px rgba(0,0,0,0.24);
+}
+.group {
+	border: none;
+}
+
+.buttonify {
+	text-align: center;
+	color:black;
+	cursor: pointer;
+}
+.buttonify:hover {
+	box-shadow: inset 0px 0px 40px 40px rgba(0,0,0,0.1);
+}
+.buttonactive {
+	box-shadow: inset 0px 0px 40px 40px rgba(0,0,0,0.24);
+}
+.buttonactive:hover {
+	box-shadow: inset 0px 0px 40px 40px rgba(0,0,0,0.24);
+}
+
+.coursecardbutton {
+	cursor: pointer;
+}
+
+.coursecardbutton:hover {
+	background-color: #f2f2f2;
 }

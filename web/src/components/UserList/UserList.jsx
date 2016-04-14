@@ -20,15 +20,15 @@ var UserList = React.createClass({
     const sortArrows = <i className="fa fa-sort fa-fw"></i>
     const sortArrowsAsc = <i className="fa fa-sort-asc fa-fw"></i>
     return (
-      <Col xs={12} >
-        <Row className="infoboxleft">
-          <Col xs={12}>
-            <Input
-              type="text"
-              addonBefore={innerSearch}
-              placeholder="Search for students"
-            />
-          </Col>
+      <Col xs={12}>
+        <Col xs={7} className="infoboxleft">
+        <Col xs={12}>
+          <Input
+            type="text"
+            addonBefore={innerSearch}
+            placeholder="Search for students"
+          />
+        </Col>
           <Col xs={12}>
             <Table className="cleanTable" striped={true} responsive>
               <thead className="floatingtablehead">
@@ -170,9 +170,13 @@ var UserList = React.createClass({
               </tbody>
             </Table>
           </Col>
-
-        </Row>
         </Col>
+        <Col xs={5} className="infoboxright">
+          <b>Info bout user?</b>
+        </Col>
+      </Col>
+
+
     );
   }
 

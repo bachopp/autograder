@@ -11,15 +11,18 @@ var ButtonToolbar = require("react-bootstrap").ButtonToolbar;
 // local
 var AdminSideNav = require("../components/AdminSideNav/AdminSideNav.jsx");
 var CourseNav = require("../components/CourseNav/CourseNav.jsx");
+var InfoBar = require("../components/InfoBar/InfoBar.jsx");
 // actions
 var TopBarActionCreators = require("../actions/TopBarActionCreators.js");
 
 // stores
-var CoursesStore = require("../stores/CoursesStore.js");
+var UsersStore = require("../stores/UsersStore.js");
+var SideNavStore = require("../stores/SideNavStore.js");
 
 function getStateFromStores() {
   return {
-    courses: CoursesStore.getCoursesForMode(),
+    courses: UsersStore.getCoursesForMode(),
+    nav: SideNavStore.getActiveElement(),
   };
 }
 
@@ -30,11 +33,13 @@ var AdminMode = React.createClass({
   },
 
   componentDidMount: function() {
-    CoursesStore.addChangeListener(this._onChange);
+    UsersStore.addChangeListener(this._onChange);
+    SideNavStore.addChangeListener(this._onChange);
   },
 
   componentWillUnmount: function() {
-    CoursesStore.removeChangeListener(this._onChange);
+    UsersStore.removeChangeListener(this._onChange);
+    SideNavStore.removeChangeListener(this._onChange);
   },
 
   render: function() {
@@ -46,16 +51,10 @@ var AdminMode = React.createClass({
           <AdminSideNav/>
         </Col>
         <Col xs={10}>
-          <Col xs={12}>
-              <Col xs={7} className="infoboxleft">
-                <CourseNav courses={courses}/>
-              </Col>
-              <Col xs={5} className="infoboxrightadmin">
-                <Col xs={6}><b>Admin Panel</b></Col>
-                <Col xs={6}><b>Mar 29, 12:21</b></Col>
-              </Col>
+          <Col xs={12} className="admininfobox">
+                <InfoBar infoType="Admin page" nav={self.state.nav}/>
           </Col>
-          {this.props.children}
+            {this.props.children}
         </Col>
       </Row>
     );

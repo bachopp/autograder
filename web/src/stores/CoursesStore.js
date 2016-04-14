@@ -6,16 +6,16 @@ var AGDispatcher = require('../dispatcher/AGDispatcher');
 var AGConstants = require('../constants/AGConstants.js');
 
 var ActionTypes = AGConstants.ActionTypes;
+var CoursesAPIUtils = require("../utils/CoursesAPIUtils.js")
 
 // utils
 var CoursesUtils = require('../utils/CoursesUtils.js');
 
 var CHANGE_EVENT = 'change';
 
-// this is temporary the same as TopBarStore, but will incorporate more Courses
+// this is temporary the same as UsersStore, but will incorporate more Courses
 // like course description and number of students
-var _courses = [];
-var _navCourses = [];
+var _courses = {};
 
 function _newCourses(newCourses) {
   _courses = newCourses;
@@ -38,25 +38,15 @@ var CoursesStore = assign({}, EventEmitter.prototype, {
   getAllCourses: function() {
     return _courses;
   },
-
-  getCoursesForMode: function() {
-    return _navCourses;
-  }
 });
 
 
-CoursesStore.dispachToken = AGDispatcher.register(function(action) {
+CoursesStore.dispatchToken = AGDispatcher.register(function(action) {
   switch(action.type) {
     // TODO: finish switch statement for different actions
-
     case ActionTypes.RECEIVE_RAW_COURSES:
-      // var courses = CoursesUtils.convertRawCourses(action.rawCourses);
-      _newCourses(action.rawCourses);
-      CoursesStore.emitChange();
-      break;
-    case ActionTypes.SWITCH_MODE:
-      var courses = CoursesUtils.convertRawCourses(_courses, action.mode);
-      _navCourses = courses;
+      courses = CoursesUtils.convertRawRole(action.rawCourses);
+      _newCourses(courses);
       CoursesStore.emitChange();
       break;
     default:

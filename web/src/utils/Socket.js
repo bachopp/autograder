@@ -1,6 +1,7 @@
 var TopBarAPIUtils = require("./TopBarAPIUtils");
 var TopBarServerActionCreators = require("../actions/TopBarServerActionCreators");
 var CoursesServerActionCreators = require("../actions/CoursesServerActionCreators");
+var CourseNavServerActionCreators = require("../actions/CourseNavServerActionCreators");
 
 var AGConstants = require("../constants/AGConstants");
 var ActionTypes = AGConstants.ActionTypes;
@@ -9,18 +10,18 @@ var Socket =  function() {
 
   this.ws = new WebSocket("ws://localhost:8000/ws");
 
-  this.message = function(payload) {
+  this.message = function(m) {
     // TODO: emit that message has arrived
     // figure out what ActionCreator to call with new data?
-    var data = JSON.parse(payload.data);
-    var pivot = data.actionType;
+    var data = JSON.parse(m.data);
 
-    switch(pivot) {
+    switch(data.actionType) {
       case ActionTypes.RECEIVE_RAW_ROLES:
-        TopBarServerActionCreators.receiveAll(data.payload.roles);
+        TopBarServerActionCreators.receiveAll(data.payload);
+        CoursesServerActionCreators.receiveAll(data.payload);
         break;
-      case ActionTypes.RECEIVE_RAW_COURSES:
-        CoursesServerActionCreators.receiveAll(data.payload.roles)
+      case ActionTypes.RECEIVE_COURSES_FOR_MODE:
+        CourseNavServerActionCreators.receiveModeCourses(data.payload);
         break;
       default:
         // do nothing
@@ -28,7 +29,7 @@ var Socket =  function() {
   };
 
   this.open = function() {
-    // TODO: emit connected on open instead of wait
+    // TODO: emit connected on open instead of wait ?
   };
 
   this.close = function() {
@@ -39,7 +40,7 @@ var Socket =  function() {
   this.ws.onopen = this.open;
   this.ws.onclose = this.close;
 
-  // This is not good at all, but temp fix, see this.open
+  // see this.open
   this.waitForSocketConnection = function waitForSocketConnection(socket, callback){
     setTimeout(
       function(){

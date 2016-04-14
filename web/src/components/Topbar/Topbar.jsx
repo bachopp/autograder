@@ -11,13 +11,14 @@ var Link = require("react-router").Link;
 var Dropdown = require("./Dropdown.jsx");
 var Navigation = require("./Navigation.jsx");
 // stores
-var TopBarStore = require("../../stores/TopBarStore.js");
+var UsersStore = require("../../stores/UsersStore.js");
 // utils
 var TopBarAPIUtils = require("../../utils/TopBarAPIUtils");
 
 function getStateFromStores() {
   return {
-    roles: TopBarStore.getAllRoles(),
+    roles: UsersStore.getAllRoles(),
+    activeRole: UsersStore.getCurrentRole(),
   };
 }
 
@@ -30,17 +31,17 @@ var Topbar = React.createClass({
   },
 
   componentDidMount: function() {
-    TopBarStore.addChangeListener(this._onChange);
+    UsersStore.addChangeListener(this._onChange);
   },
 
   componentWillUnmount: function() {
-    TopBarStore.removeChangeListener(this._onChange);
+    UsersStore.removeChangeListener(this._onChange);
   },
 
   // TODO : iterate over buttons available fo user
   render:function() {
     var self = this;
-
+    var activeRole = this.state.activeRole;
     return (
       <Navbar className="myNavbar">
         <Navbar.Header>
@@ -51,7 +52,7 @@ var Topbar = React.createClass({
         </Navbar.Header>
 
         <Navbar.Collapse>
-            <Navigation roles={self.state.roles}/>
+            <Navigation roles={self.state.roles} activeRole={activeRole}/>
           <Nav pullRight>
             <li>
               <Link to="/courses">Courses</Link>

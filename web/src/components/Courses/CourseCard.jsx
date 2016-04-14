@@ -5,30 +5,38 @@ var Button = require("react-bootstrap").Button
 var Col = require("react-bootstrap").Col
 
 var Link = require("react-router").Link;
+var browserHistory = require("react-router").browserHistory;
+
+// actions
+var CourseNavActionCreators = require("../../actions/CourseNavActionCreators.js");
 
 var CourseCard = React.createClass({
   propTypes: {
     course: React.PropTypes.object.isRequired,
     role: React.PropTypes.string.isRequired,
   },
+  handleClick: function(there, course) {
+    CourseNavActionCreators.changeActiveCourse(course);
+    browserHistory.push(there);
+  },
   render: function() {
     var self = this;
     var course = this.props.course;
     var role = this.props.role;
-    var roleCourse =  role +"/"+ course.CourseName + "/results";
-    var roleCourseGroup = role +"/"+ course.CourseName + "/groups";
+    var roleCourse = role;
+    if (role !== "Admin") {
+      roleCourse =  role +"/results/"+ course.Name
+    }
     return(
-      <Col xs={12} sm={12} md={12} lg={12} className="whitebox">
-        <h4>{course.CourseName}</h4>
-        <p>
-          Course ID: <b>{course.Courseid}</b><br/>
-          Dummy desciption and status
-          <br/>
-          Approved
-        </p>
-        <Link to={roleCourse} ><Button>View course</Button></Link>
-        <Link to={roleCourseGroup} ><Button>Manage groups</Button></Link>
-      </Col>
+      <div onClick={this.handleClick.bind(this, roleCourse, course.CourseName)} >
+        <Col xs={12} xsOffset={0} className="whitebox whiteboxWithHover coursecardbutton" >
+          <h4 className="colouredHeader">{course.Name}</h4>
+          <p className="fadedText">
+            Course ID: <b>{course.ID}</b><br/>
+            {course.Description}
+          </p>
+        </Col>
+      </div>
     );
   }
 })

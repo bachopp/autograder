@@ -11,49 +11,64 @@ var Glyphicon = require("react-bootstrap").Glyphicon;
 var Table = require("react-bootstrap").Table;
 var ProgressBar = require("react-bootstrap").ProgressBar;
 
+var LabViewStore = require("../../stores/LabViewStore.js");
+var LabViewCourseActions = require("../../actions/LabViewCourseActions.js");
 
 var Statusbar = require("./Statusbar.jsx");
 var Buildlog = require("./Buildlog.jsx");
 
-var theLog = [
-  {id: 1, text: "Starting log"},
-  {id: 2, text: "Running: test.go"},
-  {id: 3, text: "Building..."},
-  {id: 4, text: "Test case 1: OK"},
-  {id: 5, text: "Test case 2: OK"},
-  {id: 6, text: "Test case 3: FAIL"},
-  {id: 7, text: "Test case 4: OK"},
-  {id: 8, text: "Lab total cases: OK"}
-];
-
-
 var Labview = React.createClass({
+  _getDataFromStore: function() {
+    return {
+      lab: LabViewStore.getSelectedStudentLab(),
+      student: LabViewStore.getSelectedStudent(),
+    }
+  },
+  _onChange: function() {
+    this.setState(this._getDataFromStore);
+  },
+  _handleClick: function() {
+    LabViewCourseActions.toggleApprovalStudentLab();
+  },
   getInitialState: function() {
-    return null
+    return this._getDataFromStore()
+  },
+  componentDidMount: function() {
+    LabViewStore.addChangeListener(this._onChange);
   },
   componentWillUnmount: function() {
+    LabViewStore.removeChangeListener(this._onChange);
   },
   render: function() {
     const successIcon = <i className="fa fa-check fa-fw"></i>;
+    const dangerIcon = <i className="fa fa-times fa-fw"></i>;
+    var theLab = this.state.lab;
+    var theStudent = this.state.student;
+
+    if(theLab.approved) {
+      labApproval = <Alert bsStyle="success">{successIcon} Approved</Alert>;
+      statusButton = <Button onClick={this._handleClick} bsStyle="danger">Remove approval</Button>;
+    } else if(!theLab.approved) {
+      labApproval = <Alert className="redColor" bsStyle="danger">{dangerIcon} Not approved</Alert>;
+      statusButton = <Button onClick={this._handleClick} bsStyle="success">Approve</Button>
+    }
+
     return(
       <Col>
-        <h3>Lab 1 - Ola Nordmann</h3>
-        <Statusbar percent={65}/>
-        <Alert bsStyle="success">{successIcon} Approved</Alert>
+        <h3>{theLab.title} - {theStudent.firstName} {theStudent.lastName}</h3>
+        <Statusbar percent={theLab.percent}/>
+        {labApproval}
         <Col className="bottomPadding">
           <ButtonToolbar>
-            <Button bsStyle="danger">Remove approval</Button>
+            {statusButton}
             <Button bsStyle="info">Rebuild</Button>
           </ButtonToolbar>
         </Col>
         <Col>
-          <Buildlog log={theLog}/>
+          <Buildlog log={theLab.log}/>
         </Col>
       </Col>
     );
-  },
-  componentDidMount: function() {
-
   }
 });
 

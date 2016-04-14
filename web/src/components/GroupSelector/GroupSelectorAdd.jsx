@@ -20,7 +20,7 @@ var GroupSelectorAdd = React.createClass({
     var addNewGroup = this.props.addNewGroup;
 
     return (
-        <Button className="groupselectoradd" block onClick={addNewGroup}>{addGroupIcon}</Button>
+        <Button onClick={addNewGroup}>New {addGroupIcon}</Button>
     );
   }
 });
