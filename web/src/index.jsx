@@ -81,6 +81,7 @@ ReactDOM.render(
 			<Route path="/about" component={NotFound}/>
 			<Route path="/oauth" component={StudentList}/>
 
+			<Route path="*" component={NotFound} />
 		</Route>
 	</Router>,
 	document.getElementById("container")

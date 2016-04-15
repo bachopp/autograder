@@ -12,7 +12,7 @@ var Table = require("react-bootstrap").Table;
 var ProgressBar = require("react-bootstrap").ProgressBar;
 
 var LabViewStore = require("../../stores/LabViewStore.js");
-var LabViewCourseActions = require("../../actions/LabViewCourseActions.js");
+var LabViewCourseActionCreators = require("../../actions/LabViewCourseActionCreators.js");
 
 var Statusbar = require("./Statusbar.jsx");
 var Buildlog = require("./Buildlog.jsx");
@@ -28,7 +28,7 @@ var Labview = React.createClass({
     this.setState(this._getDataFromStore);
   },
   _handleClick: function() {
-    LabViewCourseActions.toggleApprovalStudentLab();
+    LabViewCourseActionCreators.toggleApprovalStudentLab();
   },
   getInitialState: function() {
     return this._getDataFromStore()
