@@ -11,11 +11,6 @@ var IndexRoute = require("react-router").IndexRoute
 // react-bootstrap requires
 var Jumbotron = require("react-bootstrap").Jumbotron
 var Button 		= require("react-bootstrap").Button
-// local components requires
-var Topbar 		= require("./components/Topbar/Topbar.jsx")
-var Welcome		= require("./components/Welcome/Welcome.jsx")
-var UserManager = require("./components/UserManager/UserManager.jsx");
-var UserSettings = require("./components/UserSettings/UserSettings.jsx");
 
 var CourseSettings = require("./components/CourseSettings/CourseSettings.jsx")
 var CourseInfo = require("./components/CourseInfo/CourseInfo.jsx")
@@ -29,12 +24,18 @@ var StudentMode = require("./views/StudentMode.jsx");
 var AdminMode = require("./views/AdminMode.jsx");
 
 // views
-var GroupManager = require("./views/GroupManager.jsx");
+var TeacherGroups = require("./views/TeacherGroups.jsx");
 var Coursepage= require("./views/Coursepage.jsx");
 var AllCourses = require("./views/AllCourses.jsx");
 var StudentList = require("./views/StudentList.jsx");
 var StudentResult = require("./views/StudentResult.jsx");
 var NotFound = require("./components/NotFound/NotFound.jsx")
+// local components requires
+var Topbar 		= require("./components/Topbar/Topbar.jsx")
+var Welcome		= require("./components/Welcome/Welcome.jsx")
+var UserManager = require("./components/UserManager/UserManager.jsx");
+var UserSettings = require("./components/UserSettings/UserSettings.jsx");
+var CourseMembers = require("./components/CourseMembers/CourseMembers.jsx");
 // this class
 
 var App = React.createClass({
@@ -64,7 +65,7 @@ ReactDOM.render(
 
 			<Route path="Teacher" component={TeacherMode}>
 					<Route path="results/:coursename" component={Coursepage}/>
-					<Route path="groups/:coursename" component={GroupManager}/>
+					<Route path="groups/:coursename" component={TeacherGroups}/>
 					<Route path="settings/:coursename" component={CourseSettings}/>
 					<Route path="users/:coursename" component={UserManager}/>
 					<Route path="info/:coursename" component={CourseInfo}/>

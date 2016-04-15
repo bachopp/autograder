@@ -14,7 +14,7 @@ var Col = require("react-bootstrap").Col;
 var GroupSelectorAdd = require("./GroupSelectorAdd.jsx");
 
 // actions
-var GroupSelectorActionCreators = require("../../actions/GroupSelectorActionCreators.js");
+var TeacherGroupsActionCreators = require("../../actions/TeacherGroupsActionCreators.js");
 
 // this className
 
@@ -33,7 +33,7 @@ var GroupSelectorElement = React.createClass({
   },
 
   removeUser: function(user, group) {
-    GroupSelectorActionCreators.removeUser(user, group);
+    TeacherGroupsActionCreators.removeUser(user, group);
     // this.props.removeUser(user, group);
   },
 

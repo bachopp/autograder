@@ -8,7 +8,7 @@ var AGConstants = require('../constants/AGConstants.js');
 var GroupSelectorUtils = require('../utils/GroupSelectorUtils.js')
 
 // store dependencies
-var GroupManagerStore = require('./GroupManagerStore.js');
+var TeacherGroupsStore = require('./TeacherGroupsStore.js');
 
 var ActionTypes = AGConstants.ActionTypes;
 
@@ -151,7 +151,7 @@ function _removeStudentFromGroup(student, group) {
   });
 }
 
-var GroupManagerStore = assign({}, EventEmitter.prototype, {
+var TeacherGroupsStore = assign({}, EventEmitter.prototype, {
 
   emitChange: function() {
     this.emit(CHANGE_EVENT);
@@ -186,25 +186,25 @@ var GroupManagerStore = assign({}, EventEmitter.prototype, {
   },
 });
 
-GroupManagerStore.dispachToken = AGDispatcher.register(function(action) {
+TeacherGroupsStore.dispachToken = AGDispatcher.register(function(action) {
   switch(action.type) {
     // TODO: finish switch statement for different actions
     case ActionTypes.RECEIVE_RAW_GROUPS:
     _newGroups(action.rawGroups);
-    GroupManagerStore.emitChange();
+    TeacherGroupsStore.emitChange();
     break;
     case ActionTypes.TOGGLE_GROUP:
       _setOneGroupActive(action.group);
-      GroupManagerStore.emitChange();
+      TeacherGroupsStore.emitChange();
       break;
     case ActionTypes.ADD_NEW_GROUP:
       _addGroup();
-      GroupManagerStore.emitChange();
+      TeacherGroupsStore.emitChange();
       break;
     case ActionTypes.REMOVE_GROUP:
       _removeGroup(action.group);
       _setOneGroupActive();
-      GroupManagerStore.emitChange();
+      TeacherGroupsStore.emitChange();
       break;
     case ActionTypes.ADD_TO_GROUP:
       _selectStudent(action.rawStudent);
@@ -214,28 +214,28 @@ GroupManagerStore.dispachToken = AGDispatcher.register(function(action) {
       } else {
         alert("CHOOSE GROUP FIRST");
       }
-      GroupManagerStore.emitChange();
+      TeacherGroupsStore.emitChange();
       break;
     case ActionTypes.REMOVE_STUDENT_FROM_GROUP:
       _removeStudentFromGroup(action.student, action.group);
-      GroupManagerStore.emitChange();
+      TeacherGroupsStore.emitChange();
       break;
     case ActionTypes.RECEIVE_RAW_STUDENTS:
       _newStudents(action.rawStudents);
-      GroupManagerStore.emitChange();
+      TeacherGroupsStore.emitChange();
       break;
     case ActionTypes.QUERY_FOR_STUDENT:
       var keep = _newStudents(_searchFor(action.query));
-      GroupManagerStore.emitChange();
+      TeacherGroupsStore.emitChange();
       var _ = _newStudents(keep);
       break;
     case ActionTypes.EXPANDE_ALL_GROUPS:
       _expandAllGroups();
-      GroupManagerStore.emitChange();
+      TeacherGroupsStore.emitChange();
       break;
     default:
      // no action
   }
 });
 
-module.exports = GroupManagerStore;
+module.exports = TeacherGroupsStore;
