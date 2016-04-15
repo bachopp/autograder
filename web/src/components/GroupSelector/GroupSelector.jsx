@@ -97,7 +97,7 @@ var GroupSelector = React.createClass({
               groups.map(function(group) {
                 var isExpanded = false;
                 var wrapperClass = "groupwrapper "
-                var groupClass = "group buttonify ";
+                var groupClass = "group textc buttonify ";
                 var elementClass = "groupelement ";
                 var emptyToken = '';
                 var len = group.users.length;

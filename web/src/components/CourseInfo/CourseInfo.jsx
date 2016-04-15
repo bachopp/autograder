@@ -7,13 +7,30 @@ var ReactDOM = require("react-dom");
 var Col = require("react-bootstrap").Col;
 var Row = require("react-bootstrap").Row;
 var Jumbotron = require("react-bootstrap").Jumbotron;
+// stores
+var UsersStore = require("../../stores/UsersStore.js");
 
 // local components requires
 var LinkPanel = require("./LinkPanel.jsx");
 // funcitons
+function getStateFromStores() {
+	return {
 
+	}
+}
 // this class
 var CourseInfo = React.createClass({
+	// getInitialState: function() {
+	//
+	// },
+	//
+	// componentDidMount: function() {
+	//
+	// },
+	//
+	// componentWillUnmount: function() {
+	//
+	// },
 
 	render: function(){
 		return (

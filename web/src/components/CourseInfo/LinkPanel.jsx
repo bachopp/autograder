@@ -19,19 +19,22 @@ var LinkPanel = React.createClass({
     const githubIcon = <i className="fa fa-github fa-fw fa-2x"></i>
 		return (
       <div>
-        <h3><b>Github links</b></h3>
-        <div className="buttonify">
-        </div>
+			<h3><b>Github links</b></h3>
+				<Col xs={6}>
+	        <div className="buttonify">
+	        {githubIcon} Course information
+	        </div>
+	        <div className="buttonify">
+	        {githubIcon} Individual labs
+	        </div>
 
-        <div className="buttonify">
-        {githubIcon} Course information
-        </div>
-        <div className="buttonify">
-        {githubIcon} Individual labs
-        </div>
-        <div className="buttonify">
-        {githubIcon} Group labs
-        </div>
+				</Col>
+				<Col xs={6}>
+	        <div className="buttonify">
+	        {githubIcon} Group labs
+	        </div>
+
+				</Col>
       </div>
 		)
 	}

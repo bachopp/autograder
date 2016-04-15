@@ -59,7 +59,7 @@ ReactDOM.render(
 			<Route path="Admin" component={AdminMode}>
 				<IndexRoute component={UserList} />
 					<Route path="settings" component={NotFound}/>
-					<Route path="info"component={NotFound}/>
+					<Route path="info"component={CourseInfo}/>
 			</Route>
 
 			<Route path="Teacher" component={TeacherMode}>
@@ -67,7 +67,7 @@ ReactDOM.render(
 					<Route path="groups/:coursename" component={GroupManager}/>
 					<Route path="settings/:coursename" component={CourseSettings}/>
 					<Route path="users/:coursename" component={UserManager}/>
-					<Route path="info/:coursename" component={NotFound}/>
+					<Route path="info/:coursename" component={CourseInfo}/>
 			</Route>
 
 			<Route path="Student" component={StudentMode}>

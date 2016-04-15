@@ -24,15 +24,15 @@ var AdminSideNav = React.createClass({
 
     return(
       <Col xs={12} className="whitebox">
-        <Link to={"/admin"}>
+        <Link to={"\/Admin"}>
           <Button className="navButton" bsStyle="danger" block>{unlockIcon} Admin options</Button>
         </Link>
 
-        <Link to={"\/admin\/settings"}>
+        <Link to={"\/Admin\/settings"}>
           <Button className="navButton" block>{settingsIcon} Settings</Button>
         </Link>
 
-        <Link to={"\/admin\/info"}>
+        <Link to={"\/Admin\/info"}>
           <Button className="navButton" block>{infoIcon} Course info</Button>
         </Link>
 
