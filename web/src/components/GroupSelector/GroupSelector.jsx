@@ -58,9 +58,6 @@ var GroupSelector = React.createClass({
     GroupSelectorActionCreators.removeGroup(group);
   },
 
-  removeUser: function(student, group) {
-    GroupSelectorActionCreators.removeUser(student, group);
-  },
   expandAll: function() {
     GroupSelectorActionCreators.expandeAll();
   },
@@ -123,7 +120,7 @@ var GroupSelector = React.createClass({
                 return (
                   <div key={group.number} className={wrapperClass}>
                     <Panel
-                    className={groupClass}
+                    className={"groupheader " + groupClass}
                     block onClick={self.activateGroup.bind(self, group)}
                     >
                     <Row>
@@ -141,7 +138,7 @@ var GroupSelector = React.createClass({
                     </Row>
                     </Panel>
                     <Panel className={groupClass} collapsible expanded={isExpanded}>
-                      <GroupSelectorElement elementClass={elementClass} group={group} removeUser={self.removeUser}/>
+                      <GroupSelectorElement elementClass={elementClass} group={group}/>
                     </Panel>
                   </div>
                 );
