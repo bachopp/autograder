@@ -12,21 +12,25 @@ var UsersStore = require("../../stores/UsersStore.js");
 
 // local components requires
 var LinkPanel = require("./LinkPanel.jsx");
+// actions
+var SideNavActionCreators = require("../../actions/SideNavActionCreators.js");
 // funcitons
 function getStateFromStores() {
 	return {
 
 	}
 }
+// constants
+const _nav = "info";
 // this class
 var CourseInfo = React.createClass({
 	// getInitialState: function() {
 	//
 	// },
 	//
-	// componentDidMount: function() {
-	//
-	// },
+	componentDidMount: function() {
+		SideNavActionCreators.changeActiveSideElement(_nav);
+	},
 	//
 	// componentWillUnmount: function() {
 	//

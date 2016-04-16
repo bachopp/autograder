@@ -12,9 +12,14 @@ var Panel = require("react-bootstrap").Panel;
 
 var StudentResultMain = require("../components/StudentResult/StudentResultMain.jsx");
 var StudentResultSide = require("../components/StudentResult/StudentResultSide.jsx");
-
+// actions
+var SideNavActionCreators = require("../actions/SideNavActionCreators.js");
+// constants
+const _nav = "results";
 var StudentResult = React.createClass({
-
+  componentDidMount: function() {
+		SideNavActionCreators.changeActiveSideElement(_nav);
+	},
   render: function() {
     self = this;
     return(

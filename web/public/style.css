@@ -356,3 +356,22 @@ background-color: #c1c1c1;
 .coursecardbutton:hover {
 	background-color: #f2f2f2;
 }
+.agcheck {
+
+}
+.agcheck:hover {
+	cursor: pointer;
+	color: blue;
+}
+
+.agcheckdisabled {
+	color: #e9ebed;
+}
+.agcheckdisabled:hover {
+	cursor: pointer;
+	color: black;
+}
+
+.agcheckgreen {
+	color: green;
+}

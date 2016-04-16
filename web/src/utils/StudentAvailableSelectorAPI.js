@@ -12,7 +12,7 @@ module.exports = {
   // TODO:  structurize payload better
   getAllStudents: function() {
     var mock = require("../components/StudentAvailableSelector/mock.js");
-    
+
     Socket.waitForSocketConnection(Socket.ws, function() {
       // var payload = RequestAPI.send(ActionTypes.RECEIVE_RAW_STUDENTS, {"username": "thomas"});
       // Socket.ws.send(payload);

@@ -12,8 +12,6 @@ var IndexRoute = require("react-router").IndexRoute
 var Jumbotron = require("react-bootstrap").Jumbotron
 var Button 		= require("react-bootstrap").Button
 
-var CourseSettings = require("./components/CourseSettings/CourseSettings.jsx")
-var CourseInfo = require("./components/CourseInfo/CourseInfo.jsx")
 
 // admin
 var UserList = require("./components/UserList/UserList.jsx");
@@ -36,6 +34,8 @@ var Welcome		= require("./components/Welcome/Welcome.jsx")
 var UserManager = require("./components/UserManager/UserManager.jsx");
 var UserSettings = require("./components/UserSettings/UserSettings.jsx");
 var CourseMembers = require("./components/CourseMembers/CourseMembers.jsx");
+var CourseSettings = require("./components/CourseSettings/CourseSettings.jsx")
+var CourseInfo = require("./components/CourseInfo/CourseInfo.jsx")
 // this class
 
 var App = React.createClass({
@@ -66,17 +66,17 @@ ReactDOM.render(
 			<Route path="Teacher" component={TeacherMode}>
 					<Route path="results/:coursename" component={Coursepage}/>
 					<Route path="groups/:coursename" component={TeacherGroups}/>
-					<Route path="settings/:coursename" component={CourseSettings}/>
 					<Route path="users/:coursename" component={UserManager}/>
+					<Route path="settings/:coursename" component={CourseSettings}/>
 					<Route path="info/:coursename" component={CourseInfo}/>
 			</Route>
 
 			<Route path="Student" component={StudentMode}>
+					<Route path="results/:coursename" component={StudentResult}/>
 					<Route path="members/:coursename" component={NotFound}/>
 					<Route path="groups/:coursename" component={NotFound}/>
-					<Route path="info/:coursename" component={CourseInfo}/>
 					<Route path="settings/:coursename" component={UserSettings}/>
-					<Route path="results/:coursename" component={StudentResult}/>
+					<Route path="info/:coursename" component={CourseInfo}/>
 			</Route>
 
 			<Route path="/about" component={NotFound}/>

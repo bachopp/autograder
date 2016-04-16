@@ -5,13 +5,11 @@ var AGConstants = require("../constants/AGConstants");
 var ActionTypes = AGConstants.ActionTypes;
 
 var Socket = require("./Socket.js");
-console.log(Socket.ws);
 
 module.exports = {
   // TODO:  remove waifFor when it's fixed
   // TODO:  structurize payload better
   getAllRoles: function() {
-    console.log(Socket);
     Socket.waitForSocketConnection(Socket.ws, function() {
       var payload = RequestAPI.send(ActionTypes.RECEIVE_RAW_ROLES, {"username": "tokams"});
       Socket.ws.send(payload);

@@ -49,22 +49,10 @@ SideNavStore.dispachToken = AGDispatcher.register(function(action) {
     // TODO: finish switch statement for different actions
 
      case ActionTypes.SWITCH_MODE:
-      console.log(action);
       _currentMode = action.mode;
-      if (_currentMode == mode.Teacher) {
-        _activeElement = _sideElements[mode.Teacher][0];
-      }
-
-      if (_currentMode == mode.Student) {
-        _activeElement = _sideElements[mode.Teacher][0];
-      }
-      if (_currentMode == mode.Admin) {
-        _activeElement = mode.Admin;
-      }
       SideNavStore.emitChange();
       break;
      case ActionTypes.SWITCH_SIDE_NAV:
-      console.log(action);
       _activeElement = action.element;
       SideNavStore.emitChange();
       break;

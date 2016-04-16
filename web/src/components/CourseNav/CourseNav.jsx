@@ -71,7 +71,6 @@ var CourseNav = React.createClass({
     }else {
       active = activeCourse;
     }
-
     return (
       <Row>
       <ButtonGroup justified>

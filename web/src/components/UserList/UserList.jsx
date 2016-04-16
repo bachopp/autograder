@@ -14,11 +14,16 @@ var Glyphicon = require("react-bootstrap").Glyphicon;
 var UserList = React.createClass({
 
   render: function() {
+    const agcheck = "agcheck ";
+    const isdisabled = "agcheckdisabled ";
+    const isgreen = "agcheckgreen ";
+    const neutral = isdisabled + "fa fa-check-square fa-lg ";
+
     const innerSearch = <Glyphicon glyph="search"/>;
-    const checkMark = <i className="fa fa-check-square"></i>;
-    const xMark = <i className="fa fa-times"></i>;
-    const sortArrows = <i className="fa fa-sort fa-fw"></i>
-    const sortArrowsAsc = <i className="fa fa-sort-asc fa-fw"></i>
+    const checkMark = <i className={neutral}></i>;
+    const xMark = <i className="fa fa-times fa-lg"></i>;
+    const sortArrows = <i className="fa fa-sort fa-fw fa-lg"></i>
+    const sortArrowsAsc = <i className="fa fa-sort-asc fa-fw fa-lg"></i>
     return (
       <Col xs={12}>
         <Col xs={7} className="infoboxleft">
@@ -45,126 +50,126 @@ var UserList = React.createClass({
                   <td>Name Surname</td>
                   <td>{xMark}</td>
                   <td>{checkMark}</td>
-                  <td></td>
-                  <td></td>
+                  <td>{checkMark}</td>
+                  <td>{checkMark}</td>
                 </tr>
                 <tr>
                   <td>Name Surname</td>
                   <td>{xMark}</td>
                   <td>{checkMark}</td>
-                  <td></td>
-                  <td></td>
+                  <td>{checkMark}</td>
+                  <td>{checkMark}</td>
                 </tr>
                 <tr>
                   <td>Name Surname</td>
                   <td>{xMark}</td>
                   <td>{checkMark}</td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>Name Surname</td>
-                  <td>5</td>
-                  <td></td>
-                  <td></td>
-                  <td>{checkMark}</td>
-                </tr>
-                <tr>
-                  <td>Name Surname</td>
-                  <td>5</td>
-                  <td></td>
-                  <td></td>
-                  <td>{checkMark}</td>
-                </tr>
-                <tr>
-                  <td>Name Surname</td>
-                  <td>5</td>
-                  <td></td>
-                  <td></td>
-                  <td>{checkMark}</td>
-                </tr>
-                <tr>
-                  <td>Name Surname</td>
-                  <td>5</td>
-                  <td></td>
-                  <td></td>
-                  <td>{checkMark}</td>
-                </tr>
-                <tr>
-                  <td>Name Surname</td>
-                  <td>5</td>
-                  <td></td>
-                  <td></td>
-                  <td>{checkMark}</td>
-                </tr>
-                <tr>
-                  <td>Name Surname</td>
-                  <td>5</td>
-                  <td></td>
                   <td>{checkMark}</td>
                   <td>{checkMark}</td>
                 </tr>
                 <tr>
                   <td>Name Surname</td>
                   <td>5</td>
-                  <td></td>
                   <td>{checkMark}</td>
-                  <td>{checkMark}</td>
-                </tr>
-                <tr>
-                  <td>Name Surname</td>
-                  <td>5</td>
-                  <td></td>
-                  <td></td>
-                  <td>{checkMark}</td>
-                </tr>
-                <tr>
-                  <td>Name Surname</td>
-                  <td>5</td>
-                  <td></td>
-                  <td></td>
-                  <td>{checkMark}</td>
-                </tr>
-                <tr>
-                  <td>Name Surname</td>
-                  <td>5</td>
-                  <td></td>
                   <td>{checkMark}</td>
                   <td>{checkMark}</td>
                 </tr>
                 <tr>
                   <td>Name Surname</td>
                   <td>5</td>
-                  <td></td>
-                  <td></td>
+                  <td>{checkMark}</td>
+                  <td>{checkMark}</td>
                   <td>{checkMark}</td>
                 </tr>
                 <tr>
                   <td>Name Surname</td>
                   <td>5</td>
-                  <td></td>
-                  <td></td>
+                  <td>{checkMark}</td>
+                  <td>{checkMark}</td>
                   <td>{checkMark}</td>
                 </tr>
                 <tr>
                   <td>Name Surname</td>
                   <td>5</td>
-                  <td></td>
-                  <td></td>
+                  <td>{checkMark}</td>
+                  <td>{checkMark}</td>
                   <td>{checkMark}</td>
                 </tr>
                 <tr>
                   <td>Name Surname</td>
                   <td>5</td>
-                  <td></td>
-                  <td></td>
+                  <td>{checkMark}</td>
+                  <td>{checkMark}</td>
                   <td>{checkMark}</td>
                 </tr>
                 <tr>
                   <td>Name Surname</td>
                   <td>5</td>
-                  <td></td>
-                  <td></td>
+                  <td>{checkMark}</td>
+                  <td>{checkMark}</td>
+                  <td>{checkMark}</td>
+                </tr>
+                <tr>
+                  <td>Name Surname</td>
+                  <td>5</td>
+                  <td>{checkMark}</td>
+                  <td>{checkMark}</td>
+                  <td>{checkMark}</td>
+                </tr>
+                <tr>
+                  <td>Name Surname</td>
+                  <td>5</td>
+                  <td>{checkMark}</td>
+                  <td>{checkMark}</td>
+                  <td>{checkMark}</td>
+                </tr>
+                <tr>
+                  <td>Name Surname</td>
+                  <td>5</td>
+                  <td>{checkMark}</td>
+                  <td>{checkMark}</td>
+                  <td>{checkMark}</td>
+                </tr>
+                <tr>
+                  <td>Name Surname</td>
+                  <td>5</td>
+                  <td>{checkMark}</td>
+                  <td>{checkMark}</td>
+                  <td>{checkMark}</td>
+                </tr>
+                <tr>
+                  <td>Name Surname</td>
+                  <td>5</td>
+                  <td>{checkMark}</td>
+                  <td>{checkMark}</td>
+                  <td>{checkMark}</td>
+                </tr>
+                <tr>
+                  <td>Name Surname</td>
+                  <td>5</td>
+                  <td>{checkMark}</td>
+                  <td>{checkMark}</td>
+                  <td>{checkMark}</td>
+                </tr>
+                <tr>
+                  <td>Name Surname</td>
+                  <td>5</td>
+                  <td>{checkMark}</td>
+                  <td>{checkMark}</td>
+                  <td>{checkMark}</td>
+                </tr>
+                <tr>
+                  <td>Name Surname</td>
+                  <td>5</td>
+                  <td>{checkMark}</td>
+                  <td>{checkMark}</td>
+                  <td>{checkMark}</td>
+                </tr>
+                <tr>
+                  <td>Name Surname</td>
+                  <td>5</td>
+                  <td>{checkMark}</td>
+                  <td>{checkMark}</td>
                   <td>{checkMark}</td>
                 </tr>
               </tbody>

@@ -11,12 +11,21 @@ var Table = require("react-bootstrap").Table;
 var ProgressBar = require("react-bootstrap").ProgressBar;
 var Row = require("react-bootstrap").Row;
 
+// actions
+var SideNavActionCreators = require("../actions/SideNavActionCreators.js");
+
 var StudentResultsList = require("../components/StudentResultsList/StudentResultsList.jsx");
 
 var Labview = require("../components/Labview/Labview.jsx");
 // local components
-
+// constants
+const _nav = "results";
+// this class
 var Coursepage = React.createClass({
+
+  componentDidMount: function() {
+    SideNavActionCreators.changeActiveSideElement(_nav);
+  },
 
   render: function() {
     const innerSearch = <Glyphicon glyph="search"/>;

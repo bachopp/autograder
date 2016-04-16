@@ -45,9 +45,8 @@ func main() {
 	r.HandleFunc("/Student/{students}/{course}", handler)
 
 	r.HandleFunc("/Admin", handler)
-	r.HandleFunc("/Admin/{groups}/{course}", handler)
-	r.HandleFunc("/Admin/{settings}/{course}", handler)
-	r.HandleFunc("/Admin/{students}/{course}", handler)
+	r.HandleFunc("/Admin/{settings}", handler)
+	r.HandleFunc("/Admin/{info}", handler)
 
 	r.PathPrefix("/").Handler(http.FileServer(http.Dir(webroot)))
 	http.Handle("/", r)
