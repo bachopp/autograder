@@ -16,14 +16,14 @@ type User struct {
 
 // Teacher represents db table
 type Teacher struct {
-	isTeacher bool
+	IsTeacher bool
 	Courses   *[]Course `json:"Courses"`
 }
 
 // Student represents db table
 type Student struct {
 	number    int
-	isStudent bool
+	IsStudent bool
 	Courses   *[]Course `json:"Courses"`
 }
 
@@ -60,21 +60,21 @@ func NewUser(name string) (*User, error) {
 	u.LastName = LastName
 	u.FirstName = FirstName
 
-	u.isTeacher, err = checkMode(u.ID, teacher)
+	u.IsTeacher, err = checkMode(u.ID, teacher)
 	if err != nil {
 		return nil, err
 	}
-	if u.isTeacher {
+	if u.IsTeacher {
 		u.Teacher.Courses, err = checkCourses(u.ID, teacher)
 		if err != nil {
 			return nil, err
 		}
 	}
-	u.isStudent, err = checkMode(u.ID, student)
+	u.IsStudent, err = checkMode(u.ID, student)
 	if err != nil {
 		return nil, err
 	}
-	if u.isStudent {
+	if u.IsStudent {
 		u.number, err = number(id)
 		if err != nil {
 			return nil, err
@@ -195,7 +195,6 @@ func number(id int) (int, error) {
 	if err != nil {
 		return 0, nil
 	}
-
 	return studno, nil
 }
 
@@ -205,10 +204,10 @@ func (user *User) updateCourse() error {
 	defer con.Close()
 	var err error
 
-	if user.isTeacher {
+	if user.IsTeacher {
 		user.Teacher.Courses, err = checkCourses(user.ID, teacher)
 	}
-	if user.isStudent {
+	if user.IsStudent {
 		user.Student.Courses, err = checkCourses(user.ID, student)
 	}
 	return err
@@ -229,8 +228,15 @@ func (user *User) AddToCourse(course *Course, modes ...string) error {
 		isMode, err := checkMode(user.ID, mode)
 
 		if !isMode {
-			stmt, err := tx.Prepare("INSERT INTO " + mode + " (userid) " +
-				"VALUES (?)")
+			var sqls string
+			if mode == student {
+				sqls = "INSERT INTO " + mode + " (userid, student_number) " +
+					"VALUES (?, 123456)"
+			} else {
+				sqls = "INSERT INTO " + mode + " (userid) " +
+					"VALUES (?)"
+			}
+			stmt, err := tx.Prepare(sqls)
 			if err != nil {
 				return err
 			}
@@ -238,9 +244,9 @@ func (user *User) AddToCourse(course *Course, modes ...string) error {
 			_, err = stmt.Exec(user.ID)
 			switch mode {
 			case teacher:
-				user.isTeacher = true
+				user.IsTeacher = true
 			case student:
-				user.isStudent = true
+				user.IsStudent = true
 			}
 			if err != nil {
 				return err
@@ -266,6 +272,38 @@ func (user *User) AddToCourse(course *Course, modes ...string) error {
 		return err
 	}
 	return nil
+}
+
+// MakeStudent adds user to students with student number
+func (user *User) MakeStudent(number int) error {
+	connectDb()
+	defer con.Close()
+
+	tx, err := con.Begin()
+	if err != nil {
+		return err
+	}
+	defer tx.Rollback()
+	stmt, err := tx.Prepare("INSERT INTO student VALUES (?,?)")
+	if err != nil {
+		return err
+	}
+	defer stmt.Close() // danger!
+
+	_, err = stmt.Exec(user.ID, number)
+
+	if err != nil {
+		return err
+	}
+
+	err = tx.Commit()
+	if err != nil {
+		return err
+	}
+	user.IsStudent = true
+
+	return nil
+
 }
 
 // MakeAdmin makes given user an admin for the system

@@ -12,6 +12,10 @@ var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
 // local
 var GroupSelectorAdd = require("./GroupSelectorAdd.jsx");
+
+// actions
+var TeacherGroupsActionCreators = require("../../actions/TeacherGroupsActionCreators.js");
+
 // this className
 
 var GroupSelectorElement = React.createClass({
@@ -19,7 +23,6 @@ var GroupSelectorElement = React.createClass({
   propTypes: {
     group: React.PropTypes.object.isRequired,
     activeGroup: React.PropTypes.bool,
-    removeUser: React.PropTypes.func.isRequired,
     elementClass: React.PropTypes.string.isRequired,
   },
 
@@ -30,7 +33,8 @@ var GroupSelectorElement = React.createClass({
   },
 
   removeUser: function(user, group) {
-    this.props.removeUser(user, group);
+    TeacherGroupsActionCreators.removeUser(user, group);
+    // this.props.removeUser(user, group);
   },
 
   render: function() {
@@ -46,18 +50,18 @@ var GroupSelectorElement = React.createClass({
       {
         users.map(function(user) {
           return (
-            <Panel className={elementClass} block  key={user.studentNumber}>
-              <Row>
+            <Col xs={6} key={user.studentNumber}>
+            <Panel className={elementClass}>
                 <Col xs={10}>
                   {user.firstName} {user.studentNumber}
                 </Col>
                 <Col xs={2}>
-                  <i onClick={self.props.removeUser.bind(null, user, group)}>
+                  <i onClick={self.removeUser.bind(null, user, group)}>
                   {removeUserIcon}
                   </i>
-                </Col>
-              </Row>
+                  </Col>
             </Panel>
+            </Col>
           );
         })
       }

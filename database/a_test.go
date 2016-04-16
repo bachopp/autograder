@@ -68,6 +68,9 @@ func TestDummyData(t *testing.T) {
 	if err := u1.MakeAdmin(); err != nil {
 		t.Error(err)
 	}
+	if err := u1.MakeStudent(22222); err != nil {
+		t.Error(err)
+	}
 	if err := u1.AddToCourse(c1, teacher); err != nil {
 		t.Error(err)
 	}

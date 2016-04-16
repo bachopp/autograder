@@ -13,7 +13,7 @@ var Panel = require("react-bootstrap").Panel;
 var StudentSideNav = require("../components/StudentSideNav/StudentSideNav.jsx");
 var GroupSelector = require("../components/GroupSelector/GroupSelector.jsx");
 
-var GroupManager = React.createClass({
+var TeacherGroups = React.createClass({
 
   componentWillUnmount: function() {
     console.log("StudentList.jsx unmounted");
@@ -34,4 +34,4 @@ var GroupManager = React.createClass({
   },
 });
 
-module.exports = GroupManager;
+module.exports = TeacherGroups;

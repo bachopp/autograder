@@ -9,7 +9,14 @@ var Input = require("react-bootstrap").Input;
 var Table = require("react-bootstrap").Table;
 var Image = require("react-bootstrap").Image;
 
+// actions
+var SideNavActionCreators = require("../../actions/SideNavActionCreators.js");
+// constants
+const _nav = "settings";
 var UserSettings = React.createClass({
+  componentDidMount: function() {
+    SideNavActionCreators.changeActiveSideElement(_nav);
+  },
   getInitialState: function() {
     return {
       isEdit: false,

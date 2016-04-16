@@ -14,6 +14,7 @@ var Navigation = require("./Navigation.jsx");
 var UsersStore = require("../../stores/UsersStore.js");
 // utils
 var TopBarAPIUtils = require("../../utils/TopBarAPIUtils");
+var TopBarAPIUtils = require("../../utils/TopBarAPIUtils.js");
 
 function getStateFromStores() {
   return {
@@ -26,6 +27,7 @@ function getStateFromStores() {
 var Topbar = React.createClass({
   getInitialState: function() {
     // Calls for initial data from server on first render cycle only.
+    // TopBarAPIUtils.getAllRoles();
     TopBarAPIUtils.getAllRoles();
     return getStateFromStores();
   },

@@ -29,8 +29,8 @@ func TestBruker(t *testing.T) {
 
 	u1.MakeAdmin()
 	fmt.Println(u1.IsAdmin)
-	fmt.Println(u1.isTeacher)
-	fmt.Println(u1.isStudent)
+	fmt.Println(u1.IsTeacher)
+	fmt.Println(u1.IsStudent)
 
 	if u1.Github != u1n && u2.Github != u2n {
 		t.Errorf("Expected %s : %s but got %s : %s", u1n, u2n, u1.Github, u2.Github)
