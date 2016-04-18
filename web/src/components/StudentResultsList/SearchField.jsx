@@ -17,7 +17,7 @@ var SearchField = React.createClass({
         type="text"
         addonBefore={innerSearch}
         placeholder="Search for students"
-        
+        onChange={this.handleChange}
       />
     );
   }

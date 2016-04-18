@@ -4,8 +4,8 @@ var AGConstants = require("../constants/AGConstants");
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 
-
-var mockData = require("./mockData.js");
+var StudentlistAPI = require("../utils/StudentlistAPI.js");
+var mockData = require("../components/StudentResultsList/mockData.js");
 
 var ActionTypes = AGConstants.ActionTypes;
 
@@ -14,11 +14,14 @@ var CHANGE_EVENT = "change";
 var _selectedStudId = 0;
 var _selectedLabId = 0;
 
+
+//console.log(StudentlistAPI.getAllStudents());
+
+
 var allStudents = mockData.students;
 var selectedStudents = allStudents;   // default all students are selected
 
 function resetStudents() {
-  console.log("--RESET STUDENTLIST");
   selectedStudents = allStudents;
 }
 
@@ -53,19 +56,10 @@ function getSelectedStudentLab() {
     return selectedStudents[_selectedStudId].labs[_selectedLabId];
   }
 }
-/*
-  TODO: When the _selectedXX is not in the list,
-  the first list-item should be set as active
 
-  -- this is to prevent bugs when searching for students
-  and the selected student is not in the queried group
-*/
 function updateStudentList(newList) {
   for(var i = 0; i<newList.length; i++){
-    if(newList[i] == selectedStudents[_selectedStudId]) {
-      // the currently selected student is in the search
-    } else {
-      // else - the selected lab will be set to the searches queryResults[0].labs[0]
+    if(!newList[1] == selectedStudents[_selectedStudId]) {
       _selectedStudId = 0;
       _selectedLabId = 0;
     }

@@ -4,7 +4,7 @@ var Col = require("react-bootstrap").Col;
 var PropTypes = React.PropTypes;
 
 var StudentElement = React.createClass({
-  
+
   propTypes: {
     lab: PropTypes.object.isRequired,
   },

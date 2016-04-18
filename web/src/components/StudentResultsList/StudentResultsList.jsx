@@ -12,7 +12,6 @@ var LabViewCourseActions = require("../../actions/LabViewCourseActions.js");
 var StudentRow = require("./StudentRow.jsx");
 var SearchField = require("./SearchField.jsx");
 
-
 var PropTypes = React.PropTypes;
 var StudentResultsList = React.createClass({
   PropTypes: {
@@ -41,8 +40,6 @@ var StudentResultsList = React.createClass({
     LabViewStore.removelistener(this._onChange);
   },
   render: function() {
-
-    console.log(this.state.students);
     if(!this.state.students || this.state.students.length == 0) {
       var ifElement = <h4>No students found</h4>;
     } else {
@@ -51,11 +48,11 @@ var StudentResultsList = React.createClass({
           <tr>
             <th>Name</th>
             <th>Slipdays</th>
-            <th>Lab 1</th>
-            <th>Lab 2</th>
-            <th>Lab 3</th>
-            <th>Lab 4</th>
-            <th>Lab 5</th>
+            {/* this requires the labs to be of equal size */}
+
+            {this.state.students[0].labs.map(function(student,index) {
+              return <th key={"studentlabShow" + index}>Lab {index + 1}</th>;
+            },this)}
           </tr>
         </thead>
         <tbody>

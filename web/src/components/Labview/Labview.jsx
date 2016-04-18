@@ -43,32 +43,30 @@ var Labview = React.createClass({
     const successIcon = <i className="fa fa-check fa-fw"></i>;
     const dangerIcon = <i className="fa fa-times fa-fw"></i>;
 
-      if(this.state.lab.length == 0) {
-        console.log("EMPTY");
-      } else {
+    /*
+      Dirty code... fix later
+    */
 
+    if(this.state.lab.length == 0) {
+
+      ifElemet = <Col><p>Not found</p></Col>;
+
+    } else {
+
+      var theLab = this.state.lab;
+      var theStudent = this.state.student;
+
+      if(this.state.lab.approved) {
+
+        labApproval = <Alert className="approved" bsStyle="success">{successIcon} Approved</Alert>;
+        statusButton = <Button onClick={this._handleClick} bsStyle="danger">Remove approval</Button>;
+      } else {
+        labApproval = <Alert className="notApproved" bsStyle="danger">{dangerIcon} Not approved</Alert>;
+        statusButton = <Button onClick={this._handleClick} bsStyle="success">Approve</Button>
       }
 
-
-
-    var theLab = this.state.lab;
-    var theStudent = this.state.student;
-
-    if(this.state.lab.approved && this.state.lab.length != 0) {
-      labApproval = <Alert className="approved" bsStyle="success">{successIcon} Approved</Alert>;
-      statusButton = <Button onClick={this._handleClick} bsStyle="danger">Remove approval</Button>;
-    } else if(!this.state.lab.approved && this.state.lab.length != 0) {
-      labApproval = <Alert className="notApproved" bsStyle="danger">{dangerIcon} Not approved</Alert>;
-      statusButton = <Button onClick={this._handleClick} bsStyle="success">Approve</Button>
-    } else {
-      labApproval = <h4>EMPTY</h4>;
-        statusButton = <h4>EMPTY 2</h4>;
-    }
-
-    return(
-      <Col>
-        <h3>{theLab.title} - {theStudent.firstName} {theStudent.lastName}</h3>
-        <Statusbar percent={theLab.percent}/>
+      var ifElement = <Col><h3>{theLab.title} - {theStudent.firstName} {theStudent.lastName}</h3>
+      <Statusbar percent={theLab.percent}/>
         {labApproval}
         <Col className="bottomPadding">
           <ButtonToolbar>
@@ -76,9 +74,15 @@ var Labview = React.createClass({
             <Button bsStyle="info">Rebuild</Button>
           </ButtonToolbar>
         </Col>
-        <Col>
-          <Buildlog log={theLab.log}/>
-        </Col>
+      <Col>
+        <Buildlog log={theLab.log}/>
+      </Col></Col>;
+
+    }
+
+    return(
+      <Col>
+        {ifElement}
       </Col>
     );
   }
