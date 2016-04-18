@@ -14,8 +14,16 @@ var MockData = {
           id: 0,
           title: "Lab 1",
           approved: false,
-          log: ["The build log comes here"],
-          percent: 65,
+          log: [
+            "1: Running program",
+            "2: Running helloworld.go, =====> 100%",
+            "3: Testing helloworld.go, =====> 100%",
+            "4: TEST1: 100%",
+            "5: TEST2: 100%",
+            "6: TESTS PASSED",
+            "7. LAB PASSED"
+          ],
+          percent: 100,
           isSelected: false
         },{
           id: 0,

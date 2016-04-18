@@ -14,7 +14,7 @@ module.exports = {
   }
 };
 
-},{"../constants/AGConstants":55,"../dispatcher/AGDispatcher":57}],2:[function(require,module,exports){
+},{"../constants/AGConstants":56,"../dispatcher/AGDispatcher":58}],2:[function(require,module,exports){
 var AGDispatcher = require("../dispatcher/AGDispatcher");
 var AGConstants = require("../constants/AGConstants");
 
@@ -30,7 +30,7 @@ module.exports = {
   }
 };
 
-},{"../constants/AGConstants":55,"../dispatcher/AGDispatcher":57}],3:[function(require,module,exports){
+},{"../constants/AGConstants":56,"../dispatcher/AGDispatcher":58}],3:[function(require,module,exports){
 var AGDispatcher = require("../dispatcher/AGDispatcher");
 var AGConstants = require("../constants/AGConstants");
 
@@ -46,83 +46,7 @@ module.exports = {
   }
 };
 
-},{"../constants/AGConstants":55,"../dispatcher/AGDispatcher":57}],4:[function(require,module,exports){
-var AGDispatcher = require("../dispatcher/AGDispatcher.js");
-var AGConstants = require("../constants/AGConstants.js");
-
-var ActionTypes = AGConstants.ActionTypes;
-
-module.exports = {
-
-  receiveStudents: function (rawStudents) {
-    AGDispatcher.dispatch({
-      type: ActionTypes.RECEIVE_RAW_STUDENTS,
-      rawStudents: rawStudents
-    });
-  }
-
-};
-
-},{"../constants/AGConstants.js":55,"../dispatcher/AGDispatcher.js":57}],5:[function(require,module,exports){
-var AGDispatcher = require("../dispatcher/AGDispatcher.js");
-var AGConstants = require("../constants/AGConstants.js");
-
-var ActionTypes = AGConstants.ActionTypes;
-
-module.exports = {
-
-  activateGroup: function (group) {
-    AGDispatcher.dispatch({
-      type: ActionTypes.TOGGLE_GROUP,
-      group: group
-    });
-  },
-
-  addNewGroup: function () {
-    AGDispatcher.dispatch({
-      type: ActionTypes.ADD_NEW_GROUP
-    });
-    // TODO call GroupSelectorAPI to inser group to DB
-  },
-  removeGroup: function (group) {
-    AGDispatcher.dispatch({
-      type: ActionTypes.REMOVE_GROUP,
-      group: group
-    });
-    // TODO call GroupSelectorAPI to release students from group update DB
-  },
-  removeUser: function (student, group) {
-    AGDispatcher.dispatch({
-      type: ActionTypes.REMOVE_STUDENT_FROM_GROUP,
-      student: student,
-      group: group
-    });
-  },
-  expandeAll: function () {
-    AGDispatcher.dispatch({
-      type: ActionTypes.EXPANDE_ALL_GROUPS
-    });
-  }
-};
-
-},{"../constants/AGConstants.js":55,"../dispatcher/AGDispatcher.js":57}],6:[function(require,module,exports){
-var AGDispatcher = require("../dispatcher/AGDispatcher.js");
-var AGConstants = require("../constants/AGConstants.js");
-
-var ActionTypes = AGConstants.ActionTypes;
-
-module.exports = {
-
-  receiveGroups: function (rawGroups) {
-    AGDispatcher.dispatch({
-      type: ActionTypes.RECEIVE_RAW_GROUPS,
-      rawGroups: rawGroups
-    });
-  }
-
-};
-
-},{"../constants/AGConstants.js":55,"../dispatcher/AGDispatcher.js":57}],7:[function(require,module,exports){
+},{"../constants/AGConstants":56,"../dispatcher/AGDispatcher":58}],4:[function(require,module,exports){
 var AGDispatcher = require("../dispatcher/AGDispatcher");
 var AGConstants = require("../constants/AGConstants");
 
@@ -161,7 +85,7 @@ module.exports = {
   }
 };
 
-},{"../constants/AGConstants":55,"../dispatcher/AGDispatcher":57}],8:[function(require,module,exports){
+},{"../constants/AGConstants":56,"../dispatcher/AGDispatcher":58}],5:[function(require,module,exports){
 var AGDispatcher = require("../dispatcher/AGDispatcher");
 var AGConstants = require("../constants/AGConstants");
 
@@ -177,7 +101,24 @@ module.exports = {
   }
 };
 
-},{"../constants/AGConstants":55,"../dispatcher/AGDispatcher":57}],9:[function(require,module,exports){
+},{"../constants/AGConstants":56,"../dispatcher/AGDispatcher":58}],6:[function(require,module,exports){
+var AGDispatcher = require("../dispatcher/AGDispatcher.js");
+var AGConstants = require("../constants/AGConstants.js");
+
+var ActionTypes = AGConstants.ActionTypes;
+
+module.exports = {
+
+  receiveStudents: function (rawStudents) {
+    AGDispatcher.dispatch({
+      type: ActionTypes.RECEIVE_RAW_STUDENTS,
+      rawStudents: rawStudents
+    });
+  }
+
+};
+
+},{"../constants/AGConstants.js":56,"../dispatcher/AGDispatcher.js":58}],7:[function(require,module,exports){
 var AGDispatcher = require("../dispatcher/AGDispatcher.js");
 var AGConstants = require("../constants/AGConstants.js");
 
@@ -197,10 +138,66 @@ module.exports = {
       type: ActionTypes.QUERY_FOR_STUDENT,
       query: query
     });
+  },
+
+  activateGroup: function (group) {
+    AGDispatcher.dispatch({
+      type: ActionTypes.TOGGLE_GROUP,
+      group: group
+    });
+  },
+
+  addNewGroup: function () {
+    AGDispatcher.dispatch({
+      type: ActionTypes.ADD_NEW_GROUP
+    });
+    // TODO call GroupSelectorAPI to inser group to DB
+  },
+  removeGroup: function (group) {
+    AGDispatcher.dispatch({
+      type: ActionTypes.REMOVE_GROUP,
+      group: group
+    });
+    // TODO call GroupSelectorAPI to release students from group update DB
+  },
+  removeUser: function (student, group) {
+    AGDispatcher.dispatch({
+      type: ActionTypes.REMOVE_STUDENT_FROM_GROUP,
+      student: student,
+      group: group
+    });
+  },
+  expandeAll: function () {
+    AGDispatcher.dispatch({
+      type: ActionTypes.EXPANDE_ALL_GROUPS
+    });
   }
 };
 
-},{"../constants/AGConstants.js":55,"../dispatcher/AGDispatcher.js":57}],10:[function(require,module,exports){
+},{"../constants/AGConstants.js":56,"../dispatcher/AGDispatcher.js":58}],8:[function(require,module,exports){
+var AGDispatcher = require("../dispatcher/AGDispatcher.js");
+var AGConstants = require("../constants/AGConstants.js");
+
+var ActionTypes = AGConstants.ActionTypes;
+
+module.exports = {
+
+  receiveStudents: function (rawStudents) {
+    AGDispatcher.dispatch({
+      type: ActionTypes.RECEIVE_RAW_STUDENTS,
+      rawStudents: rawStudents
+    });
+  },
+  receiveGroups: function (rawGroups) {
+    AGDispatcher.dispatch({
+      type: ActionTypes.RECEIVE_RAW_GROUPS,
+      rawGroups: rawGroups
+    });
+  }
+
+};
+
+},{"../constants/AGConstants.js":56,"../dispatcher/AGDispatcher.js":58}],9:[function(require,module,exports){
 var AGDispatcher = require("../dispatcher/AGDispatcher");
 var AGConstants = require("../constants/AGConstants");
 
@@ -216,7 +213,7 @@ module.exports = {
   }
 };
 
-},{"../constants/AGConstants":55,"../dispatcher/AGDispatcher":57}],11:[function(require,module,exports){
+},{"../constants/AGConstants":56,"../dispatcher/AGDispatcher":58}],10:[function(require,module,exports){
 var AGDispatcher = require("../dispatcher/AGDispatcher");
 var AGConstants = require("../constants/AGConstants");
 
@@ -232,7 +229,7 @@ module.exports = {
   }
 };
 
-},{"../constants/AGConstants":55,"../dispatcher/AGDispatcher":57}],12:[function(require,module,exports){
+},{"../constants/AGConstants":56,"../dispatcher/AGDispatcher":58}],11:[function(require,module,exports){
 var React = require("react");
 
 // react-router
@@ -263,7 +260,7 @@ var AdminSideNav = React.createClass({
       { xs: 12, className: "whitebox" },
       React.createElement(
         Link,
-        { to: "/admin" },
+        { to: "\/Admin" },
         React.createElement(
           Button,
           { className: "navButton", bsStyle: "danger", block: true },
@@ -273,7 +270,7 @@ var AdminSideNav = React.createClass({
       ),
       React.createElement(
         Link,
-        { to: "\/admin\/settings" },
+        { to: "\/Admin\/settings" },
         React.createElement(
           Button,
           { className: "navButton", block: true },
@@ -283,7 +280,7 @@ var AdminSideNav = React.createClass({
       ),
       React.createElement(
         Link,
-        { to: "\/admin\/info" },
+        { to: "\/Admin\/info" },
         React.createElement(
           Button,
           { className: "navButton", block: true },
@@ -297,7 +294,7 @@ var AdminSideNav = React.createClass({
 
 module.exports = AdminSideNav;
 
-},{"react":517,"react-bootstrap":318,"react-fontawesome":330,"react-router":382}],13:[function(require,module,exports){
+},{"react":518,"react-bootstrap":319,"react-fontawesome":331,"react-router":383}],12:[function(require,module,exports){
 var React = require("react");
 var ReactDOM = require("react-dom");
 
@@ -307,15 +304,34 @@ var ReactDOM = require("react-dom");
 var Col = require("react-bootstrap").Col;
 var Row = require("react-bootstrap").Row;
 var Jumbotron = require("react-bootstrap").Jumbotron;
+// stores
+var UsersStore = require("../../stores/UsersStore.js");
 
 // local components requires
 var LinkPanel = require("./LinkPanel.jsx");
+// actions
+var SideNavActionCreators = require("../../actions/SideNavActionCreators.js");
 // funcitons
-
+function getStateFromStores() {
+	return {};
+}
+// constants
+const _nav = "info";
 // this class
 var CourseInfo = React.createClass({
 	displayName: "CourseInfo",
 
+	// getInitialState: function() {
+	//
+	// },
+	//
+	componentDidMount: function () {
+		SideNavActionCreators.changeActiveSideElement(_nav);
+	},
+	//
+	// componentWillUnmount: function() {
+	//
+	// },
 
 	render: function () {
 		return React.createElement(
@@ -351,7 +367,7 @@ var CourseInfo = React.createClass({
 
 module.exports = CourseInfo;
 
-},{"./LinkPanel.jsx":14,"react":517,"react-bootstrap":318,"react-dom":329}],14:[function(require,module,exports){
+},{"../../actions/SideNavActionCreators.js":5,"../../stores/UsersStore.js":528,"./LinkPanel.jsx":13,"react":518,"react-bootstrap":319,"react-dom":330}],13:[function(require,module,exports){
 var React = require("react");
 var ReactDOM = require("react-dom");
 
@@ -368,49 +384,125 @@ var ListGroup = require("react-bootstrap").ListGroup;
 
 // this class
 var LinkPanel = React.createClass({
-  displayName: "LinkPanel",
+			displayName: "LinkPanel",
 
 
-  render: function () {
-    const githubIcon = React.createElement("i", { className: "fa fa-github fa-fw fa-2x" });
-    return React.createElement(
-      "div",
-      null,
-      React.createElement(
-        "h3",
-        null,
-        React.createElement(
-          "b",
-          null,
-          "Github links"
-        )
-      ),
-      React.createElement("div", { className: "buttonify" }),
-      React.createElement(
-        "div",
-        { className: "buttonify" },
-        githubIcon,
-        " Course information"
-      ),
-      React.createElement(
-        "div",
-        { className: "buttonify" },
-        githubIcon,
-        " Individual labs"
-      ),
-      React.createElement(
-        "div",
-        { className: "buttonify" },
-        githubIcon,
-        " Group labs"
-      )
-    );
-  }
+			render: function () {
+						const githubIcon = React.createElement("i", { className: "fa fa-github fa-fw fa-2x" });
+						return React.createElement(
+									"div",
+									null,
+									React.createElement(
+												"h3",
+												null,
+												React.createElement(
+															"b",
+															null,
+															"Github links"
+												)
+									),
+									React.createElement(
+												Col,
+												{ xs: 6 },
+												React.createElement(
+															"div",
+															{ className: "buttonify" },
+															githubIcon,
+															" Course information"
+												),
+												React.createElement(
+															"div",
+															{ className: "buttonify" },
+															githubIcon,
+															" Individual labs"
+												)
+									),
+									React.createElement(
+												Col,
+												{ xs: 6 },
+												React.createElement(
+															"div",
+															{ className: "buttonify" },
+															githubIcon,
+															" Group labs"
+												)
+									)
+						);
+			}
 });
 
 module.exports = LinkPanel;
 
-},{"react":517,"react-bootstrap":318,"react-dom":329}],15:[function(require,module,exports){
+},{"react":518,"react-bootstrap":319,"react-dom":330}],14:[function(require,module,exports){
+var React = require("react");
+var ReactDOM = require("react-dom");
+
+// react-router requires
+
+// react-bootstrap requires
+var Col = require("react-bootstrap").Col;
+var Row = require("react-bootstrap").Row;
+var Jumbotron = require("react-bootstrap").Jumbotron;
+// stores
+var UsersStore = require("../../stores/UsersStore.js");
+
+// local components requires
+
+// funcitons
+function getStateFromStores() {
+	return {};
+}
+// this class
+var CourseMembers = React.createClass({
+	displayName: "CourseMembers",
+
+	// getInitialState: function() {
+	//
+	// },
+	//
+	// componentDidMount: function() {
+	//
+	// },
+	//
+	// componentWillUnmount: function() {
+	//
+	// },
+
+	render: function () {
+		return React.createElement(
+			Col,
+			{ xs: 12 },
+			React.createElement(
+				Col,
+				{ xs: 7, className: "infoboxleft" },
+				React.createElement(
+					"h1",
+					null,
+					"DAT100"
+				),
+				React.createElement(
+					"p",
+					null,
+					"Course name"
+				),
+				React.createElement(
+					"p",
+					null,
+					"Course information"
+				)
+			),
+			React.createElement(
+				Col,
+				{ xs: 5, className: "infoboxright" },
+				React.createElement(LinkPanel, null)
+			)
+		);
+	}
+});
+
+module.exports = CourseMembers;
+
+},{"../../stores/UsersStore.js":528,"react":518,"react-bootstrap":319,"react-dom":330}],15:[function(require,module,exports){
 var React = require("react");
 // react-router
 var Link = require("react-router").Link;
@@ -486,7 +578,6 @@ var CourseNav = React.createClass({
     } else {
       active = activeCourse;
     }
-
     return React.createElement(
       Row,
       null,
@@ -499,7 +590,7 @@ var CourseNav = React.createClass({
           } else {
             isActive = "";
           }
-          var classes = "buttonify infoboxleft " + isActive;
+          var classes = "textc buttonify infoboxleft " + isActive;
           var url = "\/" + mode + "\/" + sidenav + "/" + course;
           return React.createElement(
             Col,
@@ -522,7 +613,7 @@ var CourseNav = React.createClass({
 
 module.exports = CourseNav;
 
-},{"../../actions/CourseNavActionCreators.js":1,"../../actions/TopBarActionCreators.js":10,"../../stores/CoursesStore.js":523,"../../stores/SideNavStore.js":526,"../../stores/UsersStore.js":527,"react":517,"react-bootstrap":318,"react-router":382}],16:[function(require,module,exports){
+},{"../../actions/CourseNavActionCreators.js":1,"../../actions/TopBarActionCreators.js":9,"../../stores/CoursesStore.js":524,"../../stores/SideNavStore.js":526,"../../stores/UsersStore.js":528,"react":518,"react-bootstrap":319,"react-router":383}],16:[function(require,module,exports){
 var React = require("react");
 var ReactDOM = require("react-dom");
 
@@ -671,7 +762,7 @@ var Assignments = React.createClass({
 
 module.exports = Assignments;
 
-},{"react":517,"react-bootstrap":318,"react-dom":329}],17:[function(require,module,exports){
+},{"react":518,"react-bootstrap":319,"react-dom":330}],17:[function(require,module,exports){
 var React = require("react");
 var ReactDOM = require("react-dom");
 
@@ -722,7 +813,7 @@ var CIOptions = React.createClass({
 
 module.exports = CIOptions;
 
-},{"react":517,"react-bootstrap":318,"react-dom":329}],18:[function(require,module,exports){
+},{"react":518,"react-bootstrap":319,"react-dom":330}],18:[function(require,module,exports){
 var React = require("react");
 var ReactDOM = require("react-dom");
 
@@ -736,6 +827,9 @@ var Panel = require("react-bootstrap").Panel;
 var Input = require("react-bootstrap").Input;
 var Button = require("react-bootstrap").Button;
 
+// actions
+var SideNavActionCreators = require("../../actions/SideNavActionCreators.js");
+
 // local components requires
 var StandardSettings = require("./StandardSettings.jsx");
 var CIOptions = require("./CIOptions.jsx");
@@ -743,10 +837,16 @@ var Assignments = require("./Assignments.jsx");
 
 // funcitons
 
+// constants
+const _nav = "settings";
 // this class
 var CourseSettings = React.createClass({
 	displayName: "CourseSettings",
 
+
+	componentDidMount: function () {
+		SideNavActionCreators.changeActiveSideElement(_nav);
+	},
 
 	render: function () {
 		return React.createElement(
@@ -773,7 +873,7 @@ var CourseSettings = React.createClass({
 
 module.exports = CourseSettings;
 
-},{"./Assignments.jsx":16,"./CIOptions.jsx":17,"./StandardSettings.jsx":19,"react":517,"react-bootstrap":318,"react-dom":329}],19:[function(require,module,exports){
+},{"../../actions/SideNavActionCreators.js":5,"./Assignments.jsx":16,"./CIOptions.jsx":17,"./StandardSettings.jsx":19,"react":518,"react-bootstrap":319,"react-dom":330}],19:[function(require,module,exports){
 var React = require("react");
 var ReactDOM = require("react-dom");
 
@@ -862,7 +962,7 @@ var StandardSettings = React.createClass({
 
 module.exports = StandardSettings;
 
-},{"react":517,"react-bootstrap":318,"react-dom":329}],20:[function(require,module,exports){
+},{"react":518,"react-bootstrap":319,"react-dom":330}],20:[function(require,module,exports){
 var React = require("react");
 //reactbootstrap
 var Col = require("react-bootstrap").Col;
@@ -893,7 +993,7 @@ var CardWrapper = React.createClass({
 
 module.exports = CardWrapper;
 
-},{"./CourseCard.jsx":22,"react":517,"react-bootstrap":318}],21:[function(require,module,exports){
+},{"./CourseCard.jsx":22,"react":518,"react-bootstrap":319}],21:[function(require,module,exports){
 var React = require("react");
 //reactbootstrap
 var Col = require("react-bootstrap").Col;
@@ -932,7 +1032,7 @@ var CenterWrapper = React.createClass({
 
 module.exports = CenterWrapper;
 
-},{"./CardWrapper.jsx":20,"react":517,"react-bootstrap":318}],22:[function(require,module,exports){
+},{"./CardWrapper.jsx":20,"react":518,"react-bootstrap":319}],22:[function(require,module,exports){
 var React = require("react");
 
 //reactbootstrap
@@ -994,7 +1094,7 @@ var CourseCard = React.createClass({
 
 module.exports = CourseCard;
 
-},{"../../actions/CourseNavActionCreators.js":1,"react":517,"react-bootstrap":318,"react-router":382}],23:[function(require,module,exports){
+},{"../../actions/CourseNavActionCreators.js":1,"react":518,"react-bootstrap":319,"react-router":383}],23:[function(require,module,exports){
 var React = require("react");
 
 // react-bootstrap requires
@@ -1063,7 +1163,7 @@ var Courses = React.createClass({
 
 module.exports = Courses;
 
-},{"../../stores/CoursesStore.js":523,"../../utils/CoursesAPIUtils.js":531,"../NotFound/NotFound.jsx":32,"./CenterWrapper.jsx":21,"react":517,"react-bootstrap":318,"react-router":382}],24:[function(require,module,exports){
+},{"../../stores/CoursesStore.js":524,"../../utils/CoursesAPIUtils.js":531,"../NotFound/NotFound.jsx":32,"./CenterWrapper.jsx":21,"react":518,"react-bootstrap":319,"react-router":383}],24:[function(require,module,exports){
 // TODO: http://react-bootstrap.github.io/components.html#panels-accordion
 
 var React = require("react");
@@ -1082,18 +1182,18 @@ var GroupSelectorElement = require("./GroupSelectorElement.jsx");
 var GroupSelectorAdd = require("./GroupSelectorAdd.jsx");
 
 var GroupSelectorAPI = require("../../utils/GroupSelectorAPI.js");
-var GroupManagerStore = require("../../stores/GroupManagerStore.js");
+var TeacherGroupsStore = require("../../stores/TeacherGroupsStore.js");
 
-var GroupSelectorActionCreators = require("../../actions/GroupSelectorActionCreators.js");
+var TeacherGroupsActionCreators = require("../../actions/TeacherGroupsActionCreators.js");
 
 // stores
 var mock = require("./mock.js");
-// var GroupManagerStore = require("../../stores/GroupManagerStore.js");
+// var TeacherGroupsStore = require("../../stores/TeacherGroupsStore.js");
 
 function getStateFromStores() {
   return {
-    groups: GroupManagerStore.getAllGroups(),
-    isGroupsExpanded: GroupManagerStore.isGroupsExpanded()
+    groups: TeacherGroupsStore.getAllGroups(),
+    isGroupsExpanded: TeacherGroupsStore.isGroupsExpanded()
   };
 }
 // this className
@@ -1107,28 +1207,25 @@ var GroupSelector = React.createClass({
   },
 
   componentDidMount: function () {
-    GroupManagerStore.addChangeListener(this._onChange);
+    TeacherGroupsStore.addChangeListener(this._onChange);
   },
   componentWillUnmount: function () {
-    GroupManagerStore.removeChangeListener(this._onChange);
+    TeacherGroupsStore.removeChangeListener(this._onChange);
   },
 
   activateGroup: function (group) {
-    GroupSelectorActionCreators.activateGroup(group);
+    TeacherGroupsActionCreators.activateGroup(group);
   },
 
   addNewGroup: function () {
-    GroupSelectorActionCreators.addNewGroup();
+    TeacherGroupsActionCreators.addNewGroup();
   },
   removeGroup: function (group) {
-    GroupSelectorActionCreators.removeGroup(group);
+    TeacherGroupsActionCreators.removeGroup(group);
   },
 
-  removeUser: function (student, group) {
-    GroupSelectorActionCreators.removeUser(student, group);
-  },
   expandAll: function () {
-    GroupSelectorActionCreators.expandeAll();
+    TeacherGroupsActionCreators.expandeAll();
   },
 
   render: function () {
@@ -1197,7 +1294,7 @@ var GroupSelector = React.createClass({
         groups.map(function (group) {
           var isExpanded = false;
           var wrapperClass = "groupwrapper ";
-          var groupClass = "group buttonify ";
+          var groupClass = "group textc buttonify ";
           var elementClass = "groupelement ";
           var emptyToken = '';
           var len = group.users.length;
@@ -1223,7 +1320,7 @@ var GroupSelector = React.createClass({
             React.createElement(
               Panel,
               {
-                className: groupClass,
+                className: "groupheader " + groupClass,
                 block: true, onClick: self.activateGroup.bind(self, group)
               },
               React.createElement(
@@ -1257,7 +1354,7 @@ var GroupSelector = React.createClass({
             React.createElement(
               Panel,
               { className: groupClass, collapsible: true, expanded: isExpanded },
-              React.createElement(GroupSelectorElement, { elementClass: elementClass, group: group, removeUser: self.removeUser })
+              React.createElement(GroupSelectorElement, { elementClass: elementClass, group: group })
             )
           );
         })
@@ -1272,7 +1369,7 @@ var GroupSelector = React.createClass({
 
 module.exports = GroupSelector;
 
-},{"../../actions/GroupSelectorActionCreators.js":5,"../../stores/GroupManagerStore.js":524,"../../utils/GroupSelectorAPI.js":533,"./GroupSelectorAdd.jsx":25,"./GroupSelectorElement.jsx":26,"./mock.js":27,"react":517,"react-bootstrap":318}],25:[function(require,module,exports){
+},{"../../actions/TeacherGroupsActionCreators.js":7,"../../stores/TeacherGroupsStore.js":527,"../../utils/GroupSelectorAPI.js":533,"./GroupSelectorAdd.jsx":25,"./GroupSelectorElement.jsx":26,"./mock.js":27,"react":518,"react-bootstrap":319}],25:[function(require,module,exports){
 var React = require("react");
 
 // react-router
@@ -1307,7 +1404,7 @@ var GroupSelectorAdd = React.createClass({
 
 module.exports = GroupSelectorAdd;
 
-},{"react":517,"react-bootstrap":318}],26:[function(require,module,exports){
+},{"react":518,"react-bootstrap":319}],26:[function(require,module,exports){
 // TODO: impement group buttor, when active it expands and displays the students that are in the group
 
 var React = require("react");
@@ -1322,6 +1419,10 @@ var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
 // local
 var GroupSelectorAdd = require("./GroupSelectorAdd.jsx");
+
+// actions
+var TeacherGroupsActionCreators = require("../../actions/TeacherGroupsActionCreators.js");
+
 // this className
 
 var GroupSelectorElement = React.createClass({
@@ -1331,7 +1432,6 @@ var GroupSelectorElement = React.createClass({
   propTypes: {
     group: React.PropTypes.object.isRequired,
     activeGroup: React.PropTypes.bool,
-    removeUser: React.PropTypes.func.isRequired,
     elementClass: React.PropTypes.string.isRequired
   },
 
@@ -1342,7 +1442,8 @@ var GroupSelectorElement = React.createClass({
   },
 
   removeUser: function (user, group) {
-    this.props.removeUser(user, group);
+    TeacherGroupsActionCreators.removeUser(user, group);
+    // this.props.removeUser(user, group);
   },
 
   render: function () {
@@ -1358,11 +1459,11 @@ var GroupSelectorElement = React.createClass({
       null,
       users.map(function (user) {
         return React.createElement(
-          Panel,
-          { className: elementClass, block: true, key: user.studentNumber },
+          Col,
+          { xs: 6, key: user.studentNumber },
           React.createElement(
-            Row,
-            null,
+            Panel,
+            { className: elementClass },
             React.createElement(
               Col,
               { xs: 10 },
@@ -1375,7 +1476,7 @@ var GroupSelectorElement = React.createClass({
               { xs: 2 },
               React.createElement(
                 "i",
-                { onClick: self.props.removeUser.bind(null, user, group) },
+                { onClick: self.removeUser.bind(null, user, group) },
                 removeUserIcon
               )
             )
@@ -1388,7 +1489,7 @@ var GroupSelectorElement = React.createClass({
 
 module.exports = GroupSelectorElement;
 
-},{"./GroupSelectorAdd.jsx":25,"react":517,"react-bootstrap":318}],27:[function(require,module,exports){
+},{"../../actions/TeacherGroupsActionCreators.js":7,"./GroupSelectorAdd.jsx":25,"react":518,"react-bootstrap":319}],27:[function(require,module,exports){
 module.exports = {
   stnr: function () {
     var arr = [];
@@ -1495,7 +1596,7 @@ var InfoBar = React.createClass({
 module.exports = InfoBar;
 // {this.state.month}, {this.state.day} - {this.state.hours}:{this.state.minutes}
 
-},{"react":517,"react-bootstrap":318}],29:[function(require,module,exports){
+},{"react":518,"react-bootstrap":319}],29:[function(require,module,exports){
 var React = require("react");
 var Col = require("react-bootstrap").Col;
 var Well = require("react-bootstrap").Well;
@@ -1524,7 +1625,7 @@ var Buildlog = React.createClass({
 
 module.exports = Buildlog;
 
-},{"react":517,"react-bootstrap":318}],30:[function(require,module,exports){
+},{"react":518,"react-bootstrap":319}],30:[function(require,module,exports){
 var React = require("react");
 var ReactDOM = require("react-dom");
 
@@ -1539,7 +1640,7 @@ var Table = require("react-bootstrap").Table;
 var ProgressBar = require("react-bootstrap").ProgressBar;
 
 var LabViewStore = require("../../stores/LabViewStore.js");
-var LabViewCourseActions = require("../../actions/LabViewCourseActions.js");
+var LabViewCourseActionCreators = require("../../actions/LabViewCourseActionCreators.js");
 
 var Statusbar = require("./Statusbar.jsx");
 var Buildlog = require("./Buildlog.jsx");
@@ -1557,7 +1658,7 @@ var Labview = React.createClass({
     this.setState(this._getDataFromStore);
   },
   _handleClick: function () {
-    LabViewCourseActions.toggleApprovalStudentLab();
+    LabViewCourseActionCreators.toggleApprovalStudentLab();
   },
   getInitialState: function () {
     return this._getDataFromStore();
@@ -1571,75 +1672,101 @@ var Labview = React.createClass({
   render: function () {
     const successIcon = React.createElement("i", { className: "fa fa-check fa-fw" });
     const dangerIcon = React.createElement("i", { className: "fa fa-times fa-fw" });
-    var theLab = this.state.lab;
-    var theStudent = this.state.student;
 
-    if (theLab.approved) {
-      labApproval = React.createElement(
-        Alert,
-        { bsStyle: "success" },
-        successIcon,
-        " Approved"
+    /*
+      Dirty code... fix later
+    */
+
+    if (this.state.lab.length == 0) {
+
+      ifElemet = React.createElement(
+        Col,
+        null,
+        React.createElement(
+          "p",
+          null,
+          "Not found"
+        )
       );
-      statusButton = React.createElement(
-        Button,
-        { onClick: this._handleClick, bsStyle: "danger" },
-        "Remove approval"
-      );
-    } else if (!theLab.approved) {
-      labApproval = React.createElement(
-        Alert,
-        { className: "redColor", bsStyle: "danger" },
-        dangerIcon,
-        " Not approved"
-      );
-      statusButton = React.createElement(
-        Button,
-        { onClick: this._handleClick, bsStyle: "success" },
-        "Approve"
+    } else {
+
+      var theLab = this.state.lab;
+      var theStudent = this.state.student;
+
+      if (this.state.lab.approved) {
+
+        labApproval = React.createElement(
+          Alert,
+          { className: "approved", bsStyle: "success" },
+          successIcon,
+          " Approved"
+        );
+        statusButton = React.createElement(
+          Button,
+          { onClick: this._handleClick, bsStyle: "danger" },
+          "Remove approval"
+        );
+      } else {
+        labApproval = React.createElement(
+          Alert,
+          { className: "notApproved", bsStyle: "danger" },
+          dangerIcon,
+          " Not approved"
+        );
+        statusButton = React.createElement(
+          Button,
+          { onClick: this._handleClick, bsStyle: "success" },
+          "Approve"
+        );
+      }
+
+      var ifElement = React.createElement(
+        Col,
+        null,
+        React.createElement(
+          "h3",
+          null,
+          theLab.title,
+          " - ",
+          theStudent.firstName,
+          " ",
+          theStudent.lastName
+        ),
+        React.createElement(Statusbar, { percent: theLab.percent }),
+        labApproval,
+        React.createElement(
+          Col,
+          { className: "bottomPadding" },
+          React.createElement(
+            ButtonToolbar,
+            null,
+            statusButton,
+            React.createElement(
+              Button,
+              { bsStyle: "info" },
+              "Rebuild"
+            )
+          )
+        ),
+        React.createElement(
+          Col,
+          null,
+          React.createElement(Buildlog, { log: theLab.log })
+        )
       );
     }
 
     return React.createElement(
       Col,
       null,
-      React.createElement(
-        "h3",
-        null,
-        theLab.title,
-        " - ",
-        theStudent.firstName,
-        " ",
-        theStudent.lastName
-      ),
-      React.createElement(Statusbar, { percent: theLab.percent }),
-      labApproval,
-      React.createElement(
-        Col,
-        { className: "bottomPadding" },
-        React.createElement(
-          ButtonToolbar,
-          null,
-          statusButton,
-          React.createElement(
-            Button,
-            { bsStyle: "info" },
-            "Rebuild"
-          )
-        )
-      ),
-      React.createElement(
-        Col,
-        null,
-        React.createElement(Buildlog, { log: theLab.log })
-      )
+      ifElement
     );
   }
 });
 
 module.exports = Labview;
 
-},{"../../actions/LabViewCourseActions.js":7,"../../stores/LabViewStore.js":525,"./Buildlog.jsx":29,"./Statusbar.jsx":31,"react":517,"react-bootstrap":318,"react-dom":329}],31:[function(require,module,exports){
+},{"../../actions/LabViewCourseActionCreators.js":4,"../../stores/LabViewStore.js":525,"./Buildlog.jsx":29,"./Statusbar.jsx":31,"react":518,"react-bootstrap":319,"react-dom":330}],31:[function(require,module,exports){
 var React = require("react");
 
 // React components
@@ -1664,7 +1791,7 @@ var Statusbar = React.createClass({
 
 module.exports = Statusbar;
 
-},{"react":517,"react-bootstrap":318}],32:[function(require,module,exports){
+},{"react":518,"react-bootstrap":319}],32:[function(require,module,exports){
 var React = require("react");
 var ReactDOM = require("react-dom");
 
@@ -1674,33 +1801,38 @@ var ReactDOM = require("react-dom");
 var Jumbotron = require("react-bootstrap").Jumbotron;
 var Button = require("react-bootstrap").Button;
 // local components requires
-
+// actions
+var SideNavActionCreators = require("../../actions/SideNavActionCreators.js");
+// constants
+const _nav = "not_found";
 // this class
 var Welcome = React.createClass({
-  displayName: "Welcome",
+	displayName: "Welcome",
 
-
-  render: function () {
-    return React.createElement(
-      Jumbotron,
-      null,
-      React.createElement(
-        "h1",
-        null,
-        "404 not found"
-      ),
-      React.createElement(
-        "p",
-        null,
-        "Go back"
-      )
-    );
-  }
+	componentDidMount: function () {
+		SideNavActionCreators.changeActiveSideElement(_nav);
+	},
+	render: function () {
+		return React.createElement(
+			Jumbotron,
+			null,
+			React.createElement(
+				"h1",
+				null,
+				"404 not found"
+			),
+			React.createElement(
+				"p",
+				null,
+				"Go back"
+			)
+		);
+	}
 });
 
 module.exports = Welcome;
 
-},{"react":517,"react-bootstrap":318,"react-dom":329}],33:[function(require,module,exports){
+},{"../../actions/SideNavActionCreators.js":5,"react":518,"react-bootstrap":319,"react-dom":330}],33:[function(require,module,exports){
 var React = require("react");
 // react-bootstrap
 var ListGroup = require("react-bootstrap").ListGroup;
@@ -1711,10 +1843,10 @@ var Col = require("react-bootstrap").Col;
 var Table = require("react-bootstrap").Table;
 
 // stores
-var GroupManagerStore = require("../../stores/GroupManagerStore.js");
+var TeacherGroupsStore = require("../../stores/TeacherGroupsStore.js");
 
 // actions
-var StudentAvailableSelectorActionCreators = require("../../actions/StudentAvailableSelectorActionCreators.js");
+var TeacherGroupsActionCreators = require("../../actions/TeacherGroupsActionCreators.js");
 
 // API
 var StudentAvailableSelectorAPI = require("../../utils/StudentAvailableSelectorAPI.js");
@@ -1726,7 +1858,7 @@ var StudentAvailableSelectorSearch = require("./StudentAvailableSelectorSearch.j
 function getStateFromStores() {
   return {
     query: '',
-    students: GroupManagerStore.getAllStudents()
+    students: TeacherGroupsStore.getAllStudents()
   };
 };
 
@@ -1741,12 +1873,12 @@ var StudentAvailableSelector = React.createClass({
   },
 
   componentDidMount: function () {
-    GroupManagerStore.addChangeListener(this._onChange);
+    TeacherGroupsStore.addChangeListener(this._onChange);
   },
 
   // three hours of debugging becouse componentWill/u/Unmount
   componentWillUnmount: function () {
-    GroupManagerStore.removeChangeListener(this._onChange);
+    TeacherGroupsStore.removeChangeListener(this._onChange);
   },
 
   render: function () {
@@ -1813,18 +1945,18 @@ var StudentAvailableSelector = React.createClass({
   },
 
   _onAddToGroup: function (student) {
-    StudentAvailableSelectorActionCreators.addStudentToGroup(student);
+    TeacherGroupsActionCreators.addStudentToGroup(student);
   },
 
   _searchFor: function (event) {
     this.setState({ query: event.target.value });
-    StudentAvailableSelectorActionCreators.searchForStudent(event.target.value);
+    TeacherGroupsActionCreators.searchForStudent(event.target.value);
   }
 });
 
 module.exports = StudentAvailableSelector;
 
-},{"../../actions/StudentAvailableSelectorActionCreators.js":9,"../../stores/GroupManagerStore.js":524,"../../utils/StudentAvailableSelectorAPI.js":537,"./StudentAvailableSelectorElement.jsx":34,"./StudentAvailableSelectorSearch.jsx":36,"react":517,"react-bootstrap":318}],34:[function(require,module,exports){
+},{"../../actions/TeacherGroupsActionCreators.js":7,"../../stores/TeacherGroupsStore.js":527,"../../utils/StudentAvailableSelectorAPI.js":537,"./StudentAvailableSelectorElement.jsx":34,"./StudentAvailableSelectorSearch.jsx":36,"react":518,"react-bootstrap":319}],34:[function(require,module,exports){
 var React = require("react");
 // react-bootstrap
 var ListGroupItem = require("react-bootstrap").ListGroupItem;
@@ -1881,7 +2013,7 @@ var StudentAvailableSelectorElement = React.createClass({
 
 module.exports = StudentAvailableSelectorElement;
 
-},{"./StudentAvailableSelectorElementAdd.jsx":35,"react":517,"react-bootstrap":318}],35:[function(require,module,exports){
+},{"./StudentAvailableSelectorElementAdd.jsx":35,"react":518,"react-bootstrap":319}],35:[function(require,module,exports){
 var React = require("react");
 
 var Button = require("react-bootstrap").Button;
@@ -1906,7 +2038,7 @@ var StudentAvailableSelectorElementAdd = React.createClass({
 
 module.exports = StudentAvailableSelectorElementAdd;
 
-},{"react":517,"react-bootstrap":318}],36:[function(require,module,exports){
+},{"react":518,"react-bootstrap":319}],36:[function(require,module,exports){
 var React = require("react");
 
 var Input = require("react-bootstrap").Input;
@@ -1945,8 +2077,8 @@ var StudentAvailableSelectorSearch = React.createClass({
 
 module.exports = StudentAvailableSelectorSearch;
 
-},{"react":517,"react-bootstrap":318}],37:[function(require,module,exports){
-// var GroupManagerServerActionCreators = require("../../actions/GroupManagerServerActionCreators.js");
+},{"react":518,"react-bootstrap":319}],37:[function(require,module,exports){
+// var TeacherGroupsServerActionCreators = require("../../actions/TeacherGroupsServerActionCreators.js");
 module.exports = {
   stnr: function () {
     var arr = [];
@@ -1963,7 +2095,7 @@ module.exports = {
     var test = { username: "tokems", firstName: "Thomas", lastName: "Glienieki", studentNumber: 12340, hasGroup: false };
     arr.push(test);
     return arr;
-    // GroupManagerServerActionCreators.receiveStudents(arr);
+    // TeacherGroupsServerActionCreators.receiveStudents(arr);
   }
 };
 
@@ -1991,7 +2123,7 @@ var StudentResultMain = React.createClass({
 
 module.exports = StudentResultMain;
 
-},{"../Labview/Labview.jsx":30,"react":517,"react-bootstrap":318}],39:[function(require,module,exports){
+},{"../Labview/Labview.jsx":30,"react":518,"react-bootstrap":319}],39:[function(require,module,exports){
 var React = require("react");
 
 // react-bootstrap
@@ -2017,32 +2149,32 @@ var StudentResultSide = React.createClass({
 
 module.exports = StudentResultSide;
 
-},{"react":517,"react-bootstrap":318}],40:[function(require,module,exports){
+},{"react":518,"react-bootstrap":319}],40:[function(require,module,exports){
 var React = require("react");
 var Input = require("react-bootstrap").Input;
 var Glyphicon = require("react-bootstrap").Glyphicon;
 
-var LabViewCourseActions = require("../../actions/LabViewCourseActions.js");
+var LabViewCourseActionCreators = require("../../actions/LabViewCourseActionCreators.js");
 
 var SearchField = React.createClass({
   handleChange: function (event) {
     raw_search = event.target.value;
-    LabViewCourseActions.searchStudentTable(raw_search);
+    LabViewCourseActionCreators.searchStudentTable(raw_search);
   },
   render: function () {
     const innerSearch = React.createElement(Glyphicon, { glyph: "search" });
     return React.createElement(Input, {
       type: "text",
       addonBefore: innerSearch,
-      placeholder: "Search for students"
-
+      placeholder: "Search for students",
+      onChange: this.handleChange
     });
   }
 }, this);
 
 module.exports = SearchField;
 
-},{"../../actions/LabViewCourseActions.js":7,"react":517,"react-bootstrap":318}],41:[function(require,module,exports){
+},{"../../actions/LabViewCourseActionCreators.js":4,"react":518,"react-bootstrap":319}],41:[function(require,module,exports){
 var React = require("react");
 var Col = require("react-bootstrap").Col;
 
@@ -2055,7 +2187,6 @@ var StudentElement = React.createClass({
   propTypes: {
     lab: PropTypes.object.isRequired
   },
-  _onChange: function () {},
   render: function () {
     var lab = this.props.lab;
     var self = this;
@@ -2084,7 +2215,7 @@ var StudentElement = React.createClass({
 
 module.exports = StudentElement;
 
-},{"react":517,"react-bootstrap":318}],42:[function(require,module,exports){
+},{"react":518,"react-bootstrap":319}],42:[function(require,module,exports){
 var React = require("react");
 
 var Col = require("react-bootstrap").Col;
@@ -2094,40 +2225,35 @@ var Table = require("react-bootstrap").Table;
 var Button = require("react-bootstrap").Button;
 var ButtonGroup = require("react-bootstrap").ButtonGroup;
 var LabViewStore = require("../../stores/LabViewStore.js");
-var LabViewCourseActions = require("../../actions/LabViewCourseActions.js");
+var LabViewCourseActionCreators = require("../../actions/LabViewCourseActionCreators.js");
 
 var StudentRow = require("./StudentRow.jsx");
 var SearchField = require("./SearchField.jsx");
 
 var PropTypes = React.PropTypes;
+
+function getStatesFromStore() {
+  return {
+    // these are public functions of other classes, without _
+    students: LabViewStore.getStudentLabs()
+  };
+}
 var StudentResultsList = React.createClass({
   displayName: "StudentResultsList",
 
-  PropTypes: {
-    selectedStudent: PropTypes.object.isRequired
-  },
-  _getStudentsFromStore: function () {
-    // more methods should be added here
-    return {
-      students: LabViewStore.getStudentLabs()
-    };
-  },
-  _handleClick: function () {},
-  _onChange: function () {
-    this.setState(this._getStudentsFromStore());
-  },
+
+  // these are super functions of React so no _
   getInitialState: function () {
-    //LabViewCourseActions.receiveStudentlabs();
-    return this._getStudentsFromStore();
+    //LabViewCourseActionCreators.receiveStudentlabs();
+    return getStatesFromStore();
   },
-  componentWillMount: function () {
+  componentDidMount: function () {
     LabViewStore.addChangeListener(this._onChange);
   },
-  componentWillUnMount: function () {
-    LabViewStore.removelistener(this._onChange);
+  componentWillUnmount: function () {
+    LabViewStore.removeChangeListener(this._onChange);
   },
   render: function () {
-
     if (!this.state.students || this.state.students.length == 0) {
       var ifElement = React.createElement(
         "h4",
@@ -2154,31 +2280,14 @@ var StudentResultsList = React.createClass({
               null,
               "Slipdays"
             ),
-            React.createElement(
-              "th",
-              null,
-              "Lab 1"
-            ),
-            React.createElement(
-              "th",
-              null,
-              "Lab 2"
-            ),
-            React.createElement(
-              "th",
-              null,
-              "Lab 3"
-            ),
-            React.createElement(
-              "th",
-              null,
-              "Lab 4"
-            ),
-            React.createElement(
-              "th",
-              null,
-              "Lab 5"
-            )
+            this.state.students[0].labs.map(function (student, index) {
+              return React.createElement(
+                "th",
+                { key: "studentlabShow" + index },
+                "Lab ",
+                index + 1
+              );
+            }, this)
           )
         ),
         React.createElement(
@@ -2190,7 +2299,6 @@ var StudentResultsList = React.createClass({
         )
       );
     }
-
     return React.createElement(
       Col,
       null,
@@ -2214,16 +2322,19 @@ var StudentResultsList = React.createClass({
         ifElement
       )
     );
+  },
+  _onChange: function () {
+    this.setState(getStatesFromStore());
   }
 });
 
 module.exports = StudentResultsList;
 
-},{"../../actions/LabViewCourseActions.js":7,"../../stores/LabViewStore.js":525,"./SearchField.jsx":40,"./StudentRow.jsx":43,"react":517,"react-bootstrap":318}],43:[function(require,module,exports){
+},{"../../actions/LabViewCourseActionCreators.js":4,"../../stores/LabViewStore.js":525,"./SearchField.jsx":40,"./StudentRow.jsx":43,"react":518,"react-bootstrap":319}],43:[function(require,module,exports){
 var React = require("react");
 var PropTypes = React.PropTypes;
 var Col = require("react-bootstrap").Col;
-var LabViewCourseActions = require("../../actions/LabViewCourseActions.js");
+var LabViewCourseActionCreators = require("../../actions/LabViewCourseActionCreators.js");
 
 var StudentElement = require("./StudentElement.jsx");
 
@@ -2236,7 +2347,7 @@ var StudentRow = React.createClass({
   handleClick: function (index) {
     var studentId = this.props.student.id;
     var labId = index;
-    LabViewCourseActions.setSelectedStudentLab(studentId, labId);
+    LabViewCourseActionCreators.setSelectedStudentLab(studentId, labId);
   },
   render: function () {
     var _student = this.props.student;
@@ -2267,7 +2378,235 @@ var StudentRow = React.createClass({
 
 module.exports = StudentRow;
 
-},{"../../actions/LabViewCourseActions.js":7,"./StudentElement.jsx":41,"react":517,"react-bootstrap":318}],44:[function(require,module,exports){
+},{"../../actions/LabViewCourseActionCreators.js":4,"./StudentElement.jsx":41,"react":518,"react-bootstrap":319}],44:[function(require,module,exports){
+var MockData = {
+  title: "Mockdata from mockdata.js",
+  students: [{
+    id: 0,
+    username: "tokams",
+    firstName: "Thomas",
+    lastName: "Darvik",
+    studentNumber: 464646,
+    slipDays: 2,
+    hasGroup: false,
+    labs: [{
+      id: 0,
+      title: "Lab 1",
+      approved: false,
+      log: ["1: Running program", "2: Running helloworld.go, =====> 100%", "3: Testing helloworld.go, =====> 100%", "4: TEST1: 100%", "5: TEST2: 100%", "6: TESTS PASSED", "7. LAB PASSED"],
+      percent: 100,
+      isSelected: false
+    }, {
+      id: 0,
+      title: "Lab 2",
+      approved: true,
+      log: ["The build log comes here"],
+      percent: 70,
+      isSelected: false
+    }, {
+      id: 0,
+      title: "Lab 3",
+      approved: false,
+      log: ["The build log comes here"],
+      percent: 30,
+      isSelected: false
+    }, {
+      id: 0,
+      title: "Lab 4",
+      approved: false,
+      log: ["The build log comes here"],
+      percent: 65,
+      isSelected: false
+    }, {
+      id: 0,
+      title: "Lab 5",
+      approved: true,
+      log: ["The build log comes here"],
+      percent: 65,
+      isSelected: false
+    }]
+  }, {
+    id: 1,
+    username: "tokams",
+    firstName: "Tomasz",
+    lastName: "Gli",
+    studentNumber: 464646,
+    slipDays: 2,
+    hasGroup: false,
+    labs: [{
+      id: 0,
+      title: "Lab 1",
+      approved: true,
+      log: ["The build log comes here"],
+      percent: 65,
+      isSelected: false
+    }, {
+      id: 0,
+      title: "Lab 2",
+      approved: true,
+      log: ["The build log comes here"],
+      percent: 70,
+      isSelected: false
+    }, {
+      id: 0,
+      title: "Lab 3",
+      approved: true,
+      log: ["The build log comes here"],
+      percent: 30,
+      isSelected: false
+    }, {
+      id: 0,
+      title: "Lab 4",
+      approved: true,
+      log: ["The build log comes here"],
+      percent: 65,
+      isSelected: false
+    }, {
+      id: 0,
+      title: "Lab 5",
+      approved: false,
+      log: ["The build log comes here"],
+      percent: 65,
+      isSelected: false
+    }]
+  }, {
+    id: 2,
+    username: "herpiderp",
+    firstName: "Herman",
+    lastName: "Slyngstadli",
+    studentNumber: 221144,
+    slipDays: 4,
+    hasGroup: false,
+    labs: [{
+      id: 0,
+      title: "Lab 1",
+      approved: false,
+      log: ["The build log comes here"],
+      percent: 65,
+      isSelected: false
+    }, {
+      id: 0,
+      title: "Lab 2",
+      approved: true,
+      log: ["The build log comes here"],
+      percent: 70,
+      isSelected: false
+    }, {
+      id: 0,
+      title: "Lab 3",
+      approved: false,
+      log: ["The build log comes here"],
+      percent: 30,
+      isSelected: false
+    }, {
+      id: 0,
+      title: "Lab 4",
+      approved: true,
+      log: ["The build log comes here"],
+      percent: 65,
+      isSelected: false
+    }, {
+      id: 0,
+      title: "Lab 5",
+      approved: false,
+      log: ["The build log comes here"],
+      percent: 65,
+      isSelected: false
+    }]
+  }, {
+    id: 3,
+    username: "deadpool",
+    firstName: "Dead",
+    lastName: "Pool",
+    studentNumber: 666666,
+    slipDays: 11,
+    hasGroup: false,
+    labs: [{
+      id: 0,
+      title: "Lab 1",
+      approved: true,
+      log: ["The build log comes here"],
+      percent: 65,
+      isSelected: false
+    }, {
+      id: 0,
+      title: "Lab 2",
+      approved: false,
+      log: ["The build log comes here"],
+      percent: 70,
+      isSelected: false
+    }, {
+      id: 0,
+      title: "Lab 3",
+      approved: false,
+      log: ["The build log comes here"],
+      percent: 30,
+      isSelected: false
+    }, {
+      id: 0,
+      title: "Lab 4",
+      approved: false,
+      log: ["The build log comes here"],
+      percent: 65,
+      isSelected: false
+    }, {
+      id: 0,
+      title: "Lab 5",
+      approved: false,
+      log: ["The build log comes here"],
+      percent: 65,
+      isSelected: false
+    }]
+  }, {
+    id: 4,
+    username: "tokams",
+    firstName: "Tomasz",
+    lastName: "Dradinski",
+    studentNumber: 990022,
+    slipDays: 0,
+    hasGroup: false,
+    labs: [{
+      id: 0,
+      title: "Lab 1",
+      approved: true,
+      log: ["The build log comes here"],
+      percent: 65,
+      isSelected: false
+    }, {
+      id: 0,
+      title: "Lab 2",
+      approved: false,
+      log: ["The build log comes here"],
+      percent: 70,
+      isSelected: false
+    }, {
+      id: 0,
+      title: "Lab 3",
+      approved: false,
+      log: ["The build log comes here"],
+      percent: 30,
+      isSelected: false
+    }, {
+      id: 0,
+      title: "Lab 4",
+      approved: false,
+      log: ["The build log comes here"],
+      percent: 65,
+      isSelected: false
+    }, {
+      id: 0,
+      title: "Lab 5",
+      approved: true,
+      log: ["The build log comes here"],
+      percent: 65,
+      isSelected: false
+    }]
+  }]
+};
+
+module.exports = MockData;
+
+},{}],45:[function(require,module,exports){
 var React = require("react");
 
 // react-router
@@ -2420,7 +2759,7 @@ var StudentSideNav = React.createClass({
 
 module.exports = StudentSideNav;
 
-},{"../../actions/SideNavActionCreators.js":8,"../../constants/constants.js":56,"react":517,"react-bootstrap":318,"react-fontawesome":330,"react-router":382}],45:[function(require,module,exports){
+},{"../../actions/SideNavActionCreators.js":5,"../../constants/constants.js":57,"react":518,"react-bootstrap":319,"react-fontawesome":331,"react-router":383}],46:[function(require,module,exports){
 var React = require("react");
 
 // react-router
@@ -2528,7 +2867,7 @@ var TeacherSideNav = React.createClass({
 
 module.exports = TeacherSideNav;
 
-},{"../../actions/SideNavActionCreators.js":8,"react":517,"react-bootstrap":318,"react-fontawesome":330,"react-router":382}],46:[function(require,module,exports){
+},{"../../actions/SideNavActionCreators.js":5,"react":518,"react-bootstrap":319,"react-fontawesome":331,"react-router":383}],47:[function(require,module,exports){
 var React = require("react");
 var Nav = require("react-bootstrap").Nav;
 
@@ -2564,7 +2903,7 @@ var Dropdown = React.createClass({
 
 module.exports = Dropdown;
 
-},{"./DropdownList.jsx":48,"react":517,"react-bootstrap":318}],47:[function(require,module,exports){
+},{"./DropdownList.jsx":49,"react":518,"react-bootstrap":319}],48:[function(require,module,exports){
 var React = require("react");
 
 // react-bootstrap
@@ -2603,7 +2942,7 @@ var DropdownElement = React.createClass({
 
 module.exports = DropdownElement;
 
-},{"react":517,"react-bootstrap":318,"react-router":382}],48:[function(require,module,exports){
+},{"react":518,"react-bootstrap":319,"react-router":383}],49:[function(require,module,exports){
 var React = require("react");
 
 // react-bootstrap requires
@@ -2643,7 +2982,7 @@ var DropdownList = React.createClass({
 
 module.exports = DropdownList;
 
-},{"./DropdownElement.jsx":47,"react":517,"react-bootstrap":318}],49:[function(require,module,exports){
+},{"./DropdownElement.jsx":48,"react":518,"react-bootstrap":319}],50:[function(require,module,exports){
 var React = require("react");
 
 // react-bootstrap requires
@@ -2694,9 +3033,9 @@ var Navigation = React.createClass({
       null,
       roles.map(function (role) {
         if (activeRole === role.Mode) {
-          isActive = "buttonify buttonactive";
+          isActive = "textc buttonify buttonactive";
         } else {
-          isActive = "buttonify";
+          isActive = "textc buttonify";
         }
         i++;
         var modeLink = "/";
@@ -2735,7 +3074,7 @@ var Navigation = React.createClass({
 
 module.exports = Navigation;
 
-},{"../../actions/TopBarActionCreators.js":10,"../../constants/constants.js":56,"./DropdownList.jsx":48,"react":517,"react-bootstrap":318,"react-router":382}],50:[function(require,module,exports){
+},{"../../actions/TopBarActionCreators.js":9,"../../constants/constants.js":57,"./DropdownList.jsx":49,"react":518,"react-bootstrap":319,"react-router":383}],51:[function(require,module,exports){
 var React = require("react");
 
 // react-bootstrap requires
@@ -2752,6 +3091,7 @@ var Navigation = require("./Navigation.jsx");
 var UsersStore = require("../../stores/UsersStore.js");
 // utils
 var TopBarAPIUtils = require("../../utils/TopBarAPIUtils");
+var TopBarAPIUtils = require("../../utils/TopBarAPIUtils.js");
 
 function getStateFromStores() {
   return {
@@ -2766,6 +3106,7 @@ var Topbar = React.createClass({
 
   getInitialState: function () {
     // Calls for initial data from server on first render cycle only.
+    // TopBarAPIUtils.getAllRoles();
     TopBarAPIUtils.getAllRoles();
     return getStateFromStores();
   },
@@ -2845,7 +3186,7 @@ var Topbar = React.createClass({
 
 module.exports = Topbar;
 
-},{"../../stores/UsersStore.js":527,"../../utils/TopBarAPIUtils":538,"./Dropdown.jsx":46,"./Navigation.jsx":49,"react":517,"react-bootstrap":318,"react-router":382}],51:[function(require,module,exports){
+},{"../../stores/UsersStore.js":528,"../../utils/TopBarAPIUtils":539,"../../utils/TopBarAPIUtils.js":539,"./Dropdown.jsx":47,"./Navigation.jsx":50,"react":518,"react-bootstrap":319,"react-router":383}],52:[function(require,module,exports){
 var React = require("react");
 
 // react-bootstrap
@@ -2864,11 +3205,16 @@ var UserList = React.createClass({
 
 
   render: function () {
+    const agcheck = "agcheck ";
+    const isdisabled = "agcheckdisabled ";
+    const isgreen = "agcheckgreen ";
+    const neutral = isdisabled + "fa fa-check-square fa-lg ";
+
     const innerSearch = React.createElement(Glyphicon, { glyph: "search" });
-    const checkMark = React.createElement("i", { className: "fa fa-check-square" });
-    const xMark = React.createElement("i", { className: "fa fa-times" });
-    const sortArrows = React.createElement("i", { className: "fa fa-sort fa-fw" });
-    const sortArrowsAsc = React.createElement("i", { className: "fa fa-sort-asc fa-fw" });
+    const checkMark = React.createElement("i", { className: neutral });
+    const xMark = React.createElement("i", { className: "fa fa-times fa-lg" });
+    const sortArrows = React.createElement("i", { className: "fa fa-sort fa-fw fa-lg" });
+    const sortArrowsAsc = React.createElement("i", { className: "fa fa-sort-asc fa-fw fa-lg" });
     return React.createElement(
       Col,
       { xs: 12 },
@@ -2947,8 +3293,16 @@ var UserList = React.createClass({
                   null,
                   checkMark
                 ),
-                React.createElement("td", null),
-                React.createElement("td", null)
+                React.createElement(
+                  "td",
+                  null,
+                  checkMark
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  checkMark
+                )
               ),
               React.createElement(
                 "tr",
@@ -2968,8 +3322,16 @@ var UserList = React.createClass({
                   null,
                   checkMark
                 ),
-                React.createElement("td", null),
-                React.createElement("td", null)
+                React.createElement(
+                  "td",
+                  null,
+                  checkMark
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  checkMark
+                )
               ),
               React.createElement(
                 "tr",
@@ -2989,128 +3351,6 @@ var UserList = React.createClass({
                   null,
                   checkMark
                 ),
-                React.createElement("td", null),
-                React.createElement("td", null)
-              ),
-              React.createElement(
-                "tr",
-                null,
-                React.createElement(
-                  "td",
-                  null,
-                  "Name Surname"
-                ),
-                React.createElement(
-                  "td",
-                  null,
-                  "5"
-                ),
-                React.createElement("td", null),
-                React.createElement("td", null),
-                React.createElement(
-                  "td",
-                  null,
-                  checkMark
-                )
-              ),
-              React.createElement(
-                "tr",
-                null,
-                React.createElement(
-                  "td",
-                  null,
-                  "Name Surname"
-                ),
-                React.createElement(
-                  "td",
-                  null,
-                  "5"
-                ),
-                React.createElement("td", null),
-                React.createElement("td", null),
-                React.createElement(
-                  "td",
-                  null,
-                  checkMark
-                )
-              ),
-              React.createElement(
-                "tr",
-                null,
-                React.createElement(
-                  "td",
-                  null,
-                  "Name Surname"
-                ),
-                React.createElement(
-                  "td",
-                  null,
-                  "5"
-                ),
-                React.createElement("td", null),
-                React.createElement("td", null),
-                React.createElement(
-                  "td",
-                  null,
-                  checkMark
-                )
-              ),
-              React.createElement(
-                "tr",
-                null,
-                React.createElement(
-                  "td",
-                  null,
-                  "Name Surname"
-                ),
-                React.createElement(
-                  "td",
-                  null,
-                  "5"
-                ),
-                React.createElement("td", null),
-                React.createElement("td", null),
-                React.createElement(
-                  "td",
-                  null,
-                  checkMark
-                )
-              ),
-              React.createElement(
-                "tr",
-                null,
-                React.createElement(
-                  "td",
-                  null,
-                  "Name Surname"
-                ),
-                React.createElement(
-                  "td",
-                  null,
-                  "5"
-                ),
-                React.createElement("td", null),
-                React.createElement("td", null),
-                React.createElement(
-                  "td",
-                  null,
-                  checkMark
-                )
-              ),
-              React.createElement(
-                "tr",
-                null,
-                React.createElement(
-                  "td",
-                  null,
-                  "Name Surname"
-                ),
-                React.createElement(
-                  "td",
-                  null,
-                  "5"
-                ),
-                React.createElement("td", null),
                 React.createElement(
                   "td",
                   null,
@@ -3135,74 +3375,11 @@ var UserList = React.createClass({
                   null,
                   "5"
                 ),
-                React.createElement("td", null),
                 React.createElement(
                   "td",
                   null,
                   checkMark
                 ),
-                React.createElement(
-                  "td",
-                  null,
-                  checkMark
-                )
-              ),
-              React.createElement(
-                "tr",
-                null,
-                React.createElement(
-                  "td",
-                  null,
-                  "Name Surname"
-                ),
-                React.createElement(
-                  "td",
-                  null,
-                  "5"
-                ),
-                React.createElement("td", null),
-                React.createElement("td", null),
-                React.createElement(
-                  "td",
-                  null,
-                  checkMark
-                )
-              ),
-              React.createElement(
-                "tr",
-                null,
-                React.createElement(
-                  "td",
-                  null,
-                  "Name Surname"
-                ),
-                React.createElement(
-                  "td",
-                  null,
-                  "5"
-                ),
-                React.createElement("td", null),
-                React.createElement("td", null),
-                React.createElement(
-                  "td",
-                  null,
-                  checkMark
-                )
-              ),
-              React.createElement(
-                "tr",
-                null,
-                React.createElement(
-                  "td",
-                  null,
-                  "Name Surname"
-                ),
-                React.createElement(
-                  "td",
-                  null,
-                  "5"
-                ),
-                React.createElement("td", null),
                 React.createElement(
                   "td",
                   null,
@@ -3227,8 +3404,16 @@ var UserList = React.createClass({
                   null,
                   "5"
                 ),
-                React.createElement("td", null),
-                React.createElement("td", null),
+                React.createElement(
+                  "td",
+                  null,
+                  checkMark
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  checkMark
+                ),
                 React.createElement(
                   "td",
                   null,
@@ -3248,8 +3433,16 @@ var UserList = React.createClass({
                   null,
                   "5"
                 ),
-                React.createElement("td", null),
-                React.createElement("td", null),
+                React.createElement(
+                  "td",
+                  null,
+                  checkMark
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  checkMark
+                ),
                 React.createElement(
                   "td",
                   null,
@@ -3269,8 +3462,16 @@ var UserList = React.createClass({
                   null,
                   "5"
                 ),
-                React.createElement("td", null),
-                React.createElement("td", null),
+                React.createElement(
+                  "td",
+                  null,
+                  checkMark
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  checkMark
+                ),
                 React.createElement(
                   "td",
                   null,
@@ -3290,8 +3491,16 @@ var UserList = React.createClass({
                   null,
                   "5"
                 ),
-                React.createElement("td", null),
-                React.createElement("td", null),
+                React.createElement(
+                  "td",
+                  null,
+                  checkMark
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  checkMark
+                ),
                 React.createElement(
                   "td",
                   null,
@@ -3311,8 +3520,277 @@ var UserList = React.createClass({
                   null,
                   "5"
                 ),
-                React.createElement("td", null),
-                React.createElement("td", null),
+                React.createElement(
+                  "td",
+                  null,
+                  checkMark
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  checkMark
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  checkMark
+                )
+              ),
+              React.createElement(
+                "tr",
+                null,
+                React.createElement(
+                  "td",
+                  null,
+                  "Name Surname"
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  "5"
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  checkMark
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  checkMark
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  checkMark
+                )
+              ),
+              React.createElement(
+                "tr",
+                null,
+                React.createElement(
+                  "td",
+                  null,
+                  "Name Surname"
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  "5"
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  checkMark
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  checkMark
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  checkMark
+                )
+              ),
+              React.createElement(
+                "tr",
+                null,
+                React.createElement(
+                  "td",
+                  null,
+                  "Name Surname"
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  "5"
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  checkMark
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  checkMark
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  checkMark
+                )
+              ),
+              React.createElement(
+                "tr",
+                null,
+                React.createElement(
+                  "td",
+                  null,
+                  "Name Surname"
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  "5"
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  checkMark
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  checkMark
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  checkMark
+                )
+              ),
+              React.createElement(
+                "tr",
+                null,
+                React.createElement(
+                  "td",
+                  null,
+                  "Name Surname"
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  "5"
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  checkMark
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  checkMark
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  checkMark
+                )
+              ),
+              React.createElement(
+                "tr",
+                null,
+                React.createElement(
+                  "td",
+                  null,
+                  "Name Surname"
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  "5"
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  checkMark
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  checkMark
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  checkMark
+                )
+              ),
+              React.createElement(
+                "tr",
+                null,
+                React.createElement(
+                  "td",
+                  null,
+                  "Name Surname"
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  "5"
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  checkMark
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  checkMark
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  checkMark
+                )
+              ),
+              React.createElement(
+                "tr",
+                null,
+                React.createElement(
+                  "td",
+                  null,
+                  "Name Surname"
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  "5"
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  checkMark
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  checkMark
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  checkMark
+                )
+              ),
+              React.createElement(
+                "tr",
+                null,
+                React.createElement(
+                  "td",
+                  null,
+                  "Name Surname"
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  "5"
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  checkMark
+                ),
+                React.createElement(
+                  "td",
+                  null,
+                  checkMark
+                ),
                 React.createElement(
                   "td",
                   null,
@@ -3339,7 +3817,7 @@ var UserList = React.createClass({
 
 module.exports = UserList;
 
-},{"react":517,"react-bootstrap":318}],52:[function(require,module,exports){
+},{"react":518,"react-bootstrap":319}],53:[function(require,module,exports){
 var React = require("react");
 
 var Col = require("react-bootstrap").Col;
@@ -3350,8 +3828,19 @@ var Button = require("react-bootstrap").Button;
 var Glyphicon = require("react-bootstrap").Glyphicon;
 var Row = require("react-bootstrap").Row;
 
+// actions
+var SideNavActionCreators = require("../../actions/SideNavActionCreators.js");
+
+// constants
+const _nav = "users";
+
 var UserSettings = React.createClass({
   displayName: "UserSettings",
+
+
+  componentDidMount: function () {
+    SideNavActionCreators.changeActiveSideElement(_nav);
+  },
 
   render: function () {
     const innerSearch = React.createElement(Glyphicon, { glyph: "search" });
@@ -3877,7 +4366,7 @@ var UserSettings = React.createClass({
 
 module.exports = UserSettings;
 
-},{"react":517,"react-bootstrap":318}],53:[function(require,module,exports){
+},{"../../actions/SideNavActionCreators.js":5,"react":518,"react-bootstrap":319}],54:[function(require,module,exports){
 var React = require("react");
 
 var Col = require("react-bootstrap").Col;
@@ -3889,9 +4378,16 @@ var Input = require("react-bootstrap").Input;
 var Table = require("react-bootstrap").Table;
 var Image = require("react-bootstrap").Image;
 
+// actions
+var SideNavActionCreators = require("../../actions/SideNavActionCreators.js");
+// constants
+const _nav = "settings";
 var UserSettings = React.createClass({
   displayName: "UserSettings",
 
+  componentDidMount: function () {
+    SideNavActionCreators.changeActiveSideElement(_nav);
+  },
   getInitialState: function () {
     return {
       isEdit: false,
@@ -4021,7 +4517,7 @@ var UserSettings = React.createClass({
 
 module.exports = UserSettings;
 
-},{"react":517,"react-bootstrap":318}],54:[function(require,module,exports){
+},{"../../actions/SideNavActionCreators.js":5,"react":518,"react-bootstrap":319}],55:[function(require,module,exports){
 var React = require("react");
 var ReactDOM = require("react-dom");
 
@@ -4066,7 +4562,7 @@ var Welcome = React.createClass({
 
 module.exports = Welcome;
 
-},{"react":517,"react-bootstrap":318,"react-dom":329}],55:[function(require,module,exports){
+},{"react":518,"react-bootstrap":319,"react-dom":330}],56:[function(require,module,exports){
 var keyMirror = require('keymirror');
 
 module.exports = {
@@ -4112,7 +4608,7 @@ module.exports = {
   })
 };
 
-},{"keymirror":174}],56:[function(require,module,exports){
+},{"keymirror":175}],57:[function(require,module,exports){
 var keyMirror = require('keymirror');
 
 module.exports = {
@@ -4128,7 +4624,7 @@ module.exports = {
   })
 };
 
-},{"keymirror":174}],57:[function(require,module,exports){
+},{"keymirror":175}],58:[function(require,module,exports){
 // This is flux style dispatcher that takes care of problems of
 // circular dependencies that may occur when actions to dispatch wait for eatchother A->B->C->A
 // this implementation only detects the circular dependencies does not fix them!
@@ -4137,7 +4633,7 @@ var Dispatcher = require('flux').Dispatcher;
 
 module.exports = new Dispatcher();
 
-},{"flux":153}],58:[function(require,module,exports){
+},{"flux":154}],59:[function(require,module,exports){
 var React = require("react");
 var ReactDOM = require("react-dom");
 
@@ -4151,14 +4647,6 @@ var IndexRoute = require("react-router").IndexRoute;
 // react-bootstrap requires
 var Jumbotron = require("react-bootstrap").Jumbotron;
 var Button = require("react-bootstrap").Button;
-// local components requires
-var Topbar = require("./components/Topbar/Topbar.jsx");
-var Welcome = require("./components/Welcome/Welcome.jsx");
-var UserManager = require("./components/UserManager/UserManager.jsx");
-var UserSettings = require("./components/UserSettings/UserSettings.jsx");
-
-var CourseSettings = require("./components/CourseSettings/CourseSettings.jsx");
-var CourseInfo = require("./components/CourseInfo/CourseInfo.jsx");
 
 // admin
 var UserList = require("./components/UserList/UserList.jsx");
@@ -4169,12 +4657,20 @@ var StudentMode = require("./views/StudentMode.jsx");
 var AdminMode = require("./views/AdminMode.jsx");
 
 // views
-var GroupManager = require("./views/GroupManager.jsx");
+var TeacherGroups = require("./views/TeacherGroups.jsx");
 var Coursepage = require("./views/Coursepage.jsx");
 var AllCourses = require("./views/AllCourses.jsx");
 var StudentList = require("./views/StudentList.jsx");
 var StudentResult = require("./views/StudentResult.jsx");
 var NotFound = require("./components/NotFound/NotFound.jsx");
+// local components requires
+var Topbar = require("./components/Topbar/Topbar.jsx");
+var Welcome = require("./components/Welcome/Welcome.jsx");
+var UserManager = require("./components/UserManager/UserManager.jsx");
+var UserSettings = require("./components/UserSettings/UserSettings.jsx");
+var CourseMembers = require("./components/CourseMembers/CourseMembers.jsx");
+var CourseSettings = require("./components/CourseSettings/CourseSettings.jsx");
+var CourseInfo = require("./components/CourseInfo/CourseInfo.jsx");
 // this class
 
 var App = React.createClass({
@@ -4205,40 +4701,41 @@ ReactDOM.render(React.createElement(
 			{ path: "Admin", component: AdminMode },
 			React.createElement(IndexRoute, { component: UserList }),
 			React.createElement(Route, { path: "settings", component: NotFound }),
-			React.createElement(Route, { path: "info", component: NotFound })
+			React.createElement(Route, { path: "info", component: CourseInfo })
 		),
 		React.createElement(
 			Route,
 			{ path: "Teacher", component: TeacherMode },
 			React.createElement(Route, { path: "results/:coursename", component: Coursepage }),
-			React.createElement(Route, { path: "groups/:coursename", component: GroupManager }),
-			React.createElement(Route, { path: "settings/:coursename", component: CourseSettings }),
+			React.createElement(Route, { path: "groups/:coursename", component: TeacherGroups }),
 			React.createElement(Route, { path: "users/:coursename", component: UserManager }),
-			React.createElement(Route, { path: "info/:coursename", component: NotFound })
+			React.createElement(Route, { path: "settings/:coursename", component: CourseSettings }),
+			React.createElement(Route, { path: "info/:coursename", component: CourseInfo })
 		),
 		React.createElement(
 			Route,
 			{ path: "Student", component: StudentMode },
+			React.createElement(Route, { path: "results/:coursename", component: StudentResult }),
 			React.createElement(Route, { path: "members/:coursename", component: NotFound }),
 			React.createElement(Route, { path: "groups/:coursename", component: NotFound }),
-			React.createElement(Route, { path: "info/:coursename", component: CourseInfo }),
 			React.createElement(Route, { path: "settings/:coursename", component: UserSettings }),
-			React.createElement(Route, { path: "results/:coursename", component: StudentResult })
+			React.createElement(Route, { path: "info/:coursename", component: CourseInfo })
 		),
 		React.createElement(Route, { path: "/about", component: NotFound }),
-		React.createElement(Route, { path: "/oauth", component: StudentList })
+		React.createElement(Route, { path: "/oauth", component: StudentList }),
+		React.createElement(Route, { path: "*", component: NotFound })
 	)
 ), document.getElementById("container"));
 
-},{"./components/CourseInfo/CourseInfo.jsx":13,"./components/CourseSettings/CourseSettings.jsx":18,"./components/NotFound/NotFound.jsx":32,"./components/Topbar/Topbar.jsx":50,"./components/UserList/UserList.jsx":51,"./components/UserManager/UserManager.jsx":52,"./components/UserSettings/UserSettings.jsx":53,"./components/Welcome/Welcome.jsx":54,"./views/AdminMode.jsx":540,"./views/AllCourses.jsx":541,"./views/Coursepage.jsx":542,"./views/GroupManager.jsx":543,"./views/StudentList.jsx":544,"./views/StudentMode.jsx":545,"./views/StudentResult.jsx":546,"./views/TeacherMode.jsx":547,"react":517,"react-bootstrap":318,"react-dom":329,"react-router":382}],59:[function(require,module,exports){
+},{"./components/CourseInfo/CourseInfo.jsx":12,"./components/CourseMembers/CourseMembers.jsx":14,"./components/CourseSettings/CourseSettings.jsx":18,"./components/NotFound/NotFound.jsx":32,"./components/Topbar/Topbar.jsx":51,"./components/UserList/UserList.jsx":52,"./components/UserManager/UserManager.jsx":53,"./components/UserSettings/UserSettings.jsx":54,"./components/Welcome/Welcome.jsx":55,"./views/AdminMode.jsx":541,"./views/AllCourses.jsx":542,"./views/Coursepage.jsx":543,"./views/StudentList.jsx":544,"./views/StudentMode.jsx":545,"./views/StudentResult.jsx":546,"./views/TeacherGroups.jsx":547,"./views/TeacherMode.jsx":548,"react":518,"react-bootstrap":319,"react-dom":330,"react-router":383}],60:[function(require,module,exports){
 module.exports = { "default": require("core-js/library/fn/object/assign"), __esModule: true };
-},{"core-js/library/fn/object/assign":70}],60:[function(require,module,exports){
+},{"core-js/library/fn/object/assign":71}],61:[function(require,module,exports){
 module.exports = { "default": require("core-js/library/fn/object/create"), __esModule: true };
-},{"core-js/library/fn/object/create":71}],61:[function(require,module,exports){
+},{"core-js/library/fn/object/create":72}],62:[function(require,module,exports){
 module.exports = { "default": require("core-js/library/fn/object/keys"), __esModule: true };
-},{"core-js/library/fn/object/keys":72}],62:[function(require,module,exports){
+},{"core-js/library/fn/object/keys":73}],63:[function(require,module,exports){
 module.exports = { "default": require("core-js/library/fn/object/set-prototype-of"), __esModule: true };
-},{"core-js/library/fn/object/set-prototype-of":73}],63:[function(require,module,exports){
+},{"core-js/library/fn/object/set-prototype-of":74}],64:[function(require,module,exports){
 "use strict";
 
 exports["default"] = function (instance, Constructor) {
@@ -4248,7 +4745,7 @@ exports["default"] = function (instance, Constructor) {
 };
 
 exports.__esModule = true;
-},{}],64:[function(require,module,exports){
+},{}],65:[function(require,module,exports){
 "use strict";
 
 var _Object$assign = require("babel-runtime/core-js/object/assign")["default"];
@@ -4268,7 +4765,7 @@ exports["default"] = _Object$assign || function (target) {
 };
 
 exports.__esModule = true;
-},{"babel-runtime/core-js/object/assign":59}],65:[function(require,module,exports){
+},{"babel-runtime/core-js/object/assign":60}],66:[function(require,module,exports){
 "use strict";
 
 var _Object$create = require("babel-runtime/core-js/object/create")["default"];
@@ -4292,7 +4789,7 @@ exports["default"] = function (subClass, superClass) {
 };
 
 exports.__esModule = true;
-},{"babel-runtime/core-js/object/create":60,"babel-runtime/core-js/object/set-prototype-of":62}],66:[function(require,module,exports){
+},{"babel-runtime/core-js/object/create":61,"babel-runtime/core-js/object/set-prototype-of":63}],67:[function(require,module,exports){
 "use strict";
 
 exports["default"] = function (obj) {
@@ -4302,7 +4799,7 @@ exports["default"] = function (obj) {
 };
 
 exports.__esModule = true;
-},{}],67:[function(require,module,exports){
+},{}],68:[function(require,module,exports){
 "use strict";
 
 exports["default"] = function (obj) {
@@ -4323,7 +4820,7 @@ exports["default"] = function (obj) {
 };
 
 exports.__esModule = true;
-},{}],68:[function(require,module,exports){
+},{}],69:[function(require,module,exports){
 "use strict";
 
 exports["default"] = function (obj, keys) {
@@ -4339,7 +4836,7 @@ exports["default"] = function (obj, keys) {
 };
 
 exports.__esModule = true;
-},{}],69:[function(require,module,exports){
+},{}],70:[function(require,module,exports){
 /*!
   Copyright (c) 2016 Jed Watson.
   Licensed under the MIT License (MIT), see
@@ -4389,41 +4886,41 @@ exports.__esModule = true;
 	}
 }());
 
-},{}],70:[function(require,module,exports){
+},{}],71:[function(require,module,exports){
 require('../../modules/es6.object.assign');
 module.exports = require('../../modules/$.core').Object.assign;
-},{"../../modules/$.core":77,"../../modules/es6.object.assign":90}],71:[function(require,module,exports){
+},{"../../modules/$.core":78,"../../modules/es6.object.assign":91}],72:[function(require,module,exports){
 var $ = require('../../modules/$');
 module.exports = function create(P, D){
   return $.create(P, D);
 };
-},{"../../modules/$":85}],72:[function(require,module,exports){
+},{"../../modules/$":86}],73:[function(require,module,exports){
 require('../../modules/es6.object.keys');
 module.exports = require('../../modules/$.core').Object.keys;
-},{"../../modules/$.core":77,"../../modules/es6.object.keys":91}],73:[function(require,module,exports){
+},{"../../modules/$.core":78,"../../modules/es6.object.keys":92}],74:[function(require,module,exports){
 require('../../modules/es6.object.set-prototype-of');
 module.exports = require('../../modules/$.core').Object.setPrototypeOf;
-},{"../../modules/$.core":77,"../../modules/es6.object.set-prototype-of":92}],74:[function(require,module,exports){
+},{"../../modules/$.core":78,"../../modules/es6.object.set-prototype-of":93}],75:[function(require,module,exports){
 module.exports = function(it){
   if(typeof it != 'function')throw TypeError(it + ' is not a function!');
   return it;
 };
-},{}],75:[function(require,module,exports){
+},{}],76:[function(require,module,exports){
 var isObject = require('./$.is-object');
 module.exports = function(it){
   if(!isObject(it))throw TypeError(it + ' is not an object!');
   return it;
 };
-},{"./$.is-object":84}],76:[function(require,module,exports){
+},{"./$.is-object":85}],77:[function(require,module,exports){
 var toString = {}.toString;
 
 module.exports = function(it){
   return toString.call(it).slice(8, -1);
 };
-},{}],77:[function(require,module,exports){
+},{}],78:[function(require,module,exports){
 var core = module.exports = {version: '1.2.6'};
 if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
-},{}],78:[function(require,module,exports){
+},{}],79:[function(require,module,exports){
 // optional / simple context binding
 var aFunction = require('./$.a-function');
 module.exports = function(fn, that, length){
@@ -4444,13 +4941,13 @@ module.exports = function(fn, that, length){
     return fn.apply(that, arguments);
   };
 };
-},{"./$.a-function":74}],79:[function(require,module,exports){
+},{"./$.a-function":75}],80:[function(require,module,exports){
 // 7.2.1 RequireObjectCoercible(argument)
 module.exports = function(it){
   if(it == undefined)throw TypeError("Can't call method on  " + it);
   return it;
 };
-},{}],80:[function(require,module,exports){
+},{}],81:[function(require,module,exports){
 var global    = require('./$.global')
   , core      = require('./$.core')
   , ctx       = require('./$.ctx')
@@ -4497,7 +4994,7 @@ $export.P = 8;  // proto
 $export.B = 16; // bind
 $export.W = 32; // wrap
 module.exports = $export;
-},{"./$.core":77,"./$.ctx":78,"./$.global":82}],81:[function(require,module,exports){
+},{"./$.core":78,"./$.ctx":79,"./$.global":83}],82:[function(require,module,exports){
 module.exports = function(exec){
   try {
     return !!exec();
@@ -4505,22 +5002,22 @@ module.exports = function(exec){
     return true;
   }
 };
-},{}],82:[function(require,module,exports){
+},{}],83:[function(require,module,exports){
 // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
 var global = module.exports = typeof window != 'undefined' && window.Math == Math
   ? window : typeof self != 'undefined' && self.Math == Math ? self : Function('return this')();
 if(typeof __g == 'number')__g = global; // eslint-disable-line no-undef
-},{}],83:[function(require,module,exports){
+},{}],84:[function(require,module,exports){
 // fallback for non-array-like ES3 and non-enumerable old V8 strings
 var cof = require('./$.cof');
 module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it){
   return cof(it) == 'String' ? it.split('') : Object(it);
 };
-},{"./$.cof":76}],84:[function(require,module,exports){
+},{"./$.cof":77}],85:[function(require,module,exports){
 module.exports = function(it){
   return typeof it === 'object' ? it !== null : typeof it === 'function';
 };
-},{}],85:[function(require,module,exports){
+},{}],86:[function(require,module,exports){
 var $Object = Object;
 module.exports = {
   create:     $Object.create,
@@ -4534,7 +5031,7 @@ module.exports = {
   getSymbols: $Object.getOwnPropertySymbols,
   each:       [].forEach
 };
-},{}],86:[function(require,module,exports){
+},{}],87:[function(require,module,exports){
 // 19.1.2.1 Object.assign(target, source, ...)
 var $        = require('./$')
   , toObject = require('./$.to-object')
@@ -4568,7 +5065,7 @@ module.exports = require('./$.fails')(function(){
   }
   return T;
 } : Object.assign;
-},{"./$":85,"./$.fails":81,"./$.iobject":83,"./$.to-object":89}],87:[function(require,module,exports){
+},{"./$":86,"./$.fails":82,"./$.iobject":84,"./$.to-object":90}],88:[function(require,module,exports){
 // most Object methods by ES6 should accept primitives
 var $export = require('./$.export')
   , core    = require('./$.core')
@@ -4579,7 +5076,7 @@ module.exports = function(KEY, exec){
   exp[KEY] = exec(fn);
   $export($export.S + $export.F * fails(function(){ fn(1); }), 'Object', exp);
 };
-},{"./$.core":77,"./$.export":80,"./$.fails":81}],88:[function(require,module,exports){
+},{"./$.core":78,"./$.export":81,"./$.fails":82}],89:[function(require,module,exports){
 // Works with __proto__ only. Old v8 can't work with null proto objects.
 /* eslint-disable no-proto */
 var getDesc  = require('./$').getDesc
@@ -4606,18 +5103,18 @@ module.exports = {
     }({}, false) : undefined),
   check: check
 };
-},{"./$":85,"./$.an-object":75,"./$.ctx":78,"./$.is-object":84}],89:[function(require,module,exports){
+},{"./$":86,"./$.an-object":76,"./$.ctx":79,"./$.is-object":85}],90:[function(require,module,exports){
 // 7.1.13 ToObject(argument)
 var defined = require('./$.defined');
 module.exports = function(it){
   return Object(defined(it));
 };
-},{"./$.defined":79}],90:[function(require,module,exports){
+},{"./$.defined":80}],91:[function(require,module,exports){
 // 19.1.3.1 Object.assign(target, source)
 var $export = require('./$.export');
 
 $export($export.S + $export.F, 'Object', {assign: require('./$.object-assign')});
-},{"./$.export":80,"./$.object-assign":86}],91:[function(require,module,exports){
+},{"./$.export":81,"./$.object-assign":87}],92:[function(require,module,exports){
 // 19.1.2.14 Object.keys(O)
 var toObject = require('./$.to-object');
 
@@ -4626,11 +5123,11 @@ require('./$.object-sap')('keys', function($keys){
     return $keys(toObject(it));
   };
 });
-},{"./$.object-sap":87,"./$.to-object":89}],92:[function(require,module,exports){
+},{"./$.object-sap":88,"./$.to-object":90}],93:[function(require,module,exports){
 // 19.1.3.19 Object.setPrototypeOf(O, proto)
 var $export = require('./$.export');
 $export($export.S, 'Object', {setPrototypeOf: require('./$.set-proto').set});
-},{"./$.export":80,"./$.set-proto":88}],93:[function(require,module,exports){
+},{"./$.export":81,"./$.set-proto":89}],94:[function(require,module,exports){
 var pSlice = Array.prototype.slice;
 var objectKeys = require('./lib/keys.js');
 var isArguments = require('./lib/is_arguments.js');
@@ -4726,7 +5223,7 @@ function objEquiv(a, b, opts) {
   return typeof a === typeof b;
 }
 
-},{"./lib/is_arguments.js":94,"./lib/keys.js":95}],94:[function(require,module,exports){
+},{"./lib/is_arguments.js":95,"./lib/keys.js":96}],95:[function(require,module,exports){
 var supportsArgumentsClass = (function(){
   return Object.prototype.toString.call(arguments)
 })() == '[object Arguments]';
@@ -4748,7 +5245,7 @@ function unsupported(object){
     false;
 };
 
-},{}],95:[function(require,module,exports){
+},{}],96:[function(require,module,exports){
 exports = module.exports = typeof Object.keys === 'function'
   ? Object.keys : shim;
 
@@ -4759,7 +5256,7 @@ function shim (obj) {
   return keys;
 }
 
-},{}],96:[function(require,module,exports){
+},{}],97:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -4784,19 +5281,19 @@ function activeElement() {
 }
 
 module.exports = exports['default'];
-},{"./ownerDocument":105,"./util/babelHelpers.js":118}],97:[function(require,module,exports){
+},{"./ownerDocument":106,"./util/babelHelpers.js":119}],98:[function(require,module,exports){
 'use strict';
 var hasClass = require('./hasClass');
 
 module.exports = function addClass(element, className) {
   if (element.classList) element.classList.add(className);else if (!hasClass(element)) element.className = element.className + ' ' + className;
 };
-},{"./hasClass":98}],98:[function(require,module,exports){
+},{"./hasClass":99}],99:[function(require,module,exports){
 'use strict';
 module.exports = function hasClass(element, className) {
   if (element.classList) return !!className && element.classList.contains(className);else return (' ' + element.className + ' ').indexOf(' ' + className + ' ') !== -1;
 };
-},{}],99:[function(require,module,exports){
+},{}],100:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -4804,13 +5301,13 @@ module.exports = {
   removeClass: require('./removeClass'),
   hasClass: require('./hasClass')
 };
-},{"./addClass":97,"./hasClass":98,"./removeClass":100}],100:[function(require,module,exports){
+},{"./addClass":98,"./hasClass":99,"./removeClass":101}],101:[function(require,module,exports){
 'use strict';
 
 module.exports = function removeClass(element, className) {
   if (element.classList) element.classList.remove(className);else element.className = element.className.replace(new RegExp('(^|\\s)' + className + '(?:\\s|$)', 'g'), '$1').replace(/\s+/g, ' ').replace(/^\s*|\s*$/g, '');
 };
-},{}],101:[function(require,module,exports){
+},{}],102:[function(require,module,exports){
 'use strict';
 
 var contains = require('../query/contains'),
@@ -4827,14 +5324,14 @@ module.exports = function (selector, handler) {
     })) handler.call(this, e);
   };
 };
-},{"../query/contains":106,"../query/querySelectorAll":111}],102:[function(require,module,exports){
+},{"../query/contains":107,"../query/querySelectorAll":112}],103:[function(require,module,exports){
 'use strict';
 var on = require('./on'),
     off = require('./off'),
     filter = require('./filter');
 
 module.exports = { on: on, off: off, filter: filter };
-},{"./filter":101,"./off":103,"./on":104}],103:[function(require,module,exports){
+},{"./filter":102,"./off":104,"./on":105}],104:[function(require,module,exports){
 'use strict';
 var canUseDOM = require('../util/inDOM');
 var off = function off() {};
@@ -4852,7 +5349,7 @@ if (canUseDOM) {
 }
 
 module.exports = off;
-},{"../util/inDOM":123}],104:[function(require,module,exports){
+},{"../util/inDOM":124}],105:[function(require,module,exports){
 'use strict';
 var canUseDOM = require('../util/inDOM');
 var on = function on() {};
@@ -4869,7 +5366,7 @@ if (canUseDOM) {
 }
 
 module.exports = on;
-},{"../util/inDOM":123}],105:[function(require,module,exports){
+},{"../util/inDOM":124}],106:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -4880,7 +5377,7 @@ function ownerDocument(node) {
 }
 
 module.exports = exports["default"];
-},{}],106:[function(require,module,exports){
+},{}],107:[function(require,module,exports){
 'use strict';
 var canUseDOM = require('../util/inDOM');
 
@@ -4901,13 +5398,13 @@ var contains = (function () {
 })();
 
 module.exports = contains;
-},{"../util/inDOM":123}],107:[function(require,module,exports){
+},{"../util/inDOM":124}],108:[function(require,module,exports){
 'use strict';
 
 module.exports = function getWindow(node) {
   return node === node.window ? node : node.nodeType === 9 ? node.defaultView || node.parentWindow : false;
 };
-},{}],108:[function(require,module,exports){
+},{}],109:[function(require,module,exports){
 'use strict';
 var contains = require('./contains'),
     getWindow = require('./isWindow'),
@@ -4938,7 +5435,7 @@ module.exports = function offset(node) {
 
   return box;
 };
-},{"../ownerDocument":105,"./contains":106,"./isWindow":107}],109:[function(require,module,exports){
+},{"../ownerDocument":106,"./contains":107,"./isWindow":108}],110:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('../util/babelHelpers.js');
@@ -4970,7 +5467,7 @@ function offsetParent(node) {
 }
 
 module.exports = exports['default'];
-},{"../ownerDocument":105,"../style":115,"../util/babelHelpers.js":118}],110:[function(require,module,exports){
+},{"../ownerDocument":106,"../style":116,"../util/babelHelpers.js":119}],111:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('../util/babelHelpers.js');
@@ -5028,7 +5525,7 @@ function position(node, offsetParent) {
 }
 
 module.exports = exports['default'];
-},{"../style":115,"../util/babelHelpers.js":118,"./offset":108,"./offsetParent":109,"./scrollLeft":112,"./scrollTop":113}],111:[function(require,module,exports){
+},{"../style":116,"../util/babelHelpers.js":119,"./offset":109,"./offsetParent":110,"./scrollLeft":113,"./scrollTop":114}],112:[function(require,module,exports){
 'use strict';
 //     Zepto.js
 //     (c) 2010-2015 Thomas Fuchs
@@ -5056,7 +5553,7 @@ module.exports = function qsa(element, selector) {
 
   return toArray(element.querySelectorAll(selector));
 };
-},{}],112:[function(require,module,exports){
+},{}],113:[function(require,module,exports){
 'use strict';
 var getWindow = require('./isWindow');
 
@@ -5067,7 +5564,7 @@ module.exports = function scrollTop(node, val) {
 
   if (win) win.scrollTo(val, 'pageYOffset' in win ? win.pageYOffset : win.document.documentElement.scrollTop);else node.scrollLeft = val;
 };
-},{"./isWindow":107}],113:[function(require,module,exports){
+},{"./isWindow":108}],114:[function(require,module,exports){
 'use strict';
 var getWindow = require('./isWindow');
 
@@ -5078,7 +5575,7 @@ module.exports = function scrollTop(node, val) {
 
   if (win) win.scrollTo('pageXOffset' in win ? win.pageXOffset : win.document.documentElement.scrollLeft, val);else node.scrollTop = val;
 };
-},{"./isWindow":107}],114:[function(require,module,exports){
+},{"./isWindow":108}],115:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('../util/babelHelpers.js');
@@ -5127,7 +5624,7 @@ module.exports = function _getComputedStyle(node) {
     }
   };
 };
-},{"../util/babelHelpers.js":118,"../util/camelizeStyle":120}],115:[function(require,module,exports){
+},{"../util/babelHelpers.js":119,"../util/camelizeStyle":121}],116:[function(require,module,exports){
 'use strict';
 
 var camelize = require('../util/camelizeStyle'),
@@ -5152,13 +5649,13 @@ module.exports = function style(node, property, value) {
 
   node.style.cssText += ';' + css;
 };
-},{"../util/camelizeStyle":120,"../util/hyphenateStyle":122,"./getComputedStyle":114,"./removeStyle":116}],116:[function(require,module,exports){
+},{"../util/camelizeStyle":121,"../util/hyphenateStyle":123,"./getComputedStyle":115,"./removeStyle":117}],117:[function(require,module,exports){
 'use strict';
 
 module.exports = function removeStyle(node, key) {
   return 'removeProperty' in node.style ? node.style.removeProperty(key) : node.style.removeAttribute(key);
 };
-},{}],117:[function(require,module,exports){
+},{}],118:[function(require,module,exports){
 'use strict';
 var canUseDOM = require('../util/inDOM');
 
@@ -5214,7 +5711,7 @@ function getTransitionProperties() {
 
   return { end: endEvent, prefix: prefix };
 }
-},{"../util/inDOM":123}],118:[function(require,module,exports){
+},{"../util/inDOM":124}],119:[function(require,module,exports){
 (function (root, factory) {
   if (typeof define === "function" && define.amd) {
     define(["exports"], factory);
@@ -5246,7 +5743,7 @@ function getTransitionProperties() {
     return target;
   };
 })
-},{}],119:[function(require,module,exports){
+},{}],120:[function(require,module,exports){
 "use strict";
 
 var rHyphen = /-(.)/g;
@@ -5256,7 +5753,7 @@ module.exports = function camelize(string) {
     return chr.toUpperCase();
   });
 };
-},{}],120:[function(require,module,exports){
+},{}],121:[function(require,module,exports){
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -5270,7 +5767,7 @@ var msPattern = /^-ms-/;
 module.exports = function camelizeStyleName(string) {
   return camelize(string.replace(msPattern, 'ms-'));
 };
-},{"./camelize":119}],121:[function(require,module,exports){
+},{"./camelize":120}],122:[function(require,module,exports){
 'use strict';
 
 var rUpper = /([A-Z])/g;
@@ -5278,7 +5775,7 @@ var rUpper = /([A-Z])/g;
 module.exports = function hyphenate(string) {
   return string.replace(rUpper, '-$1').toLowerCase();
 };
-},{}],122:[function(require,module,exports){
+},{}],123:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -5293,10 +5790,10 @@ var msPattern = /^ms-/;
 module.exports = function hyphenateStyleName(string) {
   return hyphenate(string).replace(msPattern, "-ms-");
 };
-},{"./hyphenate":121}],123:[function(require,module,exports){
+},{"./hyphenate":122}],124:[function(require,module,exports){
 'use strict';
 module.exports = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
-},{}],124:[function(require,module,exports){
+},{}],125:[function(require,module,exports){
 'use strict';
 
 var canUseDOM = require('./inDOM');
@@ -5322,7 +5819,7 @@ module.exports = function (recalc) {
 
   return size;
 };
-},{"./inDOM":123}],125:[function(require,module,exports){
+},{"./inDOM":124}],126:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -5622,7 +6119,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],126:[function(require,module,exports){
+},{}],127:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -5709,7 +6206,7 @@ var EventListener = {
 
 module.exports = EventListener;
 }).call(this,require('_process'))
-},{"./emptyFunction":133,"_process":245}],127:[function(require,module,exports){
+},{"./emptyFunction":134,"_process":246}],128:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -5746,7 +6243,7 @@ var ExecutionEnvironment = {
 };
 
 module.exports = ExecutionEnvironment;
-},{}],128:[function(require,module,exports){
+},{}],129:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -5779,7 +6276,7 @@ function camelize(string) {
 }
 
 module.exports = camelize;
-},{}],129:[function(require,module,exports){
+},{}],130:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -5820,7 +6317,7 @@ function camelizeStyleName(string) {
 }
 
 module.exports = camelizeStyleName;
-},{"./camelize":128}],130:[function(require,module,exports){
+},{"./camelize":129}],131:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -5876,7 +6373,7 @@ function containsNode(_x, _x2) {
 }
 
 module.exports = containsNode;
-},{"./isTextNode":143}],131:[function(require,module,exports){
+},{"./isTextNode":144}],132:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -5962,7 +6459,7 @@ function createArrayFromMixed(obj) {
 }
 
 module.exports = createArrayFromMixed;
-},{"./toArray":151}],132:[function(require,module,exports){
+},{"./toArray":152}],133:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -6049,7 +6546,7 @@ function createNodesFromMarkup(markup, handleScript) {
 
 module.exports = createNodesFromMarkup;
 }).call(this,require('_process'))
-},{"./ExecutionEnvironment":127,"./createArrayFromMixed":131,"./getMarkupWrap":137,"./invariant":141,"_process":245}],133:[function(require,module,exports){
+},{"./ExecutionEnvironment":128,"./createArrayFromMixed":132,"./getMarkupWrap":138,"./invariant":142,"_process":246}],134:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -6088,7 +6585,7 @@ emptyFunction.thatReturnsArgument = function (arg) {
 };
 
 module.exports = emptyFunction;
-},{}],134:[function(require,module,exports){
+},{}],135:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -6111,7 +6608,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = emptyObject;
 }).call(this,require('_process'))
-},{"_process":245}],135:[function(require,module,exports){
+},{"_process":246}],136:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -6138,7 +6635,7 @@ function focusNode(node) {
 }
 
 module.exports = focusNode;
-},{}],136:[function(require,module,exports){
+},{}],137:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -6174,7 +6671,7 @@ function getActiveElement() /*?DOMElement*/{
 }
 
 module.exports = getActiveElement;
-},{}],137:[function(require,module,exports){
+},{}],138:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -6272,7 +6769,7 @@ function getMarkupWrap(nodeName) {
 
 module.exports = getMarkupWrap;
 }).call(this,require('_process'))
-},{"./ExecutionEnvironment":127,"./invariant":141,"_process":245}],138:[function(require,module,exports){
+},{"./ExecutionEnvironment":128,"./invariant":142,"_process":246}],139:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -6311,7 +6808,7 @@ function getUnboundedScrollPosition(scrollable) {
 }
 
 module.exports = getUnboundedScrollPosition;
-},{}],139:[function(require,module,exports){
+},{}],140:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -6345,7 +6842,7 @@ function hyphenate(string) {
 }
 
 module.exports = hyphenate;
-},{}],140:[function(require,module,exports){
+},{}],141:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -6385,7 +6882,7 @@ function hyphenateStyleName(string) {
 }
 
 module.exports = hyphenateStyleName;
-},{"./hyphenate":139}],141:[function(require,module,exports){
+},{"./hyphenate":140}],142:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -6438,7 +6935,7 @@ function invariant(condition, format, a, b, c, d, e, f) {
 
 module.exports = invariant;
 }).call(this,require('_process'))
-},{"_process":245}],142:[function(require,module,exports){
+},{"_process":246}],143:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -6462,7 +6959,7 @@ function isNode(object) {
 }
 
 module.exports = isNode;
-},{}],143:[function(require,module,exports){
+},{}],144:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -6488,7 +6985,7 @@ function isTextNode(object) {
 }
 
 module.exports = isTextNode;
-},{"./isNode":142}],144:[function(require,module,exports){
+},{"./isNode":143}],145:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -6539,7 +7036,7 @@ var keyMirror = function (obj) {
 
 module.exports = keyMirror;
 }).call(this,require('_process'))
-},{"./invariant":141,"_process":245}],145:[function(require,module,exports){
+},{"./invariant":142,"_process":246}],146:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -6575,7 +7072,7 @@ var keyOf = function (oneKeyObj) {
 };
 
 module.exports = keyOf;
-},{}],146:[function(require,module,exports){
+},{}],147:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -6627,7 +7124,7 @@ function mapObject(object, callback, context) {
 }
 
 module.exports = mapObject;
-},{}],147:[function(require,module,exports){
+},{}],148:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -6659,7 +7156,7 @@ function memoizeStringOnly(callback) {
 }
 
 module.exports = memoizeStringOnly;
-},{}],148:[function(require,module,exports){
+},{}],149:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -6683,7 +7180,7 @@ if (ExecutionEnvironment.canUseDOM) {
 }
 
 module.exports = performance || {};
-},{"./ExecutionEnvironment":127}],149:[function(require,module,exports){
+},{"./ExecutionEnvironment":128}],150:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -6718,7 +7215,7 @@ if (performance.now) {
 }
 
 module.exports = performanceNow;
-},{"./performance":148}],150:[function(require,module,exports){
+},{"./performance":149}],151:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -6769,7 +7266,7 @@ function shallowEqual(objA, objB) {
 }
 
 module.exports = shallowEqual;
-},{}],151:[function(require,module,exports){
+},{}],152:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -6829,7 +7326,7 @@ function toArray(obj) {
 
 module.exports = toArray;
 }).call(this,require('_process'))
-},{"./invariant":141,"_process":245}],152:[function(require,module,exports){
+},{"./invariant":142,"_process":246}],153:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -6889,7 +7386,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = warning;
 }).call(this,require('_process'))
-},{"./emptyFunction":133,"_process":245}],153:[function(require,module,exports){
+},{"./emptyFunction":134,"_process":246}],154:[function(require,module,exports){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -6901,7 +7398,7 @@ module.exports = warning;
 
 module.exports.Dispatcher = require('./lib/Dispatcher');
 
-},{"./lib/Dispatcher":154}],154:[function(require,module,exports){
+},{"./lib/Dispatcher":155}],155:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
@@ -7135,7 +7632,7 @@ var Dispatcher = (function () {
 
 module.exports = Dispatcher;
 }).call(this,require('_process'))
-},{"_process":245,"fbjs/lib/invariant":155}],155:[function(require,module,exports){
+},{"_process":246,"fbjs/lib/invariant":156}],156:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -7187,7 +7684,7 @@ var invariant = function (condition, format, a, b, c, d, e, f) {
 
 module.exports = invariant;
 }).call(this,require('_process'))
-},{"_process":245}],156:[function(require,module,exports){
+},{"_process":246}],157:[function(require,module,exports){
 /**
  * Indicates that navigation was caused by a call to history.push.
  */
@@ -7219,7 +7716,7 @@ exports['default'] = {
   REPLACE: REPLACE,
   POP: POP
 };
-},{}],157:[function(require,module,exports){
+},{}],158:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -7246,7 +7743,7 @@ function loopAsync(turns, work, callback) {
 
   next();
 }
-},{}],158:[function(require,module,exports){
+},{}],159:[function(require,module,exports){
 (function (process){
 /*eslint-disable no-empty */
 'use strict';
@@ -7322,7 +7819,7 @@ function readState(key) {
   return null;
 }
 }).call(this,require('_process'))
-},{"_process":245,"warning":522}],159:[function(require,module,exports){
+},{"_process":246,"warning":523}],160:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -7398,13 +7895,13 @@ function supportsGoWithoutReloadUsingHash() {
   var ua = navigator.userAgent;
   return ua.indexOf('Firefox') === -1;
 }
-},{}],160:[function(require,module,exports){
+},{}],161:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
 var canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
 exports.canUseDOM = canUseDOM;
-},{}],161:[function(require,module,exports){
+},{}],162:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -7454,7 +7951,7 @@ function parsePath(path) {
   };
 }
 }).call(this,require('_process'))
-},{"_process":245,"warning":522}],162:[function(require,module,exports){
+},{"_process":246,"warning":523}],163:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -7633,7 +8130,7 @@ function createBrowserHistory() {
 exports['default'] = createBrowserHistory;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./Actions":156,"./DOMStateStorage":158,"./DOMUtils":159,"./ExecutionEnvironment":160,"./PathUtils":161,"./createDOMHistory":163,"_process":245,"invariant":172}],163:[function(require,module,exports){
+},{"./Actions":157,"./DOMStateStorage":159,"./DOMUtils":160,"./ExecutionEnvironment":161,"./PathUtils":162,"./createDOMHistory":164,"_process":246,"invariant":173}],164:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -7676,7 +8173,7 @@ function createDOMHistory(options) {
 exports['default'] = createDOMHistory;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./DOMUtils":159,"./ExecutionEnvironment":160,"./createHistory":165,"_process":245,"invariant":172}],164:[function(require,module,exports){
+},{"./DOMUtils":160,"./ExecutionEnvironment":161,"./createHistory":166,"_process":246,"invariant":173}],165:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -7925,7 +8422,7 @@ function createHashHistory() {
 exports['default'] = createHashHistory;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./Actions":156,"./DOMStateStorage":158,"./DOMUtils":159,"./ExecutionEnvironment":160,"./PathUtils":161,"./createDOMHistory":163,"_process":245,"invariant":172,"warning":522}],165:[function(require,module,exports){
+},{"./Actions":157,"./DOMStateStorage":159,"./DOMUtils":160,"./ExecutionEnvironment":161,"./PathUtils":162,"./createDOMHistory":164,"_process":246,"invariant":173,"warning":523}],166:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -8216,7 +8713,7 @@ function createHistory() {
 exports['default'] = createHistory;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./Actions":156,"./AsyncUtils":157,"./PathUtils":161,"./createLocation":166,"./deprecate":168,"./runTransitionHook":169,"_process":245,"deep-equal":93,"warning":522}],166:[function(require,module,exports){
+},{"./Actions":157,"./AsyncUtils":158,"./PathUtils":162,"./createLocation":167,"./deprecate":169,"./runTransitionHook":170,"_process":246,"deep-equal":94,"warning":523}],167:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -8270,7 +8767,7 @@ function createLocation() {
 exports['default'] = createLocation;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./Actions":156,"./PathUtils":161,"_process":245,"warning":522}],167:[function(require,module,exports){
+},{"./Actions":157,"./PathUtils":162,"_process":246,"warning":523}],168:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -8426,7 +8923,7 @@ function createMemoryHistory() {
 exports['default'] = createMemoryHistory;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./Actions":156,"./PathUtils":161,"./createHistory":165,"_process":245,"invariant":172,"warning":522}],168:[function(require,module,exports){
+},{"./Actions":157,"./PathUtils":162,"./createHistory":166,"_process":246,"invariant":173,"warning":523}],169:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -8448,7 +8945,7 @@ function deprecate(fn, message) {
 exports['default'] = deprecate;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"_process":245,"warning":522}],169:[function(require,module,exports){
+},{"_process":246,"warning":523}],170:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -8475,7 +8972,7 @@ function runTransitionHook(hook, location, callback) {
 exports['default'] = runTransitionHook;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"_process":245,"warning":522}],170:[function(require,module,exports){
+},{"_process":246,"warning":523}],171:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -8614,7 +9111,7 @@ function useBasename(createHistory) {
 
 exports['default'] = useBasename;
 module.exports = exports['default'];
-},{"./ExecutionEnvironment":160,"./PathUtils":161,"./deprecate":168,"./runTransitionHook":169}],171:[function(require,module,exports){
+},{"./ExecutionEnvironment":161,"./PathUtils":162,"./deprecate":169,"./runTransitionHook":170}],172:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -8796,7 +9293,7 @@ function useQueries(createHistory) {
 exports['default'] = useQueries;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./PathUtils":161,"./deprecate":168,"./runTransitionHook":169,"_process":245,"query-string":246,"warning":522}],172:[function(require,module,exports){
+},{"./PathUtils":162,"./deprecate":169,"./runTransitionHook":170,"_process":246,"query-string":247,"warning":523}],173:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -8851,7 +9348,7 @@ var invariant = function(condition, format, a, b, c, d, e, f) {
 module.exports = invariant;
 
 }).call(this,require('_process'))
-},{"_process":245}],173:[function(require,module,exports){
+},{"_process":246}],174:[function(require,module,exports){
 // Source: http://jsfiddle.net/vWx8V/
 // http://stackoverflow.com/questions/5603195/full-list-of-javascript-keycodes
 
@@ -9000,7 +9497,7 @@ for (var alias in aliases) {
   codes[alias] = aliases[alias]
 }
 
-},{}],174:[function(require,module,exports){
+},{}],175:[function(require,module,exports){
 /**
  * Copyright 2013-2014 Facebook, Inc.
  *
@@ -9055,7 +9552,7 @@ var keyMirror = function(obj) {
 
 module.exports = keyMirror;
 
-},{}],175:[function(require,module,exports){
+},{}],176:[function(require,module,exports){
 /**
  * Gets the last element of `array`.
  *
@@ -9076,7 +9573,7 @@ function last(array) {
 
 module.exports = last;
 
-},{}],176:[function(require,module,exports){
+},{}],177:[function(require,module,exports){
 var baseEach = require('../internal/baseEach'),
     createFind = require('../internal/createFind');
 
@@ -9134,7 +9631,7 @@ var find = createFind(baseEach);
 
 module.exports = find;
 
-},{"../internal/baseEach":185,"../internal/createFind":209}],177:[function(require,module,exports){
+},{"../internal/baseEach":186,"../internal/createFind":210}],178:[function(require,module,exports){
 /** Used as the `TypeError` message for "Functions" methods. */
 var FUNC_ERROR_TEXT = 'Expected a function';
 
@@ -9194,7 +9691,7 @@ function restParam(func, start) {
 
 module.exports = restParam;
 
-},{}],178:[function(require,module,exports){
+},{}],179:[function(require,module,exports){
 (function (global){
 var cachePush = require('./cachePush'),
     getNative = require('./getNative');
@@ -9227,7 +9724,7 @@ SetCache.prototype.push = cachePush;
 module.exports = SetCache;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./cachePush":205,"./getNative":215}],179:[function(require,module,exports){
+},{"./cachePush":206,"./getNative":216}],180:[function(require,module,exports){
 /**
  * A specialized version of `_.forEach` for arrays without support for callback
  * shorthands and `this` binding.
@@ -9251,7 +9748,7 @@ function arrayEach(array, iteratee) {
 
 module.exports = arrayEach;
 
-},{}],180:[function(require,module,exports){
+},{}],181:[function(require,module,exports){
 /**
  * A specialized version of `_.map` for arrays without support for callback
  * shorthands and `this` binding.
@@ -9274,7 +9771,7 @@ function arrayMap(array, iteratee) {
 
 module.exports = arrayMap;
 
-},{}],181:[function(require,module,exports){
+},{}],182:[function(require,module,exports){
 /**
  * Appends the elements of `values` to `array`.
  *
@@ -9296,7 +9793,7 @@ function arrayPush(array, values) {
 
 module.exports = arrayPush;
 
-},{}],182:[function(require,module,exports){
+},{}],183:[function(require,module,exports){
 /**
  * A specialized version of `_.some` for arrays without support for callback
  * shorthands and `this` binding.
@@ -9321,7 +9818,7 @@ function arraySome(array, predicate) {
 
 module.exports = arraySome;
 
-},{}],183:[function(require,module,exports){
+},{}],184:[function(require,module,exports){
 var baseMatches = require('./baseMatches'),
     baseMatchesProperty = require('./baseMatchesProperty'),
     bindCallback = require('./bindCallback'),
@@ -9358,7 +9855,7 @@ function baseCallback(func, thisArg, argCount) {
 
 module.exports = baseCallback;
 
-},{"../utility/identity":242,"../utility/property":243,"./baseMatches":197,"./baseMatchesProperty":198,"./bindCallback":203}],184:[function(require,module,exports){
+},{"../utility/identity":243,"../utility/property":244,"./baseMatches":198,"./baseMatchesProperty":199,"./bindCallback":204}],185:[function(require,module,exports){
 var baseIndexOf = require('./baseIndexOf'),
     cacheIndexOf = require('./cacheIndexOf'),
     createCache = require('./createCache');
@@ -9415,7 +9912,7 @@ function baseDifference(array, values) {
 
 module.exports = baseDifference;
 
-},{"./baseIndexOf":193,"./cacheIndexOf":204,"./createCache":208}],185:[function(require,module,exports){
+},{"./baseIndexOf":194,"./cacheIndexOf":205,"./createCache":209}],186:[function(require,module,exports){
 var baseForOwn = require('./baseForOwn'),
     createBaseEach = require('./createBaseEach');
 
@@ -9432,7 +9929,7 @@ var baseEach = createBaseEach(baseForOwn);
 
 module.exports = baseEach;
 
-},{"./baseForOwn":191,"./createBaseEach":206}],186:[function(require,module,exports){
+},{"./baseForOwn":192,"./createBaseEach":207}],187:[function(require,module,exports){
 /**
  * The base implementation of `_.find`, `_.findLast`, `_.findKey`, and `_.findLastKey`,
  * without support for callback shorthands and `this` binding, which iterates
@@ -9459,7 +9956,7 @@ function baseFind(collection, predicate, eachFunc, retKey) {
 
 module.exports = baseFind;
 
-},{}],187:[function(require,module,exports){
+},{}],188:[function(require,module,exports){
 /**
  * The base implementation of `_.findIndex` and `_.findLastIndex` without
  * support for callback shorthands and `this` binding.
@@ -9484,7 +9981,7 @@ function baseFindIndex(array, predicate, fromRight) {
 
 module.exports = baseFindIndex;
 
-},{}],188:[function(require,module,exports){
+},{}],189:[function(require,module,exports){
 var arrayPush = require('./arrayPush'),
     isArguments = require('../lang/isArguments'),
     isArray = require('../lang/isArray'),
@@ -9527,7 +10024,7 @@ function baseFlatten(array, isDeep, isStrict, result) {
 
 module.exports = baseFlatten;
 
-},{"../lang/isArguments":229,"../lang/isArray":230,"./arrayPush":181,"./isArrayLike":217,"./isObjectLike":222}],189:[function(require,module,exports){
+},{"../lang/isArguments":230,"../lang/isArray":231,"./arrayPush":182,"./isArrayLike":218,"./isObjectLike":223}],190:[function(require,module,exports){
 var createBaseFor = require('./createBaseFor');
 
 /**
@@ -9546,7 +10043,7 @@ var baseFor = createBaseFor();
 
 module.exports = baseFor;
 
-},{"./createBaseFor":207}],190:[function(require,module,exports){
+},{"./createBaseFor":208}],191:[function(require,module,exports){
 var baseFor = require('./baseFor'),
     keysIn = require('../object/keysIn');
 
@@ -9565,7 +10062,7 @@ function baseForIn(object, iteratee) {
 
 module.exports = baseForIn;
 
-},{"../object/keysIn":237,"./baseFor":189}],191:[function(require,module,exports){
+},{"../object/keysIn":238,"./baseFor":190}],192:[function(require,module,exports){
 var baseFor = require('./baseFor'),
     keys = require('../object/keys');
 
@@ -9584,7 +10081,7 @@ function baseForOwn(object, iteratee) {
 
 module.exports = baseForOwn;
 
-},{"../object/keys":236,"./baseFor":189}],192:[function(require,module,exports){
+},{"../object/keys":237,"./baseFor":190}],193:[function(require,module,exports){
 var toObject = require('./toObject');
 
 /**
@@ -9616,7 +10113,7 @@ function baseGet(object, path, pathKey) {
 
 module.exports = baseGet;
 
-},{"./toObject":227}],193:[function(require,module,exports){
+},{"./toObject":228}],194:[function(require,module,exports){
 var indexOfNaN = require('./indexOfNaN');
 
 /**
@@ -9645,7 +10142,7 @@ function baseIndexOf(array, value, fromIndex) {
 
 module.exports = baseIndexOf;
 
-},{"./indexOfNaN":216}],194:[function(require,module,exports){
+},{"./indexOfNaN":217}],195:[function(require,module,exports){
 var baseIsEqualDeep = require('./baseIsEqualDeep'),
     isObject = require('../lang/isObject'),
     isObjectLike = require('./isObjectLike');
@@ -9675,7 +10172,7 @@ function baseIsEqual(value, other, customizer, isLoose, stackA, stackB) {
 
 module.exports = baseIsEqual;
 
-},{"../lang/isObject":233,"./baseIsEqualDeep":195,"./isObjectLike":222}],195:[function(require,module,exports){
+},{"../lang/isObject":234,"./baseIsEqualDeep":196,"./isObjectLike":223}],196:[function(require,module,exports){
 var equalArrays = require('./equalArrays'),
     equalByTag = require('./equalByTag'),
     equalObjects = require('./equalObjects'),
@@ -9780,7 +10277,7 @@ function baseIsEqualDeep(object, other, equalFunc, customizer, isLoose, stackA, 
 
 module.exports = baseIsEqualDeep;
 
-},{"../lang/isArray":230,"../lang/isTypedArray":235,"./equalArrays":210,"./equalByTag":211,"./equalObjects":212,"./isHostObject":218}],196:[function(require,module,exports){
+},{"../lang/isArray":231,"../lang/isTypedArray":236,"./equalArrays":211,"./equalByTag":212,"./equalObjects":213,"./isHostObject":219}],197:[function(require,module,exports){
 var baseIsEqual = require('./baseIsEqual'),
     toObject = require('./toObject');
 
@@ -9834,7 +10331,7 @@ function baseIsMatch(object, matchData, customizer) {
 
 module.exports = baseIsMatch;
 
-},{"./baseIsEqual":194,"./toObject":227}],197:[function(require,module,exports){
+},{"./baseIsEqual":195,"./toObject":228}],198:[function(require,module,exports){
 var baseIsMatch = require('./baseIsMatch'),
     getMatchData = require('./getMatchData'),
     toObject = require('./toObject');
@@ -9867,7 +10364,7 @@ function baseMatches(source) {
 
 module.exports = baseMatches;
 
-},{"./baseIsMatch":196,"./getMatchData":214,"./toObject":227}],198:[function(require,module,exports){
+},{"./baseIsMatch":197,"./getMatchData":215,"./toObject":228}],199:[function(require,module,exports){
 var baseGet = require('./baseGet'),
     baseIsEqual = require('./baseIsEqual'),
     baseSlice = require('./baseSlice'),
@@ -9914,7 +10411,7 @@ function baseMatchesProperty(path, srcValue) {
 
 module.exports = baseMatchesProperty;
 
-},{"../array/last":175,"../lang/isArray":230,"./baseGet":192,"./baseIsEqual":194,"./baseSlice":201,"./isKey":220,"./isStrictComparable":223,"./toObject":227,"./toPath":228}],199:[function(require,module,exports){
+},{"../array/last":176,"../lang/isArray":231,"./baseGet":193,"./baseIsEqual":195,"./baseSlice":202,"./isKey":221,"./isStrictComparable":224,"./toObject":228,"./toPath":229}],200:[function(require,module,exports){
 var toObject = require('./toObject');
 
 /**
@@ -9932,7 +10429,7 @@ function baseProperty(key) {
 
 module.exports = baseProperty;
 
-},{"./toObject":227}],200:[function(require,module,exports){
+},{"./toObject":228}],201:[function(require,module,exports){
 var baseGet = require('./baseGet'),
     toPath = require('./toPath');
 
@@ -9953,7 +10450,7 @@ function basePropertyDeep(path) {
 
 module.exports = basePropertyDeep;
 
-},{"./baseGet":192,"./toPath":228}],201:[function(require,module,exports){
+},{"./baseGet":193,"./toPath":229}],202:[function(require,module,exports){
 /**
  * The base implementation of `_.slice` without an iteratee call guard.
  *
@@ -9987,7 +10484,7 @@ function baseSlice(array, start, end) {
 
 module.exports = baseSlice;
 
-},{}],202:[function(require,module,exports){
+},{}],203:[function(require,module,exports){
 /**
  * Converts `value` to a string if it's not one. An empty string is returned
  * for `null` or `undefined` values.
@@ -10002,7 +10499,7 @@ function baseToString(value) {
 
 module.exports = baseToString;
 
-},{}],203:[function(require,module,exports){
+},{}],204:[function(require,module,exports){
 var identity = require('../utility/identity');
 
 /**
@@ -10043,7 +10540,7 @@ function bindCallback(func, thisArg, argCount) {
 
 module.exports = bindCallback;
 
-},{"../utility/identity":242}],204:[function(require,module,exports){
+},{"../utility/identity":243}],205:[function(require,module,exports){
 var isObject = require('../lang/isObject');
 
 /**
@@ -10064,7 +10561,7 @@ function cacheIndexOf(cache, value) {
 
 module.exports = cacheIndexOf;
 
-},{"../lang/isObject":233}],205:[function(require,module,exports){
+},{"../lang/isObject":234}],206:[function(require,module,exports){
 var isObject = require('../lang/isObject');
 
 /**
@@ -10086,7 +10583,7 @@ function cachePush(value) {
 
 module.exports = cachePush;
 
-},{"../lang/isObject":233}],206:[function(require,module,exports){
+},{"../lang/isObject":234}],207:[function(require,module,exports){
 var getLength = require('./getLength'),
     isLength = require('./isLength'),
     toObject = require('./toObject');
@@ -10119,7 +10616,7 @@ function createBaseEach(eachFunc, fromRight) {
 
 module.exports = createBaseEach;
 
-},{"./getLength":213,"./isLength":221,"./toObject":227}],207:[function(require,module,exports){
+},{"./getLength":214,"./isLength":222,"./toObject":228}],208:[function(require,module,exports){
 var toObject = require('./toObject');
 
 /**
@@ -10148,7 +10645,7 @@ function createBaseFor(fromRight) {
 
 module.exports = createBaseFor;
 
-},{"./toObject":227}],208:[function(require,module,exports){
+},{"./toObject":228}],209:[function(require,module,exports){
 (function (global){
 var SetCache = require('./SetCache'),
     getNative = require('./getNative');
@@ -10173,7 +10670,7 @@ function createCache(values) {
 module.exports = createCache;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./SetCache":178,"./getNative":215}],209:[function(require,module,exports){
+},{"./SetCache":179,"./getNative":216}],210:[function(require,module,exports){
 var baseCallback = require('./baseCallback'),
     baseFind = require('./baseFind'),
     baseFindIndex = require('./baseFindIndex'),
@@ -10200,7 +10697,7 @@ function createFind(eachFunc, fromRight) {
 
 module.exports = createFind;
 
-},{"../lang/isArray":230,"./baseCallback":183,"./baseFind":186,"./baseFindIndex":187}],210:[function(require,module,exports){
+},{"../lang/isArray":231,"./baseCallback":184,"./baseFind":187,"./baseFindIndex":188}],211:[function(require,module,exports){
 var arraySome = require('./arraySome');
 
 /**
@@ -10253,7 +10750,7 @@ function equalArrays(array, other, equalFunc, customizer, isLoose, stackA, stack
 
 module.exports = equalArrays;
 
-},{"./arraySome":182}],211:[function(require,module,exports){
+},{"./arraySome":183}],212:[function(require,module,exports){
 /** `Object#toString` result references. */
 var boolTag = '[object Boolean]',
     dateTag = '[object Date]',
@@ -10303,7 +10800,7 @@ function equalByTag(object, other, tag) {
 
 module.exports = equalByTag;
 
-},{}],212:[function(require,module,exports){
+},{}],213:[function(require,module,exports){
 var keys = require('../object/keys');
 
 /** Used for native method references. */
@@ -10372,7 +10869,7 @@ function equalObjects(object, other, equalFunc, customizer, isLoose, stackA, sta
 
 module.exports = equalObjects;
 
-},{"../object/keys":236}],213:[function(require,module,exports){
+},{"../object/keys":237}],214:[function(require,module,exports){
 var baseProperty = require('./baseProperty');
 
 /**
@@ -10389,7 +10886,7 @@ var getLength = baseProperty('length');
 
 module.exports = getLength;
 
-},{"./baseProperty":199}],214:[function(require,module,exports){
+},{"./baseProperty":200}],215:[function(require,module,exports){
 var isStrictComparable = require('./isStrictComparable'),
     pairs = require('../object/pairs');
 
@@ -10412,7 +10909,7 @@ function getMatchData(object) {
 
 module.exports = getMatchData;
 
-},{"../object/pairs":239,"./isStrictComparable":223}],215:[function(require,module,exports){
+},{"../object/pairs":240,"./isStrictComparable":224}],216:[function(require,module,exports){
 var isNative = require('../lang/isNative');
 
 /**
@@ -10430,7 +10927,7 @@ function getNative(object, key) {
 
 module.exports = getNative;
 
-},{"../lang/isNative":232}],216:[function(require,module,exports){
+},{"../lang/isNative":233}],217:[function(require,module,exports){
 /**
  * Gets the index at which the first occurrence of `NaN` is found in `array`.
  *
@@ -10455,7 +10952,7 @@ function indexOfNaN(array, fromIndex, fromRight) {
 
 module.exports = indexOfNaN;
 
-},{}],217:[function(require,module,exports){
+},{}],218:[function(require,module,exports){
 var getLength = require('./getLength'),
     isLength = require('./isLength');
 
@@ -10472,7 +10969,7 @@ function isArrayLike(value) {
 
 module.exports = isArrayLike;
 
-},{"./getLength":213,"./isLength":221}],218:[function(require,module,exports){
+},{"./getLength":214,"./isLength":222}],219:[function(require,module,exports){
 /**
  * Checks if `value` is a host object in IE < 9.
  *
@@ -10495,7 +10992,7 @@ var isHostObject = (function() {
 
 module.exports = isHostObject;
 
-},{}],219:[function(require,module,exports){
+},{}],220:[function(require,module,exports){
 /** Used to detect unsigned integer values. */
 var reIsUint = /^\d+$/;
 
@@ -10521,7 +11018,7 @@ function isIndex(value, length) {
 
 module.exports = isIndex;
 
-},{}],220:[function(require,module,exports){
+},{}],221:[function(require,module,exports){
 var isArray = require('../lang/isArray'),
     toObject = require('./toObject');
 
@@ -10551,7 +11048,7 @@ function isKey(value, object) {
 
 module.exports = isKey;
 
-},{"../lang/isArray":230,"./toObject":227}],221:[function(require,module,exports){
+},{"../lang/isArray":231,"./toObject":228}],222:[function(require,module,exports){
 /**
  * Used as the [maximum length](http://ecma-international.org/ecma-262/6.0/#sec-number.max_safe_integer)
  * of an array-like value.
@@ -10573,7 +11070,7 @@ function isLength(value) {
 
 module.exports = isLength;
 
-},{}],222:[function(require,module,exports){
+},{}],223:[function(require,module,exports){
 /**
  * Checks if `value` is object-like.
  *
@@ -10587,7 +11084,7 @@ function isObjectLike(value) {
 
 module.exports = isObjectLike;
 
-},{}],223:[function(require,module,exports){
+},{}],224:[function(require,module,exports){
 var isObject = require('../lang/isObject');
 
 /**
@@ -10604,7 +11101,7 @@ function isStrictComparable(value) {
 
 module.exports = isStrictComparable;
 
-},{"../lang/isObject":233}],224:[function(require,module,exports){
+},{"../lang/isObject":234}],225:[function(require,module,exports){
 var toObject = require('./toObject');
 
 /**
@@ -10634,7 +11131,7 @@ function pickByArray(object, props) {
 
 module.exports = pickByArray;
 
-},{"./toObject":227}],225:[function(require,module,exports){
+},{"./toObject":228}],226:[function(require,module,exports){
 var baseForIn = require('./baseForIn');
 
 /**
@@ -10658,7 +11155,7 @@ function pickByCallback(object, predicate) {
 
 module.exports = pickByCallback;
 
-},{"./baseForIn":190}],226:[function(require,module,exports){
+},{"./baseForIn":191}],227:[function(require,module,exports){
 var isArguments = require('../lang/isArguments'),
     isArray = require('../lang/isArray'),
     isIndex = require('./isIndex'),
@@ -10702,7 +11199,7 @@ function shimKeys(object) {
 
 module.exports = shimKeys;
 
-},{"../lang/isArguments":229,"../lang/isArray":230,"../lang/isString":234,"../object/keysIn":237,"./isIndex":219,"./isLength":221}],227:[function(require,module,exports){
+},{"../lang/isArguments":230,"../lang/isArray":231,"../lang/isString":235,"../object/keysIn":238,"./isIndex":220,"./isLength":222}],228:[function(require,module,exports){
 var isObject = require('../lang/isObject'),
     isString = require('../lang/isString'),
     support = require('../support');
@@ -10730,7 +11227,7 @@ function toObject(value) {
 
 module.exports = toObject;
 
-},{"../lang/isObject":233,"../lang/isString":234,"../support":241}],228:[function(require,module,exports){
+},{"../lang/isObject":234,"../lang/isString":235,"../support":242}],229:[function(require,module,exports){
 var baseToString = require('./baseToString'),
     isArray = require('../lang/isArray');
 
@@ -10760,7 +11257,7 @@ function toPath(value) {
 
 module.exports = toPath;
 
-},{"../lang/isArray":230,"./baseToString":202}],229:[function(require,module,exports){
+},{"../lang/isArray":231,"./baseToString":203}],230:[function(require,module,exports){
 var isArrayLike = require('../internal/isArrayLike'),
     isObjectLike = require('../internal/isObjectLike');
 
@@ -10796,7 +11293,7 @@ function isArguments(value) {
 
 module.exports = isArguments;
 
-},{"../internal/isArrayLike":217,"../internal/isObjectLike":222}],230:[function(require,module,exports){
+},{"../internal/isArrayLike":218,"../internal/isObjectLike":223}],231:[function(require,module,exports){
 var getNative = require('../internal/getNative'),
     isLength = require('../internal/isLength'),
     isObjectLike = require('../internal/isObjectLike');
@@ -10838,7 +11335,7 @@ var isArray = nativeIsArray || function(value) {
 
 module.exports = isArray;
 
-},{"../internal/getNative":215,"../internal/isLength":221,"../internal/isObjectLike":222}],231:[function(require,module,exports){
+},{"../internal/getNative":216,"../internal/isLength":222,"../internal/isObjectLike":223}],232:[function(require,module,exports){
 var isObject = require('./isObject');
 
 /** `Object#toString` result references. */
@@ -10878,7 +11375,7 @@ function isFunction(value) {
 
 module.exports = isFunction;
 
-},{"./isObject":233}],232:[function(require,module,exports){
+},{"./isObject":234}],233:[function(require,module,exports){
 var isFunction = require('./isFunction'),
     isHostObject = require('../internal/isHostObject'),
     isObjectLike = require('../internal/isObjectLike');
@@ -10929,7 +11426,7 @@ function isNative(value) {
 
 module.exports = isNative;
 
-},{"../internal/isHostObject":218,"../internal/isObjectLike":222,"./isFunction":231}],233:[function(require,module,exports){
+},{"../internal/isHostObject":219,"../internal/isObjectLike":223,"./isFunction":232}],234:[function(require,module,exports){
 /**
  * Checks if `value` is the [language type](https://es5.github.io/#x8) of `Object`.
  * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
@@ -10959,7 +11456,7 @@ function isObject(value) {
 
 module.exports = isObject;
 
-},{}],234:[function(require,module,exports){
+},{}],235:[function(require,module,exports){
 var isObjectLike = require('../internal/isObjectLike');
 
 /** `Object#toString` result references. */
@@ -10996,7 +11493,7 @@ function isString(value) {
 
 module.exports = isString;
 
-},{"../internal/isObjectLike":222}],235:[function(require,module,exports){
+},{"../internal/isObjectLike":223}],236:[function(require,module,exports){
 var isLength = require('../internal/isLength'),
     isObjectLike = require('../internal/isObjectLike');
 
@@ -11072,7 +11569,7 @@ function isTypedArray(value) {
 
 module.exports = isTypedArray;
 
-},{"../internal/isLength":221,"../internal/isObjectLike":222}],236:[function(require,module,exports){
+},{"../internal/isLength":222,"../internal/isObjectLike":223}],237:[function(require,module,exports){
 var getNative = require('../internal/getNative'),
     isArrayLike = require('../internal/isArrayLike'),
     isObject = require('../lang/isObject'),
@@ -11120,7 +11617,7 @@ var keys = !nativeKeys ? shimKeys : function(object) {
 
 module.exports = keys;
 
-},{"../internal/getNative":215,"../internal/isArrayLike":217,"../internal/shimKeys":226,"../lang/isObject":233,"../support":241}],237:[function(require,module,exports){
+},{"../internal/getNative":216,"../internal/isArrayLike":218,"../internal/shimKeys":227,"../lang/isObject":234,"../support":242}],238:[function(require,module,exports){
 var arrayEach = require('../internal/arrayEach'),
     isArguments = require('../lang/isArguments'),
     isArray = require('../lang/isArray'),
@@ -11258,7 +11755,7 @@ function keysIn(object) {
 
 module.exports = keysIn;
 
-},{"../internal/arrayEach":179,"../internal/isIndex":219,"../internal/isLength":221,"../lang/isArguments":229,"../lang/isArray":230,"../lang/isFunction":231,"../lang/isObject":233,"../lang/isString":234,"../support":241}],238:[function(require,module,exports){
+},{"../internal/arrayEach":180,"../internal/isIndex":220,"../internal/isLength":222,"../lang/isArguments":230,"../lang/isArray":231,"../lang/isFunction":232,"../lang/isObject":234,"../lang/isString":235,"../support":242}],239:[function(require,module,exports){
 var arrayMap = require('../internal/arrayMap'),
     baseDifference = require('../internal/baseDifference'),
     baseFlatten = require('../internal/baseFlatten'),
@@ -11307,7 +11804,7 @@ var omit = restParam(function(object, props) {
 
 module.exports = omit;
 
-},{"../function/restParam":177,"../internal/arrayMap":180,"../internal/baseDifference":184,"../internal/baseFlatten":188,"../internal/bindCallback":203,"../internal/pickByArray":224,"../internal/pickByCallback":225,"./keysIn":237}],239:[function(require,module,exports){
+},{"../function/restParam":178,"../internal/arrayMap":181,"../internal/baseDifference":185,"../internal/baseFlatten":189,"../internal/bindCallback":204,"../internal/pickByArray":225,"../internal/pickByCallback":226,"./keysIn":238}],240:[function(require,module,exports){
 var keys = require('./keys'),
     toObject = require('../internal/toObject');
 
@@ -11342,7 +11839,7 @@ function pairs(object) {
 
 module.exports = pairs;
 
-},{"../internal/toObject":227,"./keys":236}],240:[function(require,module,exports){
+},{"../internal/toObject":228,"./keys":237}],241:[function(require,module,exports){
 var baseFlatten = require('../internal/baseFlatten'),
     bindCallback = require('../internal/bindCallback'),
     pickByArray = require('../internal/pickByArray'),
@@ -11386,7 +11883,7 @@ var pick = restParam(function(object, props) {
 
 module.exports = pick;
 
-},{"../function/restParam":177,"../internal/baseFlatten":188,"../internal/bindCallback":203,"../internal/pickByArray":224,"../internal/pickByCallback":225}],241:[function(require,module,exports){
+},{"../function/restParam":178,"../internal/baseFlatten":189,"../internal/bindCallback":204,"../internal/pickByArray":225,"../internal/pickByCallback":226}],242:[function(require,module,exports){
 /** Used for native method references. */
 var arrayProto = Array.prototype,
     errorProto = Error.prototype,
@@ -11484,7 +11981,7 @@ var support = {};
 
 module.exports = support;
 
-},{}],242:[function(require,module,exports){
+},{}],243:[function(require,module,exports){
 /**
  * This method returns the first argument provided to it.
  *
@@ -11506,7 +12003,7 @@ function identity(value) {
 
 module.exports = identity;
 
-},{}],243:[function(require,module,exports){
+},{}],244:[function(require,module,exports){
 var baseProperty = require('../internal/baseProperty'),
     basePropertyDeep = require('../internal/basePropertyDeep'),
     isKey = require('../internal/isKey');
@@ -11539,7 +12036,7 @@ function property(path) {
 
 module.exports = property;
 
-},{"../internal/baseProperty":199,"../internal/basePropertyDeep":200,"../internal/isKey":220}],244:[function(require,module,exports){
+},{"../internal/baseProperty":200,"../internal/basePropertyDeep":201,"../internal/isKey":221}],245:[function(require,module,exports){
 /* eslint-disable no-unused-vars */
 'use strict';
 var hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -11580,7 +12077,7 @@ module.exports = Object.assign || function (target, source) {
 	return to;
 };
 
-},{}],245:[function(require,module,exports){
+},{}],246:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -11673,7 +12170,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],246:[function(require,module,exports){
+},{}],247:[function(require,module,exports){
 'use strict';
 var strictUriEncode = require('strict-uri-encode');
 
@@ -11741,7 +12238,7 @@ exports.stringify = function (obj) {
 	}).join('&') : '';
 };
 
-},{"strict-uri-encode":518}],247:[function(require,module,exports){
+},{"strict-uri-encode":519}],248:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -11772,7 +12269,7 @@ var Accordion = _react2['default'].createClass({
 
 exports['default'] = Accordion;
 module.exports = exports['default'];
-},{"./PanelGroup":303,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/interop-require-default":66,"react":517}],248:[function(require,module,exports){
+},{"./PanelGroup":304,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/interop-require-default":67,"react":518}],249:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -11866,7 +12363,7 @@ var Alert = _react2['default'].createClass({
 
 exports['default'] = _utilsBootstrapUtils.bsStyles(_styleMaps.State.values(), _styleMaps.State.INFO, _utilsBootstrapUtils.bsClass('alert', Alert));
 module.exports = exports['default'];
-},{"./styleMaps":319,"./utils/bootstrapUtils":323,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/interop-require-default":66,"classnames":69,"react":517}],249:[function(require,module,exports){
+},{"./styleMaps":320,"./utils/bootstrapUtils":324,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/interop-require-default":67,"classnames":70,"react":518}],250:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -11926,7 +12423,7 @@ var Badge = _react2['default'].createClass({
 
 exports['default'] = Badge;
 module.exports = exports['default'];
-},{"./utils/ValidComponentChildren":322,"./utils/bootstrapUtils":323,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/interop-require-default":66,"classnames":69,"react":517}],250:[function(require,module,exports){
+},{"./utils/ValidComponentChildren":323,"./utils/bootstrapUtils":324,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/interop-require-default":67,"classnames":70,"react":518}],251:[function(require,module,exports){
 'use strict';
 
 var _objectWithoutProperties = require('babel-runtime/helpers/object-without-properties')['default'];
@@ -11989,7 +12486,7 @@ var Breadcrumb = _react2['default'].createClass({
 
 exports['default'] = Breadcrumb;
 module.exports = exports['default'];
-},{"./utils/ValidComponentChildren":322,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/interop-require-default":66,"babel-runtime/helpers/object-without-properties":68,"classnames":69,"react":517}],251:[function(require,module,exports){
+},{"./utils/ValidComponentChildren":323,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/interop-require-default":67,"babel-runtime/helpers/object-without-properties":69,"classnames":70,"react":518}],252:[function(require,module,exports){
 'use strict';
 
 var _objectWithoutProperties = require('babel-runtime/helpers/object-without-properties')['default'];
@@ -12086,7 +12583,7 @@ var BreadcrumbItem = _react2['default'].createClass({
 
 exports['default'] = BreadcrumbItem;
 module.exports = exports['default'];
-},{"./SafeAnchor":308,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/interop-require-default":66,"babel-runtime/helpers/object-without-properties":68,"classnames":69,"react":517}],252:[function(require,module,exports){
+},{"./SafeAnchor":309,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/interop-require-default":67,"babel-runtime/helpers/object-without-properties":69,"classnames":70,"react":518}],253:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -12215,7 +12712,7 @@ Button.types = types;
 
 exports['default'] = _utilsBootstrapUtils.bsStyles(ButtonStyles, _styleMaps.DEFAULT, _utilsBootstrapUtils.bsSizes([_styleMaps.Sizes.LARGE, _styleMaps.Sizes.SMALL, _styleMaps.Sizes.XSMALL], _utilsBootstrapUtils.bsClass('btn', Button)));
 module.exports = exports['default'];
-},{"./styleMaps":319,"./utils/bootstrapUtils":323,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/interop-require-default":66,"classnames":69,"react":517,"react-prop-types/lib/elementType":352}],253:[function(require,module,exports){
+},{"./styleMaps":320,"./utils/bootstrapUtils":324,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/interop-require-default":67,"classnames":70,"react":518,"react-prop-types/lib/elementType":353}],254:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -12290,7 +12787,7 @@ var ButtonGroup = _react2['default'].createClass({
 
 exports['default'] = _utilsBootstrapUtils.bsClass('btn-group', ButtonGroup);
 module.exports = exports['default'];
-},{"./Button":252,"./utils/bootstrapUtils":323,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/interop-require-default":66,"classnames":69,"react":517,"react-prop-types/lib/all":349}],254:[function(require,module,exports){
+},{"./Button":253,"./utils/bootstrapUtils":324,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/interop-require-default":67,"classnames":70,"react":518,"react-prop-types/lib/all":350}],255:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -12380,7 +12877,7 @@ ButtonInput.propTypes = {
 
 exports['default'] = ButtonInput;
 module.exports = exports['default'];
-},{"./Button":252,"./FormGroup":268,"./InputBase":273,"./utils/childrenValueInputValidation":325,"babel-runtime/helpers/class-call-check":63,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/inherits":65,"babel-runtime/helpers/interop-require-default":66,"babel-runtime/helpers/object-without-properties":68,"react":517}],255:[function(require,module,exports){
+},{"./Button":253,"./FormGroup":269,"./InputBase":274,"./utils/childrenValueInputValidation":326,"babel-runtime/helpers/class-call-check":64,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/inherits":66,"babel-runtime/helpers/interop-require-default":67,"babel-runtime/helpers/object-without-properties":69,"react":518}],256:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -12433,7 +12930,7 @@ var ButtonToolbar = _react2['default'].createClass({
 
 exports['default'] = ButtonToolbar;
 module.exports = exports['default'];
-},{"./Button":252,"./utils/bootstrapUtils":323,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/interop-require-default":66,"classnames":69,"react":517}],256:[function(require,module,exports){
+},{"./Button":253,"./utils/bootstrapUtils":324,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/interop-require-default":67,"classnames":70,"react":518}],257:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -12744,7 +13241,7 @@ var Carousel = _react2['default'].createClass({
 
 exports['default'] = Carousel;
 module.exports = exports['default'];
-},{"./Glyphicon":269,"./utils/ValidComponentChildren":322,"./utils/bootstrapUtils":323,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/interop-require-default":66,"classnames":69,"react":517}],257:[function(require,module,exports){
+},{"./Glyphicon":270,"./utils/ValidComponentChildren":323,"./utils/bootstrapUtils":324,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/interop-require-default":67,"classnames":70,"react":518}],258:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -12868,7 +13365,7 @@ var CarouselItem = _react2['default'].createClass({
 
 exports['default'] = CarouselItem;
 module.exports = exports['default'];
-},{"./utils/TransitionEvents":321,"./utils/bootstrapUtils":323,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/interop-require-default":66,"classnames":69,"react":517,"react-dom":329}],258:[function(require,module,exports){
+},{"./utils/TransitionEvents":322,"./utils/bootstrapUtils":324,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/interop-require-default":67,"classnames":70,"react":518,"react-dom":330}],259:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -13117,7 +13614,7 @@ var Col = _react2['default'].createClass({
 
 exports['default'] = Col;
 module.exports = exports['default'];
-},{"./styleMaps":319,"babel-runtime/core-js/object/keys":61,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/interop-require-default":66,"classnames":69,"react":517,"react-prop-types/lib/elementType":352}],259:[function(require,module,exports){
+},{"./styleMaps":320,"babel-runtime/core-js/object/keys":62,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/interop-require-default":67,"classnames":70,"react":518,"react-prop-types/lib/elementType":353}],260:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -13364,7 +13861,7 @@ Collapse.defaultProps = {
 
 exports['default'] = Collapse;
 module.exports = exports['default'];
-},{"./utils/createChainedFunction":326,"babel-runtime/helpers/class-call-check":63,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/inherits":65,"babel-runtime/helpers/interop-require-default":66,"classnames":69,"dom-helpers/style":115,"react":517,"react-overlays/lib/Transition":337,"react-prop-types/lib/deprecated":351}],260:[function(require,module,exports){
+},{"./utils/createChainedFunction":327,"babel-runtime/helpers/class-call-check":64,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/inherits":66,"babel-runtime/helpers/interop-require-default":67,"classnames":70,"dom-helpers/style":116,"react":518,"react-overlays/lib/Transition":338,"react-prop-types/lib/deprecated":352}],261:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -13482,7 +13979,7 @@ var CollapsibleNav = _react2['default'].createClass({
 
 exports['default'] = _utilsDeprecationWarning2['default'].wrapper(CollapsibleNav, 'CollapsibleNav', 'Navbar.Collapse', 'http://react-bootstrap.github.io/components.html#navbars');
 module.exports = exports['default'];
-},{"./Collapse":259,"./utils/ValidComponentChildren":322,"./utils/createChainedFunction":326,"./utils/deprecationWarning":328,"babel-runtime/helpers/interop-require-default":66,"classnames":69,"react":517}],261:[function(require,module,exports){
+},{"./Collapse":260,"./utils/ValidComponentChildren":323,"./utils/createChainedFunction":327,"./utils/deprecationWarning":329,"babel-runtime/helpers/interop-require-default":67,"classnames":70,"react":518}],262:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -13883,7 +14380,7 @@ Dropdown.Menu = _DropdownMenu2['default'];
 
 exports['default'] = Dropdown;
 module.exports = exports['default'];
-},{"./ButtonGroup":253,"./DropdownMenu":263,"./DropdownToggle":264,"./utils/CustomPropTypes":320,"./utils/ValidComponentChildren":322,"./utils/bootstrapUtils":323,"./utils/createChainedFunction":326,"babel-runtime/helpers/class-call-check":63,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/inherits":65,"babel-runtime/helpers/interop-require-default":66,"classnames":69,"dom-helpers/activeElement":96,"dom-helpers/query/contains":106,"keycode":173,"lodash-compat/collection/find":176,"lodash-compat/object/omit":238,"react":517,"react-dom":329,"react-prop-types/lib/all":349,"react-prop-types/lib/elementType":352,"react-prop-types/lib/isRequiredForA11y":353,"uncontrollable":520}],262:[function(require,module,exports){
+},{"./ButtonGroup":254,"./DropdownMenu":264,"./DropdownToggle":265,"./utils/CustomPropTypes":321,"./utils/ValidComponentChildren":323,"./utils/bootstrapUtils":324,"./utils/createChainedFunction":327,"babel-runtime/helpers/class-call-check":64,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/inherits":66,"babel-runtime/helpers/interop-require-default":67,"classnames":70,"dom-helpers/activeElement":97,"dom-helpers/query/contains":107,"keycode":174,"lodash-compat/collection/find":177,"lodash-compat/object/omit":239,"react":518,"react-dom":330,"react-prop-types/lib/all":350,"react-prop-types/lib/elementType":353,"react-prop-types/lib/isRequiredForA11y":354,"uncontrollable":521}],263:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -13990,7 +14487,7 @@ DropdownButton.defaultProps = {
 
 exports['default'] = DropdownButton;
 module.exports = exports['default'];
-},{"./Button":252,"./Dropdown":261,"babel-runtime/core-js/object/keys":61,"babel-runtime/helpers/class-call-check":63,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/inherits":65,"babel-runtime/helpers/interop-require-default":66,"babel-runtime/helpers/object-without-properties":68,"lodash-compat/object/omit":238,"lodash-compat/object/pick":240,"react":517}],263:[function(require,module,exports){
+},{"./Button":253,"./Dropdown":262,"babel-runtime/core-js/object/keys":62,"babel-runtime/helpers/class-call-check":64,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/inherits":66,"babel-runtime/helpers/interop-require-default":67,"babel-runtime/helpers/object-without-properties":69,"lodash-compat/object/omit":239,"lodash-compat/object/pick":241,"react":518}],264:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -14187,7 +14684,7 @@ DropdownMenu.propTypes = {
 
 exports['default'] = DropdownMenu;
 module.exports = exports['default'];
-},{"./utils/ValidComponentChildren":322,"./utils/bootstrapUtils":323,"./utils/createChainedFunction":326,"babel-runtime/helpers/class-call-check":63,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/inherits":65,"babel-runtime/helpers/interop-require-default":66,"babel-runtime/helpers/object-without-properties":68,"classnames":69,"keycode":173,"react":517,"react-dom":329,"react-overlays/lib/RootCloseWrapper":336}],264:[function(require,module,exports){
+},{"./utils/ValidComponentChildren":323,"./utils/bootstrapUtils":324,"./utils/createChainedFunction":327,"babel-runtime/helpers/class-call-check":64,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/inherits":66,"babel-runtime/helpers/interop-require-default":67,"babel-runtime/helpers/object-without-properties":69,"classnames":70,"keycode":174,"react":518,"react-dom":330,"react-overlays/lib/RootCloseWrapper":337}],265:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -14276,7 +14773,7 @@ DropdownToggle.isToggle = true;
 DropdownToggle.titleProp = 'title';
 DropdownToggle.onClickProp = 'onClick';
 module.exports = exports['default'];
-},{"./Button":252,"./SafeAnchor":308,"babel-runtime/helpers/class-call-check":63,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/inherits":65,"babel-runtime/helpers/interop-require-default":66,"classnames":69,"react":517}],265:[function(require,module,exports){
+},{"./Button":253,"./SafeAnchor":309,"babel-runtime/helpers/class-call-check":64,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/inherits":66,"babel-runtime/helpers/interop-require-default":67,"classnames":70,"react":518}],266:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -14400,7 +14897,7 @@ Fade.defaultProps = {
 
 exports['default'] = Fade;
 module.exports = exports['default'];
-},{"babel-runtime/helpers/class-call-check":63,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/inherits":65,"babel-runtime/helpers/interop-require-default":66,"classnames":69,"react":517,"react-overlays/lib/Transition":337,"react-prop-types/lib/deprecated":351}],266:[function(require,module,exports){
+},{"babel-runtime/helpers/class-call-check":64,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/inherits":66,"babel-runtime/helpers/interop-require-default":67,"classnames":70,"react":518,"react-overlays/lib/Transition":338,"react-prop-types/lib/deprecated":352}],267:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -14464,7 +14961,7 @@ Static.propTypes = {
 
 exports['default'] = Static;
 module.exports = exports['default'];
-},{"../InputBase":273,"../utils/childrenValueInputValidation":325,"babel-runtime/helpers/class-call-check":63,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/inherits":65,"babel-runtime/helpers/interop-require-default":66,"classnames":69,"react":517}],267:[function(require,module,exports){
+},{"../InputBase":274,"../utils/childrenValueInputValidation":326,"babel-runtime/helpers/class-call-check":64,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/inherits":66,"babel-runtime/helpers/interop-require-default":67,"classnames":70,"react":518}],268:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -14476,7 +14973,7 @@ var _Static2 = require('./Static');
 var _Static3 = _interopRequireDefault(_Static2);
 
 exports.Static = _Static3['default'];
-},{"./Static":266,"babel-runtime/helpers/interop-require-default":66}],268:[function(require,module,exports){
+},{"./Static":267,"babel-runtime/helpers/interop-require-default":67}],269:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -14546,7 +15043,7 @@ FormGroup.propTypes = {
 
 exports['default'] = FormGroup;
 module.exports = exports['default'];
-},{"babel-runtime/helpers/class-call-check":63,"babel-runtime/helpers/inherits":65,"babel-runtime/helpers/interop-require-default":66,"classnames":69,"react":517}],269:[function(require,module,exports){
+},{"babel-runtime/helpers/class-call-check":64,"babel-runtime/helpers/inherits":66,"babel-runtime/helpers/interop-require-default":67,"classnames":70,"react":518}],270:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -14605,7 +15102,7 @@ var Glyphicon = _react2['default'].createClass({
 
 exports['default'] = Glyphicon;
 module.exports = exports['default'];
-},{"babel-runtime/helpers/extends":64,"babel-runtime/helpers/interop-require-default":66,"classnames":69,"react":517}],270:[function(require,module,exports){
+},{"babel-runtime/helpers/extends":65,"babel-runtime/helpers/interop-require-default":67,"classnames":70,"react":518}],271:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -14664,7 +15161,7 @@ var Grid = _react2['default'].createClass({
 
 exports['default'] = Grid;
 module.exports = exports['default'];
-},{"babel-runtime/helpers/extends":64,"babel-runtime/helpers/interop-require-default":66,"classnames":69,"react":517,"react-prop-types/lib/elementType":352}],271:[function(require,module,exports){
+},{"babel-runtime/helpers/extends":65,"babel-runtime/helpers/interop-require-default":67,"classnames":70,"react":518,"react-prop-types/lib/elementType":353}],272:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -14730,7 +15227,7 @@ var Image = _react2['default'].createClass({
 
 exports['default'] = Image;
 module.exports = exports['default'];
-},{"babel-runtime/helpers/extends":64,"babel-runtime/helpers/interop-require-default":66,"classnames":69,"react":517}],272:[function(require,module,exports){
+},{"babel-runtime/helpers/extends":65,"babel-runtime/helpers/interop-require-default":67,"classnames":70,"react":518}],273:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -14786,7 +15283,7 @@ Input.propTypes = {
 
 exports['default'] = Input;
 module.exports = exports['default'];
-},{"./FormControls":267,"./InputBase":273,"./utils/deprecationWarning":328,"babel-runtime/helpers/class-call-check":63,"babel-runtime/helpers/inherits":65,"babel-runtime/helpers/interop-require-default":66,"babel-runtime/helpers/interop-require-wildcard":67,"react":517}],273:[function(require,module,exports){
+},{"./FormControls":268,"./InputBase":274,"./utils/deprecationWarning":329,"babel-runtime/helpers/class-call-check":64,"babel-runtime/helpers/inherits":66,"babel-runtime/helpers/interop-require-default":67,"babel-runtime/helpers/interop-require-wildcard":68,"react":518}],274:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -15049,7 +15546,7 @@ InputBase.defaultProps = {
 
 exports['default'] = InputBase;
 module.exports = exports['default'];
-},{"./FormGroup":268,"./Glyphicon":269,"babel-runtime/helpers/class-call-check":63,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/inherits":65,"babel-runtime/helpers/interop-require-default":66,"classnames":69,"react":517}],274:[function(require,module,exports){
+},{"./FormGroup":269,"./Glyphicon":270,"babel-runtime/helpers/class-call-check":64,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/inherits":66,"babel-runtime/helpers/interop-require-default":67,"classnames":70,"react":518}],275:[function(require,module,exports){
 // https://www.npmjs.org/package/react-interpolate-component
 // TODO: Drop this in favor of es6 string interpolation
 
@@ -15147,7 +15644,7 @@ var Interpolate = _react2['default'].createClass({
 
 exports['default'] = Interpolate;
 module.exports = exports['default'];
-},{"./utils/ValidComponentChildren":322,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/interop-require-default":66,"react":517}],275:[function(require,module,exports){
+},{"./utils/ValidComponentChildren":323,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/interop-require-default":67,"react":518}],276:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -15195,7 +15692,7 @@ var Jumbotron = _react2['default'].createClass({
 
 exports['default'] = Jumbotron;
 module.exports = exports['default'];
-},{"babel-runtime/helpers/extends":64,"babel-runtime/helpers/interop-require-default":66,"classnames":69,"react":517,"react-prop-types/lib/elementType":352}],276:[function(require,module,exports){
+},{"babel-runtime/helpers/extends":65,"babel-runtime/helpers/interop-require-default":67,"classnames":70,"react":518,"react-prop-types/lib/elementType":353}],277:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -15249,7 +15746,7 @@ var Label = (function (_React$Component) {
 
 exports['default'] = Label;
 module.exports = exports['default'];
-},{"./styleMaps":319,"./utils/bootstrapUtils":323,"babel-runtime/helpers/class-call-check":63,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/inherits":65,"babel-runtime/helpers/interop-require-default":66,"classnames":69,"react":517}],277:[function(require,module,exports){
+},{"./styleMaps":320,"./utils/bootstrapUtils":324,"babel-runtime/helpers/class-call-check":64,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/inherits":66,"babel-runtime/helpers/interop-require-default":67,"classnames":70,"react":518}],278:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -15377,7 +15874,7 @@ ListGroup.propTypes = {
 
 exports['default'] = ListGroup;
 module.exports = exports['default'];
-},{"./ListGroupItem":278,"./utils/ValidComponentChildren":322,"babel-runtime/helpers/class-call-check":63,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/inherits":65,"babel-runtime/helpers/interop-require-default":66,"classnames":69,"react":517}],278:[function(require,module,exports){
+},{"./ListGroupItem":279,"./utils/ValidComponentChildren":323,"babel-runtime/helpers/class-call-check":64,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/inherits":66,"babel-runtime/helpers/interop-require-default":67,"classnames":70,"react":518}],279:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -15514,7 +16011,7 @@ ListGroupItem.defaultTypes = {
 
 exports['default'] = _utilsBootstrapUtils.bsStyles(_styleMaps.State.values(), _utilsBootstrapUtils.bsClass('list-group-item', ListGroupItem));
 module.exports = exports['default'];
-},{"./styleMaps":319,"./utils/bootstrapUtils":323,"babel-runtime/helpers/class-call-check":63,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/inherits":65,"babel-runtime/helpers/interop-require-default":66,"classnames":69,"react":517}],279:[function(require,module,exports){
+},{"./styleMaps":320,"./utils/bootstrapUtils":324,"babel-runtime/helpers/class-call-check":64,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/inherits":66,"babel-runtime/helpers/interop-require-default":67,"classnames":70,"react":518}],280:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -15649,7 +16146,7 @@ MenuItem.defaultProps = {
 
 exports['default'] = _utilsBootstrapUtils.bsClass('dropdown', MenuItem);
 module.exports = exports['default'];
-},{"./SafeAnchor":308,"./utils/bootstrapUtils":323,"./utils/createChainedFunction":326,"babel-runtime/helpers/class-call-check":63,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/inherits":65,"babel-runtime/helpers/interop-require-default":66,"babel-runtime/helpers/object-without-properties":68,"classnames":69,"react":517,"react-prop-types/lib/all":349}],280:[function(require,module,exports){
+},{"./SafeAnchor":309,"./utils/bootstrapUtils":324,"./utils/createChainedFunction":327,"babel-runtime/helpers/class-call-check":64,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/inherits":66,"babel-runtime/helpers/interop-require-default":67,"babel-runtime/helpers/object-without-properties":69,"classnames":70,"react":518,"react-prop-types/lib/all":350}],281:[function(require,module,exports){
 
 /* eslint-disable react/prop-types */
 'use strict';
@@ -15975,7 +16472,7 @@ Modal.BACKDROP_TRANSITION_DURATION = 150;
 
 exports['default'] = _utilsBootstrapUtils.bsSizes([_styleMaps.Sizes.LARGE, _styleMaps.Sizes.SMALL], _utilsBootstrapUtils.bsClass('modal', Modal));
 module.exports = exports['default'];
-},{"./Fade":265,"./ModalBody":281,"./ModalDialog":282,"./ModalFooter":283,"./ModalHeader":284,"./ModalTitle":285,"./styleMaps":319,"./utils/bootstrapUtils":323,"babel-runtime/core-js/object/keys":61,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/interop-require-default":66,"babel-runtime/helpers/object-without-properties":68,"classnames":69,"dom-helpers/events":102,"dom-helpers/ownerDocument":105,"dom-helpers/util/inDOM":123,"dom-helpers/util/scrollbarSize":124,"lodash-compat/object/pick":240,"react":517,"react-dom":329,"react-overlays/lib/Modal":331,"react-overlays/lib/utils/isOverflowing":342,"react-prop-types/lib/elementType":352}],281:[function(require,module,exports){
+},{"./Fade":266,"./ModalBody":282,"./ModalDialog":283,"./ModalFooter":284,"./ModalHeader":285,"./ModalTitle":286,"./styleMaps":320,"./utils/bootstrapUtils":324,"babel-runtime/core-js/object/keys":62,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/interop-require-default":67,"babel-runtime/helpers/object-without-properties":69,"classnames":70,"dom-helpers/events":103,"dom-helpers/ownerDocument":106,"dom-helpers/util/inDOM":124,"dom-helpers/util/scrollbarSize":125,"lodash-compat/object/pick":241,"react":518,"react-dom":330,"react-overlays/lib/Modal":332,"react-overlays/lib/utils/isOverflowing":343,"react-prop-types/lib/elementType":353}],282:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -16023,7 +16520,7 @@ var ModalBody = (function (_React$Component) {
 
 exports['default'] = _utilsBootstrapUtils.bsClass('modal', ModalBody);
 module.exports = exports['default'];
-},{"./utils/bootstrapUtils":323,"babel-runtime/helpers/class-call-check":63,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/inherits":65,"babel-runtime/helpers/interop-require-default":66,"classnames":69,"react":517}],282:[function(require,module,exports){
+},{"./utils/bootstrapUtils":324,"babel-runtime/helpers/class-call-check":64,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/inherits":66,"babel-runtime/helpers/interop-require-default":67,"classnames":70,"react":518}],283:[function(require,module,exports){
 /* eslint-disable react/prop-types */
 'use strict';
 
@@ -16091,7 +16588,7 @@ var ModalDialog = _react2['default'].createClass({
 
 exports['default'] = _utilsBootstrapUtils.bsSizes([_styleMaps.Sizes.LARGE, _styleMaps.Sizes.SMALL], _utilsBootstrapUtils.bsClass('modal', ModalDialog));
 module.exports = exports['default'];
-},{"./styleMaps":319,"./utils/bootstrapUtils":323,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/interop-require-default":66,"classnames":69,"react":517}],283:[function(require,module,exports){
+},{"./styleMaps":320,"./utils/bootstrapUtils":324,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/interop-require-default":67,"classnames":70,"react":518}],284:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -16150,7 +16647,7 @@ ModalFooter.defaultProps = {
 
 exports['default'] = _utilsBootstrapUtils.bsClass('modal', ModalFooter);
 module.exports = exports['default'];
-},{"./utils/bootstrapUtils":323,"babel-runtime/helpers/class-call-check":63,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/inherits":65,"babel-runtime/helpers/interop-require-default":66,"classnames":69,"react":517}],284:[function(require,module,exports){
+},{"./utils/bootstrapUtils":324,"babel-runtime/helpers/class-call-check":64,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/inherits":66,"babel-runtime/helpers/interop-require-default":67,"classnames":70,"react":518}],285:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -16255,7 +16752,7 @@ ModalHeader.defaultProps = {
 
 exports['default'] = _utilsBootstrapUtils.bsClass('modal', ModalHeader);
 module.exports = exports['default'];
-},{"./utils/bootstrapUtils":323,"./utils/createChainedFunction":326,"babel-runtime/helpers/class-call-check":63,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/inherits":65,"babel-runtime/helpers/interop-require-default":66,"babel-runtime/helpers/object-without-properties":68,"classnames":69,"react":517}],285:[function(require,module,exports){
+},{"./utils/bootstrapUtils":324,"./utils/createChainedFunction":327,"babel-runtime/helpers/class-call-check":64,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/inherits":66,"babel-runtime/helpers/interop-require-default":67,"babel-runtime/helpers/object-without-properties":69,"classnames":70,"react":518}],286:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -16303,7 +16800,7 @@ var ModalTitle = (function (_React$Component) {
 
 exports['default'] = _utilsBootstrapUtils.bsClass('modal', ModalTitle);
 module.exports = exports['default'];
-},{"./utils/bootstrapUtils":323,"babel-runtime/helpers/class-call-check":63,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/inherits":65,"babel-runtime/helpers/interop-require-default":66,"classnames":69,"react":517}],286:[function(require,module,exports){
+},{"./utils/bootstrapUtils":324,"babel-runtime/helpers/class-call-check":64,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/inherits":66,"babel-runtime/helpers/interop-require-default":67,"classnames":70,"react":518}],287:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -16517,7 +17014,7 @@ Nav.defaultProps = {
 
 exports['default'] = _utilsBootstrapUtils.bsClass('nav', _utilsBootstrapUtils.bsStyles(['tabs', 'pills'], Nav));
 module.exports = exports['default'];
-},{"./Collapse":259,"./utils/ValidComponentChildren":322,"./utils/bootstrapUtils":323,"./utils/createChainedFunction":326,"babel-runtime/helpers/class-call-check":63,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/inherits":65,"babel-runtime/helpers/interop-require-default":66,"classnames":69,"react":517,"react-prop-types/lib/all":349,"react-prop-types/lib/deprecated":351}],287:[function(require,module,exports){
+},{"./Collapse":260,"./utils/ValidComponentChildren":323,"./utils/bootstrapUtils":324,"./utils/createChainedFunction":327,"babel-runtime/helpers/class-call-check":64,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/inherits":66,"babel-runtime/helpers/interop-require-default":67,"classnames":70,"react":518,"react-prop-types/lib/all":350,"react-prop-types/lib/deprecated":352}],288:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -16536,7 +17033,7 @@ exports['default'] = _utilsDeprecationWarning2['default'].wrapper(_NavbarBrand2[
   message: 'The `NavBrand` component has been renamed to: `NavbarBrand`. ' + 'Please use that component instead; this alias will be removed in an upcoming release'
 });
 module.exports = exports['default'];
-},{"./NavbarBrand":291,"./utils/deprecationWarning":328,"babel-runtime/helpers/interop-require-default":66}],288:[function(require,module,exports){
+},{"./NavbarBrand":292,"./utils/deprecationWarning":329,"babel-runtime/helpers/interop-require-default":67}],289:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -16606,7 +17103,7 @@ NavDropdown.propTypes = _extends({
 
 exports['default'] = NavDropdown;
 module.exports = exports['default'];
-},{"./Dropdown":261,"babel-runtime/helpers/class-call-check":63,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/inherits":65,"babel-runtime/helpers/interop-require-default":66,"babel-runtime/helpers/object-without-properties":68,"react":517}],289:[function(require,module,exports){
+},{"./Dropdown":262,"babel-runtime/helpers/class-call-check":64,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/inherits":66,"babel-runtime/helpers/interop-require-default":67,"babel-runtime/helpers/object-without-properties":69,"react":518}],290:[function(require,module,exports){
 'use strict';
 
 var _objectWithoutProperties = require('babel-runtime/helpers/object-without-properties')['default'];
@@ -16718,7 +17215,7 @@ var NavItem = _react2['default'].createClass({
 exports['default'] = NavItem;
 module.exports = exports['default'];
 //eslint-disable-line
-},{"./SafeAnchor":308,"./utils/createChainedFunction":326,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/interop-require-default":66,"babel-runtime/helpers/object-without-properties":68,"classnames":69,"react":517}],290:[function(require,module,exports){
+},{"./SafeAnchor":309,"./utils/createChainedFunction":327,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/interop-require-default":67,"babel-runtime/helpers/object-without-properties":69,"classnames":70,"react":518}],291:[function(require,module,exports){
 /* eslint react/no-multi-comp: 0 */
 'use strict';
 
@@ -16987,7 +17484,7 @@ Navbar.Link = createSimpleWrapper('a', 'link', 'NavbarLink');
 
 exports['default'] = Navbar;
 module.exports = exports['default'];
-},{"./Grid":270,"./NavbarBrand":291,"./NavbarCollapse":292,"./NavbarHeader":293,"./NavbarToggle":294,"./deprecated/Navbar":317,"./styleMaps":319,"./utils/ValidComponentChildren":322,"./utils/bootstrapUtils":323,"./utils/deprecationWarning":328,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/interop-require-default":66,"babel-runtime/helpers/object-without-properties":68,"classnames":69,"react":517,"react-prop-types/lib/deprecated":351,"react-prop-types/lib/elementType":352,"uncontrollable":520}],291:[function(require,module,exports){
+},{"./Grid":271,"./NavbarBrand":292,"./NavbarCollapse":293,"./NavbarHeader":294,"./NavbarToggle":295,"./deprecated/Navbar":318,"./styleMaps":320,"./utils/ValidComponentChildren":323,"./utils/bootstrapUtils":324,"./utils/deprecationWarning":329,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/interop-require-default":67,"babel-runtime/helpers/object-without-properties":69,"classnames":70,"react":518,"react-prop-types/lib/deprecated":352,"react-prop-types/lib/elementType":353,"uncontrollable":521}],292:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -17057,7 +17554,7 @@ NavbarBrand.contextTypes = {
 
 exports['default'] = NavbarBrand;
 module.exports = exports['default'];
-},{"./utils/bootstrapUtils":323,"babel-runtime/helpers/class-call-check":63,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/inherits":65,"babel-runtime/helpers/interop-require-default":66,"babel-runtime/helpers/object-without-properties":68,"classnames":69,"react":517}],292:[function(require,module,exports){
+},{"./utils/bootstrapUtils":324,"babel-runtime/helpers/class-call-check":64,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/inherits":66,"babel-runtime/helpers/interop-require-default":67,"babel-runtime/helpers/object-without-properties":69,"classnames":70,"react":518}],293:[function(require,module,exports){
 'use strict';
 
 var _objectWithoutProperties = require('babel-runtime/helpers/object-without-properties')['default'];
@@ -17113,7 +17610,7 @@ var NavbarCollapse = _react2['default'].createClass({
 
 exports['default'] = NavbarCollapse;
 module.exports = exports['default'];
-},{"./Collapse":259,"./utils/bootstrapUtils":323,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/interop-require-default":66,"babel-runtime/helpers/object-without-properties":68,"react":517}],293:[function(require,module,exports){
+},{"./Collapse":260,"./utils/bootstrapUtils":324,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/interop-require-default":67,"babel-runtime/helpers/object-without-properties":69,"react":518}],294:[function(require,module,exports){
 'use strict';
 
 var _objectWithoutProperties = require('babel-runtime/helpers/object-without-properties')['default'];
@@ -17156,7 +17653,7 @@ var NavbarHeader = _react2['default'].createClass({
 
 exports['default'] = NavbarHeader;
 module.exports = exports['default'];
-},{"./utils/bootstrapUtils":323,"babel-runtime/helpers/interop-require-default":66,"babel-runtime/helpers/object-without-properties":68,"react":517}],294:[function(require,module,exports){
+},{"./utils/bootstrapUtils":324,"babel-runtime/helpers/interop-require-default":67,"babel-runtime/helpers/object-without-properties":69,"react":518}],295:[function(require,module,exports){
 'use strict';
 
 var _objectWithoutProperties = require('babel-runtime/helpers/object-without-properties')['default'];
@@ -17216,7 +17713,7 @@ var NavbarToggle = _react2['default'].createClass({
 
 exports['default'] = NavbarToggle;
 module.exports = exports['default'];
-},{"./utils/bootstrapUtils":323,"babel-runtime/helpers/interop-require-default":66,"babel-runtime/helpers/object-without-properties":68,"react":517}],295:[function(require,module,exports){
+},{"./utils/bootstrapUtils":324,"babel-runtime/helpers/interop-require-default":67,"babel-runtime/helpers/object-without-properties":69,"react":518}],296:[function(require,module,exports){
 /* eslint react/prop-types: [2, {ignore: ["container", "containerPadding", "target", "placement", "children"] }] */
 /* These properties are validated in 'Portal' and 'Position' components */
 
@@ -17356,7 +17853,7 @@ Overlay.defaultProps = {
 
 exports['default'] = Overlay;
 module.exports = exports['default'];
-},{"./Fade":265,"babel-runtime/helpers/class-call-check":63,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/inherits":65,"babel-runtime/helpers/interop-require-default":66,"babel-runtime/helpers/object-without-properties":68,"classnames":69,"react":517,"react-overlays/lib/Overlay":333,"react-prop-types/lib/elementType":352}],296:[function(require,module,exports){
+},{"./Fade":266,"babel-runtime/helpers/class-call-check":64,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/inherits":66,"babel-runtime/helpers/interop-require-default":67,"babel-runtime/helpers/object-without-properties":69,"classnames":70,"react":518,"react-overlays/lib/Overlay":334,"react-prop-types/lib/elementType":353}],297:[function(require,module,exports){
 (function (process){
 /* eslint-disable react/prop-types */
 
@@ -17673,7 +18170,7 @@ var OverlayTrigger = _react2['default'].createClass({
 exports['default'] = OverlayTrigger;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./Overlay":295,"./utils/createChainedFunction":326,"_process":245,"babel-runtime/core-js/object/keys":61,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/interop-require-default":66,"dom-helpers/query/contains":106,"lodash-compat/object/pick":240,"react":517,"react-dom":329,"warning":522}],297:[function(require,module,exports){
+},{"./Overlay":296,"./utils/createChainedFunction":327,"_process":246,"babel-runtime/core-js/object/keys":62,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/interop-require-default":67,"dom-helpers/query/contains":107,"lodash-compat/object/pick":241,"react":518,"react-dom":330,"warning":523}],298:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -17708,7 +18205,7 @@ var PageHeader = _react2['default'].createClass({
 
 exports['default'] = PageHeader;
 module.exports = exports['default'];
-},{"babel-runtime/helpers/extends":64,"babel-runtime/helpers/interop-require-default":66,"classnames":69,"react":517}],298:[function(require,module,exports){
+},{"babel-runtime/helpers/extends":65,"babel-runtime/helpers/interop-require-default":67,"classnames":70,"react":518}],299:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -17787,7 +18284,7 @@ var PageItem = _react2['default'].createClass({
 
 exports['default'] = PageItem;
 module.exports = exports['default'];
-},{"./SafeAnchor":308,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/interop-require-default":66,"classnames":69,"react":517}],299:[function(require,module,exports){
+},{"./SafeAnchor":309,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/interop-require-default":67,"classnames":70,"react":518}],300:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -17838,7 +18335,7 @@ var Pager = _react2['default'].createClass({
 
 exports['default'] = Pager;
 module.exports = exports['default'];
-},{"./utils/ValidComponentChildren":322,"./utils/createChainedFunction":326,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/interop-require-default":66,"classnames":69,"react":517}],300:[function(require,module,exports){
+},{"./utils/ValidComponentChildren":323,"./utils/createChainedFunction":327,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/interop-require-default":67,"classnames":70,"react":518}],301:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -18133,7 +18630,7 @@ var Pagination = _react2['default'].createClass({
 
 exports['default'] = _utilsBootstrapUtils.bsClass('pagination', Pagination);
 module.exports = exports['default'];
-},{"./PaginationButton":301,"./SafeAnchor":308,"./utils/bootstrapUtils":323,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/interop-require-default":66,"classnames":69,"react":517,"react-prop-types/lib/elementType":352}],301:[function(require,module,exports){
+},{"./PaginationButton":302,"./SafeAnchor":309,"./utils/bootstrapUtils":324,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/interop-require-default":67,"classnames":70,"react":518,"react-prop-types/lib/elementType":353}],302:[function(require,module,exports){
 'use strict';
 
 var _objectWithoutProperties = require('babel-runtime/helpers/object-without-properties')['default'];
@@ -18217,7 +18714,7 @@ var PaginationButton = _react2['default'].createClass({
 
 exports['default'] = PaginationButton;
 module.exports = exports['default'];
-},{"./utils/createSelectedEvent":327,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/interop-require-default":66,"babel-runtime/helpers/object-without-properties":68,"classnames":69,"react":517,"react-prop-types/lib/elementType":352}],302:[function(require,module,exports){
+},{"./utils/createSelectedEvent":328,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/interop-require-default":67,"babel-runtime/helpers/object-without-properties":69,"classnames":70,"react":518,"react-prop-types/lib/elementType":353}],303:[function(require,module,exports){
 'use strict';
 
 var _objectWithoutProperties = require('babel-runtime/helpers/object-without-properties')['default'];
@@ -18467,7 +18964,7 @@ var PANEL_STATES = _styleMaps.State.values().concat(_styleMaps.DEFAULT, _styleMa
 
 exports['default'] = _utilsBootstrapUtils.bsStyles(PANEL_STATES, _styleMaps.DEFAULT, _utilsBootstrapUtils.bsClass('panel', Panel));
 module.exports = exports['default'];
-},{"./Collapse":259,"./styleMaps":319,"./utils/bootstrapUtils":323,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/interop-require-default":66,"babel-runtime/helpers/object-without-properties":68,"classnames":69,"react":517}],303:[function(require,module,exports){
+},{"./Collapse":260,"./styleMaps":320,"./utils/bootstrapUtils":324,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/interop-require-default":67,"babel-runtime/helpers/object-without-properties":69,"classnames":70,"react":518}],304:[function(require,module,exports){
 'use strict';
 
 var _objectWithoutProperties = require('babel-runtime/helpers/object-without-properties')['default'];
@@ -18583,7 +19080,7 @@ var PanelGroup = _react2['default'].createClass({
 
 exports['default'] = _utilsBootstrapUtils.bsClass('panel-group', PanelGroup);
 module.exports = exports['default'];
-},{"./utils/ValidComponentChildren":322,"./utils/bootstrapUtils":323,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/interop-require-default":66,"babel-runtime/helpers/object-without-properties":68,"classnames":69,"react":517}],304:[function(require,module,exports){
+},{"./utils/ValidComponentChildren":323,"./utils/bootstrapUtils":324,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/interop-require-default":67,"babel-runtime/helpers/object-without-properties":69,"classnames":70,"react":518}],305:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -18696,7 +19193,7 @@ var Popover = _react2['default'].createClass({
 exports['default'] = Popover;
 module.exports = exports['default'];
 // we don't want to expose the `style` property
-},{"./utils/bootstrapUtils":323,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/interop-require-default":66,"classnames":69,"react":517,"react-prop-types/lib/isRequiredForA11y":353}],305:[function(require,module,exports){
+},{"./utils/bootstrapUtils":324,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/interop-require-default":67,"classnames":70,"react":518,"react-prop-types/lib/isRequiredForA11y":354}],306:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -18895,7 +19392,7 @@ ProgressBar.defaultProps = _extends({}, ProgressBar.defaultProps, {
 
 exports['default'] = _utilsBootstrapUtils.bsStyles(_styleMaps.State.values(), _utilsBootstrapUtils.bsClass('progress-bar', ProgressBar));
 module.exports = exports['default'];
-},{"./Interpolate":274,"./styleMaps":319,"./utils/ValidComponentChildren":322,"./utils/bootstrapUtils":323,"babel-runtime/helpers/class-call-check":63,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/inherits":65,"babel-runtime/helpers/interop-require-default":66,"babel-runtime/helpers/object-without-properties":68,"classnames":69,"react":517}],306:[function(require,module,exports){
+},{"./Interpolate":275,"./styleMaps":320,"./utils/ValidComponentChildren":323,"./utils/bootstrapUtils":324,"babel-runtime/helpers/class-call-check":64,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/inherits":66,"babel-runtime/helpers/interop-require-default":67,"babel-runtime/helpers/object-without-properties":69,"classnames":70,"react":518}],307:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -18991,7 +19488,7 @@ ResponsiveEmbed.propTypes = {
 exports['default'] = ResponsiveEmbed;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"_process":245,"babel-runtime/helpers/class-call-check":63,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/inherits":65,"babel-runtime/helpers/interop-require-default":66,"babel-runtime/helpers/object-without-properties":68,"classnames":69,"react":517,"warning":522}],307:[function(require,module,exports){
+},{"_process":246,"babel-runtime/helpers/class-call-check":64,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/inherits":66,"babel-runtime/helpers/interop-require-default":67,"babel-runtime/helpers/object-without-properties":69,"classnames":70,"react":518,"warning":523}],308:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -19041,7 +19538,7 @@ var Row = _react2['default'].createClass({
 
 exports['default'] = Row;
 module.exports = exports['default'];
-},{"babel-runtime/helpers/extends":64,"babel-runtime/helpers/interop-require-default":66,"classnames":69,"react":517,"react-prop-types/lib/elementType":352}],308:[function(require,module,exports){
+},{"babel-runtime/helpers/extends":65,"babel-runtime/helpers/interop-require-default":67,"classnames":70,"react":518,"react-prop-types/lib/elementType":353}],309:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -19102,7 +19599,7 @@ SafeAnchor.propTypes = {
   onClick: _react2['default'].PropTypes.func
 };
 module.exports = exports['default'];
-},{"./utils/createChainedFunction":326,"babel-runtime/helpers/class-call-check":63,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/inherits":65,"babel-runtime/helpers/interop-require-default":66,"react":517}],309:[function(require,module,exports){
+},{"./utils/createChainedFunction":327,"babel-runtime/helpers/class-call-check":64,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/inherits":66,"babel-runtime/helpers/interop-require-default":67,"react":518}],310:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -19231,7 +19728,7 @@ SplitButton.Toggle = _SplitToggle2['default'];
 
 exports['default'] = SplitButton;
 module.exports = exports['default'];
-},{"./Button":252,"./Dropdown":261,"./SplitToggle":310,"babel-runtime/core-js/object/keys":61,"babel-runtime/helpers/class-call-check":63,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/inherits":65,"babel-runtime/helpers/interop-require-default":66,"babel-runtime/helpers/object-without-properties":68,"lodash-compat/object/omit":238,"lodash-compat/object/pick":240,"react":517}],310:[function(require,module,exports){
+},{"./Button":253,"./Dropdown":262,"./SplitToggle":311,"babel-runtime/core-js/object/keys":62,"babel-runtime/helpers/class-call-check":64,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/inherits":66,"babel-runtime/helpers/interop-require-default":67,"babel-runtime/helpers/object-without-properties":69,"lodash-compat/object/omit":239,"lodash-compat/object/pick":241,"react":518}],311:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -19275,7 +19772,7 @@ exports['default'] = SplitToggle;
 
 SplitToggle.defaultProps = _DropdownToggle2['default'].defaultProps;
 module.exports = exports['default'];
-},{"./DropdownToggle":264,"babel-runtime/helpers/class-call-check":63,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/inherits":65,"babel-runtime/helpers/interop-require-default":66,"react":517}],311:[function(require,module,exports){
+},{"./DropdownToggle":265,"babel-runtime/helpers/class-call-check":64,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/inherits":66,"babel-runtime/helpers/interop-require-default":67,"react":518}],312:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -19403,7 +19900,7 @@ var Tab = _react2['default'].createClass({
 
 exports['default'] = Tab;
 module.exports = exports['default'];
-},{"./utils/TransitionEvents":321,"./utils/bootstrapUtils":323,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/interop-require-default":66,"classnames":69,"react":517,"react-dom":329}],312:[function(require,module,exports){
+},{"./utils/TransitionEvents":322,"./utils/bootstrapUtils":324,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/interop-require-default":67,"classnames":70,"react":518,"react-dom":330}],313:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -19465,7 +19962,7 @@ var Table = _react2['default'].createClass({
 
 exports['default'] = Table;
 module.exports = exports['default'];
-},{"babel-runtime/helpers/extends":64,"babel-runtime/helpers/interop-require-default":66,"classnames":69,"react":517}],313:[function(require,module,exports){
+},{"babel-runtime/helpers/extends":65,"babel-runtime/helpers/interop-require-default":67,"classnames":70,"react":518}],314:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -19909,7 +20406,7 @@ var Tabs = _react2['default'].createClass({
 
 exports['default'] = Tabs;
 module.exports = exports['default'];
-},{"./Col":258,"./Nav":286,"./NavItem":289,"./styleMaps":319,"./utils/ValidComponentChildren":322,"./utils/bootstrapUtils":323,"./utils/createChainedFunction":326,"babel-runtime/core-js/object/keys":61,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/interop-require-default":66,"babel-runtime/helpers/object-without-properties":68,"classnames":69,"keycode":173,"react":517,"react-dom":329}],314:[function(require,module,exports){
+},{"./Col":259,"./Nav":287,"./NavItem":290,"./styleMaps":320,"./utils/ValidComponentChildren":323,"./utils/bootstrapUtils":324,"./utils/createChainedFunction":327,"babel-runtime/core-js/object/keys":62,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/interop-require-default":67,"babel-runtime/helpers/object-without-properties":69,"classnames":70,"keycode":174,"react":518,"react-dom":330}],315:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -19977,7 +20474,7 @@ var Thumbnail = _react2['default'].createClass({
 
 exports['default'] = _utilsBootstrapUtils.bsClass('thumbnail', Thumbnail);
 module.exports = exports['default'];
-},{"./SafeAnchor":308,"./utils/bootstrapUtils":323,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/interop-require-default":66,"classnames":69,"react":517}],315:[function(require,module,exports){
+},{"./SafeAnchor":309,"./utils/bootstrapUtils":324,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/interop-require-default":67,"classnames":70,"react":518}],316:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -20077,7 +20574,7 @@ var Tooltip = _react2['default'].createClass({
 
 exports['default'] = Tooltip;
 module.exports = exports['default'];
-},{"./utils/bootstrapUtils":323,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/interop-require-default":66,"classnames":69,"react":517,"react-prop-types/lib/isRequiredForA11y":353}],316:[function(require,module,exports){
+},{"./utils/bootstrapUtils":324,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/interop-require-default":67,"classnames":70,"react":518,"react-prop-types/lib/isRequiredForA11y":354}],317:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -20131,7 +20628,7 @@ var Well = (function (_React$Component) {
 
 exports['default'] = Well;
 module.exports = exports['default'];
-},{"./styleMaps":319,"./utils/bootstrapUtils":323,"babel-runtime/helpers/class-call-check":63,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/inherits":65,"babel-runtime/helpers/interop-require-default":66,"classnames":69,"react":517}],317:[function(require,module,exports){
+},{"./styleMaps":320,"./utils/bootstrapUtils":324,"babel-runtime/helpers/class-call-check":64,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/inherits":66,"babel-runtime/helpers/interop-require-default":67,"classnames":70,"react":518}],318:[function(require,module,exports){
 'use strict';
 
 var _objectWithoutProperties = require('babel-runtime/helpers/object-without-properties')['default'];
@@ -20391,7 +20888,7 @@ var NAVBAR_STATES = [_styleMaps.DEFAULT, _styleMaps.INVERSE];
 
 exports['default'] = _utilsBootstrapUtils.bsStyles(NAVBAR_STATES, _styleMaps.DEFAULT, _utilsBootstrapUtils.bsClass('navbar', Navbar));
 module.exports = exports['default'];
-},{"../Grid":270,"../NavBrand":287,"../styleMaps":319,"../utils/ValidComponentChildren":322,"../utils/bootstrapUtils":323,"../utils/createChainedFunction":326,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/interop-require-default":66,"babel-runtime/helpers/object-without-properties":68,"classnames":69,"react":517,"react-prop-types/lib/deprecated":351,"react-prop-types/lib/elementType":352}],318:[function(require,module,exports){
+},{"../Grid":271,"../NavBrand":288,"../styleMaps":320,"../utils/ValidComponentChildren":323,"../utils/bootstrapUtils":324,"../utils/createChainedFunction":327,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/interop-require-default":67,"babel-runtime/helpers/object-without-properties":69,"classnames":70,"react":518,"react-prop-types/lib/deprecated":352,"react-prop-types/lib/elementType":353}],319:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -20776,7 +21273,7 @@ var utils = {
   ValidComponentChildren: _utilsValidComponentChildren2['default']
 };
 exports.utils = utils;
-},{"./Accordion":247,"./Alert":248,"./Badge":249,"./Breadcrumb":250,"./BreadcrumbItem":251,"./Button":252,"./ButtonGroup":253,"./ButtonInput":254,"./ButtonToolbar":255,"./Carousel":256,"./CarouselItem":257,"./Col":258,"./Collapse":259,"./CollapsibleNav":260,"./Dropdown":261,"./DropdownButton":262,"./Fade":265,"./FormControls":267,"./Glyphicon":269,"./Grid":270,"./Image":271,"./Input":272,"./Interpolate":274,"./Jumbotron":275,"./Label":276,"./ListGroup":277,"./ListGroupItem":278,"./MenuItem":279,"./Modal":280,"./ModalBody":281,"./ModalFooter":283,"./ModalHeader":284,"./ModalTitle":285,"./Nav":286,"./NavBrand":287,"./NavDropdown":288,"./NavItem":289,"./Navbar":290,"./NavbarBrand":291,"./Overlay":295,"./OverlayTrigger":296,"./PageHeader":297,"./PageItem":298,"./Pager":299,"./Pagination":300,"./Panel":302,"./PanelGroup":303,"./Popover":304,"./ProgressBar":305,"./ResponsiveEmbed":306,"./Row":307,"./SafeAnchor":308,"./SplitButton":309,"./Tab":311,"./Table":312,"./Tabs":313,"./Thumbnail":314,"./Tooltip":315,"./Well":316,"./utils/ValidComponentChildren":322,"./utils/bootstrapUtils":323,"./utils/childrenValueInputValidation":325,"./utils/createChainedFunction":326,"babel-runtime/helpers/interop-require-default":66,"babel-runtime/helpers/interop-require-wildcard":67}],319:[function(require,module,exports){
+},{"./Accordion":248,"./Alert":249,"./Badge":250,"./Breadcrumb":251,"./BreadcrumbItem":252,"./Button":253,"./ButtonGroup":254,"./ButtonInput":255,"./ButtonToolbar":256,"./Carousel":257,"./CarouselItem":258,"./Col":259,"./Collapse":260,"./CollapsibleNav":261,"./Dropdown":262,"./DropdownButton":263,"./Fade":266,"./FormControls":268,"./Glyphicon":270,"./Grid":271,"./Image":272,"./Input":273,"./Interpolate":275,"./Jumbotron":276,"./Label":277,"./ListGroup":278,"./ListGroupItem":279,"./MenuItem":280,"./Modal":281,"./ModalBody":282,"./ModalFooter":284,"./ModalHeader":285,"./ModalTitle":286,"./Nav":287,"./NavBrand":288,"./NavDropdown":289,"./NavItem":290,"./Navbar":291,"./NavbarBrand":292,"./Overlay":296,"./OverlayTrigger":297,"./PageHeader":298,"./PageItem":299,"./Pager":300,"./Pagination":301,"./Panel":303,"./PanelGroup":304,"./Popover":305,"./ProgressBar":306,"./ResponsiveEmbed":307,"./Row":308,"./SafeAnchor":309,"./SplitButton":310,"./Tab":312,"./Table":313,"./Tabs":314,"./Thumbnail":315,"./Tooltip":316,"./Well":317,"./utils/ValidComponentChildren":323,"./utils/bootstrapUtils":324,"./utils/childrenValueInputValidation":326,"./utils/createChainedFunction":327,"babel-runtime/helpers/interop-require-default":67,"babel-runtime/helpers/interop-require-wildcard":68}],320:[function(require,module,exports){
 'use strict';
 
 var _Object$assign = require('babel-runtime/core-js/object/assign')['default'];
@@ -20840,7 +21337,7 @@ var INVERSE = 'inverse';
 
 exports.INVERSE = INVERSE;
 exports['default'] = styleMaps;
-},{"babel-runtime/core-js/object/assign":59,"babel-runtime/core-js/object/create":60,"babel-runtime/core-js/object/keys":61}],320:[function(require,module,exports){
+},{"babel-runtime/core-js/object/assign":60,"babel-runtime/core-js/object/create":61,"babel-runtime/core-js/object/keys":62}],321:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -20912,7 +21409,7 @@ exports['default'] = {
   }
 };
 module.exports = exports['default'];
-},{"./childrenToArray":324,"babel-runtime/helpers/interop-require-default":66,"react-prop-types/lib/common":350}],321:[function(require,module,exports){
+},{"./childrenToArray":325,"babel-runtime/helpers/interop-require-default":67,"react-prop-types/lib/common":351}],322:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -21027,7 +21524,7 @@ var ReactTransitionEvents = {
 
 exports['default'] = ReactTransitionEvents;
 module.exports = exports['default'];
-},{}],322:[function(require,module,exports){
+},{}],323:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -21171,7 +21668,7 @@ exports['default'] = {
   hasValidComponent: hasValidComponent
 };
 module.exports = exports['default'];
-},{"babel-runtime/helpers/interop-require-default":66,"react":517}],323:[function(require,module,exports){
+},{"babel-runtime/helpers/interop-require-default":67,"react":518}],324:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -21350,7 +21847,7 @@ exports['default'] = {
 var _curry = curry;
 exports._curry = _curry;
 }).call(this,require('_process'))
-},{"../styleMaps":319,"_process":245,"babel-runtime/helpers/extends":64,"babel-runtime/helpers/interop-require-default":66,"invariant":172,"react":517,"warning":522}],324:[function(require,module,exports){
+},{"../styleMaps":320,"_process":246,"babel-runtime/helpers/extends":65,"babel-runtime/helpers/interop-require-default":67,"invariant":173,"react":518,"warning":523}],325:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -21377,7 +21874,7 @@ function childrenAsArray(children) {
 }
 
 module.exports = exports['default'];
-},{"./ValidComponentChildren":322,"babel-runtime/helpers/interop-require-default":66}],325:[function(require,module,exports){
+},{"./ValidComponentChildren":323,"babel-runtime/helpers/interop-require-default":67}],326:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -21404,7 +21901,7 @@ function valueValidation(props, propName, componentName) {
 }
 
 module.exports = exports['default'];
-},{"babel-runtime/helpers/interop-require-default":66,"react":517,"react-prop-types/lib/singlePropFrom":354}],326:[function(require,module,exports){
+},{"babel-runtime/helpers/interop-require-default":67,"react":518,"react-prop-types/lib/singlePropFrom":355}],327:[function(require,module,exports){
 /**
  * Safe chained function
  *
@@ -21446,7 +21943,7 @@ function createChainedFunction() {
 
 exports['default'] = createChainedFunction;
 module.exports = exports['default'];
-},{}],327:[function(require,module,exports){
+},{}],328:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -21469,7 +21966,7 @@ function createSelectedEvent(eventKey) {
 }
 
 module.exports = exports["default"];
-},{}],328:[function(require,module,exports){
+},{}],329:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -21543,12 +22040,12 @@ deprecationWarning.wrapper = function (Component) {
 exports['default'] = deprecationWarning;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"_process":245,"babel-runtime/helpers/class-call-check":63,"babel-runtime/helpers/inherits":65,"babel-runtime/helpers/interop-require-default":66,"warning":522}],329:[function(require,module,exports){
+},{"_process":246,"babel-runtime/helpers/class-call-check":64,"babel-runtime/helpers/inherits":66,"babel-runtime/helpers/interop-require-default":67,"warning":523}],330:[function(require,module,exports){
 'use strict';
 
 module.exports = require('react/lib/ReactDOM');
 
-},{"react/lib/ReactDOM":423}],330:[function(require,module,exports){
+},{"react/lib/ReactDOM":424}],331:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -21648,7 +22145,7 @@ exports['default'] = _react2['default'].createClass({
   }
 });
 module.exports = exports['default'];
-},{"react":517}],331:[function(require,module,exports){
+},{"react":518}],332:[function(require,module,exports){
 /*eslint-disable react/prop-types */
 'use strict';
 
@@ -22114,7 +22611,7 @@ Modal.manager = modalManager;
 
 exports['default'] = Modal;
 module.exports = exports['default'];
-},{"./ModalManager":332,"./Portal":334,"./utils/addEventListener":338,"./utils/addFocusListener":339,"./utils/getContainer":341,"./utils/ownerDocument":345,"dom-helpers/activeElement":96,"dom-helpers/query/contains":106,"dom-helpers/util/inDOM":123,"react":517,"react-prop-types/lib/elementType":347,"react-prop-types/lib/mountable":348,"warning":522}],332:[function(require,module,exports){
+},{"./ModalManager":333,"./Portal":335,"./utils/addEventListener":339,"./utils/addFocusListener":340,"./utils/getContainer":342,"./utils/ownerDocument":346,"dom-helpers/activeElement":97,"dom-helpers/query/contains":107,"dom-helpers/util/inDOM":124,"react":518,"react-prop-types/lib/elementType":348,"react-prop-types/lib/mountable":349,"warning":523}],333:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -22271,7 +22768,7 @@ var ModalManager = (function () {
 
 exports['default'] = ModalManager;
 module.exports = exports['default'];
-},{"./utils/isOverflowing":342,"./utils/manageAriaHidden":343,"dom-helpers/class":99,"dom-helpers/style":115,"dom-helpers/util/scrollbarSize":124}],333:[function(require,module,exports){
+},{"./utils/isOverflowing":343,"./utils/manageAriaHidden":344,"dom-helpers/class":100,"dom-helpers/style":116,"dom-helpers/util/scrollbarSize":125}],334:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -22467,7 +22964,7 @@ Overlay.propTypes = _extends({}, _Portal2['default'].propTypes, _Position2['defa
 
 exports['default'] = Overlay;
 module.exports = exports['default'];
-},{"./Portal":334,"./Position":335,"./RootCloseWrapper":336,"react":517,"react-prop-types/lib/elementType":347}],334:[function(require,module,exports){
+},{"./Portal":335,"./Position":336,"./RootCloseWrapper":337,"react":518,"react-prop-types/lib/elementType":348}],335:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -22591,7 +23088,7 @@ var Portal = _react2['default'].createClass({
 
 exports['default'] = Portal;
 module.exports = exports['default'];
-},{"./utils/getContainer":341,"./utils/ownerDocument":345,"react":517,"react-dom":329,"react-prop-types/lib/mountable":348}],335:[function(require,module,exports){
+},{"./utils/getContainer":342,"./utils/ownerDocument":346,"react":518,"react-dom":330,"react-prop-types/lib/mountable":349}],336:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -22790,7 +23287,7 @@ Position.defaultProps = {
 
 exports['default'] = Position;
 module.exports = exports['default'];
-},{"./utils/getContainer":341,"./utils/overlayPositionUtils":344,"./utils/ownerDocument":345,"classnames":69,"react":517,"react-dom":329,"react-prop-types/lib/mountable":348}],336:[function(require,module,exports){
+},{"./utils/getContainer":342,"./utils/overlayPositionUtils":345,"./utils/ownerDocument":346,"classnames":70,"react":518,"react-dom":330,"react-prop-types/lib/mountable":349}],337:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -22950,7 +23447,7 @@ RootCloseWrapper.propTypes = {
   noWrap: _react2['default'].PropTypes.bool
 };
 module.exports = exports['default'];
-},{"./utils/addEventListener":338,"./utils/createChainedFunction":340,"./utils/ownerDocument":345,"react":517,"react-dom":329}],337:[function(require,module,exports){
+},{"./utils/addEventListener":339,"./utils/createChainedFunction":341,"./utils/ownerDocument":346,"react":518,"react-dom":330}],338:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -23288,7 +23785,7 @@ Transition.defaultProps = {
 };
 
 exports['default'] = Transition;
-},{"classnames":69,"dom-helpers/events/on":104,"dom-helpers/transition/properties":117,"react":517,"react-dom":329}],338:[function(require,module,exports){
+},{"classnames":70,"dom-helpers/events/on":105,"dom-helpers/transition/properties":118,"react":518,"react-dom":330}],339:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -23313,7 +23810,7 @@ exports['default'] = function (node, event, handler) {
 };
 
 module.exports = exports['default'];
-},{"dom-helpers/events/off":103,"dom-helpers/events/on":104}],339:[function(require,module,exports){
+},{"dom-helpers/events/off":104,"dom-helpers/events/on":105}],340:[function(require,module,exports){
 /**
  * Firefox doesn't have a focusin event so using capture is easiest way to get bubbling
  * IE8 can't do addEventListener, but does have onfocusin, so we use that in ie8
@@ -23345,7 +23842,7 @@ function addFocusListener(handler) {
 }
 
 module.exports = exports['default'];
-},{}],340:[function(require,module,exports){
+},{}],341:[function(require,module,exports){
 /**
  * Safe chained function
  *
@@ -23387,7 +23884,7 @@ function createChainedFunction() {
 
 exports['default'] = createChainedFunction;
 module.exports = exports['default'];
-},{}],341:[function(require,module,exports){
+},{}],342:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -23405,7 +23902,7 @@ function getContainer(container, defaultContainer) {
 }
 
 module.exports = exports['default'];
-},{"react-dom":329}],342:[function(require,module,exports){
+},{"react-dom":330}],343:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -23446,7 +23943,7 @@ function isOverflowing(container) {
 }
 
 module.exports = exports['default'];
-},{"dom-helpers/ownerDocument":105,"dom-helpers/query/isWindow":107}],343:[function(require,module,exports){
+},{"dom-helpers/ownerDocument":106,"dom-helpers/query/isWindow":108}],344:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -23494,7 +23991,7 @@ function showSiblings(container, mountNode) {
     return ariaHidden(false, node);
   });
 }
-},{}],344:[function(require,module,exports){
+},{}],345:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -23629,7 +24126,7 @@ function getLeftDelta(left, overlayWidth, container, padding) {
 }
 exports['default'] = utils;
 module.exports = exports['default'];
-},{"./ownerDocument":345,"dom-helpers/query/offset":108,"dom-helpers/query/position":110,"dom-helpers/query/scrollTop":113}],345:[function(require,module,exports){
+},{"./ownerDocument":346,"dom-helpers/query/offset":109,"dom-helpers/query/position":111,"dom-helpers/query/scrollTop":114}],346:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -23649,7 +24146,7 @@ exports['default'] = function (componentOrElement) {
 };
 
 module.exports = exports['default'];
-},{"dom-helpers/ownerDocument":105,"react-dom":329}],346:[function(require,module,exports){
+},{"dom-helpers/ownerDocument":106,"react-dom":330}],347:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -23684,7 +24181,7 @@ function createChainableTypeChecker(validate) {
 
   return chainedCheckType;
 }
-},{}],347:[function(require,module,exports){
+},{}],348:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -23726,7 +24223,7 @@ function validate(props, propName, componentName) {
 
 exports['default'] = _common.createChainableTypeChecker(validate);
 module.exports = exports['default'];
-},{"./common":346,"react":517}],348:[function(require,module,exports){
+},{"./common":347,"react":518}],349:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -23754,7 +24251,7 @@ function validate(props, propName, componentName) {
 
 exports['default'] = _common.createChainableTypeChecker(validate);
 module.exports = exports['default'];
-},{"./common":346}],349:[function(require,module,exports){
+},{"./common":347}],350:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -23791,9 +24288,9 @@ function all() {
 }
 
 module.exports = exports['default'];
-},{}],350:[function(require,module,exports){
-arguments[4][346][0].apply(exports,arguments)
-},{"dup":346}],351:[function(require,module,exports){
+},{}],351:[function(require,module,exports){
+arguments[4][347][0].apply(exports,arguments)
+},{"dup":347}],352:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -23816,9 +24313,9 @@ function deprecated(propType, explanation) {
 }
 
 module.exports = exports['default'];
-},{"warning":522}],352:[function(require,module,exports){
-arguments[4][347][0].apply(exports,arguments)
-},{"./common":350,"dup":347,"react":517}],353:[function(require,module,exports){
+},{"warning":523}],353:[function(require,module,exports){
+arguments[4][348][0].apply(exports,arguments)
+},{"./common":351,"dup":348,"react":518}],354:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -23835,7 +24332,7 @@ function isRequiredForA11y(propType) {
 }
 
 module.exports = exports["default"];
-},{}],354:[function(require,module,exports){
+},{}],355:[function(require,module,exports){
 /**
  * Checks if only one of the listed properties is in use. An error is given
  * if multiple have a value
@@ -23874,7 +24371,7 @@ function createSinglePropFromChecker() {
 }
 
 module.exports = exports['default'];
-},{}],355:[function(require,module,exports){
+},{}],356:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -23965,7 +24462,7 @@ function mapAsync(array, work, callback) {
     });
   });
 }
-},{}],356:[function(require,module,exports){
+},{}],357:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -23998,7 +24495,7 @@ var History = {
 exports['default'] = History;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./PropTypes":363,"./routerWarning":386,"_process":245}],357:[function(require,module,exports){
+},{"./PropTypes":364,"./routerWarning":387,"_process":246}],358:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -24029,7 +24526,7 @@ var IndexLink = _react2['default'].createClass({
 
 exports['default'] = IndexLink;
 module.exports = exports['default'];
-},{"./Link":361,"react":517}],358:[function(require,module,exports){
+},{"./Link":362,"react":518}],359:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -24096,7 +24593,7 @@ var IndexRedirect = _react2['default'].createClass({
 exports['default'] = IndexRedirect;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./PropTypes":363,"./Redirect":364,"./routerWarning":386,"_process":245,"invariant":172,"react":517}],359:[function(require,module,exports){
+},{"./PropTypes":364,"./Redirect":365,"./routerWarning":387,"_process":246,"invariant":173,"react":518}],360:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -24160,7 +24657,7 @@ var IndexRoute = _react2['default'].createClass({
 exports['default'] = IndexRoute;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./PropTypes":363,"./RouteUtils":367,"./routerWarning":386,"_process":245,"invariant":172,"react":517}],360:[function(require,module,exports){
+},{"./PropTypes":364,"./RouteUtils":368,"./routerWarning":387,"_process":246,"invariant":173,"react":518}],361:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -24232,7 +24729,7 @@ var Lifecycle = {
 exports['default'] = Lifecycle;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./routerWarning":386,"_process":245,"invariant":172,"react":517}],361:[function(require,module,exports){
+},{"./routerWarning":387,"_process":246,"invariant":173,"react":518}],362:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -24399,7 +24896,7 @@ var Link = _react2['default'].createClass({
 exports['default'] = Link;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./routerWarning":386,"_process":245,"react":517}],362:[function(require,module,exports){
+},{"./routerWarning":387,"_process":246,"react":518}],363:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -24629,7 +25126,7 @@ function formatPattern(pattern, params) {
   return pathname.replace(/\/+/g, '/');
 }
 }).call(this,require('_process'))
-},{"_process":245,"invariant":172}],363:[function(require,module,exports){
+},{"_process":246,"invariant":173}],364:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -24683,7 +25180,7 @@ exports['default'] = {
   components: components,
   route: route
 };
-},{"react":517}],364:[function(require,module,exports){
+},{"react":518}],365:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -24789,7 +25286,7 @@ var Redirect = _react2['default'].createClass({
 exports['default'] = Redirect;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./PatternUtils":362,"./PropTypes":363,"./RouteUtils":367,"_process":245,"invariant":172,"react":517}],365:[function(require,module,exports){
+},{"./PatternUtils":363,"./PropTypes":364,"./RouteUtils":368,"_process":246,"invariant":173,"react":518}],366:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -24848,7 +25345,7 @@ var Route = _react2['default'].createClass({
 exports['default'] = Route;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./PropTypes":363,"./RouteUtils":367,"_process":245,"invariant":172,"react":517}],366:[function(require,module,exports){
+},{"./PropTypes":364,"./RouteUtils":368,"_process":246,"invariant":173,"react":518}],367:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -24897,7 +25394,7 @@ var RouteContext = {
 exports['default'] = RouteContext;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./routerWarning":386,"_process":245,"react":517}],367:[function(require,module,exports){
+},{"./routerWarning":387,"_process":246,"react":518}],368:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -25014,7 +25511,7 @@ function createRoutes(routes) {
   return routes;
 }
 }).call(this,require('_process'))
-},{"./routerWarning":386,"_process":245,"react":517}],368:[function(require,module,exports){
+},{"./routerWarning":387,"_process":246,"react":518}],369:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -25227,7 +25724,7 @@ var Router = _react2['default'].createClass({
 exports['default'] = Router;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./PropTypes":363,"./RouteUtils":367,"./RouterContext":369,"./RouterUtils":370,"./createTransitionManager":377,"./routerWarning":386,"_process":245,"history/lib/createHashHistory":164,"history/lib/useQueries":171,"react":517}],369:[function(require,module,exports){
+},{"./PropTypes":364,"./RouteUtils":368,"./RouterContext":370,"./RouterUtils":371,"./createTransitionManager":378,"./routerWarning":387,"_process":246,"history/lib/createHashHistory":165,"history/lib/useQueries":172,"react":518}],370:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -25384,7 +25881,7 @@ var RouterContext = _react2['default'].createClass({
 exports['default'] = RouterContext;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./RouteUtils":367,"./deprecateObjectProperties":378,"./getRouteParams":380,"./routerWarning":386,"_process":245,"invariant":172,"react":517}],370:[function(require,module,exports){
+},{"./RouteUtils":368,"./deprecateObjectProperties":379,"./getRouteParams":381,"./routerWarning":387,"_process":246,"invariant":173,"react":518}],371:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -25420,7 +25917,7 @@ function createRoutingHistory(history, transitionManager) {
   return history;
 }
 }).call(this,require('_process'))
-},{"./deprecateObjectProperties":378,"_process":245}],371:[function(require,module,exports){
+},{"./deprecateObjectProperties":379,"_process":246}],372:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -25455,7 +25952,7 @@ var RoutingContext = _react2['default'].createClass({
 exports['default'] = RoutingContext;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./RouterContext":369,"./routerWarning":386,"_process":245,"react":517}],372:[function(require,module,exports){
+},{"./RouterContext":370,"./routerWarning":387,"_process":246,"react":518}],373:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -25547,7 +26044,7 @@ function runLeaveHooks(routes) {
   }
 }
 }).call(this,require('_process'))
-},{"./AsyncUtils":355,"./routerWarning":386,"_process":245}],373:[function(require,module,exports){
+},{"./AsyncUtils":356,"./routerWarning":387,"_process":246}],374:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -25564,7 +26061,7 @@ var _createRouterHistory2 = _interopRequireDefault(_createRouterHistory);
 
 exports['default'] = _createRouterHistory2['default'](_historyLibCreateBrowserHistory2['default']);
 module.exports = exports['default'];
-},{"./createRouterHistory":376,"history/lib/createBrowserHistory":162}],374:[function(require,module,exports){
+},{"./createRouterHistory":377,"history/lib/createBrowserHistory":163}],375:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -25621,7 +26118,7 @@ function computeChangedRoutes(prevState, nextState) {
 
 exports['default'] = computeChangedRoutes;
 module.exports = exports['default'];
-},{"./PatternUtils":362}],375:[function(require,module,exports){
+},{"./PatternUtils":363}],376:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -25655,7 +26152,7 @@ function createMemoryHistory(options) {
 }
 
 module.exports = exports['default'];
-},{"history/lib/createMemoryHistory":167,"history/lib/useBasename":170,"history/lib/useQueries":171}],376:[function(require,module,exports){
+},{"history/lib/createMemoryHistory":168,"history/lib/useBasename":171,"history/lib/useQueries":172}],377:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -25675,7 +26172,7 @@ exports['default'] = function (createHistory) {
 };
 
 module.exports = exports['default'];
-},{"./useRouterHistory":387}],377:[function(require,module,exports){
+},{"./useRouterHistory":388}],378:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -25974,7 +26471,7 @@ function createTransitionManager(history, routes) {
 //export default useRoutes
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./TransitionUtils":372,"./computeChangedRoutes":374,"./getComponents":379,"./isActive":383,"./matchRoutes":385,"./routerWarning":386,"_process":245,"history/lib/Actions":156}],378:[function(require,module,exports){
+},{"./TransitionUtils":373,"./computeChangedRoutes":375,"./getComponents":380,"./isActive":384,"./matchRoutes":386,"./routerWarning":387,"_process":246,"history/lib/Actions":157}],379:[function(require,module,exports){
 (function (process){
 /*eslint no-empty: 0*/
 'use strict';
@@ -26034,7 +26531,7 @@ function deprecateObjectProperties(object, message) {
 
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./routerWarning":386,"_process":245}],379:[function(require,module,exports){
+},{"./routerWarning":387,"_process":246}],380:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -26068,7 +26565,7 @@ function getComponents(nextState, callback) {
 
 exports['default'] = getComponents;
 module.exports = exports['default'];
-},{"./AsyncUtils":355}],380:[function(require,module,exports){
+},{"./AsyncUtils":356}],381:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -26093,7 +26590,7 @@ function getRouteParams(route, params) {
 
 exports['default'] = getRouteParams;
 module.exports = exports['default'];
-},{"./PatternUtils":362}],381:[function(require,module,exports){
+},{"./PatternUtils":363}],382:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -26110,7 +26607,7 @@ var _createRouterHistory2 = _interopRequireDefault(_createRouterHistory);
 
 exports['default'] = _createRouterHistory2['default'](_historyLibCreateHashHistory2['default']);
 module.exports = exports['default'];
-},{"./createRouterHistory":376,"history/lib/createHashHistory":164}],382:[function(require,module,exports){
+},{"./createRouterHistory":377,"history/lib/createHashHistory":165}],383:[function(require,module,exports){
 /* components */
 'use strict';
 
@@ -26247,7 +26744,7 @@ var _createMemoryHistory2 = require('./createMemoryHistory');
 var _createMemoryHistory3 = _interopRequireDefault(_createMemoryHistory2);
 
 exports.createMemoryHistory = _createMemoryHistory3['default'];
-},{"./History":356,"./IndexLink":357,"./IndexRedirect":358,"./IndexRoute":359,"./Lifecycle":360,"./Link":361,"./PatternUtils":362,"./PropTypes":363,"./Redirect":364,"./Route":365,"./RouteContext":366,"./RouteUtils":367,"./Router":368,"./RouterContext":369,"./RoutingContext":371,"./browserHistory":373,"./createMemoryHistory":375,"./hashHistory":381,"./match":384,"./useRouterHistory":387,"./useRoutes":388}],383:[function(require,module,exports){
+},{"./History":357,"./IndexLink":358,"./IndexRedirect":359,"./IndexRoute":360,"./Lifecycle":361,"./Link":362,"./PatternUtils":363,"./PropTypes":364,"./Redirect":365,"./Route":366,"./RouteContext":367,"./RouteUtils":368,"./Router":369,"./RouterContext":370,"./RoutingContext":372,"./browserHistory":374,"./createMemoryHistory":376,"./hashHistory":382,"./match":385,"./useRouterHistory":388,"./useRoutes":389}],384:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -26375,7 +26872,7 @@ function isActive(_ref, indexOnly, currentLocation, routes, params) {
 }
 
 module.exports = exports['default'];
-},{"./PatternUtils":362}],384:[function(require,module,exports){
+},{"./PatternUtils":363}],385:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -26459,7 +26956,7 @@ function match(_ref, callback) {
 exports['default'] = match;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./RouteUtils":367,"./RouterUtils":370,"./createMemoryHistory":375,"./createTransitionManager":377,"_process":245,"invariant":172}],385:[function(require,module,exports){
+},{"./RouteUtils":368,"./RouterUtils":371,"./createMemoryHistory":376,"./createTransitionManager":378,"_process":246,"invariant":173}],386:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -26668,7 +27165,7 @@ function matchRoutes(routes, location, callback) {
 exports['default'] = matchRoutes;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./AsyncUtils":355,"./PatternUtils":362,"./RouteUtils":367,"./routerWarning":386,"_process":245}],386:[function(require,module,exports){
+},{"./AsyncUtils":356,"./PatternUtils":363,"./RouteUtils":368,"./routerWarning":387,"_process":246}],387:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -26693,7 +27190,7 @@ function routerWarning(falseToWarn, message) {
 
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"_process":245,"warning":522}],387:[function(require,module,exports){
+},{"_process":246,"warning":523}],388:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -26718,7 +27215,7 @@ function useRouterHistory(createHistory) {
 }
 
 module.exports = exports['default'];
-},{"history/lib/useBasename":170,"history/lib/useQueries":171}],388:[function(require,module,exports){
+},{"history/lib/useBasename":171,"history/lib/useQueries":172}],389:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -26772,7 +27269,7 @@ function useRoutes(createHistory) {
 exports['default'] = useRoutes;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./createTransitionManager":377,"./routerWarning":386,"_process":245,"history/lib/useQueries":171}],389:[function(require,module,exports){
+},{"./createTransitionManager":378,"./routerWarning":387,"_process":246,"history/lib/useQueries":172}],390:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -26809,7 +27306,7 @@ var AutoFocusUtils = {
 };
 
 module.exports = AutoFocusUtils;
-},{"./ReactMount":453,"./findDOMNode":496,"fbjs/lib/focusNode":135}],390:[function(require,module,exports){
+},{"./ReactMount":454,"./findDOMNode":497,"fbjs/lib/focusNode":136}],391:[function(require,module,exports){
 /**
  * Copyright 2013-2015 Facebook, Inc.
  * All rights reserved.
@@ -27215,7 +27712,7 @@ var BeforeInputEventPlugin = {
 };
 
 module.exports = BeforeInputEventPlugin;
-},{"./EventConstants":402,"./EventPropagators":406,"./FallbackCompositionState":407,"./SyntheticCompositionEvent":478,"./SyntheticInputEvent":482,"fbjs/lib/ExecutionEnvironment":127,"fbjs/lib/keyOf":145}],391:[function(require,module,exports){
+},{"./EventConstants":403,"./EventPropagators":407,"./FallbackCompositionState":408,"./SyntheticCompositionEvent":479,"./SyntheticInputEvent":483,"fbjs/lib/ExecutionEnvironment":128,"fbjs/lib/keyOf":146}],392:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -27355,7 +27852,7 @@ var CSSProperty = {
 };
 
 module.exports = CSSProperty;
-},{}],392:[function(require,module,exports){
+},{}],393:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -27533,7 +28030,7 @@ ReactPerf.measureMethods(CSSPropertyOperations, 'CSSPropertyOperations', {
 
 module.exports = CSSPropertyOperations;
 }).call(this,require('_process'))
-},{"./CSSProperty":391,"./ReactPerf":459,"./dangerousStyleValue":493,"_process":245,"fbjs/lib/ExecutionEnvironment":127,"fbjs/lib/camelizeStyleName":129,"fbjs/lib/hyphenateStyleName":140,"fbjs/lib/memoizeStringOnly":147,"fbjs/lib/warning":152}],393:[function(require,module,exports){
+},{"./CSSProperty":392,"./ReactPerf":460,"./dangerousStyleValue":494,"_process":246,"fbjs/lib/ExecutionEnvironment":128,"fbjs/lib/camelizeStyleName":130,"fbjs/lib/hyphenateStyleName":141,"fbjs/lib/memoizeStringOnly":148,"fbjs/lib/warning":153}],394:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -27629,7 +28126,7 @@ PooledClass.addPoolingTo(CallbackQueue);
 
 module.exports = CallbackQueue;
 }).call(this,require('_process'))
-},{"./Object.assign":410,"./PooledClass":411,"_process":245,"fbjs/lib/invariant":141}],394:[function(require,module,exports){
+},{"./Object.assign":411,"./PooledClass":412,"_process":246,"fbjs/lib/invariant":142}],395:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -27951,7 +28448,7 @@ var ChangeEventPlugin = {
 };
 
 module.exports = ChangeEventPlugin;
-},{"./EventConstants":402,"./EventPluginHub":403,"./EventPropagators":406,"./ReactUpdates":471,"./SyntheticEvent":480,"./getEventTarget":502,"./isEventSupported":507,"./isTextInputElement":508,"fbjs/lib/ExecutionEnvironment":127,"fbjs/lib/keyOf":145}],395:[function(require,module,exports){
+},{"./EventConstants":403,"./EventPluginHub":404,"./EventPropagators":407,"./ReactUpdates":472,"./SyntheticEvent":481,"./getEventTarget":503,"./isEventSupported":508,"./isTextInputElement":509,"fbjs/lib/ExecutionEnvironment":128,"fbjs/lib/keyOf":146}],396:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -27975,7 +28472,7 @@ var ClientReactRootIndex = {
 };
 
 module.exports = ClientReactRootIndex;
-},{}],396:[function(require,module,exports){
+},{}],397:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -28107,7 +28604,7 @@ ReactPerf.measureMethods(DOMChildrenOperations, 'DOMChildrenOperations', {
 
 module.exports = DOMChildrenOperations;
 }).call(this,require('_process'))
-},{"./Danger":399,"./ReactMultiChildUpdateTypes":455,"./ReactPerf":459,"./setInnerHTML":512,"./setTextContent":513,"_process":245,"fbjs/lib/invariant":141}],397:[function(require,module,exports){
+},{"./Danger":400,"./ReactMultiChildUpdateTypes":456,"./ReactPerf":460,"./setInnerHTML":513,"./setTextContent":514,"_process":246,"fbjs/lib/invariant":142}],398:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -28344,7 +28841,7 @@ var DOMProperty = {
 
 module.exports = DOMProperty;
 }).call(this,require('_process'))
-},{"_process":245,"fbjs/lib/invariant":141}],398:[function(require,module,exports){
+},{"_process":246,"fbjs/lib/invariant":142}],399:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -28572,7 +29069,7 @@ ReactPerf.measureMethods(DOMPropertyOperations, 'DOMPropertyOperations', {
 
 module.exports = DOMPropertyOperations;
 }).call(this,require('_process'))
-},{"./DOMProperty":397,"./ReactPerf":459,"./quoteAttributeValueForBrowser":510,"_process":245,"fbjs/lib/warning":152}],399:[function(require,module,exports){
+},{"./DOMProperty":398,"./ReactPerf":460,"./quoteAttributeValueForBrowser":511,"_process":246,"fbjs/lib/warning":153}],400:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -28720,7 +29217,7 @@ var Danger = {
 
 module.exports = Danger;
 }).call(this,require('_process'))
-},{"_process":245,"fbjs/lib/ExecutionEnvironment":127,"fbjs/lib/createNodesFromMarkup":132,"fbjs/lib/emptyFunction":133,"fbjs/lib/getMarkupWrap":137,"fbjs/lib/invariant":141}],400:[function(require,module,exports){
+},{"_process":246,"fbjs/lib/ExecutionEnvironment":128,"fbjs/lib/createNodesFromMarkup":133,"fbjs/lib/emptyFunction":134,"fbjs/lib/getMarkupWrap":138,"fbjs/lib/invariant":142}],401:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -28748,7 +29245,7 @@ var keyOf = require('fbjs/lib/keyOf');
 var DefaultEventPluginOrder = [keyOf({ ResponderEventPlugin: null }), keyOf({ SimpleEventPlugin: null }), keyOf({ TapEventPlugin: null }), keyOf({ EnterLeaveEventPlugin: null }), keyOf({ ChangeEventPlugin: null }), keyOf({ SelectEventPlugin: null }), keyOf({ BeforeInputEventPlugin: null })];
 
 module.exports = DefaultEventPluginOrder;
-},{"fbjs/lib/keyOf":145}],401:[function(require,module,exports){
+},{"fbjs/lib/keyOf":146}],402:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -28873,7 +29370,7 @@ var EnterLeaveEventPlugin = {
 };
 
 module.exports = EnterLeaveEventPlugin;
-},{"./EventConstants":402,"./EventPropagators":406,"./ReactMount":453,"./SyntheticMouseEvent":484,"fbjs/lib/keyOf":145}],402:[function(require,module,exports){
+},{"./EventConstants":403,"./EventPropagators":407,"./ReactMount":454,"./SyntheticMouseEvent":485,"fbjs/lib/keyOf":146}],403:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -28966,7 +29463,7 @@ var EventConstants = {
 };
 
 module.exports = EventConstants;
-},{"fbjs/lib/keyMirror":144}],403:[function(require,module,exports){
+},{"fbjs/lib/keyMirror":145}],404:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -29248,7 +29745,7 @@ var EventPluginHub = {
 
 module.exports = EventPluginHub;
 }).call(this,require('_process'))
-},{"./EventPluginRegistry":404,"./EventPluginUtils":405,"./ReactErrorUtils":444,"./accumulateInto":490,"./forEachAccumulated":498,"_process":245,"fbjs/lib/invariant":141,"fbjs/lib/warning":152}],404:[function(require,module,exports){
+},{"./EventPluginRegistry":405,"./EventPluginUtils":406,"./ReactErrorUtils":445,"./accumulateInto":491,"./forEachAccumulated":499,"_process":246,"fbjs/lib/invariant":142,"fbjs/lib/warning":153}],405:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -29471,7 +29968,7 @@ var EventPluginRegistry = {
 
 module.exports = EventPluginRegistry;
 }).call(this,require('_process'))
-},{"_process":245,"fbjs/lib/invariant":141}],405:[function(require,module,exports){
+},{"_process":246,"fbjs/lib/invariant":142}],406:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -29676,7 +30173,7 @@ var EventPluginUtils = {
 
 module.exports = EventPluginUtils;
 }).call(this,require('_process'))
-},{"./EventConstants":402,"./ReactErrorUtils":444,"_process":245,"fbjs/lib/invariant":141,"fbjs/lib/warning":152}],406:[function(require,module,exports){
+},{"./EventConstants":403,"./ReactErrorUtils":445,"_process":246,"fbjs/lib/invariant":142,"fbjs/lib/warning":153}],407:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -29814,7 +30311,7 @@ var EventPropagators = {
 
 module.exports = EventPropagators;
 }).call(this,require('_process'))
-},{"./EventConstants":402,"./EventPluginHub":403,"./accumulateInto":490,"./forEachAccumulated":498,"_process":245,"fbjs/lib/warning":152}],407:[function(require,module,exports){
+},{"./EventConstants":403,"./EventPluginHub":404,"./accumulateInto":491,"./forEachAccumulated":499,"_process":246,"fbjs/lib/warning":153}],408:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -29910,7 +30407,7 @@ assign(FallbackCompositionState.prototype, {
 PooledClass.addPoolingTo(FallbackCompositionState);
 
 module.exports = FallbackCompositionState;
-},{"./Object.assign":410,"./PooledClass":411,"./getTextContentAccessor":505}],408:[function(require,module,exports){
+},{"./Object.assign":411,"./PooledClass":412,"./getTextContentAccessor":506}],409:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -30141,7 +30638,7 @@ var HTMLDOMPropertyConfig = {
 };
 
 module.exports = HTMLDOMPropertyConfig;
-},{"./DOMProperty":397,"fbjs/lib/ExecutionEnvironment":127}],409:[function(require,module,exports){
+},{"./DOMProperty":398,"fbjs/lib/ExecutionEnvironment":128}],410:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -30278,7 +30775,7 @@ var LinkedValueUtils = {
 
 module.exports = LinkedValueUtils;
 }).call(this,require('_process'))
-},{"./ReactPropTypeLocations":461,"./ReactPropTypes":462,"_process":245,"fbjs/lib/invariant":141,"fbjs/lib/warning":152}],410:[function(require,module,exports){
+},{"./ReactPropTypeLocations":462,"./ReactPropTypes":463,"_process":246,"fbjs/lib/invariant":142,"fbjs/lib/warning":153}],411:[function(require,module,exports){
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -30326,7 +30823,7 @@ function assign(target, sources) {
 }
 
 module.exports = assign;
-},{}],411:[function(require,module,exports){
+},{}],412:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -30448,7 +30945,7 @@ var PooledClass = {
 
 module.exports = PooledClass;
 }).call(this,require('_process'))
-},{"_process":245,"fbjs/lib/invariant":141}],412:[function(require,module,exports){
+},{"_process":246,"fbjs/lib/invariant":142}],413:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -30489,7 +30986,7 @@ React.__SECRET_DOM_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactDOM;
 React.__SECRET_DOM_SERVER_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactDOMServer;
 
 module.exports = React;
-},{"./Object.assign":410,"./ReactDOM":423,"./ReactDOMServer":433,"./ReactIsomorphic":451,"./deprecated":494}],413:[function(require,module,exports){
+},{"./Object.assign":411,"./ReactDOM":424,"./ReactDOMServer":434,"./ReactIsomorphic":452,"./deprecated":495}],414:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -30528,7 +31025,7 @@ var ReactBrowserComponentMixin = {
 
 module.exports = ReactBrowserComponentMixin;
 }).call(this,require('_process'))
-},{"./ReactInstanceMap":450,"./findDOMNode":496,"_process":245,"fbjs/lib/warning":152}],414:[function(require,module,exports){
+},{"./ReactInstanceMap":451,"./findDOMNode":497,"_process":246,"fbjs/lib/warning":153}],415:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -30853,7 +31350,7 @@ ReactPerf.measureMethods(ReactBrowserEventEmitter, 'ReactBrowserEventEmitter', {
 });
 
 module.exports = ReactBrowserEventEmitter;
-},{"./EventConstants":402,"./EventPluginHub":403,"./EventPluginRegistry":404,"./Object.assign":410,"./ReactEventEmitterMixin":445,"./ReactPerf":459,"./ViewportMetrics":489,"./isEventSupported":507}],415:[function(require,module,exports){
+},{"./EventConstants":403,"./EventPluginHub":404,"./EventPluginRegistry":405,"./Object.assign":411,"./ReactEventEmitterMixin":446,"./ReactPerf":460,"./ViewportMetrics":490,"./isEventSupported":508}],416:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -30978,7 +31475,7 @@ var ReactChildReconciler = {
 
 module.exports = ReactChildReconciler;
 }).call(this,require('_process'))
-},{"./ReactReconciler":464,"./instantiateReactComponent":506,"./shouldUpdateReactComponent":514,"./traverseAllChildren":515,"_process":245,"fbjs/lib/warning":152}],416:[function(require,module,exports){
+},{"./ReactReconciler":465,"./instantiateReactComponent":507,"./shouldUpdateReactComponent":515,"./traverseAllChildren":516,"_process":246,"fbjs/lib/warning":153}],417:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -31161,7 +31658,7 @@ var ReactChildren = {
 };
 
 module.exports = ReactChildren;
-},{"./PooledClass":411,"./ReactElement":440,"./traverseAllChildren":515,"fbjs/lib/emptyFunction":133}],417:[function(require,module,exports){
+},{"./PooledClass":412,"./ReactElement":441,"./traverseAllChildren":516,"fbjs/lib/emptyFunction":134}],418:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -31935,7 +32432,7 @@ var ReactClass = {
 
 module.exports = ReactClass;
 }).call(this,require('_process'))
-},{"./Object.assign":410,"./ReactComponent":418,"./ReactElement":440,"./ReactNoopUpdateQueue":457,"./ReactPropTypeLocationNames":460,"./ReactPropTypeLocations":461,"_process":245,"fbjs/lib/emptyObject":134,"fbjs/lib/invariant":141,"fbjs/lib/keyMirror":144,"fbjs/lib/keyOf":145,"fbjs/lib/warning":152}],418:[function(require,module,exports){
+},{"./Object.assign":411,"./ReactComponent":419,"./ReactElement":441,"./ReactNoopUpdateQueue":458,"./ReactPropTypeLocationNames":461,"./ReactPropTypeLocations":462,"_process":246,"fbjs/lib/emptyObject":135,"fbjs/lib/invariant":142,"fbjs/lib/keyMirror":145,"fbjs/lib/keyOf":146,"fbjs/lib/warning":153}],419:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -32060,7 +32557,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = ReactComponent;
 }).call(this,require('_process'))
-},{"./ReactNoopUpdateQueue":457,"./canDefineProperty":492,"_process":245,"fbjs/lib/emptyObject":134,"fbjs/lib/invariant":141,"fbjs/lib/warning":152}],419:[function(require,module,exports){
+},{"./ReactNoopUpdateQueue":458,"./canDefineProperty":493,"_process":246,"fbjs/lib/emptyObject":135,"fbjs/lib/invariant":142,"fbjs/lib/warning":153}],420:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -32102,7 +32599,7 @@ var ReactComponentBrowserEnvironment = {
 };
 
 module.exports = ReactComponentBrowserEnvironment;
-},{"./ReactDOMIDOperations":428,"./ReactMount":453}],420:[function(require,module,exports){
+},{"./ReactDOMIDOperations":429,"./ReactMount":454}],421:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -32156,7 +32653,7 @@ var ReactComponentEnvironment = {
 
 module.exports = ReactComponentEnvironment;
 }).call(this,require('_process'))
-},{"_process":245,"fbjs/lib/invariant":141}],421:[function(require,module,exports){
+},{"_process":246,"fbjs/lib/invariant":142}],422:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -32853,7 +33350,7 @@ var ReactCompositeComponent = {
 
 module.exports = ReactCompositeComponent;
 }).call(this,require('_process'))
-},{"./Object.assign":410,"./ReactComponentEnvironment":420,"./ReactCurrentOwner":422,"./ReactElement":440,"./ReactInstanceMap":450,"./ReactPerf":459,"./ReactPropTypeLocationNames":460,"./ReactPropTypeLocations":461,"./ReactReconciler":464,"./ReactUpdateQueue":470,"./shouldUpdateReactComponent":514,"_process":245,"fbjs/lib/emptyObject":134,"fbjs/lib/invariant":141,"fbjs/lib/warning":152}],422:[function(require,module,exports){
+},{"./Object.assign":411,"./ReactComponentEnvironment":421,"./ReactCurrentOwner":423,"./ReactElement":441,"./ReactInstanceMap":451,"./ReactPerf":460,"./ReactPropTypeLocationNames":461,"./ReactPropTypeLocations":462,"./ReactReconciler":465,"./ReactUpdateQueue":471,"./shouldUpdateReactComponent":515,"_process":246,"fbjs/lib/emptyObject":135,"fbjs/lib/invariant":142,"fbjs/lib/warning":153}],423:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -32884,7 +33381,7 @@ var ReactCurrentOwner = {
 };
 
 module.exports = ReactCurrentOwner;
-},{}],423:[function(require,module,exports){
+},{}],424:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -32979,7 +33476,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = React;
 }).call(this,require('_process'))
-},{"./ReactCurrentOwner":422,"./ReactDOMTextComponent":434,"./ReactDefaultInjection":437,"./ReactInstanceHandles":449,"./ReactMount":453,"./ReactPerf":459,"./ReactReconciler":464,"./ReactUpdates":471,"./ReactVersion":472,"./findDOMNode":496,"./renderSubtreeIntoContainer":511,"_process":245,"fbjs/lib/ExecutionEnvironment":127,"fbjs/lib/warning":152}],424:[function(require,module,exports){
+},{"./ReactCurrentOwner":423,"./ReactDOMTextComponent":435,"./ReactDefaultInjection":438,"./ReactInstanceHandles":450,"./ReactMount":454,"./ReactPerf":460,"./ReactReconciler":465,"./ReactUpdates":472,"./ReactVersion":473,"./findDOMNode":497,"./renderSubtreeIntoContainer":512,"_process":246,"fbjs/lib/ExecutionEnvironment":128,"fbjs/lib/warning":153}],425:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -33030,7 +33527,7 @@ var ReactDOMButton = {
 };
 
 module.exports = ReactDOMButton;
-},{}],425:[function(require,module,exports){
+},{}],426:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -33995,7 +34492,7 @@ assign(ReactDOMComponent.prototype, ReactDOMComponent.Mixin, ReactMultiChild.Mix
 
 module.exports = ReactDOMComponent;
 }).call(this,require('_process'))
-},{"./AutoFocusUtils":389,"./CSSPropertyOperations":392,"./DOMProperty":397,"./DOMPropertyOperations":398,"./EventConstants":402,"./Object.assign":410,"./ReactBrowserEventEmitter":414,"./ReactComponentBrowserEnvironment":419,"./ReactDOMButton":424,"./ReactDOMInput":429,"./ReactDOMOption":430,"./ReactDOMSelect":431,"./ReactDOMTextarea":435,"./ReactMount":453,"./ReactMultiChild":454,"./ReactPerf":459,"./ReactUpdateQueue":470,"./canDefineProperty":492,"./escapeTextContentForBrowser":495,"./isEventSupported":507,"./setInnerHTML":512,"./setTextContent":513,"./validateDOMNesting":516,"_process":245,"fbjs/lib/invariant":141,"fbjs/lib/keyOf":145,"fbjs/lib/shallowEqual":150,"fbjs/lib/warning":152}],426:[function(require,module,exports){
+},{"./AutoFocusUtils":390,"./CSSPropertyOperations":393,"./DOMProperty":398,"./DOMPropertyOperations":399,"./EventConstants":403,"./Object.assign":411,"./ReactBrowserEventEmitter":415,"./ReactComponentBrowserEnvironment":420,"./ReactDOMButton":425,"./ReactDOMInput":430,"./ReactDOMOption":431,"./ReactDOMSelect":432,"./ReactDOMTextarea":436,"./ReactMount":454,"./ReactMultiChild":455,"./ReactPerf":460,"./ReactUpdateQueue":471,"./canDefineProperty":493,"./escapeTextContentForBrowser":496,"./isEventSupported":508,"./setInnerHTML":513,"./setTextContent":514,"./validateDOMNesting":517,"_process":246,"fbjs/lib/invariant":142,"fbjs/lib/keyOf":146,"fbjs/lib/shallowEqual":151,"fbjs/lib/warning":153}],427:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -34175,7 +34672,7 @@ var ReactDOMFactories = mapObject({
 
 module.exports = ReactDOMFactories;
 }).call(this,require('_process'))
-},{"./ReactElement":440,"./ReactElementValidator":441,"_process":245,"fbjs/lib/mapObject":146}],427:[function(require,module,exports){
+},{"./ReactElement":441,"./ReactElementValidator":442,"_process":246,"fbjs/lib/mapObject":147}],428:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -34194,7 +34691,7 @@ var ReactDOMFeatureFlags = {
 };
 
 module.exports = ReactDOMFeatureFlags;
-},{}],428:[function(require,module,exports){
+},{}],429:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -34291,7 +34788,7 @@ ReactPerf.measureMethods(ReactDOMIDOperations, 'ReactDOMIDOperations', {
 
 module.exports = ReactDOMIDOperations;
 }).call(this,require('_process'))
-},{"./DOMChildrenOperations":396,"./DOMPropertyOperations":398,"./ReactMount":453,"./ReactPerf":459,"_process":245,"fbjs/lib/invariant":141}],429:[function(require,module,exports){
+},{"./DOMChildrenOperations":397,"./DOMPropertyOperations":399,"./ReactMount":454,"./ReactPerf":460,"_process":246,"fbjs/lib/invariant":142}],430:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -34447,7 +34944,7 @@ function _handleChange(event) {
 
 module.exports = ReactDOMInput;
 }).call(this,require('_process'))
-},{"./LinkedValueUtils":409,"./Object.assign":410,"./ReactDOMIDOperations":428,"./ReactMount":453,"./ReactUpdates":471,"_process":245,"fbjs/lib/invariant":141}],430:[function(require,module,exports){
+},{"./LinkedValueUtils":410,"./Object.assign":411,"./ReactDOMIDOperations":429,"./ReactMount":454,"./ReactUpdates":472,"_process":246,"fbjs/lib/invariant":142}],431:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -34539,7 +35036,7 @@ var ReactDOMOption = {
 
 module.exports = ReactDOMOption;
 }).call(this,require('_process'))
-},{"./Object.assign":410,"./ReactChildren":416,"./ReactDOMSelect":431,"_process":245,"fbjs/lib/warning":152}],431:[function(require,module,exports){
+},{"./Object.assign":411,"./ReactChildren":417,"./ReactDOMSelect":432,"_process":246,"fbjs/lib/warning":153}],432:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -34730,7 +35227,7 @@ function _handleChange(event) {
 
 module.exports = ReactDOMSelect;
 }).call(this,require('_process'))
-},{"./LinkedValueUtils":409,"./Object.assign":410,"./ReactMount":453,"./ReactUpdates":471,"_process":245,"fbjs/lib/warning":152}],432:[function(require,module,exports){
+},{"./LinkedValueUtils":410,"./Object.assign":411,"./ReactMount":454,"./ReactUpdates":472,"_process":246,"fbjs/lib/warning":153}],433:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -34943,7 +35440,7 @@ var ReactDOMSelection = {
 };
 
 module.exports = ReactDOMSelection;
-},{"./getNodeForCharacterOffset":504,"./getTextContentAccessor":505,"fbjs/lib/ExecutionEnvironment":127}],433:[function(require,module,exports){
+},{"./getNodeForCharacterOffset":505,"./getTextContentAccessor":506,"fbjs/lib/ExecutionEnvironment":128}],434:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -34970,7 +35467,7 @@ var ReactDOMServer = {
 };
 
 module.exports = ReactDOMServer;
-},{"./ReactDefaultInjection":437,"./ReactServerRendering":468,"./ReactVersion":472}],434:[function(require,module,exports){
+},{"./ReactDefaultInjection":438,"./ReactServerRendering":469,"./ReactVersion":473}],435:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -35100,7 +35597,7 @@ assign(ReactDOMTextComponent.prototype, {
 
 module.exports = ReactDOMTextComponent;
 }).call(this,require('_process'))
-},{"./DOMChildrenOperations":396,"./DOMPropertyOperations":398,"./Object.assign":410,"./ReactComponentBrowserEnvironment":419,"./ReactMount":453,"./escapeTextContentForBrowser":495,"./setTextContent":513,"./validateDOMNesting":516,"_process":245}],435:[function(require,module,exports){
+},{"./DOMChildrenOperations":397,"./DOMPropertyOperations":399,"./Object.assign":411,"./ReactComponentBrowserEnvironment":420,"./ReactMount":454,"./escapeTextContentForBrowser":496,"./setTextContent":514,"./validateDOMNesting":517,"_process":246}],436:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -35216,7 +35713,7 @@ function _handleChange(event) {
 
 module.exports = ReactDOMTextarea;
 }).call(this,require('_process'))
-},{"./LinkedValueUtils":409,"./Object.assign":410,"./ReactDOMIDOperations":428,"./ReactUpdates":471,"_process":245,"fbjs/lib/invariant":141,"fbjs/lib/warning":152}],436:[function(require,module,exports){
+},{"./LinkedValueUtils":410,"./Object.assign":411,"./ReactDOMIDOperations":429,"./ReactUpdates":472,"_process":246,"fbjs/lib/invariant":142,"fbjs/lib/warning":153}],437:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -35284,7 +35781,7 @@ var ReactDefaultBatchingStrategy = {
 };
 
 module.exports = ReactDefaultBatchingStrategy;
-},{"./Object.assign":410,"./ReactUpdates":471,"./Transaction":488,"fbjs/lib/emptyFunction":133}],437:[function(require,module,exports){
+},{"./Object.assign":411,"./ReactUpdates":472,"./Transaction":489,"fbjs/lib/emptyFunction":134}],438:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -35384,7 +35881,7 @@ module.exports = {
   inject: inject
 };
 }).call(this,require('_process'))
-},{"./BeforeInputEventPlugin":390,"./ChangeEventPlugin":394,"./ClientReactRootIndex":395,"./DefaultEventPluginOrder":400,"./EnterLeaveEventPlugin":401,"./HTMLDOMPropertyConfig":408,"./ReactBrowserComponentMixin":413,"./ReactComponentBrowserEnvironment":419,"./ReactDOMComponent":425,"./ReactDOMTextComponent":434,"./ReactDefaultBatchingStrategy":436,"./ReactDefaultPerf":438,"./ReactEventListener":446,"./ReactInjection":447,"./ReactInstanceHandles":449,"./ReactMount":453,"./ReactReconcileTransaction":463,"./SVGDOMPropertyConfig":473,"./SelectEventPlugin":474,"./ServerReactRootIndex":475,"./SimpleEventPlugin":476,"_process":245,"fbjs/lib/ExecutionEnvironment":127}],438:[function(require,module,exports){
+},{"./BeforeInputEventPlugin":391,"./ChangeEventPlugin":395,"./ClientReactRootIndex":396,"./DefaultEventPluginOrder":401,"./EnterLeaveEventPlugin":402,"./HTMLDOMPropertyConfig":409,"./ReactBrowserComponentMixin":414,"./ReactComponentBrowserEnvironment":420,"./ReactDOMComponent":426,"./ReactDOMTextComponent":435,"./ReactDefaultBatchingStrategy":437,"./ReactDefaultPerf":439,"./ReactEventListener":447,"./ReactInjection":448,"./ReactInstanceHandles":450,"./ReactMount":454,"./ReactReconcileTransaction":464,"./SVGDOMPropertyConfig":474,"./SelectEventPlugin":475,"./ServerReactRootIndex":476,"./SimpleEventPlugin":477,"_process":246,"fbjs/lib/ExecutionEnvironment":128}],439:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -35622,7 +36119,7 @@ var ReactDefaultPerf = {
 };
 
 module.exports = ReactDefaultPerf;
-},{"./DOMProperty":397,"./ReactDefaultPerfAnalysis":439,"./ReactMount":453,"./ReactPerf":459,"fbjs/lib/performanceNow":149}],439:[function(require,module,exports){
+},{"./DOMProperty":398,"./ReactDefaultPerfAnalysis":440,"./ReactMount":454,"./ReactPerf":460,"fbjs/lib/performanceNow":150}],440:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -35824,7 +36321,7 @@ var ReactDefaultPerfAnalysis = {
 };
 
 module.exports = ReactDefaultPerfAnalysis;
-},{"./Object.assign":410}],440:[function(require,module,exports){
+},{"./Object.assign":411}],441:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -36074,7 +36571,7 @@ ReactElement.isValidElement = function (object) {
 
 module.exports = ReactElement;
 }).call(this,require('_process'))
-},{"./Object.assign":410,"./ReactCurrentOwner":422,"./canDefineProperty":492,"_process":245}],441:[function(require,module,exports){
+},{"./Object.assign":411,"./ReactCurrentOwner":423,"./canDefineProperty":493,"_process":246}],442:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -36358,7 +36855,7 @@ var ReactElementValidator = {
 
 module.exports = ReactElementValidator;
 }).call(this,require('_process'))
-},{"./ReactCurrentOwner":422,"./ReactElement":440,"./ReactPropTypeLocationNames":460,"./ReactPropTypeLocations":461,"./canDefineProperty":492,"./getIteratorFn":503,"_process":245,"fbjs/lib/invariant":141,"fbjs/lib/warning":152}],442:[function(require,module,exports){
+},{"./ReactCurrentOwner":423,"./ReactElement":441,"./ReactPropTypeLocationNames":461,"./ReactPropTypeLocations":462,"./canDefineProperty":493,"./getIteratorFn":504,"_process":246,"fbjs/lib/invariant":142,"fbjs/lib/warning":153}],443:[function(require,module,exports){
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -36410,7 +36907,7 @@ assign(ReactEmptyComponent.prototype, {
 ReactEmptyComponent.injection = ReactEmptyComponentInjection;
 
 module.exports = ReactEmptyComponent;
-},{"./Object.assign":410,"./ReactElement":440,"./ReactEmptyComponentRegistry":443,"./ReactReconciler":464}],443:[function(require,module,exports){
+},{"./Object.assign":411,"./ReactElement":441,"./ReactEmptyComponentRegistry":444,"./ReactReconciler":465}],444:[function(require,module,exports){
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -36459,7 +36956,7 @@ var ReactEmptyComponentRegistry = {
 };
 
 module.exports = ReactEmptyComponentRegistry;
-},{}],444:[function(require,module,exports){
+},{}],445:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -36539,7 +37036,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = ReactErrorUtils;
 }).call(this,require('_process'))
-},{"_process":245}],445:[function(require,module,exports){
+},{"_process":246}],446:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -36578,7 +37075,7 @@ var ReactEventEmitterMixin = {
 };
 
 module.exports = ReactEventEmitterMixin;
-},{"./EventPluginHub":403}],446:[function(require,module,exports){
+},{"./EventPluginHub":404}],447:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -36790,7 +37287,7 @@ var ReactEventListener = {
 };
 
 module.exports = ReactEventListener;
-},{"./Object.assign":410,"./PooledClass":411,"./ReactInstanceHandles":449,"./ReactMount":453,"./ReactUpdates":471,"./getEventTarget":502,"fbjs/lib/EventListener":126,"fbjs/lib/ExecutionEnvironment":127,"fbjs/lib/getUnboundedScrollPosition":138}],447:[function(require,module,exports){
+},{"./Object.assign":411,"./PooledClass":412,"./ReactInstanceHandles":450,"./ReactMount":454,"./ReactUpdates":472,"./getEventTarget":503,"fbjs/lib/EventListener":127,"fbjs/lib/ExecutionEnvironment":128,"fbjs/lib/getUnboundedScrollPosition":139}],448:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -36829,7 +37326,7 @@ var ReactInjection = {
 };
 
 module.exports = ReactInjection;
-},{"./DOMProperty":397,"./EventPluginHub":403,"./ReactBrowserEventEmitter":414,"./ReactClass":417,"./ReactComponentEnvironment":420,"./ReactEmptyComponent":442,"./ReactNativeComponent":456,"./ReactPerf":459,"./ReactRootIndex":466,"./ReactUpdates":471}],448:[function(require,module,exports){
+},{"./DOMProperty":398,"./EventPluginHub":404,"./ReactBrowserEventEmitter":415,"./ReactClass":418,"./ReactComponentEnvironment":421,"./ReactEmptyComponent":443,"./ReactNativeComponent":457,"./ReactPerf":460,"./ReactRootIndex":467,"./ReactUpdates":472}],449:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -36954,7 +37451,7 @@ var ReactInputSelection = {
 };
 
 module.exports = ReactInputSelection;
-},{"./ReactDOMSelection":432,"fbjs/lib/containsNode":130,"fbjs/lib/focusNode":135,"fbjs/lib/getActiveElement":136}],449:[function(require,module,exports){
+},{"./ReactDOMSelection":433,"fbjs/lib/containsNode":131,"fbjs/lib/focusNode":136,"fbjs/lib/getActiveElement":137}],450:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -37259,7 +37756,7 @@ var ReactInstanceHandles = {
 
 module.exports = ReactInstanceHandles;
 }).call(this,require('_process'))
-},{"./ReactRootIndex":466,"_process":245,"fbjs/lib/invariant":141}],450:[function(require,module,exports){
+},{"./ReactRootIndex":467,"_process":246,"fbjs/lib/invariant":142}],451:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -37307,7 +37804,7 @@ var ReactInstanceMap = {
 };
 
 module.exports = ReactInstanceMap;
-},{}],451:[function(require,module,exports){
+},{}],452:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -37384,7 +37881,7 @@ var React = {
 
 module.exports = React;
 }).call(this,require('_process'))
-},{"./Object.assign":410,"./ReactChildren":416,"./ReactClass":417,"./ReactComponent":418,"./ReactDOMFactories":426,"./ReactElement":440,"./ReactElementValidator":441,"./ReactPropTypes":462,"./ReactVersion":472,"./onlyChild":509,"_process":245}],452:[function(require,module,exports){
+},{"./Object.assign":411,"./ReactChildren":417,"./ReactClass":418,"./ReactComponent":419,"./ReactDOMFactories":427,"./ReactElement":441,"./ReactElementValidator":442,"./ReactPropTypes":463,"./ReactVersion":473,"./onlyChild":510,"_process":246}],453:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -37430,7 +37927,7 @@ var ReactMarkupChecksum = {
 };
 
 module.exports = ReactMarkupChecksum;
-},{"./adler32":491}],453:[function(require,module,exports){
+},{"./adler32":492}],454:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -38283,7 +38780,7 @@ ReactPerf.measureMethods(ReactMount, 'ReactMount', {
 
 module.exports = ReactMount;
 }).call(this,require('_process'))
-},{"./DOMProperty":397,"./Object.assign":410,"./ReactBrowserEventEmitter":414,"./ReactCurrentOwner":422,"./ReactDOMFeatureFlags":427,"./ReactElement":440,"./ReactEmptyComponentRegistry":443,"./ReactInstanceHandles":449,"./ReactInstanceMap":450,"./ReactMarkupChecksum":452,"./ReactPerf":459,"./ReactReconciler":464,"./ReactUpdateQueue":470,"./ReactUpdates":471,"./instantiateReactComponent":506,"./setInnerHTML":512,"./shouldUpdateReactComponent":514,"./validateDOMNesting":516,"_process":245,"fbjs/lib/containsNode":130,"fbjs/lib/emptyObject":134,"fbjs/lib/invariant":141,"fbjs/lib/warning":152}],454:[function(require,module,exports){
+},{"./DOMProperty":398,"./Object.assign":411,"./ReactBrowserEventEmitter":415,"./ReactCurrentOwner":423,"./ReactDOMFeatureFlags":428,"./ReactElement":441,"./ReactEmptyComponentRegistry":444,"./ReactInstanceHandles":450,"./ReactInstanceMap":451,"./ReactMarkupChecksum":453,"./ReactPerf":460,"./ReactReconciler":465,"./ReactUpdateQueue":471,"./ReactUpdates":472,"./instantiateReactComponent":507,"./setInnerHTML":513,"./shouldUpdateReactComponent":515,"./validateDOMNesting":517,"_process":246,"fbjs/lib/containsNode":131,"fbjs/lib/emptyObject":135,"fbjs/lib/invariant":142,"fbjs/lib/warning":153}],455:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -38782,7 +39279,7 @@ var ReactMultiChild = {
 
 module.exports = ReactMultiChild;
 }).call(this,require('_process'))
-},{"./ReactChildReconciler":415,"./ReactComponentEnvironment":420,"./ReactCurrentOwner":422,"./ReactMultiChildUpdateTypes":455,"./ReactReconciler":464,"./flattenChildren":497,"_process":245}],455:[function(require,module,exports){
+},{"./ReactChildReconciler":416,"./ReactComponentEnvironment":421,"./ReactCurrentOwner":423,"./ReactMultiChildUpdateTypes":456,"./ReactReconciler":465,"./flattenChildren":498,"_process":246}],456:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -38815,7 +39312,7 @@ var ReactMultiChildUpdateTypes = keyMirror({
 });
 
 module.exports = ReactMultiChildUpdateTypes;
-},{"fbjs/lib/keyMirror":144}],456:[function(require,module,exports){
+},{"fbjs/lib/keyMirror":145}],457:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -38912,7 +39409,7 @@ var ReactNativeComponent = {
 
 module.exports = ReactNativeComponent;
 }).call(this,require('_process'))
-},{"./Object.assign":410,"_process":245,"fbjs/lib/invariant":141}],457:[function(require,module,exports){
+},{"./Object.assign":411,"_process":246,"fbjs/lib/invariant":142}],458:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2015, Facebook, Inc.
@@ -39033,7 +39530,7 @@ var ReactNoopUpdateQueue = {
 
 module.exports = ReactNoopUpdateQueue;
 }).call(this,require('_process'))
-},{"_process":245,"fbjs/lib/warning":152}],458:[function(require,module,exports){
+},{"_process":246,"fbjs/lib/warning":153}],459:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -39127,7 +39624,7 @@ var ReactOwner = {
 
 module.exports = ReactOwner;
 }).call(this,require('_process'))
-},{"_process":245,"fbjs/lib/invariant":141}],459:[function(require,module,exports){
+},{"_process":246,"fbjs/lib/invariant":142}],460:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -39226,7 +39723,7 @@ function _noMeasure(objName, fnName, func) {
 
 module.exports = ReactPerf;
 }).call(this,require('_process'))
-},{"_process":245}],460:[function(require,module,exports){
+},{"_process":246}],461:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -39253,7 +39750,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = ReactPropTypeLocationNames;
 }).call(this,require('_process'))
-},{"_process":245}],461:[function(require,module,exports){
+},{"_process":246}],462:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -39276,7 +39773,7 @@ var ReactPropTypeLocations = keyMirror({
 });
 
 module.exports = ReactPropTypeLocations;
-},{"fbjs/lib/keyMirror":144}],462:[function(require,module,exports){
+},{"fbjs/lib/keyMirror":145}],463:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -39633,7 +40130,7 @@ function getClassName(propValue) {
 }
 
 module.exports = ReactPropTypes;
-},{"./ReactElement":440,"./ReactPropTypeLocationNames":460,"./getIteratorFn":503,"fbjs/lib/emptyFunction":133}],463:[function(require,module,exports){
+},{"./ReactElement":441,"./ReactPropTypeLocationNames":461,"./getIteratorFn":504,"fbjs/lib/emptyFunction":134}],464:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -39785,7 +40282,7 @@ assign(ReactReconcileTransaction.prototype, Transaction.Mixin, Mixin);
 PooledClass.addPoolingTo(ReactReconcileTransaction);
 
 module.exports = ReactReconcileTransaction;
-},{"./CallbackQueue":393,"./Object.assign":410,"./PooledClass":411,"./ReactBrowserEventEmitter":414,"./ReactDOMFeatureFlags":427,"./ReactInputSelection":448,"./Transaction":488}],464:[function(require,module,exports){
+},{"./CallbackQueue":394,"./Object.assign":411,"./PooledClass":412,"./ReactBrowserEventEmitter":415,"./ReactDOMFeatureFlags":428,"./ReactInputSelection":449,"./Transaction":489}],465:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -39893,7 +40390,7 @@ var ReactReconciler = {
 };
 
 module.exports = ReactReconciler;
-},{"./ReactRef":465}],465:[function(require,module,exports){
+},{"./ReactRef":466}],466:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -39972,7 +40469,7 @@ ReactRef.detachRefs = function (instance, element) {
 };
 
 module.exports = ReactRef;
-},{"./ReactOwner":458}],466:[function(require,module,exports){
+},{"./ReactOwner":459}],467:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -40002,7 +40499,7 @@ var ReactRootIndex = {
 };
 
 module.exports = ReactRootIndex;
-},{}],467:[function(require,module,exports){
+},{}],468:[function(require,module,exports){
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -40026,7 +40523,7 @@ var ReactServerBatchingStrategy = {
 };
 
 module.exports = ReactServerBatchingStrategy;
-},{}],468:[function(require,module,exports){
+},{}],469:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -40112,7 +40609,7 @@ module.exports = {
   renderToStaticMarkup: renderToStaticMarkup
 };
 }).call(this,require('_process'))
-},{"./ReactDefaultBatchingStrategy":436,"./ReactElement":440,"./ReactInstanceHandles":449,"./ReactMarkupChecksum":452,"./ReactServerBatchingStrategy":467,"./ReactServerRenderingTransaction":469,"./ReactUpdates":471,"./instantiateReactComponent":506,"_process":245,"fbjs/lib/emptyObject":134,"fbjs/lib/invariant":141}],469:[function(require,module,exports){
+},{"./ReactDefaultBatchingStrategy":437,"./ReactElement":441,"./ReactInstanceHandles":450,"./ReactMarkupChecksum":453,"./ReactServerBatchingStrategy":468,"./ReactServerRenderingTransaction":470,"./ReactUpdates":472,"./instantiateReactComponent":507,"_process":246,"fbjs/lib/emptyObject":135,"fbjs/lib/invariant":142}],470:[function(require,module,exports){
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -40200,7 +40697,7 @@ assign(ReactServerRenderingTransaction.prototype, Transaction.Mixin, Mixin);
 PooledClass.addPoolingTo(ReactServerRenderingTransaction);
 
 module.exports = ReactServerRenderingTransaction;
-},{"./CallbackQueue":393,"./Object.assign":410,"./PooledClass":411,"./Transaction":488,"fbjs/lib/emptyFunction":133}],470:[function(require,module,exports){
+},{"./CallbackQueue":394,"./Object.assign":411,"./PooledClass":412,"./Transaction":489,"fbjs/lib/emptyFunction":134}],471:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2015, Facebook, Inc.
@@ -40460,7 +40957,7 @@ var ReactUpdateQueue = {
 
 module.exports = ReactUpdateQueue;
 }).call(this,require('_process'))
-},{"./Object.assign":410,"./ReactCurrentOwner":422,"./ReactElement":440,"./ReactInstanceMap":450,"./ReactUpdates":471,"_process":245,"fbjs/lib/invariant":141,"fbjs/lib/warning":152}],471:[function(require,module,exports){
+},{"./Object.assign":411,"./ReactCurrentOwner":423,"./ReactElement":441,"./ReactInstanceMap":451,"./ReactUpdates":472,"_process":246,"fbjs/lib/invariant":142,"fbjs/lib/warning":153}],472:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -40686,7 +41183,7 @@ var ReactUpdates = {
 
 module.exports = ReactUpdates;
 }).call(this,require('_process'))
-},{"./CallbackQueue":393,"./Object.assign":410,"./PooledClass":411,"./ReactPerf":459,"./ReactReconciler":464,"./Transaction":488,"_process":245,"fbjs/lib/invariant":141}],472:[function(require,module,exports){
+},{"./CallbackQueue":394,"./Object.assign":411,"./PooledClass":412,"./ReactPerf":460,"./ReactReconciler":465,"./Transaction":489,"_process":246,"fbjs/lib/invariant":142}],473:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -40701,7 +41198,7 @@ module.exports = ReactUpdates;
 'use strict';
 
 module.exports = '0.14.7';
-},{}],473:[function(require,module,exports){
+},{}],474:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -40829,7 +41326,7 @@ var SVGDOMPropertyConfig = {
 };
 
 module.exports = SVGDOMPropertyConfig;
-},{"./DOMProperty":397}],474:[function(require,module,exports){
+},{"./DOMProperty":398}],475:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -41031,7 +41528,7 @@ var SelectEventPlugin = {
 };
 
 module.exports = SelectEventPlugin;
-},{"./EventConstants":402,"./EventPropagators":406,"./ReactInputSelection":448,"./SyntheticEvent":480,"./isTextInputElement":508,"fbjs/lib/ExecutionEnvironment":127,"fbjs/lib/getActiveElement":136,"fbjs/lib/keyOf":145,"fbjs/lib/shallowEqual":150}],475:[function(require,module,exports){
+},{"./EventConstants":403,"./EventPropagators":407,"./ReactInputSelection":449,"./SyntheticEvent":481,"./isTextInputElement":509,"fbjs/lib/ExecutionEnvironment":128,"fbjs/lib/getActiveElement":137,"fbjs/lib/keyOf":146,"fbjs/lib/shallowEqual":151}],476:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -41061,7 +41558,7 @@ var ServerReactRootIndex = {
 };
 
 module.exports = ServerReactRootIndex;
-},{}],476:[function(require,module,exports){
+},{}],477:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -41651,7 +42148,7 @@ var SimpleEventPlugin = {
 
 module.exports = SimpleEventPlugin;
 }).call(this,require('_process'))
-},{"./EventConstants":402,"./EventPropagators":406,"./ReactMount":453,"./SyntheticClipboardEvent":477,"./SyntheticDragEvent":479,"./SyntheticEvent":480,"./SyntheticFocusEvent":481,"./SyntheticKeyboardEvent":483,"./SyntheticMouseEvent":484,"./SyntheticTouchEvent":485,"./SyntheticUIEvent":486,"./SyntheticWheelEvent":487,"./getEventCharCode":499,"_process":245,"fbjs/lib/EventListener":126,"fbjs/lib/emptyFunction":133,"fbjs/lib/invariant":141,"fbjs/lib/keyOf":145}],477:[function(require,module,exports){
+},{"./EventConstants":403,"./EventPropagators":407,"./ReactMount":454,"./SyntheticClipboardEvent":478,"./SyntheticDragEvent":480,"./SyntheticEvent":481,"./SyntheticFocusEvent":482,"./SyntheticKeyboardEvent":484,"./SyntheticMouseEvent":485,"./SyntheticTouchEvent":486,"./SyntheticUIEvent":487,"./SyntheticWheelEvent":488,"./getEventCharCode":500,"_process":246,"fbjs/lib/EventListener":127,"fbjs/lib/emptyFunction":134,"fbjs/lib/invariant":142,"fbjs/lib/keyOf":146}],478:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -41691,7 +42188,7 @@ function SyntheticClipboardEvent(dispatchConfig, dispatchMarker, nativeEvent, na
 SyntheticEvent.augmentClass(SyntheticClipboardEvent, ClipboardEventInterface);
 
 module.exports = SyntheticClipboardEvent;
-},{"./SyntheticEvent":480}],478:[function(require,module,exports){
+},{"./SyntheticEvent":481}],479:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -41729,7 +42226,7 @@ function SyntheticCompositionEvent(dispatchConfig, dispatchMarker, nativeEvent, 
 SyntheticEvent.augmentClass(SyntheticCompositionEvent, CompositionEventInterface);
 
 module.exports = SyntheticCompositionEvent;
-},{"./SyntheticEvent":480}],479:[function(require,module,exports){
+},{"./SyntheticEvent":481}],480:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -41767,7 +42264,7 @@ function SyntheticDragEvent(dispatchConfig, dispatchMarker, nativeEvent, nativeE
 SyntheticMouseEvent.augmentClass(SyntheticDragEvent, DragEventInterface);
 
 module.exports = SyntheticDragEvent;
-},{"./SyntheticMouseEvent":484}],480:[function(require,module,exports){
+},{"./SyntheticMouseEvent":485}],481:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -41950,7 +42447,7 @@ PooledClass.addPoolingTo(SyntheticEvent, PooledClass.fourArgumentPooler);
 
 module.exports = SyntheticEvent;
 }).call(this,require('_process'))
-},{"./Object.assign":410,"./PooledClass":411,"_process":245,"fbjs/lib/emptyFunction":133,"fbjs/lib/warning":152}],481:[function(require,module,exports){
+},{"./Object.assign":411,"./PooledClass":412,"_process":246,"fbjs/lib/emptyFunction":134,"fbjs/lib/warning":153}],482:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -41988,7 +42485,7 @@ function SyntheticFocusEvent(dispatchConfig, dispatchMarker, nativeEvent, native
 SyntheticUIEvent.augmentClass(SyntheticFocusEvent, FocusEventInterface);
 
 module.exports = SyntheticFocusEvent;
-},{"./SyntheticUIEvent":486}],482:[function(require,module,exports){
+},{"./SyntheticUIEvent":487}],483:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -42027,7 +42524,7 @@ function SyntheticInputEvent(dispatchConfig, dispatchMarker, nativeEvent, native
 SyntheticEvent.augmentClass(SyntheticInputEvent, InputEventInterface);
 
 module.exports = SyntheticInputEvent;
-},{"./SyntheticEvent":480}],483:[function(require,module,exports){
+},{"./SyntheticEvent":481}],484:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -42113,7 +42610,7 @@ function SyntheticKeyboardEvent(dispatchConfig, dispatchMarker, nativeEvent, nat
 SyntheticUIEvent.augmentClass(SyntheticKeyboardEvent, KeyboardEventInterface);
 
 module.exports = SyntheticKeyboardEvent;
-},{"./SyntheticUIEvent":486,"./getEventCharCode":499,"./getEventKey":500,"./getEventModifierState":501}],484:[function(require,module,exports){
+},{"./SyntheticUIEvent":487,"./getEventCharCode":500,"./getEventKey":501,"./getEventModifierState":502}],485:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -42187,7 +42684,7 @@ function SyntheticMouseEvent(dispatchConfig, dispatchMarker, nativeEvent, native
 SyntheticUIEvent.augmentClass(SyntheticMouseEvent, MouseEventInterface);
 
 module.exports = SyntheticMouseEvent;
-},{"./SyntheticUIEvent":486,"./ViewportMetrics":489,"./getEventModifierState":501}],485:[function(require,module,exports){
+},{"./SyntheticUIEvent":487,"./ViewportMetrics":490,"./getEventModifierState":502}],486:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -42234,7 +42731,7 @@ function SyntheticTouchEvent(dispatchConfig, dispatchMarker, nativeEvent, native
 SyntheticUIEvent.augmentClass(SyntheticTouchEvent, TouchEventInterface);
 
 module.exports = SyntheticTouchEvent;
-},{"./SyntheticUIEvent":486,"./getEventModifierState":501}],486:[function(require,module,exports){
+},{"./SyntheticUIEvent":487,"./getEventModifierState":502}],487:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -42295,7 +42792,7 @@ function SyntheticUIEvent(dispatchConfig, dispatchMarker, nativeEvent, nativeEve
 SyntheticEvent.augmentClass(SyntheticUIEvent, UIEventInterface);
 
 module.exports = SyntheticUIEvent;
-},{"./SyntheticEvent":480,"./getEventTarget":502}],487:[function(require,module,exports){
+},{"./SyntheticEvent":481,"./getEventTarget":503}],488:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -42351,7 +42848,7 @@ function SyntheticWheelEvent(dispatchConfig, dispatchMarker, nativeEvent, native
 SyntheticMouseEvent.augmentClass(SyntheticWheelEvent, WheelEventInterface);
 
 module.exports = SyntheticWheelEvent;
-},{"./SyntheticMouseEvent":484}],488:[function(require,module,exports){
+},{"./SyntheticMouseEvent":485}],489:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -42585,7 +43082,7 @@ var Transaction = {
 
 module.exports = Transaction;
 }).call(this,require('_process'))
-},{"_process":245,"fbjs/lib/invariant":141}],489:[function(require,module,exports){
+},{"_process":246,"fbjs/lib/invariant":142}],490:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -42613,7 +43110,7 @@ var ViewportMetrics = {
 };
 
 module.exports = ViewportMetrics;
-},{}],490:[function(require,module,exports){
+},{}],491:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -42675,7 +43172,7 @@ function accumulateInto(current, next) {
 
 module.exports = accumulateInto;
 }).call(this,require('_process'))
-},{"_process":245,"fbjs/lib/invariant":141}],491:[function(require,module,exports){
+},{"_process":246,"fbjs/lib/invariant":142}],492:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -42718,7 +43215,7 @@ function adler32(data) {
 }
 
 module.exports = adler32;
-},{}],492:[function(require,module,exports){
+},{}],493:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -42745,7 +43242,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = canDefineProperty;
 }).call(this,require('_process'))
-},{"_process":245}],493:[function(require,module,exports){
+},{"_process":246}],494:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -42801,7 +43298,7 @@ function dangerousStyleValue(name, value) {
 }
 
 module.exports = dangerousStyleValue;
-},{"./CSSProperty":391}],494:[function(require,module,exports){
+},{"./CSSProperty":392}],495:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -42852,7 +43349,7 @@ function deprecated(fnName, newModule, newPackage, ctx, fn) {
 
 module.exports = deprecated;
 }).call(this,require('_process'))
-},{"./Object.assign":410,"_process":245,"fbjs/lib/warning":152}],495:[function(require,module,exports){
+},{"./Object.assign":411,"_process":246,"fbjs/lib/warning":153}],496:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -42891,7 +43388,7 @@ function escapeTextContentForBrowser(text) {
 }
 
 module.exports = escapeTextContentForBrowser;
-},{}],496:[function(require,module,exports){
+},{}],497:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -42943,7 +43440,7 @@ function findDOMNode(componentOrElement) {
 
 module.exports = findDOMNode;
 }).call(this,require('_process'))
-},{"./ReactCurrentOwner":422,"./ReactInstanceMap":450,"./ReactMount":453,"_process":245,"fbjs/lib/invariant":141,"fbjs/lib/warning":152}],497:[function(require,module,exports){
+},{"./ReactCurrentOwner":423,"./ReactInstanceMap":451,"./ReactMount":454,"_process":246,"fbjs/lib/invariant":142,"fbjs/lib/warning":153}],498:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -42994,7 +43491,7 @@ function flattenChildren(children) {
 
 module.exports = flattenChildren;
 }).call(this,require('_process'))
-},{"./traverseAllChildren":515,"_process":245,"fbjs/lib/warning":152}],498:[function(require,module,exports){
+},{"./traverseAllChildren":516,"_process":246,"fbjs/lib/warning":153}],499:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -43024,7 +43521,7 @@ var forEachAccumulated = function (arr, cb, scope) {
 };
 
 module.exports = forEachAccumulated;
-},{}],499:[function(require,module,exports){
+},{}],500:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -43075,7 +43572,7 @@ function getEventCharCode(nativeEvent) {
 }
 
 module.exports = getEventCharCode;
-},{}],500:[function(require,module,exports){
+},{}],501:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -43179,7 +43676,7 @@ function getEventKey(nativeEvent) {
 }
 
 module.exports = getEventKey;
-},{"./getEventCharCode":499}],501:[function(require,module,exports){
+},{"./getEventCharCode":500}],502:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -43224,7 +43721,7 @@ function getEventModifierState(nativeEvent) {
 }
 
 module.exports = getEventModifierState;
-},{}],502:[function(require,module,exports){
+},{}],503:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -43254,7 +43751,7 @@ function getEventTarget(nativeEvent) {
 }
 
 module.exports = getEventTarget;
-},{}],503:[function(require,module,exports){
+},{}],504:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -43295,7 +43792,7 @@ function getIteratorFn(maybeIterable) {
 }
 
 module.exports = getIteratorFn;
-},{}],504:[function(require,module,exports){
+},{}],505:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -43369,7 +43866,7 @@ function getNodeForCharacterOffset(root, offset) {
 }
 
 module.exports = getNodeForCharacterOffset;
-},{}],505:[function(require,module,exports){
+},{}],506:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -43403,7 +43900,7 @@ function getTextContentAccessor() {
 }
 
 module.exports = getTextContentAccessor;
-},{"fbjs/lib/ExecutionEnvironment":127}],506:[function(require,module,exports){
+},{"fbjs/lib/ExecutionEnvironment":128}],507:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -43518,7 +44015,7 @@ function instantiateReactComponent(node) {
 
 module.exports = instantiateReactComponent;
 }).call(this,require('_process'))
-},{"./Object.assign":410,"./ReactCompositeComponent":421,"./ReactEmptyComponent":442,"./ReactNativeComponent":456,"_process":245,"fbjs/lib/invariant":141,"fbjs/lib/warning":152}],507:[function(require,module,exports){
+},{"./Object.assign":411,"./ReactCompositeComponent":422,"./ReactEmptyComponent":443,"./ReactNativeComponent":457,"_process":246,"fbjs/lib/invariant":142,"fbjs/lib/warning":153}],508:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -43579,7 +44076,7 @@ function isEventSupported(eventNameSuffix, capture) {
 }
 
 module.exports = isEventSupported;
-},{"fbjs/lib/ExecutionEnvironment":127}],508:[function(require,module,exports){
+},{"fbjs/lib/ExecutionEnvironment":128}],509:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -43620,7 +44117,7 @@ function isTextInputElement(elem) {
 }
 
 module.exports = isTextInputElement;
-},{}],509:[function(require,module,exports){
+},{}],510:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -43656,7 +44153,7 @@ function onlyChild(children) {
 
 module.exports = onlyChild;
 }).call(this,require('_process'))
-},{"./ReactElement":440,"_process":245,"fbjs/lib/invariant":141}],510:[function(require,module,exports){
+},{"./ReactElement":441,"_process":246,"fbjs/lib/invariant":142}],511:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -43683,7 +44180,7 @@ function quoteAttributeValueForBrowser(value) {
 }
 
 module.exports = quoteAttributeValueForBrowser;
-},{"./escapeTextContentForBrowser":495}],511:[function(require,module,exports){
+},{"./escapeTextContentForBrowser":496}],512:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -43700,7 +44197,7 @@ module.exports = quoteAttributeValueForBrowser;
 var ReactMount = require('./ReactMount');
 
 module.exports = ReactMount.renderSubtreeIntoContainer;
-},{"./ReactMount":453}],512:[function(require,module,exports){
+},{"./ReactMount":454}],513:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -43791,7 +44288,7 @@ if (ExecutionEnvironment.canUseDOM) {
 }
 
 module.exports = setInnerHTML;
-},{"fbjs/lib/ExecutionEnvironment":127}],513:[function(require,module,exports){
+},{"fbjs/lib/ExecutionEnvironment":128}],514:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -43832,7 +44329,7 @@ if (ExecutionEnvironment.canUseDOM) {
 }
 
 module.exports = setTextContent;
-},{"./escapeTextContentForBrowser":495,"./setInnerHTML":512,"fbjs/lib/ExecutionEnvironment":127}],514:[function(require,module,exports){
+},{"./escapeTextContentForBrowser":496,"./setInnerHTML":513,"fbjs/lib/ExecutionEnvironment":128}],515:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -43876,7 +44373,7 @@ function shouldUpdateReactComponent(prevElement, nextElement) {
 }
 
 module.exports = shouldUpdateReactComponent;
-},{}],515:[function(require,module,exports){
+},{}],516:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -44068,7 +44565,7 @@ function traverseAllChildren(children, callback, traverseContext) {
 
 module.exports = traverseAllChildren;
 }).call(this,require('_process'))
-},{"./ReactCurrentOwner":422,"./ReactElement":440,"./ReactInstanceHandles":449,"./getIteratorFn":503,"_process":245,"fbjs/lib/invariant":141,"fbjs/lib/warning":152}],516:[function(require,module,exports){
+},{"./ReactCurrentOwner":423,"./ReactElement":441,"./ReactInstanceHandles":450,"./getIteratorFn":504,"_process":246,"fbjs/lib/invariant":142,"fbjs/lib/warning":153}],517:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2015, Facebook, Inc.
@@ -44434,12 +44931,12 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = validateDOMNesting;
 }).call(this,require('_process'))
-},{"./Object.assign":410,"_process":245,"fbjs/lib/emptyFunction":133,"fbjs/lib/warning":152}],517:[function(require,module,exports){
+},{"./Object.assign":411,"_process":246,"fbjs/lib/emptyFunction":134,"fbjs/lib/warning":153}],518:[function(require,module,exports){
 'use strict';
 
 module.exports = require('./lib/React');
 
-},{"./lib/React":412}],518:[function(require,module,exports){
+},{"./lib/React":413}],519:[function(require,module,exports){
 'use strict';
 module.exports = function (str) {
 	return encodeURIComponent(str).replace(/[!'()*]/g, function (c) {
@@ -44447,7 +44944,7 @@ module.exports = function (str) {
 	});
 };
 
-},{}],519:[function(require,module,exports){
+},{}],520:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -44593,7 +45090,7 @@ function createUncontrollable(mixins, set) {
 }
 
 module.exports = exports['default'];
-},{"./utils":521,"react":517}],520:[function(require,module,exports){
+},{"./utils":522,"react":518}],521:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -44625,7 +45122,7 @@ function set(component, propName, handler, value, args) {
 
 exports['default'] = _createUncontrollable2['default']([mixin], set);
 module.exports = exports['default'];
-},{"./createUncontrollable":519}],521:[function(require,module,exports){
+},{"./createUncontrollable":520}],522:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -44739,7 +45236,7 @@ function has(o, k) {
   return o ? Object.prototype.hasOwnProperty.call(o, k) : false;
 }
 }).call(this,require('_process'))
-},{"_process":245,"invariant":172,"react":517}],522:[function(require,module,exports){
+},{"_process":246,"invariant":173,"react":518}],523:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -44803,7 +45300,7 @@ if (process.env.NODE_ENV !== 'production') {
 module.exports = warning;
 
 }).call(this,require('_process'))
-},{"_process":245}],523:[function(require,module,exports){
+},{"_process":246}],524:[function(require,module,exports){
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 
@@ -44861,7 +45358,205 @@ CoursesStore.dispatchToken = AGDispatcher.register(function (action) {
 
 module.exports = CoursesStore;
 
-},{"../constants/AGConstants.js":55,"../dispatcher/AGDispatcher":57,"../utils/CoursesAPIUtils.js":531,"../utils/CoursesUtils.js":532,"events":125,"object-assign":244}],524:[function(require,module,exports){
+},{"../constants/AGConstants.js":56,"../dispatcher/AGDispatcher":58,"../utils/CoursesAPIUtils.js":531,"../utils/CoursesUtils.js":532,"events":126,"object-assign":245}],525:[function(require,module,exports){
+var React = require("react");
+var AGDispatcher = require("../dispatcher/AGDispatcher");
+var AGConstants = require("../constants/AGConstants");
+var EventEmitter = require('events').EventEmitter;
+var assign = require('object-assign');
+
+var StudentlistAPI = require("../utils/StudentlistAPI.js");
+var mockData = require("../components/StudentResultsList/mockData.js");
+
+var ActionTypes = AGConstants.ActionTypes;
+
+var CHANGE_EVENT = "change";
+
+var _selectedStudId = 0;
+var _selectedLabId = 0;
+
+//console.log(StudentlistAPI.getAllStudents());
+
+var allStudents = mockData.students;
+var selectedStudents = allStudents; // default all students are selected
+
+function resetStudents() {
+  selectedStudents = allStudents;
+}
+
+function queryStudents(query) {
+  resetStudents();
+  if (!query) return;
+  _queryResult = [];
+  _localStudents = selectedStudents;
+  query = query.toLowerCase();
+  _localStudents.forEach(function (cStud) {
+    var uname = cStud.username.toLowerCase().search(query);
+    var fname = cStud.firstName.toLowerCase().search(query);
+    var lname = cStud.lastName.toLowerCase().search(query);
+
+    uname >= 0 || fname >= 0 || lname >= 0 ? _queryResult.push(cStud) : 0;
+  });
+
+  if (_queryResult.length == 0) {
+    return false;
+  } else {
+    return _queryResult;
+  }
+}
+
+function getStudentLabs() {
+  return selectedStudents;
+}
+function getSelectedStudentLab() {
+  if (selectedStudents.length == 0) {
+    return false;
+  } else {
+    return selectedStudents[_selectedStudId].labs[_selectedLabId];
+  }
+}
+
+function updateStudentList(newList) {
+  for (var i = 0; i < newList.length; i++) {
+    if (!newList[1] == selectedStudents[_selectedStudId]) {
+      _selectedStudId = 0;
+      _selectedLabId = 0;
+    }
+  }
+  selectedStudents = newList;
+}
+
+function setSelectedStudentLab(studentIndex, labIndex) {
+  selectedStudents[_selectedStudId].labs[_selectedLabId].isSelected = false;
+  _selectedStudId = studentIndex;
+  _selectedLabId = labIndex;
+
+  selectedStudents[studentIndex].labs[labIndex].isSelected = true;
+}
+
+function toggleSelectedLab() {
+  selectedStudents[_selectedStudId].labs[_selectedLabId].approved = !selectedStudents[_selectedStudId].labs[_selectedLabId].approved;
+}
+
+var LabViewStore = assign({}, EventEmitter.prototype, {
+  emitChange: function () {
+    this.emit(CHANGE_EVENT);
+  },
+  addChangeListener: function (callback) {
+    this.on(CHANGE_EVENT, callback);
+  },
+  removeChangeListener: function (callback) {
+    this.removeListener(CHANGE_EVENT, callback);
+  },
+  getStudentLabs: function () {
+    return getStudentLabs();
+  },
+  getSelectedStudent: function () {
+    return getStudentLabs()[_selectedStudId];
+  },
+  getSelectedStudentLab: function () {
+    var lab = getSelectedStudentLab();
+    if (lab) {
+      return lab;
+    } else {
+      return [];
+    }
+  }
+});
+LabViewStore.dispatchToken = AGDispatcher.register(function (action) {
+  switch (action.type) {
+    case ActionTypes.SET_SELECTED_STUDENTLAB:
+      setSelectedStudentLab(action.studentIndex, action.labIndex);
+      LabViewStore.emitChange();
+      break;
+    case ActionTypes.TOGGLE_APPROVAL_STUDENTLAB:
+      toggleSelectedLab();
+      LabViewStore.emitChange();
+      break;
+    case ActionTypes.SEARCH_FOR_STUDENT:
+      var keep = queryStudents(action.query);
+      if (keep) {
+        updateStudentList(keep);
+        LabViewStore.emitChange();
+        updateStudentList(keep);
+      } else {
+        updateStudentList([]); // returns empty array if no results on search
+        LabViewStore.emitChange();
+      }
+      break;
+    default:
+    // do nothing here
+  }
+});
+
+module.exports = LabViewStore;
+
+},{"../components/StudentResultsList/mockData.js":44,"../constants/AGConstants":56,"../dispatcher/AGDispatcher":58,"../utils/StudentlistAPI.js":538,"events":126,"object-assign":245,"react":518}],526:[function(require,module,exports){
+var EventEmitter = require('events').EventEmitter;
+var assign = require('object-assign');
+
+// const
+var constants = require('../constants/constants.js');
+var mode = constants.mode;
+// local
+var AGDispatcher = require('../dispatcher/AGDispatcher');
+var AGConstants = require('../constants/AGConstants.js');
+var ActionTypes = AGConstants.ActionTypes;
+
+var CHANGE_EVENT = 'change';
+
+var _currentMode = '';
+var _activeElement = '';
+var _sideElements = {
+  Teacher: ["results", "groups", "users", "settings", "info"],
+  Student: [{
+    labs: [],
+    grouplabs: []
+  }, "members", "groups", "settings", "info"],
+  Admin: ["settings", "info"]
+};
+
+var SideNavStore = assign({}, EventEmitter.prototype, {
+
+  emitChange: function () {
+    this.emit(CHANGE_EVENT);
+  },
+
+  addChangeListener: function (callback) {
+    this.on(CHANGE_EVENT, callback);
+  },
+
+  removeChangeListener: function (callback) {
+    this.removeListener(CHANGE_EVENT, callback);
+  },
+
+  getActiveElement: function () {
+    return _activeElement;
+  }
+
+});
+
+SideNavStore.dispachToken = AGDispatcher.register(function (action) {
+
+  switch (action.type) {
+    // TODO: finish switch statement for different actions
+
+    case ActionTypes.SWITCH_MODE:
+      _currentMode = action.mode;
+      SideNavStore.emitChange();
+      break;
+    case ActionTypes.SWITCH_SIDE_NAV:
+      _activeElement = action.element;
+      SideNavStore.emitChange();
+      break;
+    default:
+    // no action
+  }
+});
+
+module.exports = SideNavStore;
+
+},{"../constants/AGConstants.js":56,"../constants/constants.js":57,"../dispatcher/AGDispatcher":58,"events":126,"object-assign":245}],527:[function(require,module,exports){
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 
@@ -44872,7 +45567,7 @@ var AGConstants = require('../constants/AGConstants.js');
 var GroupSelectorUtils = require('../utils/GroupSelectorUtils.js');
 
 // store dependencies
-var GroupManagerStore = require('./GroupManagerStore.js');
+var TeacherGroupsStore = require('./TeacherGroupsStore.js');
 
 var ActionTypes = AGConstants.ActionTypes;
 
@@ -45014,7 +45709,7 @@ function _removeStudentFromGroup(student, group) {
   });
 }
 
-var GroupManagerStore = assign({}, EventEmitter.prototype, {
+var TeacherGroupsStore = assign({}, EventEmitter.prototype, {
 
   emitChange: function () {
     this.emit(CHANGE_EVENT);
@@ -45048,25 +45743,25 @@ var GroupManagerStore = assign({}, EventEmitter.prototype, {
   }
 });
 
-GroupManagerStore.dispachToken = AGDispatcher.register(function (action) {
+TeacherGroupsStore.dispachToken = AGDispatcher.register(function (action) {
   switch (action.type) {
     // TODO: finish switch statement for different actions
     case ActionTypes.RECEIVE_RAW_GROUPS:
       _newGroups(action.rawGroups);
-      GroupManagerStore.emitChange();
+      TeacherGroupsStore.emitChange();
       break;
     case ActionTypes.TOGGLE_GROUP:
       _setOneGroupActive(action.group);
-      GroupManagerStore.emitChange();
+      TeacherGroupsStore.emitChange();
       break;
     case ActionTypes.ADD_NEW_GROUP:
       _addGroup();
-      GroupManagerStore.emitChange();
+      TeacherGroupsStore.emitChange();
       break;
     case ActionTypes.REMOVE_GROUP:
       _removeGroup(action.group);
       _setOneGroupActive();
-      GroupManagerStore.emitChange();
+      TeacherGroupsStore.emitChange();
       break;
     case ActionTypes.ADD_TO_GROUP:
       _selectStudent(action.rawStudent);
@@ -45076,239 +45771,33 @@ GroupManagerStore.dispachToken = AGDispatcher.register(function (action) {
       } else {
         alert("CHOOSE GROUP FIRST");
       }
-      GroupManagerStore.emitChange();
+      TeacherGroupsStore.emitChange();
       break;
     case ActionTypes.REMOVE_STUDENT_FROM_GROUP:
       _removeStudentFromGroup(action.student, action.group);
-      GroupManagerStore.emitChange();
+      TeacherGroupsStore.emitChange();
       break;
     case ActionTypes.RECEIVE_RAW_STUDENTS:
       _newStudents(action.rawStudents);
-      GroupManagerStore.emitChange();
+      TeacherGroupsStore.emitChange();
       break;
     case ActionTypes.QUERY_FOR_STUDENT:
       var keep = _newStudents(_searchFor(action.query));
-      GroupManagerStore.emitChange();
+      TeacherGroupsStore.emitChange();
       var _ = _newStudents(keep);
       break;
     case ActionTypes.EXPANDE_ALL_GROUPS:
       _expandAllGroups();
-      GroupManagerStore.emitChange();
+      TeacherGroupsStore.emitChange();
       break;
     default:
     // no action
   }
 });
 
-module.exports = GroupManagerStore;
+module.exports = TeacherGroupsStore;
 
-},{"../constants/AGConstants.js":55,"../dispatcher/AGDispatcher":57,"../utils/GroupSelectorUtils.js":534,"./GroupManagerStore.js":524,"events":125,"object-assign":244}],525:[function(require,module,exports){
-var React = require("react");
-var AGDispatcher = require("../dispatcher/AGDispatcher");
-var AGConstants = require("../constants/AGConstants");
-var EventEmitter = require('events').EventEmitter;
-var assign = require('object-assign');
-
-var mockData = require("./mockData.js");
-
-var ActionTypes = AGConstants.ActionTypes;
-
-var CHANGE_EVENT = "change";
-
-var _selectedStudId = 0;
-var _selectedLabId = 0;
-
-var allStudents = mockData.students;
-var selectedStudents = allStudents; // default all students are selected
-
-function resetStudents() {
-  console.log("--RESET STUDENTLIST");
-  selectedStudents = allStudents;
-}
-
-function queryStudents(query) {
-  resetStudents();
-  if (!query) return;
-  _queryResult = [];
-  _localStudents = selectedStudents;
-  query = query.toLowerCase();
-  _localStudents.forEach(function (cStud) {
-    var uname = cStud.username.toLowerCase().search(query);
-    var fname = cStud.firstName.toLowerCase().search(query);
-    var lname = cStud.lastName.toLowerCase().search(query);
-
-    uname >= 0 || fname >= 0 || lname >= 0 ? _queryResult.push(cStud) : 0;
-  });
-
-  if (_queryResult.length == 0) {
-    return false;
-  } else {
-    return _queryResult;
-  }
-}
-
-function getStudentLabs() {
-  return selectedStudents;
-}
-function getSelectedStudentLab() {
-  return selectedStudents[_selectedStudId].labs[_selectedLabId];
-}
-/*
-  TODO: When the _selectedXX is not in the list,
-  the first list-item should be set as active
-
-  -- this is to prevent bugs when searching for students
-  and the selected student is not in the queried group
-*/
-function updateStudentList(newList) {
-  for (var i = 0; i < newList.length; i++) {
-    if (newList[i] == selectedStudents[_selectedStudId]) {
-      // the currently selected student is in the search
-    } else {
-        // else - the selected lab will be set to the searches queryResults[0].labs[0]
-        _selectedStudId = 0;
-        _selectedLabId = 0;
-      }
-  }
-  selectedStudents = newList;
-}
-
-function setSelectedStudentLab(studentIndex, labIndex) {
-  selectedStudents[_selectedStudId].labs[_selectedLabId].isSelected = false;
-  _selectedStudId = studentIndex;
-  _selectedLabId = labIndex;
-
-  selectedStudents[studentIndex].labs[labIndex].isSelected = true;
-}
-
-function toggleSelectedLab() {
-  selectedStudents[_selectedStudId].labs[_selectedLabId].approved = !selectedStudents[_selectedStudId].labs[_selectedLabId].approved;
-}
-
-var LabViewStore = assign({}, EventEmitter.prototype, {
-  emitChange: function () {
-    this.emit(CHANGE_EVENT);
-  },
-  addChangeListener: function (callback) {
-    this.on(CHANGE_EVENT, callback);
-  },
-  removeChangeListener: function (callback) {
-    this.removeListener(CHANGE_EVENT, callback);
-  },
-  getStudentLabs: function () {
-    return getStudentLabs();
-  },
-  getSelectedStudent: function () {
-    return getStudentLabs()[_selectedStudId];
-  },
-  getSelectedStudentLab: function () {
-    return getSelectedStudentLab();
-  }
-});
-LabViewStore.dispatchToken = AGDispatcher.register(function (action) {
-  switch (action.type) {
-    case ActionTypes.SET_SELECTED_STUDENTLAB:
-      setSelectedStudentLab(action.studentIndex, action.labIndex);
-      LabViewStore.emitChange();
-      break;
-    case ActionTypes.TOGGLE_APPROVAL_STUDENTLAB:
-      toggleSelectedLab();
-      LabViewStore.emitChange();
-      break;
-    case ActionTypes.SEARCH_FOR_STUDENT:
-      var keep = queryStudents(action.query);
-      if (keep) {
-        updateStudentList(keep);
-        LabViewStore.emitChange();
-        updateStudentList(keep);
-      } else {
-        updateStudentList([]); // returns empty array if no results on search
-        LabViewStore.emitChange();
-      }
-      break;
-    default:
-    // do nothing here
-  }
-});
-
-module.exports = LabViewStore;
-
-},{"../constants/AGConstants":55,"../dispatcher/AGDispatcher":57,"./mockData.js":528,"events":125,"object-assign":244,"react":517}],526:[function(require,module,exports){
-var EventEmitter = require('events').EventEmitter;
-var assign = require('object-assign');
-
-// const
-var constants = require('../constants/constants.js');
-var mode = constants.mode;
-// local
-var AGDispatcher = require('../dispatcher/AGDispatcher');
-var AGConstants = require('../constants/AGConstants.js');
-var ActionTypes = AGConstants.ActionTypes;
-
-var CHANGE_EVENT = 'change';
-
-var _currentMode = '';
-var _activeElement = '';
-var _sideElements = {
-  Teacher: ["results", "groups", "users", "settings", "info"],
-  Student: [{
-    labs: [],
-    grouplabs: []
-  }, "members", "groups", "settings", "info"],
-  Admin: ["settings", "info"]
-};
-
-var SideNavStore = assign({}, EventEmitter.prototype, {
-
-  emitChange: function () {
-    this.emit(CHANGE_EVENT);
-  },
-
-  addChangeListener: function (callback) {
-    this.on(CHANGE_EVENT, callback);
-  },
-
-  removeChangeListener: function (callback) {
-    this.removeListener(CHANGE_EVENT, callback);
-  },
-
-  getActiveElement: function () {
-    return _activeElement;
-  }
-
-});
-
-SideNavStore.dispachToken = AGDispatcher.register(function (action) {
-
-  switch (action.type) {
-    // TODO: finish switch statement for different actions
-
-    case ActionTypes.SWITCH_MODE:
-      _currentMode = action.mode;
-      if (_currentMode == mode.Teacher) {
-        _activeElement = _sideElements[mode.Teacher][0];
-      }
-
-      if (_currentMode == mode.Student) {
-        _activeElement = _sideElements[mode.Teacher][0];
-      }
-      if (_currentMode == mode.Admin) {
-        _activeElement = mode.Admin;
-      }
-      SideNavStore.emitChange();
-      break;
-    case ActionTypes.SWITCH_SIDE_NAV:
-      _activeElement = action.element;
-      SideNavStore.emitChange();
-      break;
-    default:
-    // no action
-  }
-});
-
-module.exports = SideNavStore;
-
-},{"../constants/AGConstants.js":55,"../constants/constants.js":56,"../dispatcher/AGDispatcher":57,"events":125,"object-assign":244}],527:[function(require,module,exports){
+},{"../constants/AGConstants.js":56,"../dispatcher/AGDispatcher":58,"../utils/GroupSelectorUtils.js":534,"./TeacherGroupsStore.js":527,"events":126,"object-assign":245}],528:[function(require,module,exports){
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 
@@ -45418,235 +45907,7 @@ UsersStore.dispachToken = AGDispatcher.register(function (action) {
 
 module.exports = UsersStore;
 
-},{"../constants/AGConstants.js":55,"../constants/constants.js":56,"../dispatcher/AGDispatcher":57,"../utils/CourseNavUtils.js":530,"../utils/TopBarUtils":539,"events":125,"object-assign":244}],528:[function(require,module,exports){
-var MockData = {
-  title: "Mockdata from mockdata.js",
-  students: [{
-    id: 0,
-    username: "tokams",
-    firstName: "Thomas",
-    lastName: "Darvik",
-    studentNumber: 464646,
-    slipDays: 2,
-    hasGroup: false,
-    labs: [{
-      id: 0,
-      title: "Lab 1",
-      approved: false,
-      log: ["The build log comes here"],
-      percent: 65,
-      isSelected: false
-    }, {
-      id: 0,
-      title: "Lab 2",
-      approved: true,
-      log: ["The build log comes here"],
-      percent: 70,
-      isSelected: false
-    }, {
-      id: 0,
-      title: "Lab 3",
-      approved: false,
-      log: ["The build log comes here"],
-      percent: 30,
-      isSelected: false
-    }, {
-      id: 0,
-      title: "Lab 4",
-      approved: false,
-      log: ["The build log comes here"],
-      percent: 65,
-      isSelected: false
-    }, {
-      id: 0,
-      title: "Lab 5",
-      approved: true,
-      log: ["The build log comes here"],
-      percent: 65,
-      isSelected: false
-    }]
-  }, {
-    id: 1,
-    username: "tokams",
-    firstName: "Tomasz",
-    lastName: "Gli",
-    studentNumber: 464646,
-    slipDays: 2,
-    hasGroup: false,
-    labs: [{
-      id: 0,
-      title: "Lab 1",
-      approved: true,
-      log: ["The build log comes here"],
-      percent: 65,
-      isSelected: false
-    }, {
-      id: 0,
-      title: "Lab 2",
-      approved: true,
-      log: ["The build log comes here"],
-      percent: 70,
-      isSelected: false
-    }, {
-      id: 0,
-      title: "Lab 3",
-      approved: true,
-      log: ["The build log comes here"],
-      percent: 30,
-      isSelected: false
-    }, {
-      id: 0,
-      title: "Lab 4",
-      approved: true,
-      log: ["The build log comes here"],
-      percent: 65,
-      isSelected: false
-    }, {
-      id: 0,
-      title: "Lab 5",
-      approved: false,
-      log: ["The build log comes here"],
-      percent: 65,
-      isSelected: false
-    }]
-  }, {
-    id: 2,
-    username: "herpiderp",
-    firstName: "Herman",
-    lastName: "Slyngstadli",
-    studentNumber: 221144,
-    slipDays: 4,
-    hasGroup: false,
-    labs: [{
-      id: 0,
-      title: "Lab 1",
-      approved: false,
-      log: ["The build log comes here"],
-      percent: 65,
-      isSelected: false
-    }, {
-      id: 0,
-      title: "Lab 2",
-      approved: true,
-      log: ["The build log comes here"],
-      percent: 70,
-      isSelected: false
-    }, {
-      id: 0,
-      title: "Lab 3",
-      approved: false,
-      log: ["The build log comes here"],
-      percent: 30,
-      isSelected: false
-    }, {
-      id: 0,
-      title: "Lab 4",
-      approved: true,
-      log: ["The build log comes here"],
-      percent: 65,
-      isSelected: false
-    }, {
-      id: 0,
-      title: "Lab 5",
-      approved: false,
-      log: ["The build log comes here"],
-      percent: 65,
-      isSelected: false
-    }]
-  }, {
-    id: 3,
-    username: "deadpool",
-    firstName: "Dead",
-    lastName: "Pool",
-    studentNumber: 666666,
-    slipDays: 11,
-    hasGroup: false,
-    labs: [{
-      id: 0,
-      title: "Lab 1",
-      approved: true,
-      log: ["The build log comes here"],
-      percent: 65,
-      isSelected: false
-    }, {
-      id: 0,
-      title: "Lab 2",
-      approved: false,
-      log: ["The build log comes here"],
-      percent: 70,
-      isSelected: false
-    }, {
-      id: 0,
-      title: "Lab 3",
-      approved: false,
-      log: ["The build log comes here"],
-      percent: 30,
-      isSelected: false
-    }, {
-      id: 0,
-      title: "Lab 4",
-      approved: false,
-      log: ["The build log comes here"],
-      percent: 65,
-      isSelected: false
-    }, {
-      id: 0,
-      title: "Lab 5",
-      approved: false,
-      log: ["The build log comes here"],
-      percent: 65,
-      isSelected: false
-    }]
-  }, {
-    id: 4,
-    username: "tokams",
-    firstName: "Tomasz",
-    lastName: "Dradinski",
-    studentNumber: 990022,
-    slipDays: 0,
-    hasGroup: false,
-    labs: [{
-      id: 0,
-      title: "Lab 1",
-      approved: true,
-      log: ["The build log comes here"],
-      percent: 65,
-      isSelected: false
-    }, {
-      id: 0,
-      title: "Lab 2",
-      approved: false,
-      log: ["The build log comes here"],
-      percent: 70,
-      isSelected: false
-    }, {
-      id: 0,
-      title: "Lab 3",
-      approved: false,
-      log: ["The build log comes here"],
-      percent: 30,
-      isSelected: false
-    }, {
-      id: 0,
-      title: "Lab 4",
-      approved: false,
-      log: ["The build log comes here"],
-      percent: 65,
-      isSelected: false
-    }, {
-      id: 0,
-      title: "Lab 5",
-      approved: true,
-      log: ["The build log comes here"],
-      percent: 65,
-      isSelected: false
-    }]
-  }]
-};
-
-module.exports = MockData;
-
-},{}],529:[function(require,module,exports){
+},{"../constants/AGConstants.js":56,"../constants/constants.js":57,"../dispatcher/AGDispatcher":58,"../utils/CourseNavUtils.js":530,"../utils/TopBarUtils":540,"events":126,"object-assign":245}],529:[function(require,module,exports){
 var CourseNavServerActionCreators = require("../actions/CourseNavServerActionCreators.js");
 var RequestAPI = require("./RequestAPI.js");
 
@@ -45666,7 +45927,7 @@ module.exports = {
   }
 };
 
-},{"../actions/CourseNavServerActionCreators.js":2,"../constants/AGConstants":55,"./RequestAPI.js":535,"./Socket.js":536}],530:[function(require,module,exports){
+},{"../actions/CourseNavServerActionCreators.js":2,"../constants/AGConstants":56,"./RequestAPI.js":535,"./Socket.js":536}],530:[function(require,module,exports){
 module.exports = {
   // TODO: These are used in stores to convert received data from API to whatever we need
   convertRawCourses: function (rawCourses) {
@@ -45709,7 +45970,7 @@ module.exports = {
   }
 };
 
-},{"../actions/TopBarServerActionCreators.js":11,"../constants/AGConstants":55,"./RequestAPI.js":535,"./Socket.js":536}],532:[function(require,module,exports){
+},{"../actions/TopBarServerActionCreators.js":10,"../constants/AGConstants":56,"./RequestAPI.js":535,"./Socket.js":536}],532:[function(require,module,exports){
 var constants = require('../constants/constants.js');
 var mode = constants.mode;
 
@@ -45729,8 +45990,8 @@ module.exports = {
   }
 };
 
-},{"../constants/constants.js":56}],533:[function(require,module,exports){
-var GroupSelectorServerActionCreators = require("../actions/GroupSelectorServerActionCreators.js");
+},{"../constants/constants.js":57}],533:[function(require,module,exports){
+var TeacherGroupsServerActionCreators = require("../actions/TeacherGroupsServerActionCreators.js");
 var RequestAPI = require("./RequestAPI.js");
 
 var AGConstants = require("../constants/AGConstants");
@@ -45748,12 +46009,12 @@ module.exports = {
       // var payload = RequestAPI.send(ActionTypes.RECEIVE_RAW_GROUPS, {"username": "thomas"});
       // Socket.ws.send(payload);
       var arr = mock.stnr();
-      GroupSelectorServerActionCreators.receiveGroups(arr);
+      TeacherGroupsServerActionCreators.receiveGroups(arr);
     });
   }
 };
 
-},{"../actions/GroupSelectorServerActionCreators.js":6,"../components/GroupSelector/mock.js":27,"../constants/AGConstants":55,"./RequestAPI.js":535,"./Socket.js":536}],534:[function(require,module,exports){
+},{"../actions/TeacherGroupsServerActionCreators.js":8,"../components/GroupSelector/mock.js":27,"../constants/AGConstants":56,"./RequestAPI.js":535,"./Socket.js":536}],534:[function(require,module,exports){
 module.exports = {
   // TODO: These are used in stores to convert received data from API to whatever we need
   // convertRawGroup: function(rawGroup) {
@@ -45795,8 +46056,7 @@ module.exports = {
 
 };
 
-},{"../constants/AGConstants":55}],536:[function(require,module,exports){
-var TopBarAPIUtils = require("./TopBarAPIUtils");
+},{"../constants/AGConstants":56}],536:[function(require,module,exports){
 var TopBarServerActionCreators = require("../actions/TopBarServerActionCreators");
 var CoursesServerActionCreators = require("../actions/CoursesServerActionCreators");
 var CourseNavServerActionCreators = require("../actions/CourseNavServerActionCreators");
@@ -45856,13 +46116,13 @@ var Socket = function () {
 
 module.exports = new Socket();
 
-},{"../actions/CourseNavServerActionCreators":2,"../actions/CoursesServerActionCreators":3,"../actions/TopBarServerActionCreators":11,"../constants/AGConstants":55,"./TopBarAPIUtils":538}],537:[function(require,module,exports){
+},{"../actions/CourseNavServerActionCreators":2,"../actions/CoursesServerActionCreators":3,"../actions/TopBarServerActionCreators":10,"../constants/AGConstants":56}],537:[function(require,module,exports){
 var RequestAPI = require("./RequestAPI.js");
 
 var AGConstants = require("../constants/AGConstants");
 var ActionTypes = AGConstants.ActionTypes;
 
-var GroupManagerServerActionCreators = require("../actions/GroupManagerServerActionCreators.js");
+var TeacherGroupsServerActionCreators = require("../actions/TeacherGroupsServerActionCreators.js");
 
 var Socket = require("./Socket.js");
 
@@ -45876,12 +46136,35 @@ module.exports = {
       // var payload = RequestAPI.send(ActionTypes.RECEIVE_RAW_STUDENTS, {"username": "thomas"});
       // Socket.ws.send(payload);
       var arr = mock.stnr();
-      GroupManagerServerActionCreators.receiveStudents(arr);
+      TeacherGroupsServerActionCreators.receiveStudents(arr);
     });
   }
 };
 
-},{"../actions/GroupManagerServerActionCreators.js":4,"../components/StudentAvailableSelector/mock.js":37,"../constants/AGConstants":55,"./RequestAPI.js":535,"./Socket.js":536}],538:[function(require,module,exports){
+},{"../actions/TeacherGroupsServerActionCreators.js":8,"../components/StudentAvailableSelector/mock.js":37,"../constants/AGConstants":56,"./RequestAPI.js":535,"./Socket.js":536}],538:[function(require,module,exports){
+var StudentlistServerActionCreator = require("../actions/StudentlistServerActionCreator.js");
+var RequestAPI = require("./RequestAPI.js");
+
+var AGConstants = require("../constants/AGConstants");
+var ActionTypes = AGConstants.ActionTypes;
+
+var Socket = require("./Socket.js");
+
+module.exports = {
+  // TODO:  remove waifFor when it's fixed
+  // TODO:  structurize payload better
+  getAllStudents: function () {
+    var mock = require("../components/StudentResultsList/mockData.js");
+    Socket.waitForSocketConnection(Socket.ws, function () {
+      // var payload = RequestAPI.send(ActionTypes.RECEIVE_RAW_GROUPS, {"username": "thomas"});
+      // Socket.ws.send(payload);
+      var studentArray = mock.students;
+      StudentlistServerActionCreator.receiveStudents(studentArray);
+    });
+  }
+};
+
+},{"../actions/StudentlistServerActionCreator.js":6,"../components/StudentResultsList/mockData.js":44,"../constants/AGConstants":56,"./RequestAPI.js":535,"./Socket.js":536}],539:[function(require,module,exports){
 var TopBarServerActionCreators = require("../actions/TopBarServerActionCreators");
 var RequestAPI = require("./RequestAPI.js");
 
@@ -45901,7 +46184,7 @@ module.exports = {
   }
 };
 
-},{"../actions/TopBarServerActionCreators":11,"../constants/AGConstants":55,"./RequestAPI.js":535,"./Socket.js":536}],539:[function(require,module,exports){
+},{"../actions/TopBarServerActionCreators":10,"../constants/AGConstants":56,"./RequestAPI.js":535,"./Socket.js":536}],540:[function(require,module,exports){
 var constants = require('../constants/constants.js');
 var mode = constants.mode;
 module.exports = {
@@ -45922,7 +46205,7 @@ module.exports = {
   }
 };
 
-},{"../constants/constants.js":56}],540:[function(require,module,exports){
+},{"../constants/constants.js":57}],541:[function(require,module,exports){
 var React = require("react");
 // react-router
 var Link = require("react-router").Link;
@@ -45999,7 +46282,7 @@ var AdminMode = React.createClass({
 
 module.exports = AdminMode;
 
-},{"../actions/TopBarActionCreators.js":10,"../components/AdminSideNav/AdminSideNav.jsx":12,"../components/CourseNav/CourseNav.jsx":15,"../components/InfoBar/InfoBar.jsx":28,"../stores/SideNavStore.js":526,"../stores/UsersStore.js":527,"react":517,"react-bootstrap":318,"react-router":382}],541:[function(require,module,exports){
+},{"../actions/TopBarActionCreators.js":9,"../components/AdminSideNav/AdminSideNav.jsx":11,"../components/CourseNav/CourseNav.jsx":15,"../components/InfoBar/InfoBar.jsx":28,"../stores/SideNavStore.js":526,"../stores/UsersStore.js":528,"react":518,"react-bootstrap":319,"react-router":383}],542:[function(require,module,exports){
 var React = require("react");
 
 // react-bootstrap
@@ -46018,7 +46301,7 @@ var StudentAvailableSelector = React.createClass({
 
 module.exports = StudentAvailableSelector;
 
-},{"../components/Courses/Courses.jsx":23,"react":517}],542:[function(require,module,exports){
+},{"../components/Courses/Courses.jsx":23,"react":518}],543:[function(require,module,exports){
 var React = require("react");
 var ReactDOM = require("react-dom");
 
@@ -46032,14 +46315,23 @@ var Table = require("react-bootstrap").Table;
 var ProgressBar = require("react-bootstrap").ProgressBar;
 var Row = require("react-bootstrap").Row;
 
+// actions
+var SideNavActionCreators = require("../actions/SideNavActionCreators.js");
+
 var StudentResultsList = require("../components/StudentResultsList/StudentResultsList.jsx");
 
 var Labview = require("../components/Labview/Labview.jsx");
 // local components
-
+// constants
+const _nav = "results";
+// this class
 var Coursepage = React.createClass({
   displayName: "Coursepage",
 
+
+  componentDidMount: function () {
+    SideNavActionCreators.changeActiveSideElement(_nav);
+  },
 
   render: function () {
     const innerSearch = React.createElement(Glyphicon, { glyph: "search" });
@@ -46063,49 +46355,7 @@ var Coursepage = React.createClass({
 
 module.exports = Coursepage;
 
-},{"../components/Labview/Labview.jsx":30,"../components/StudentResultsList/StudentResultsList.jsx":42,"react":517,"react-bootstrap":318,"react-dom":329}],543:[function(require,module,exports){
-var React = require("react");
-
-// react-bootstrap
-
-var Row = require("react-bootstrap").Row;
-var Col = require("react-bootstrap").Col;
-var Table = require("react-bootstrap").Table;
-var ListGroupItem = require("react-bootstrap").ListGroupItem;
-var Panel = require("react-bootstrap").Panel;
-
-// local
-
-var TeacherSideNav = require("../components/TeacherSideNav/TeacherSideNav.jsx");
-var StudentAvailableSelector = require("../components/StudentAvailableSelector/StudentAvailableSelector.jsx");
-var GroupSelector = require("../components/GroupSelector/GroupSelector.jsx");
-
-var GroupManager = React.createClass({
-  displayName: "GroupManager",
-
-
-  render: function () {
-    self = this;
-    return React.createElement(
-      Col,
-      { xs: 12 },
-      React.createElement(
-        Col,
-        { xs: 7, className: "infoboxleft" },
-        React.createElement(StudentAvailableSelector, null)
-      ),
-      React.createElement(
-        Col,
-        { xs: 5, className: "infoboxright" },
-        React.createElement(GroupSelector, null)
-      )
-    );
-  }
-});
-
-module.exports = GroupManager;
-
-},{"../components/GroupSelector/GroupSelector.jsx":24,"../components/StudentAvailableSelector/StudentAvailableSelector.jsx":33,"../components/TeacherSideNav/TeacherSideNav.jsx":45,"react":517,"react-bootstrap":318}],544:[function(require,module,exports){
+},{"../actions/SideNavActionCreators.js":5,"../components/Labview/Labview.jsx":30,"../components/StudentResultsList/StudentResultsList.jsx":42,"react":518,"react-bootstrap":319,"react-dom":330}],544:[function(require,module,exports){
 var React = require("react");
 
 // react-bootstrap
@@ -46121,8 +46371,8 @@ var Panel = require("react-bootstrap").Panel;
 var StudentSideNav = require("../components/StudentSideNav/StudentSideNav.jsx");
 var GroupSelector = require("../components/GroupSelector/GroupSelector.jsx");
 
-var GroupManager = React.createClass({
-  displayName: "GroupManager",
+var TeacherGroups = React.createClass({
+  displayName: "TeacherGroups",
 
 
   componentWillUnmount: function () {
@@ -46148,9 +46398,9 @@ var GroupManager = React.createClass({
   }
 });
 
-module.exports = GroupManager;
+module.exports = TeacherGroups;
 
-},{"../components/GroupSelector/GroupSelector.jsx":24,"../components/StudentSideNav/StudentSideNav.jsx":44,"react":517,"react-bootstrap":318}],545:[function(require,module,exports){
+},{"../components/GroupSelector/GroupSelector.jsx":24,"../components/StudentSideNav/StudentSideNav.jsx":45,"react":518,"react-bootstrap":319}],545:[function(require,module,exports){
 var React = require("react");
 // react-router
 var Link = require("react-router").Link;
@@ -46248,7 +46498,7 @@ var StudentMode = React.createClass({
 
 module.exports = StudentMode;
 
-},{"../actions/TopBarActionCreators.js":10,"../components/CourseNav/CourseNav.jsx":15,"../components/InfoBar/InfoBar.jsx":28,"../components/StudentSideNav/StudentSideNav.jsx":44,"../constants/constants.js":56,"../stores/SideNavStore.js":526,"../stores/UsersStore.js":527,"../utils/CourseNavAPI.js":529,"react":517,"react-bootstrap":318,"react-router":382}],546:[function(require,module,exports){
+},{"../actions/TopBarActionCreators.js":9,"../components/CourseNav/CourseNav.jsx":15,"../components/InfoBar/InfoBar.jsx":28,"../components/StudentSideNav/StudentSideNav.jsx":45,"../constants/constants.js":57,"../stores/SideNavStore.js":526,"../stores/UsersStore.js":528,"../utils/CourseNavAPI.js":529,"react":518,"react-bootstrap":319,"react-router":383}],546:[function(require,module,exports){
 var React = require("react");
 
 // react-bootstrap
@@ -46263,11 +46513,16 @@ var Panel = require("react-bootstrap").Panel;
 
 var StudentResultMain = require("../components/StudentResult/StudentResultMain.jsx");
 var StudentResultSide = require("../components/StudentResult/StudentResultSide.jsx");
-
+// actions
+var SideNavActionCreators = require("../actions/SideNavActionCreators.js");
+// constants
+const _nav = "results";
 var StudentResult = React.createClass({
   displayName: "StudentResult",
 
-
+  componentDidMount: function () {
+    SideNavActionCreators.changeActiveSideElement(_nav);
+  },
   render: function () {
     self = this;
     return React.createElement(
@@ -46284,7 +46539,58 @@ var StudentResult = React.createClass({
 
 module.exports = StudentResult;
 
-},{"../components/StudentResult/StudentResultMain.jsx":38,"../components/StudentResult/StudentResultSide.jsx":39,"react":517,"react-bootstrap":318}],547:[function(require,module,exports){
+},{"../actions/SideNavActionCreators.js":5,"../components/StudentResult/StudentResultMain.jsx":38,"../components/StudentResult/StudentResultSide.jsx":39,"react":518,"react-bootstrap":319}],547:[function(require,module,exports){
+var React = require("react");
+
+// react-bootstrap
+
+var Row = require("react-bootstrap").Row;
+var Col = require("react-bootstrap").Col;
+var Table = require("react-bootstrap").Table;
+var ListGroupItem = require("react-bootstrap").ListGroupItem;
+var Panel = require("react-bootstrap").Panel;
+
+// actions
+var SideNavActionCreators = require("../actions/SideNavActionCreators.js");
+
+// local
+var TeacherSideNav = require("../components/TeacherSideNav/TeacherSideNav.jsx");
+var StudentAvailableSelector = require("../components/StudentAvailableSelector/StudentAvailableSelector.jsx");
+var GroupSelector = require("../components/GroupSelector/GroupSelector.jsx");
+
+// constants
+const _nav = "groups";
+
+var TeacherGroups = React.createClass({
+  displayName: "TeacherGroups",
+
+
+  componentDidMount: function () {
+    SideNavActionCreators.changeActiveSideElement(_nav);
+  },
+
+  render: function () {
+    self = this;
+    return React.createElement(
+      Col,
+      { xs: 12 },
+      React.createElement(
+        Col,
+        { xs: 7, className: "infoboxleft" },
+        React.createElement(StudentAvailableSelector, null)
+      ),
+      React.createElement(
+        Col,
+        { xs: 5, className: "infoboxright" },
+        React.createElement(GroupSelector, null)
+      )
+    );
+  }
+});
+
+module.exports = TeacherGroups;
+
+},{"../actions/SideNavActionCreators.js":5,"../components/GroupSelector/GroupSelector.jsx":24,"../components/StudentAvailableSelector/StudentAvailableSelector.jsx":33,"../components/TeacherSideNav/TeacherSideNav.jsx":46,"react":518,"react-bootstrap":319}],548:[function(require,module,exports){
 var React = require("react");
 // react-router
 var Link = require("react-router").Link;
@@ -46389,4 +46695,4 @@ var TeacherMode = React.createClass({
 
 module.exports = TeacherMode;
 
-},{"../actions/TopBarActionCreators.js":10,"../components/CourseNav/CourseNav.jsx":15,"../components/InfoBar/InfoBar.jsx":28,"../components/TeacherSideNav/TeacherSideNav.jsx":45,"../constants/constants.js":56,"../stores/CoursesStore.js":523,"../stores/SideNavStore.js":526,"../stores/UsersStore.js":527,"../utils/CourseNavAPI.js":529,"react":517,"react-bootstrap":318,"react-router":382}]},{},[58]);
+},{"../actions/TopBarActionCreators.js":9,"../components/CourseNav/CourseNav.jsx":15,"../components/InfoBar/InfoBar.jsx":28,"../components/TeacherSideNav/TeacherSideNav.jsx":46,"../constants/constants.js":57,"../stores/CoursesStore.js":524,"../stores/SideNavStore.js":526,"../stores/UsersStore.js":528,"../utils/CourseNavAPI.js":529,"react":518,"react-bootstrap":319,"react-router":383}]},{},[59]);

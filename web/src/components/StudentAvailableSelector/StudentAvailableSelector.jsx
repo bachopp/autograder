@@ -8,10 +8,10 @@ var Col = require("react-bootstrap").Col;
 var Table = require("react-bootstrap").Table;
 
 // stores
-var GroupManagerStore = require("../../stores/GroupManagerStore.js");
+var TeacherGroupsStore = require("../../stores/TeacherGroupsStore.js");
 
 // actions
-var StudentAvailableSelectorActionCreators = require("../../actions/StudentAvailableSelectorActionCreators.js");
+var TeacherGroupsActionCreators = require("../../actions/TeacherGroupsActionCreators.js");
 
 // API
 var StudentAvailableSelectorAPI = require("../../utils/StudentAvailableSelectorAPI.js");
@@ -24,7 +24,7 @@ var StudentAvailableSelectorSearch = require("./StudentAvailableSelectorSearch.j
 function getStateFromStores() {
    return {
     query: '',
-    students: GroupManagerStore.getAllStudents(),
+    students: TeacherGroupsStore.getAllStudents(),
   };
 };
 
@@ -37,12 +37,12 @@ var StudentAvailableSelector = React.createClass({
   },
 
   componentDidMount: function() {
-    GroupManagerStore.addChangeListener(this._onChange);
+    TeacherGroupsStore.addChangeListener(this._onChange);
   },
 
 // three hours of debugging becouse componentWill/u/Unmount
   componentWillUnmount: function() {
-    GroupManagerStore.removeChangeListener(this._onChange);
+    TeacherGroupsStore.removeChangeListener(this._onChange);
   },
 
   render: function() {
@@ -91,12 +91,12 @@ var StudentAvailableSelector = React.createClass({
   },
 
   _onAddToGroup: function(student) {
-    StudentAvailableSelectorActionCreators.addStudentToGroup(student);
+    TeacherGroupsActionCreators.addStudentToGroup(student);
   },
 
   _searchFor: function(event) {
     this.setState({query: event.target.value})
-    StudentAvailableSelectorActionCreators.searchForStudent(event.target.value);
+    TeacherGroupsActionCreators.searchForStudent(event.target.value);
   }
 });
 

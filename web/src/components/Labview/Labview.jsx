@@ -12,7 +12,7 @@ var Table = require("react-bootstrap").Table;
 var ProgressBar = require("react-bootstrap").ProgressBar;
 
 var LabViewStore = require("../../stores/LabViewStore.js");
-var LabViewCourseActions = require("../../actions/LabViewCourseActions.js");
+var LabViewCourseActionCreators = require("../../actions/LabViewCourseActionCreators.js");
 
 var Statusbar = require("./Statusbar.jsx");
 var Buildlog = require("./Buildlog.jsx");
@@ -28,7 +28,7 @@ var Labview = React.createClass({
     this.setState(this._getDataFromStore);
   },
   _handleClick: function() {
-    LabViewCourseActions.toggleApprovalStudentLab();
+    LabViewCourseActionCreators.toggleApprovalStudentLab();
   },
   getInitialState: function() {
     return this._getDataFromStore()
@@ -42,21 +42,31 @@ var Labview = React.createClass({
   render: function() {
     const successIcon = <i className="fa fa-check fa-fw"></i>;
     const dangerIcon = <i className="fa fa-times fa-fw"></i>;
-    var theLab = this.state.lab;
-    var theStudent = this.state.student;
 
-    if(theLab.approved) {
-      labApproval = <Alert bsStyle="success">{successIcon} Approved</Alert>;
-      statusButton = <Button onClick={this._handleClick} bsStyle="danger">Remove approval</Button>;
-    } else if(!theLab.approved) {
-      labApproval = <Alert className="redColor" bsStyle="danger">{dangerIcon} Not approved</Alert>;
-      statusButton = <Button onClick={this._handleClick} bsStyle="success">Approve</Button>
-    }
+    /*
+      Dirty code... fix later
+    */
 
-    return(
-      <Col>
-        <h3>{theLab.title} - {theStudent.firstName} {theStudent.lastName}</h3>
-        <Statusbar percent={theLab.percent}/>
+    if(this.state.lab.length == 0) {
+
+      ifElemet = <Col><p>Not found</p></Col>;
+
+    } else {
+
+      var theLab = this.state.lab;
+      var theStudent = this.state.student;
+
+      if(this.state.lab.approved) {
+
+        labApproval = <Alert className="approved" bsStyle="success">{successIcon} Approved</Alert>;
+        statusButton = <Button onClick={this._handleClick} bsStyle="danger">Remove approval</Button>;
+      } else {
+        labApproval = <Alert className="notApproved" bsStyle="danger">{dangerIcon} Not approved</Alert>;
+        statusButton = <Button onClick={this._handleClick} bsStyle="success">Approve</Button>
+      }
+
+      var ifElement = <Col><h3>{theLab.title} - {theStudent.firstName} {theStudent.lastName}</h3>
+      <Statusbar percent={theLab.percent}/>
         {labApproval}
         <Col className="bottomPadding">
           <ButtonToolbar>
@@ -64,9 +74,15 @@ var Labview = React.createClass({
             <Button bsStyle="info">Rebuild</Button>
           </ButtonToolbar>
         </Col>
-        <Col>
-          <Buildlog log={theLab.log}/>
-        </Col>
+      <Col>
+        <Buildlog log={theLab.log}/>
+      </Col></Col>;
+
+    }
+
+    return(
+      <Col>
+        {ifElement}
       </Col>
     );
   }
