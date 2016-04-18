@@ -1,4 +1,3 @@
-var TopBarAPIUtils = require("./TopBarAPIUtils");
 var TopBarServerActionCreators = require("../actions/TopBarServerActionCreators");
 var CoursesServerActionCreators = require("../actions/CoursesServerActionCreators");
 var CourseNavServerActionCreators = require("../actions/CourseNavServerActionCreators");

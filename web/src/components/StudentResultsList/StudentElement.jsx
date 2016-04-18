@@ -8,9 +8,6 @@ var StudentElement = React.createClass({
   propTypes: {
     lab: PropTypes.object.isRequired,
   },
-  _onChange: function() {
-
-  },
   render: function() {
     var lab = this.props.lab;
     var self = this;

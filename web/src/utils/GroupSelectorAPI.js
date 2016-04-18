@@ -1,4 +1,4 @@
-var GroupSelectorServerActionCreators = require("../actions/GroupSelectorServerActionCreators.js");
+var TeacherGroupsServerActionCreators = require("../actions/TeacherGroupsServerActionCreators.js");
 var RequestAPI = require("./RequestAPI.js");
 
 var AGConstants = require("../constants/AGConstants");
@@ -16,7 +16,7 @@ module.exports = {
       // var payload = RequestAPI.send(ActionTypes.RECEIVE_RAW_GROUPS, {"username": "thomas"});
       // Socket.ws.send(payload);
       var arr = mock.stnr();
-      GroupSelectorServerActionCreators.receiveGroups(arr);
+      TeacherGroupsServerActionCreators.receiveGroups(arr);
     });
   }
 };

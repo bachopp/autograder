@@ -71,7 +71,6 @@ var CourseNav = React.createClass({
     }else {
       active = activeCourse;
     }
-
     return (
       <Row>
       <ButtonGroup justified>
@@ -82,7 +81,7 @@ var CourseNav = React.createClass({
           } else {
             isActive = "";
           }
-          var classes = "buttonify infoboxleft " + isActive;
+          var classes = "textc buttonify infoboxleft " + isActive;
           var url = "\/" + mode + "\/" + sidenav + "/" + course
           return (
             <Col

@@ -17,19 +17,19 @@ var GroupSelectorElement = require("./GroupSelectorElement.jsx");
 var GroupSelectorAdd = require("./GroupSelectorAdd.jsx");
 
 var GroupSelectorAPI = require("../../utils/GroupSelectorAPI.js");
-var GroupManagerStore = require("../../stores/GroupManagerStore.js");
+var TeacherGroupsStore = require("../../stores/TeacherGroupsStore.js");
 
-var GroupSelectorActionCreators = require("../../actions/GroupSelectorActionCreators.js");
+var TeacherGroupsActionCreators = require("../../actions/TeacherGroupsActionCreators.js");
 
 // stores
 var mock = require("./mock.js");
-// var GroupManagerStore = require("../../stores/GroupManagerStore.js");
+// var TeacherGroupsStore = require("../../stores/TeacherGroupsStore.js");
 
 
 function getStateFromStores() {
   return {
-    groups: GroupManagerStore.getAllGroups(),
-    isGroupsExpanded: GroupManagerStore.isGroupsExpanded(),
+    groups: TeacherGroupsStore.getAllGroups(),
+    isGroupsExpanded: TeacherGroupsStore.isGroupsExpanded(),
   };
 }
 // this className
@@ -41,28 +41,25 @@ var GroupSelector = React.createClass({
   },
 
   componentDidMount: function() {
-    GroupManagerStore.addChangeListener(this._onChange);
+    TeacherGroupsStore.addChangeListener(this._onChange);
   },
   componentWillUnmount: function() {
-    GroupManagerStore.removeChangeListener(this._onChange);
+    TeacherGroupsStore.removeChangeListener(this._onChange);
   },
 
   activateGroup: function(group) {
-    GroupSelectorActionCreators.activateGroup(group);
+    TeacherGroupsActionCreators.activateGroup(group);
   },
 
   addNewGroup: function() {
-    GroupSelectorActionCreators.addNewGroup();
+    TeacherGroupsActionCreators.addNewGroup();
   },
   removeGroup: function(group) {
-    GroupSelectorActionCreators.removeGroup(group);
+    TeacherGroupsActionCreators.removeGroup(group);
   },
 
-  removeUser: function(student, group) {
-    GroupSelectorActionCreators.removeUser(student, group);
-  },
   expandAll: function() {
-    GroupSelectorActionCreators.expandeAll();
+    TeacherGroupsActionCreators.expandeAll();
   },
 
   render: function() {
@@ -100,7 +97,7 @@ var GroupSelector = React.createClass({
               groups.map(function(group) {
                 var isExpanded = false;
                 var wrapperClass = "groupwrapper "
-                var groupClass = "group buttonify ";
+                var groupClass = "group textc buttonify ";
                 var elementClass = "groupelement ";
                 var emptyToken = '';
                 var len = group.users.length;
@@ -123,7 +120,7 @@ var GroupSelector = React.createClass({
                 return (
                   <div key={group.number} className={wrapperClass}>
                     <Panel
-                    className={groupClass}
+                    className={"groupheader " + groupClass}
                     block onClick={self.activateGroup.bind(self, group)}
                     >
                     <Row>
@@ -141,7 +138,7 @@ var GroupSelector = React.createClass({
                     </Row>
                     </Panel>
                     <Panel className={groupClass} collapsible expanded={isExpanded}>
-                      <GroupSelectorElement elementClass={elementClass} group={group} removeUser={self.removeUser}/>
+                      <GroupSelectorElement elementClass={elementClass} group={group}/>
                     </Panel>
                   </div>
                 );

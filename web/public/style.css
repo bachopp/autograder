@@ -229,7 +229,8 @@ color: white; /*Change active text color here*/
 	border: none;
 }
 .groupmanagericons:hover {
-	background-color:	#d9534f;
+	/*color:	#d9534f;*/
+	color: gray;
 }
 
 /*
@@ -246,42 +247,50 @@ color: white; /*Change active text color here*/
 box-shadow: inset 0px 0px 40px 40px rgba(0,0,0,0.24);
 background-color: #c1c1c1;
 */
+.groupheader {
+	box-shadow: inset 0px 0px 100px 100px rgba(0,0,0,0.01) !important;
+}
+.group {
+	background-color: #e9ebed;
+	border: none;
+}
 .aggray {
-	background-color: #e6f2ff;
+	background-color: #d4d8dc;
 }
 .agdarkgray {
-	background-color: #b3ffff;
+	background-color: #e6f2ff;
 }
 .gropuwrapper {
 	border: solid #f5f5f5 1px;
 	margin-bottom: 5px;
 }
 .groupwrapper.wrapperactive {
-	box-shadow: inset 0px 0px 40px 40px rgba(0,0,0,0.24);
+	box-shadow: inset 0px 0px 100px 100px rgba(0,0,0,0.01);
 	margin-bottom: 5px;
 	border-radius: 4px;
 }
 .groupelement {
 	border: none;
-	box-shadow: inset 0px 0px 40px 40px rgba(0,0,0,0.24);
+	box-shadow: inset 0px 0px 100px 100px rgba(0,0,0,0.01);
+	margin-bottom: 5px !important;
 }
-.group {
-	border: none;
+
+.textc {
+	text-align: center;
 }
 
 .buttonify {
-	text-align: center;
 	color:black;
 	cursor: pointer;
 }
 .buttonify:hover {
-	box-shadow: inset 0px 0px 40px 40px rgba(0,0,0,0.1);
+	box-shadow: inset 0px 0px 100px 100px rgba(0,0,0,0.05);
 }
 .buttonactive {
-	box-shadow: inset 0px 0px 40px 40px rgba(0,0,0,0.24);
+	box-shadow: inset 0px 0px 100px 100px rgba(0,0,0,0.1);
 }
 .buttonactive:hover {
-	box-shadow: inset 0px 0px 40px 40px rgba(0,0,0,0.24);
+	box-shadow: inset 0px 0px 100px 100px rgba(0,0,0,0.1);
 }
 
 .coursecardbutton {
@@ -290,4 +299,23 @@ background-color: #c1c1c1;
 
 .coursecardbutton:hover {
 	background-color: #f2f2f2;
+}
+.agcheck {
+
+}
+.agcheck:hover {
+	cursor: pointer;
+	color: blue;
+}
+
+.agcheckdisabled {
+	color: #e9ebed;
+}
+.agcheckdisabled:hover {
+	cursor: pointer;
+	color: black;
+}
+
+.agcheckgreen {
+	color: green;
 }

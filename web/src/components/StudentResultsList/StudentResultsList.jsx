@@ -7,37 +7,31 @@ var Table = require("react-bootstrap").Table;
 var Button = require("react-bootstrap").Button;
 var ButtonGroup = require("react-bootstrap").ButtonGroup;
 var LabViewStore = require("../../stores/LabViewStore.js");
-var LabViewCourseActions = require("../../actions/LabViewCourseActions.js");
+var LabViewCourseActionCreators = require("../../actions/LabViewCourseActionCreators.js");
 
 var StudentRow = require("./StudentRow.jsx");
 var SearchField = require("./SearchField.jsx");
 
 var PropTypes = React.PropTypes;
+
+function getStatesFromStore() {
+  return {
+    // these are public functions of other classes, without _
+    students: LabViewStore.getStudentLabs(),
+  };
+}
 var StudentResultsList = React.createClass({
-  PropTypes: {
-    students: PropTypes.array,
-    selectedStudent: PropTypes.object,
-  },
-  _getStudentsFromStore: function() {
-    // more methods should be added here
-    return {
-      students: LabViewStore.getStudentLabs(),
-    }
-  },
-  _handleClick: function() {
-  },
-  _onChange: function() {
-    this.setState(this._getStudentsFromStore());
-  },
+
+  // these are super functions of React so no _
   getInitialState: function() {
-    //LabViewCourseActions.receiveStudentlabs();
-    return this._getStudentsFromStore();
+    //LabViewCourseActionCreators.receiveStudentlabs();
+    return getStatesFromStore();
   },
-  componentWillMount: function() {
+  componentDidMount: function() {
     LabViewStore.addChangeListener(this._onChange);
   },
-  componentWillUnMount: function() {
-    LabViewStore.removelistener(this._onChange);
+  componentWillUnmount: function() {
+    LabViewStore.removeChangeListener(this._onChange);
   },
   render: function() {
     if(!this.state.students || this.state.students.length == 0) {
@@ -77,7 +71,10 @@ var StudentResultsList = React.createClass({
             </Col>
 
           </Col>
-    )}
+    )},
+    _onChange: function() {
+      this.setState(getStatesFromStore());
+    },
 });
 
 module.exports = StudentResultsList;

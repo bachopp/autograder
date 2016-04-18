@@ -1,7 +1,7 @@
 var React = require("react");
 var PropTypes = React.PropTypes;
 var Col = require("react-bootstrap").Col;
-var LabViewCourseActions = require("../../actions/LabViewCourseActions.js");
+var LabViewCourseActionCreators = require("../../actions/LabViewCourseActionCreators.js");
 
 var StudentElement = require("./StudentElement.jsx");
 
@@ -12,7 +12,7 @@ var StudentRow = React.createClass({
   handleClick: function(index) {
     var studentId = this.props.student.id;
     var labId = index;
-    LabViewCourseActions.setSelectedStudentLab(studentId,labId);
+    LabViewCourseActionCreators.setSelectedStudentLab(studentId,labId);
   },
   render: function() {
   var _student = this.props.student;

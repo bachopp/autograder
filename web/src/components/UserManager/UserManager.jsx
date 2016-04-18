@@ -8,7 +8,18 @@ var Button = require("react-bootstrap").Button;
 var Glyphicon = require("react-bootstrap").Glyphicon;
 var Row = require("react-bootstrap").Row;
 
+// actions
+var SideNavActionCreators = require("../../actions/SideNavActionCreators.js");
+
+// constants
+const _nav = "users";
+
 var UserSettings = React.createClass({
+
+  componentDidMount: function() {
+    SideNavActionCreators.changeActiveSideElement(_nav);
+  },
+
   render: function() {
     const innerSearch = <Glyphicon glyph="search"/>;
     return(

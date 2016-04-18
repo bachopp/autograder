@@ -47,9 +47,9 @@ var Navigation = React.createClass({
       <Nav>
         {roles.map(function(role) {
           if (activeRole === role.Mode) {
-            isActive = "buttonify buttonactive";
+            isActive = "textc buttonify buttonactive";
           } else {
-            isActive = "buttonify";
+            isActive = "textc buttonify";
           }
           i++;
           var modeLink = "/";

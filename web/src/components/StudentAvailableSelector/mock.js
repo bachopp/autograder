@@ -1,4 +1,4 @@
-// var GroupManagerServerActionCreators = require("../../actions/GroupManagerServerActionCreators.js");
+// var TeacherGroupsServerActionCreators = require("../../actions/TeacherGroupsServerActionCreators.js");
 module.exports = {
   stnr: function() {
     var arr = [];
@@ -15,6 +15,6 @@ module.exports = {
     var test = {username:"tokems", firstName: "Thomas", lastName: "Glienieki", studentNumber:  12340, hasGroup: false};
     arr.push(test);
     return arr;
-    // GroupManagerServerActionCreators.receiveStudents(arr);
+    // TeacherGroupsServerActionCreators.receiveStudents(arr);
   },
 }
