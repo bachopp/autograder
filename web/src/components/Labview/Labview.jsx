@@ -11,6 +11,11 @@ var Glyphicon = require("react-bootstrap").Glyphicon;
 var Table = require("react-bootstrap").Table;
 var ProgressBar = require("react-bootstrap").ProgressBar;
 
+var FormGroup = require("react-bootstrap").FormGroup;
+var ControlLabel = require("react-bootstrap").ControlLabel;
+var FormControl = require("react-bootstrap").FormControl;
+var InputGroup = require("react-bootstrap").InputGroup;
+
 var LabViewStore = require("../../stores/LabViewStore.js");
 var LabViewCourseActionCreators = require("../../actions/LabViewCourseActionCreators.js");
 
@@ -22,6 +27,7 @@ var Labview = React.createClass({
     return {
       lab: LabViewStore.getSelectedStudentLab(),
       student: LabViewStore.getSelectedStudent(),
+      isExpanded: LabViewStore.getExpandedStatus()
     }
   },
   _onChange: function() {
@@ -29,6 +35,9 @@ var Labview = React.createClass({
   },
   _handleClick: function() {
     LabViewCourseActionCreators.toggleApprovalStudentLab();
+  },
+  handleExpand: function() {
+    LabViewCourseActionCreators.toggleLabExpand();
   },
   getInitialState: function() {
     return this._getDataFromStore()
@@ -46,6 +55,26 @@ var Labview = React.createClass({
     /*
       Dirty code... fix later
     */
+
+    if(this.state.isExpanded) {
+      expandedButtonText = "Minimize log";
+      expandedComponent = <Col className="bottomMargin">
+        <h4>Comment</h4>
+        <Input type="text" placeholder="Comment on the lab"/>
+        <Button>Comment</Button>
+      </Col>;
+
+      logfile = this.state.lab.log;
+
+    } else {
+      expandedButtonText = "Expand log";
+      expandedComponent = "";
+
+      logfile = this.state.lab.log.slice(0,7);
+
+    }
+
+    console.log(logfile);
 
     if(this.state.lab.length == 0) {
 
@@ -72,12 +101,13 @@ var Labview = React.createClass({
           <ButtonToolbar>
             {statusButton}
             <Button bsStyle="info">Rebuild</Button>
+            <Button onClick={this.handleExpand} className="pull-right outlineButton" bsStyle="default">{expandedButtonText}</Button>
           </ButtonToolbar>
         </Col>
       <Col>
-        <Buildlog log={theLab.log}/>
+        {expandedComponent}
+        <Buildlog log={logfile}/>
       </Col></Col>;
-
     }
 
     return(
