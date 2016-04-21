@@ -14,28 +14,58 @@ var Dropdown = require("react-bootstrap").Dropdown;
 var MenuItem = require("react-bootstrap").MenuItem;
 
 // local components requires
+var s1 = "s1";
+var s1b = false;
 
+var g1 = "g1";
+var g1b = false;
 // funcitons
 
 // this class
 var Assignments = React.createClass({
+	getInitialState: function() {
+		return {
+			ass: false,
+			s1b: false,
+			g1b: false,
+		}
+	},
+
+	_expand: function(ln) {
+		if (ln == s1) {
+			this.setState({
+				s1b: true,
+				g1b: false,
+			});
+		} else if (ln == g1) {
+			this.setState({
+				g1b: true,
+				s1b: false,
+			});
+		} else {
+			this.setState({
+				ass: !this.state.ass,
+			});
+		}
+	},
 
 	render: function(){
+		var self = this;
+		console.log(this.state.ass);
 		return (
       <div>
-				<Button block>Assignments</Button>
+				<Button block onClick={this._expand}>Assignments</Button>
 				<br/>
+				<Panel collapsible expanded={this.state.ass}>
 				<form>
-					<PanelGroup defaultActiveKey="2" accordion>
 						<b>Individual assignments</b>
-
 						{/* the labs are mapped info got from store -> db */}
-							<Panel header="Lab 1" eventKey="1">
+							<Panel className="buttonify" header="Lab 1" collapsible expanded={self.state.s1b} onClick={self._expand.bind(self,s1)}>
 								<Input type="text" label="Folder name" />
 								<Input type="text" label="Deadline" />
 								<Dropdown id="dropdown-custom-2">
 						      <Button bsStyle="info">
-						        Primary language lab 1
+						        Primary language
 						      </Button>
 						      <Dropdown.Toggle bsStyle="success"/>
 						      <Dropdown.Menu className="super-colors">
@@ -47,23 +77,20 @@ var Assignments = React.createClass({
 							</Panel>
 						{/* map */}
 
-					</PanelGroup>
-
 					<br/>
 					<Button block bsStyle="success">Update individual</Button>
 				</form>
 
 				<form>
-					<PanelGroup defaultActiveKey="2" accordion>
 						<b>Group assignments</b>
 
 						{/* the labs are mapped info got from store -> db */}
-							<Panel header="Lab 1" eventKey="1">
+							<Panel className="buttonify" header="Lab 1" collapsible expanded={self.state.g1b} onClick={self._expand.bind(self,g1)}>
 								<Input type="text" label="Folder name" />
 								<Input type="text" label="Deadline" />
 								<Dropdown id="dropdown-custom-2">
 									<Button bsStyle="info">
-										Primary language lab 1
+										Primary language
 									</Button>
 									<Dropdown.Toggle bsStyle="success"/>
 									<Dropdown.Menu className="super-colors">
@@ -75,11 +102,11 @@ var Assignments = React.createClass({
 							</Panel>
 						{/* map */}
 
-					</PanelGroup>
 
 					<br/>
 					<Button block bsStyle="success">Update group</Button>
 				</form>
+				</Panel>
     	</div>
 		)
 	}

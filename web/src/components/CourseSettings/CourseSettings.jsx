@@ -31,16 +31,17 @@ var CourseSettings = React.createClass({
 	},
 
 	render: function(){
+		var self = this;
 		return (
       <Col xs={12} className="whitebox">
         <Col xs={4}>
 					<StandardSettings/>
         </Col>
 				<Col xs={4}>
-					<CIOptions/>
+					<Assignments/>
         </Col>
 				<Col xs={4}>
-					<Assignments/>
+					<CIOptions/>
         </Col>
       </Col>
 		)

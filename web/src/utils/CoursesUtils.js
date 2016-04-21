@@ -13,6 +13,13 @@ module.exports = {
         roles.push(role);
       }
     }
+    console.log(roles);
     return roles
+  },
+
+  extractCourse: function(courses) {
+    courses.forEach(function(course) {
+      console.log(course);
+    });
   },
 };

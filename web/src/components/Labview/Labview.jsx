@@ -18,6 +18,9 @@ var Statusbar = require("./Statusbar.jsx");
 var Buildlog = require("./Buildlog.jsx");
 
 var Labview = React.createClass({
+  propTypes: {
+    isStudent: React.PropTypes.bool,
+  },
   _getDataFromStore: function() {
     return {
       lab: LabViewStore.getSelectedStudentLab(),
@@ -46,7 +49,7 @@ var Labview = React.createClass({
     /*
       Dirty code... fix later
     */
-
+    console.log(this.props.isStudent);
     if(this.state.lab.length == 0) {
 
       ifElemet = <Col><p>Not found</p></Col>;
@@ -59,10 +62,18 @@ var Labview = React.createClass({
       if(this.state.lab.approved) {
 
         labApproval = <Alert className="approved" bsStyle="success">{successIcon} Approved</Alert>;
-        statusButton = <Button onClick={this._handleClick} bsStyle="danger">Remove approval</Button>;
+        if (!this.props.isStudent) {
+          statusButton = <Button onClick={this._handleClick} bsStyle="danger">Remove approval</Button>;
+        } else {
+          statusButton = <div></div>;
+        }
       } else {
         labApproval = <Alert className="notApproved" bsStyle="danger">{dangerIcon} Not approved</Alert>;
-        statusButton = <Button onClick={this._handleClick} bsStyle="success">Approve</Button>
+        if (!this.props.isStudent) {
+          statusButton = <Button onClick={this._handleClick} bsStyle="success">Approve</Button>;
+        } else {
+          statusButton = <div></div>;
+        }
       }
 
       var ifElement = <Col><h3>{theLab.title} - {theStudent.firstName} {theStudent.lastName}</h3>

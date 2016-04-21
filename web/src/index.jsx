@@ -20,7 +20,6 @@ var UserList = require("./components/UserList/UserList.jsx");
 var TeacherMode = require("./views/TeacherMode.jsx");
 var StudentMode = require("./views/StudentMode.jsx");
 var AdminMode = require("./views/AdminMode.jsx");
-
 // views
 var TeacherGroups = require("./views/TeacherGroups.jsx");
 var Coursepage= require("./views/Coursepage.jsx");
@@ -36,6 +35,9 @@ var UserSettings = require("./components/UserSettings/UserSettings.jsx");
 var CourseMembers = require("./components/CourseMembers/CourseMembers.jsx");
 var CourseSettings = require("./components/CourseSettings/CourseSettings.jsx")
 var CourseInfo = require("./components/CourseInfo/CourseInfo.jsx")
+var AdminSettings = require("./components/AdminSettings/AdminSettings.jsx");
+var StudentGroup = require("./components/StudentGroup/StudentGroup.jsx");
+var StudentList = require("./components/StudentList/StudentList.jsx");
 // this class
 
 var App = React.createClass({
@@ -59,8 +61,8 @@ ReactDOM.render(
 
 			<Route path="Admin" component={AdminMode}>
 				<IndexRoute component={UserList} />
-					<Route path="settings" component={NotFound}/>
-					<Route path="info"component={CourseInfo}/>
+					<Route path="settings" component={AdminSettings}/>
+					<Route path="info"component={NotFound}/>
 			</Route>
 
 			<Route path="Teacher" component={TeacherMode}>
@@ -73,8 +75,8 @@ ReactDOM.render(
 
 			<Route path="Student" component={StudentMode}>
 					<Route path="results/:coursename" component={StudentResult}/>
-					<Route path="members/:coursename" component={NotFound}/>
-					<Route path="groups/:coursename" component={NotFound}/>
+					<Route path="members/:coursename" component={StudentList}/>
+					<Route path="groups/:coursename" component={StudentGroup}/>
 					<Route path="settings/:coursename" component={UserSettings}/>
 					<Route path="info/:coursename" component={CourseInfo}/>
 			</Route>

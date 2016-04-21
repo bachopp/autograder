@@ -13,7 +13,7 @@ var StudentResultMain = React.createClass({
   render: function() {
 
     return (
-      <Labview />
+      <Labview isStudent={true}/>
     );
   }
 

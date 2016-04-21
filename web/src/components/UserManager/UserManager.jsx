@@ -16,12 +16,32 @@ const _nav = "users";
 
 var UserSettings = React.createClass({
 
+  getInitialState: function() {
+    return {
+      sstat: "Pending",
+      bstyle: "info",
+    }
+  },
+
+  _change: function(status) {
+    if (status == "Pending") {
+      this.setState({sstat: "Yes",bstyle: "default"});
+    }
+    if (status == "No") {
+      this.setState({sstat: "Yes"});
+    }
+    if (status == "Yes") {
+      this.setState({sstat: "No"});
+    }
+  },
+
   componentDidMount: function() {
     SideNavActionCreators.changeActiveSideElement(_nav);
   },
 
   render: function() {
     const innerSearch = <Glyphicon glyph="search"/>;
+    self = this;
     return(
       <Col xs={12}>
         <Row  className="infoboxleft">
@@ -49,7 +69,7 @@ var UserSettings = React.createClass({
                     <td>Thomas Darvik</td>
                     <td>223344</td>
                     <td>
-                      <Button bsStyle="info">Pending</Button>
+                      <Button bsStyle={this.state.bstyle} onClick={self._change.bind(self,"Pending")}>{this.state.sstat}</Button>
                     </td>
                     <td>
                       <Button bsStyle="default">No</Button>
