@@ -11,15 +11,16 @@ var ActionTypes = AGConstants.ActionTypes;
 
 var CHANGE_EVENT = "change";
 
-var _selectedStudId = 0;
-var _selectedLabId = 0;
-
-
-//console.log(StudentlistAPI.getAllStudents());
-
+var selectedStudId = 0;
+var selectedLabId = 0;
+var logExpanded = false;
 
 var allStudents = mockData.students;
 var selectedStudents = allStudents;   // default all students are selected
+
+function toggleLabExpand() {
+  logExpanded = !logExpanded;
+}
 
 function resetStudents() {
   selectedStudents = allStudents;
@@ -53,33 +54,30 @@ function getSelectedStudentLab() {
   if(selectedStudents.length == 0) {
     return false;
   } else {
-    return selectedStudents[_selectedStudId].labs[_selectedLabId];
+    return selectedStudents[selectedStudId].labs[selectedLabId];
   }
 }
 
 function updateStudentList(newList) {
   for(var i = 0; i<newList.length; i++){
-    if(!newList[1] == selectedStudents[_selectedStudId]) {
-      _selectedStudId = 0;
-      _selectedLabId = 0;
+    if(!newList[1] == selectedStudents[selectedStudId]) {
+      selectedStudId = 0;
+      selectedLabId = 0;
     }
   }
   selectedStudents = newList;
 }
 
-function setSelectedStudentLab(studentIndex,labIndex) {
-  selectedStudents[_selectedStudId].labs[_selectedLabId].isSelected = false;
-  _selectedStudId = studentIndex;
-  _selectedLabId = labIndex;
-
-  selectedStudents[studentIndex].labs[labIndex].isSelected = true;
+function setSelectedStudentLab(sIndex,lIndex) {
+  selectedStudents[selectedStudId].labs[selectedLabId].isSelected = false;
+  selectedStudId = sIndex;
+  selectedLabId = lIndex;
+  selectedStudents[sIndex].labs[lIndex].isSelected = true;
 }
 
 function toggleSelectedLab() {
-  selectedStudents[_selectedStudId].labs[_selectedLabId].approved = !selectedStudents[_selectedStudId].labs[_selectedLabId].approved;
+  selectedStudents[selectedStudId].labs[selectedLabId].approved = !selectedStudents[selectedStudId].labs[selectedLabId].approved;
 }
-
-
 
 var LabViewStore = assign({},EventEmitter.prototype, {
   emitChange: function() {
@@ -91,11 +89,14 @@ var LabViewStore = assign({},EventEmitter.prototype, {
   removeChangeListener: function(callback){
     this.removeListener(CHANGE_EVENT,callback);
   },
+  getExpandedStatus: function() {
+    return logExpanded;
+  },
   getStudentLabs: function() {
     return getStudentLabs();
   },
   getSelectedStudent: function() {
-    return getStudentLabs()[_selectedStudId];
+    return getStudentLabs()[selectedStudId];
   },
   getSelectedStudentLab: function() {
     var lab = getSelectedStudentLab();
@@ -114,6 +115,10 @@ LabViewStore.dispatchToken = AGDispatcher.register(function(action) {
       break;
     case ActionTypes.TOGGLE_APPROVAL_STUDENTLAB:
       toggleSelectedLab();
+      LabViewStore.emitChange();
+      break;
+    case ActionTypes.TOGGLE_LAB_EXPAND:
+      toggleLabExpand();
       LabViewStore.emitChange();
       break;
     case ActionTypes.SEARCH_FOR_STUDENT:

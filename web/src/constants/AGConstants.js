@@ -33,6 +33,8 @@ module.exports = {
     TOGGLE_APPROVAL_STUDENTLAB: null,
 
     SEARCH_FOR_STUDENT: null,
+    TOGGLE_LAB_EXPAND: null,
+
 
     // CourseNav
     RECEIVE_COURSES_FOR_MODE: null,

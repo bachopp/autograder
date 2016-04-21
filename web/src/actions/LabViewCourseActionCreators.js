@@ -21,6 +21,11 @@ module.exports = {
       labIndex: labIndex,
     })
   },
+  toggleLabExpand: function() {
+    AGDispatcher.dispatch({
+      type: ActionTypes.TOGGLE_LAB_EXPAND,
+    });
+  },
   toggleApprovalStudentLab: function() {
     AGDispatcher.dispatch({
       type: ActionTypes.TOGGLE_APPROVAL_STUDENTLAB,
