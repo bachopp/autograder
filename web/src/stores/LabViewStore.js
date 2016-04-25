@@ -27,23 +27,23 @@ function resetStudents() {
 }
 
 function queryStudents(query) {
-  resetStudents();
-  if(!query) return;
-  _queryResult = [];
-  _localStudents = selectedStudents;
-  query = query.toLowerCase();
-  _localStudents.forEach(function(cStud) {
-    var uname = cStud.username.toLowerCase().search(query);
-    var fname = cStud.firstName.toLowerCase().search(query);
-    var lname = cStud.lastName.toLowerCase().search(query);
+  if(query) {
+    queryResults = [];
+    fullSList = selectedStudents;
+    query = query.toLowerCase();
 
-    (uname>=0 || fname>= 0 || lname>=0) ? _queryResult.push(cStud) : 0;
-  });
+    fullSList.forEach(function(cStud) {
+      var uname = cStud.username.toLowerCase().search(query);
+      var fname = cStud.firstName.toLowerCase().search(query);
+      var lname = cStud.lastName.toLowerCase().search(query);
 
-  if(_queryResult.length == 0) {
-    return false;
+      if(uname >= 0 || fname >= 0 || lname >= 0) {
+        queryResults.push(cStud);
+      }
+    });
+    return queryResults;
   } else {
-    return _queryResult;
+    return false;
   }
 }
 
@@ -126,7 +126,6 @@ LabViewStore.dispatchToken = AGDispatcher.register(function(action) {
       if(keep) {
         updateStudentList(keep);
         LabViewStore.emitChange();
-        updateStudentList(keep);
       } else {
         updateStudentList([]);    // returns empty array if no results on search
         LabViewStore.emitChange();

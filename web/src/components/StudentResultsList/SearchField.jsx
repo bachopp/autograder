@@ -7,8 +7,11 @@ var LabViewCourseActionCreators = require("../../actions/LabViewCourseActionCrea
 
 var SearchField = React.createClass({
   handleChange: function(event) {
-    raw_search = event.target.value;
-    LabViewCourseActionCreators.searchStudentTable(raw_search);
+    if(event.target.value == "" || event.target.length == 0) {
+      // do nothing - the search string is empty
+    } else {
+      LabViewCourseActionCreators.searchStudentTable(event.target.value);
+    }
   },
   render: function() {
     const innerSearch = <Glyphicon glyph="search"/>;

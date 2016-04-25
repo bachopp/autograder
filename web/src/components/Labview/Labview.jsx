@@ -22,81 +22,65 @@ var LabViewCourseActionCreators = require("../../actions/LabViewCourseActionCrea
 var Statusbar = require("./Statusbar.jsx");
 var Buildlog = require("./Buildlog.jsx");
 
+function getDataFromStore() {
+  return {
+    student: LabViewStore.getSelectedStudent(),
+    lab: LabViewStore.getSelectedStudentLab(),
+    isExpanded: LabViewStore.getExpandedStatus(),
+  }
+}
+
 var Labview = React.createClass({
   propTypes: {
     isStudent: React.PropTypes.bool,
   },
-  _getDataFromStore: function() {
-    return {
-      lab: LabViewStore.getSelectedStudentLab(),
-      student: LabViewStore.getSelectedStudent(),
-      isExpanded: LabViewStore.getExpandedStatus()
-    }
+  onChange: function() {
+    this.setState(getDataFromStore());
   },
-  _onChange: function() {
-    this.setState(this._getDataFromStore);
-  },
-  _handleClick: function() {
+  handleClick: function() {
     LabViewCourseActionCreators.toggleApprovalStudentLab();
   },
   handleExpand: function() {
     LabViewCourseActionCreators.toggleLabExpand();
   },
   getInitialState: function() {
-    return this._getDataFromStore()
+    return getDataFromStore();
   },
   componentDidMount: function() {
-    LabViewStore.addChangeListener(this._onChange);
+    LabViewStore.addChangeListener(this.onChange);
   },
   componentWillUnmount: function() {
-    LabViewStore.removeChangeListener(this._onChange);
+    LabViewStore.removeChangeListener(this.onChange);
   },
   render: function() {
     const successIcon = <i className="fa fa-check fa-fw"></i>;
     const dangerIcon = <i className="fa fa-times fa-fw"></i>;
 
-    /*
-      Dirty code... fix later
-    */
-
-    if(this.state.isExpanded) {
+    if(this.state.isExpanded == true) {
       expandedButtonText = "Minimize log";
-      expandedComponent = <Col className="bottomMargin">
-        <h4>Comment</h4>
-        <Input type="text" placeholder="Comment on the lab"/>
-        <Button>Comment</Button>
-      </Col>;
-
-      logfile = this.state.lab.log;
-
     } else {
       expandedButtonText = "Expand log";
-      expandedComponent = "";
-
-      logfile = this.state.lab.log.slice(0,7);
-
     }
 
-    console.log(logfile);
 
-    if(this.state.lab.length == 0) {
 
-      ifElemet = <Col><p>Not found</p></Col>;
 
+    // check if the lab exists
+    if(!this.state.lab || this.state.lab.length == 0) {
+      ifElement = <Col><p>Lab not found</p></Col>
     } else {
-
-      var theLab = this.state.lab;
-      var theStudent = this.state.student;
-
+      // the student lab exists
       if(this.state.lab.approved) {
-
+        // the lab is approved
         labApproval = <Alert className="approved" bsStyle="success">{successIcon} Approved</Alert>;
         if (!this.props.isStudent) {
           statusButton = <Button onClick={this._handleClick} bsStyle="danger">Remove approval</Button>;
         } else {
           statusButton = <div></div>;
         }
+
       } else {
+        // the lab is not approved
         labApproval = <Alert className="notApproved" bsStyle="danger">{dangerIcon} Not approved</Alert>;
         if (!this.props.isStudent) {
           statusButton = <Button onClick={this._handleClick} bsStyle="success">Approve</Button>;
@@ -105,22 +89,22 @@ var Labview = React.createClass({
         }
       }
 
-      var ifElement = <Col><h3>{theLab.title} - {theStudent.firstName} {theStudent.lastName}</h3>
-      <Statusbar percent={theLab.percent}/>
+      var ifElement = <Col>
+        <h3>{this.state.lab.title} - {this.state.student.firstName} {this.state.student.lastName}</h3>
+        <Statusbar percent={this.state.lab.percent}/>
         {labApproval}
         <Col className="bottomPadding">
           <ButtonToolbar>
             {statusButton}
             <Button bsStyle="info">Rebuild</Button>
-            <Button onClick={this.handleExpand} className="pull-right outlineButton" bsStyle="default">{expandedButtonText}</Button>
+            <Button bsStyle="default" onClick={this.handleExpand} className="pull-right">{expandedButtonText}</Button>
           </ButtonToolbar>
         </Col>
-      <Col>
-        {expandedComponent}
-        <Buildlog log={logfile}/>
-      </Col></Col>;
+        <Col>
+          <Buildlog log={this.state.lab.log}/>
+        </Col>
+      </Col>
     }
-
     return(
       <Col>
         {ifElement}
@@ -128,9 +112,5 @@ var Labview = React.createClass({
     );
   }
 });
-
-
-
-
 
 module.exports = Labview;
