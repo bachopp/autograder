@@ -65,7 +65,7 @@ var InfoBar = React.createClass({
   },
 
   toggle() {
-    this.setState({ show: !this.state.show });
+    //this.setState({ show: !this.state.show });
   },
 
   render: function() {
@@ -77,7 +77,6 @@ var InfoBar = React.createClass({
     return(
       <div className={blinkclass}>
         <Col xs={4}><b>
-        {this.state.month}, {this.state.day} - {this.state.hours}:{this.state.minutes}
         </b></Col>
         <OverlayTrigger placement="bottom" overlay={tooltip}>
         <Col xs={2} className="buttonify textc" >{notificationIcon} : <b> 1 </b> </Col>
@@ -89,4 +88,5 @@ var InfoBar = React.createClass({
 });
 // {this.props.infoType} {this.props.nav}
 
+//{this.state.month}, {this.state.day} - {this.state.hours}:{this.state.minutes}
 module.exports = InfoBar;

@@ -43,6 +43,9 @@ var Labview = React.createClass({
   handleExpand: function() {
     LabViewCourseActionCreators.toggleLabExpand();
   },
+  triggerBuild: function() {
+    console.log("BUILD HANDLER");
+  },
   getInitialState: function() {
     return getDataFromStore();
   },
@@ -62,9 +65,6 @@ var Labview = React.createClass({
       expandedButtonText = "Expand log";
     }
 
-
-
-
     // check if the lab exists
     if(!this.state.lab || this.state.lab.length == 0) {
       ifElement = <Col><p>Lab not found</p></Col>
@@ -74,7 +74,7 @@ var Labview = React.createClass({
         // the lab is approved
         labApproval = <Alert className="approved" bsStyle="success">{successIcon} Approved</Alert>;
         if (!this.props.isStudent) {
-          statusButton = <Button onClick={this._handleClick} bsStyle="danger">Remove approval</Button>;
+          statusButton = <Button onClick={this.handleClick} bsStyle="danger">Remove approval</Button>;
         } else {
           statusButton = <div></div>;
         }
@@ -83,7 +83,7 @@ var Labview = React.createClass({
         // the lab is not approved
         labApproval = <Alert className="notApproved" bsStyle="danger">{dangerIcon} Not approved</Alert>;
         if (!this.props.isStudent) {
-          statusButton = <Button onClick={this._handleClick} bsStyle="success">Approve</Button>;
+          statusButton = <Button onClick={this.handleClick} bsStyle="success">Approve</Button>;
         } else {
           statusButton = <div></div>;
         }
@@ -96,7 +96,7 @@ var Labview = React.createClass({
         <Col className="bottomPadding">
           <ButtonToolbar>
             {statusButton}
-            <Button bsStyle="info">Rebuild</Button>
+            <Button onClick={this.triggerBuild} bsStyle="info">Rebuild</Button>
             <Button bsStyle="default" onClick={this.handleExpand} className="pull-right">{expandedButtonText}</Button>
           </ButtonToolbar>
         </Col>

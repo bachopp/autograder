@@ -10,13 +10,13 @@ var mockData = require("../components/StudentResultsList/mockData.js");
 var ActionTypes = AGConstants.ActionTypes;
 
 var CHANGE_EVENT = "change";
-
-var selectedStudId = 0;
-var selectedLabId = 0;
 var logExpanded = false;
 
 var allStudents = mockData.students;
 var selectedStudents = allStudents;   // default all students are selected
+var selectedStudId = 0;
+var selectedLabId = 0;
+selectedStudents[selectedStudId].labs[selectedLabId].isSelected = true;
 
 function toggleLabExpand() {
   logExpanded = !logExpanded;
@@ -27,24 +27,25 @@ function resetStudents() {
 }
 
 function queryStudents(query) {
-  if(query) {
-    queryResults = [];
-    fullSList = selectedStudents;
-    query = query.toLowerCase();
-
-    fullSList.forEach(function(cStud) {
-      var uname = cStud.username.toLowerCase().search(query);
-      var fname = cStud.firstName.toLowerCase().search(query);
-      var lname = cStud.lastName.toLowerCase().search(query);
-
-      if(uname >= 0 || fname >= 0 || lname >= 0) {
-        queryResults.push(cStud);
-      }
-    });
-    return queryResults;
-  } else {
+  if(query.length == 0 || query == "" || query == " ") {
     return false;
   }
+  queryResults = [];
+  fullSList = selectedStudents;
+  query = query.toLowerCase();
+
+  fullSList.forEach(function(cStud) {
+    var uname = cStud.username.toLowerCase().search(query);
+    var fname = cStud.firstName.toLowerCase().search(query);
+    var lname = cStud.lastName.toLowerCase().search(query);
+
+    if(uname >= 0 || fname >= 0 || lname >= 0) {
+      queryResults.push(cStud);
+    }
+  });
+
+  return queryResults;
+
 }
 
 function getStudentLabs() {
@@ -122,6 +123,7 @@ LabViewStore.dispatchToken = AGDispatcher.register(function(action) {
       LabViewStore.emitChange();
       break;
     case ActionTypes.SEARCH_FOR_STUDENT:
+      
       var keep = queryStudents(action.query);
       if(keep) {
         updateStudentList(keep);
