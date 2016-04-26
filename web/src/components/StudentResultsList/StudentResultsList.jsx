@@ -35,8 +35,10 @@ var StudentResultsList = React.createClass({
   },
   render: function() {
     if(!this.state.students || this.state.students.length == 0) {
+      // store.getStudentLabs() returned []
       var ifElement = <h4>No students found</h4>;
     } else {
+      // store.getStudentLabs() returned a student list - correct
       var ifElement = <Table className="tables" striped={true} responsive={true} bordered={true}>
         <thead>
           <tr>

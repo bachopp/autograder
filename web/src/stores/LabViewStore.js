@@ -23,15 +23,22 @@ function toggleLabExpand() {
 }
 
 function resetStudents() {
+  console.log(selectedStudents);
   selectedStudents = allStudents;
+  selectedStudents[0].labs[0].isSelected = true;
+  console.log(selectedStudents);
 }
 
+// Search function - inputs the query and returns a list of students
+// this also set the current lab and student to the first one, if
+// the student is not in the queried selection
 function queryStudents(query) {
+  // full list of students
+  fullSList = selectedStudents;
   if(query.length == 0 || query == "" || query == " ") {
     return false;
   }
   queryResults = [];
-  fullSList = selectedStudents;
   query = query.toLowerCase();
 
   fullSList.forEach(function(cStud) {
@@ -44,9 +51,21 @@ function queryStudents(query) {
     }
   });
 
-  return queryResults;
+  /*
+    REALLY HOT BUG FIX.
+  */
+  for(var i = 0; i<queryResults.length;i++) {
+    var current = queryResults[i];
+    for(var j = 0; j<current.labs.length; j++) {
+      current.labs[j].isSelected = false;
+    }
+  }
 
+  queryResults[0].labs[0].isSelected = true;
+
+  return queryResults;
 }
+
 
 function getStudentLabs() {
   return selectedStudents;
@@ -59,13 +78,8 @@ function getSelectedStudentLab() {
   }
 }
 
+// updates the student list - if [] -> error
 function updateStudentList(newList) {
-  for(var i = 0; i<newList.length; i++){
-    if(!newList[1] == selectedStudents[selectedStudId]) {
-      selectedStudId = 0;
-      selectedLabId = 0;
-    }
-  }
   selectedStudents = newList;
 }
 
@@ -97,7 +111,8 @@ var LabViewStore = assign({},EventEmitter.prototype, {
     return getStudentLabs();
   },
   getSelectedStudent: function() {
-    return getStudentLabs()[selectedStudId];
+    var allStudents = getStudentLabs();
+    return allStudents[selectedStudId];
   },
   getSelectedStudentLab: function() {
     var lab = getSelectedStudentLab();
@@ -123,15 +138,20 @@ LabViewStore.dispatchToken = AGDispatcher.register(function(action) {
       LabViewStore.emitChange();
       break;
     case ActionTypes.SEARCH_FOR_STUDENT:
-      
       var keep = queryStudents(action.query);
-      if(keep) {
-        updateStudentList(keep);
-        LabViewStore.emitChange();
+      if(keep.length == 0) {
+        // no matching results
+        updateStudentList([]);
+      } else if(!keep) {
+        // query is empty -- updates the list with full student list
+        // must reset the student list to the raw again.
+        // might want to change this in a future version
+        resetStudents();
+        updateStudentList(getStudentLabs());
       } else {
-        updateStudentList([]);    // returns empty array if no results on search
-        LabViewStore.emitChange();
+        updateStudentList(keep);
       }
+      LabViewStore.emitChange();
       break;
     default:
       // do nothing here
