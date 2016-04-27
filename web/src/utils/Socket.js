@@ -22,6 +22,8 @@ var Socket =  function() {
       case ActionTypes.RECEIVE_COURSES_FOR_MODE:
         CourseNavServerActionCreators.receiveModeCourses(data.payload);
         break;
+      case ActionTypes.RECEIVE_STUDENTS_FOR_COURSE:
+        console.log(data.payload);
       default:
         // do nothing
     }

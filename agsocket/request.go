@@ -9,8 +9,9 @@ type Request struct {
 // Payload is the data that might be send with request
 type Payload struct {
 	// TODO: add more fields
-	User string `json:"username"`
-	Mode string `json:"mode"`
+	User   string `json:"username"`
+	Mode   string `json:"mode"`
+	Course string `json:"courseName"`
 }
 
 // Response is the json of the struct created

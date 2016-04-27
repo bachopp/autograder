@@ -51,9 +51,6 @@ var AdminMode = React.createClass({
           <AdminSideNav/>
         </Col>
         <Col xs={10}>
-          <Col xs={12} className="admininfobox">
-                <InfoBar infoType="Admin page" nav={self.state.nav}/>
-          </Col>
             {this.props.children}
         </Col>
       </Row>

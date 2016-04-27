@@ -42,5 +42,8 @@ module.exports = {
     // SideNav
     SWITCH_SIDE_NAV: null,
 
+    // students for course
+    RECEIVE_STUDENTS_FOR_COURSE: null,
+
   })
 };
