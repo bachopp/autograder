@@ -30,8 +30,10 @@ function queryStudents(query) {
   if(query.length == 0 || query == "" || query == " ") {
     return false;
   }
+
   queryResults = [];
   fullSList = selectedStudents;
+
   query = query.toLowerCase();
 
   fullSList.forEach(function(cStud) {
@@ -43,7 +45,7 @@ function queryStudents(query) {
       queryResults.push(cStud);
     }
   });
-
+  console.log(fullList.length + selectedStudents.length);
   return queryResults;
 
 }
@@ -123,7 +125,7 @@ LabViewStore.dispatchToken = AGDispatcher.register(function(action) {
       LabViewStore.emitChange();
       break;
     case ActionTypes.SEARCH_FOR_STUDENT:
-      
+
       var keep = queryStudents(action.query);
       if(keep) {
         updateStudentList(keep);
