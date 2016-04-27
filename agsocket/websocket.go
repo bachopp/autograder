@@ -16,8 +16,9 @@ const (
 	username = "username"
 	mode     = "mode"
 
-	ReceiveRawRoles       = "RECEIVE_RAW_ROLES"
-	ReceiveCoursesForMode = "RECEIVE_COURSES_FOR_MODE"
+	ReceiveRawRoles          = "RECEIVE_RAW_ROLES"
+	ReceiveCoursesForMode    = "RECEIVE_COURSES_FOR_MODE"
+	ReceiveStudentsForCourse = "RECEIVE_STUDENTS_FOR_COURSE"
 )
 
 var webroot = "/var/www/autograder/web/public"
@@ -77,6 +78,17 @@ func handleRequest(socket *websocket.Conn) {
 				socket.WriteMessage(msgType, arr)
 			}
 			msg, err := json.Marshal(Response{actionType, u})
+			socket.WriteMessage(msgType, msg)
+		case ReceiveStudentsForCourse:
+			fmt.Println(string(msg))
+			var err error
+			name := payload.Course
+			students, err := database.GetAllUsers(name)
+			if err != nil {
+				arr := []byte(err.Error())
+				socket.WriteMessage(msgType, arr)
+			}
+			msg, err := json.Marshal(Response{actionType, students})
 			socket.WriteMessage(msgType, msg)
 		default:
 			//no op

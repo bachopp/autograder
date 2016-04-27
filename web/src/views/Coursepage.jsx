@@ -11,6 +11,9 @@ var Table = require("react-bootstrap").Table;
 var ProgressBar = require("react-bootstrap").ProgressBar;
 var Row = require("react-bootstrap").Row;
 
+// api
+var CoursepageAPI = require("../utils/CoursepageAPI.js");
+
 // stores
 var LabViewStore = require("../stores/LabViewStore.js");
 
@@ -38,6 +41,7 @@ var Coursepage = React.createClass({
   },
   getInitialState: function() {
     //LabViewCourseActionCreators.receiveStudentlabs();
+    CoursepageAPI.getStudentsForCourse("DAT310");
     return getStatesFromStore();
   },
   componentWillUnmount: function() {

@@ -74,9 +74,7 @@ var TeacherMode = React.createClass({
               <Col xs={7}>
                 <CourseNav courses={courses} mode={mode.Teacher}/>
               </Col>
-              <Col xs={5} className="infoboxright">
-                <InfoBar infoType={infoType} nav={self.state.nav}/>
-              </Col>
+
           </Col>
 
           {this.props.children}

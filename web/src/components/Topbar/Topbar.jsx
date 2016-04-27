@@ -45,7 +45,7 @@ var Topbar = React.createClass({
     var self = this;
     var activeRole = this.state.activeRole;
     return (
-      <Navbar className="myNavbar">
+      <Navbar className="myNavbar fixinplace">
         <Navbar.Header>
           <Navbar.Brand>
             <Link to="/">Autograder</Link>
