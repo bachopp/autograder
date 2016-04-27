@@ -189,3 +189,36 @@ func addAssignment() {
 func removeAssignment(id int) {
 
 }
+
+// GetAllUsers return users array for a given course
+func GetAllUsers(courseName string) ([]User, error) {
+	connectDb()
+	defer con.Close()
+	cid := CourseID(courseName)
+	stmt, err := con.Prepare("SELECT user.userid, courseid, github, last_name, first_name " +
+		"FROM student_course " +
+		"INNER JOIN user " +
+		"ON student_course.userid = user.userid " +
+		"WHERE courseid = (?)")
+	if err != nil {
+		log.Fatal(err)
+	}
+	rows, err := stmt.Query(cid)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var students []User
+	var userid, courseid int
+	var github, lastName, firstName string
+	for rows.Next() {
+		err := rows.Scan(&userid, &courseid, &github, &lastName, &firstName)
+		if err != nil {
+			return nil, err
+		}
+		students = append(students, User{ID: userid, Github: github, LastName: lastName, FirstName: firstName})
+	}
+
+	return students, nil
+}

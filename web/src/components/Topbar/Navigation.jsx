@@ -31,6 +31,7 @@ var Navigation = React.createClass({
   },
   getLastCourse: function(role) {
     // TODO: coockies
+    console.log(role.Courses)
     return "/" + role.Courses.Courses[0].Name;
   },
 
