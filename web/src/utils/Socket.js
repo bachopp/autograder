@@ -1,6 +1,8 @@
 var TopBarServerActionCreators = require("../actions/TopBarServerActionCreators");
 var CoursesServerActionCreators = require("../actions/CoursesServerActionCreators");
 var CourseNavServerActionCreators = require("../actions/CourseNavServerActionCreators");
+var StudentResultsListServerActionCreators = require("../actions/StudentResultsListServerActionCreators");
+
 
 var AGConstants = require("../constants/AGConstants");
 var ActionTypes = AGConstants.ActionTypes;
@@ -24,6 +26,7 @@ var Socket =  function() {
         break;
       case ActionTypes.RECEIVE_STUDENTS_FOR_COURSE:
         console.log(data.payload);
+        StudentResultsListServerActionCreators.receiveAll(data.payload);
       default:
         // do nothing
     }
