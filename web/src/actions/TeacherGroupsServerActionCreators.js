@@ -7,7 +7,7 @@ module.exports = {
 
   receiveStudents: function(rawStudents) {
     AGDispatcher.dispatch({
-      type: ActionTypes.RECEIVE_RAW_STUDENTS,
+      type: ActionTypes.RECEIVE_STUDENTS_FOR_COURSE,
       rawStudents: rawStudents,
     });
   },

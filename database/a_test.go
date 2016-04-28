@@ -90,7 +90,7 @@ func TestDummyData(t *testing.T) {
 		t.Error(err)
 	}
 	// test courses
-	name := "DAT100"
+	name := "DAT310"
 	singleAssm := 5
 	groupAssm := 2
 	description := "Objektorientert programmering"
@@ -110,7 +110,7 @@ func TestDummyData(t *testing.T) {
 	isCodeReview = false
 	c2, err := InsertCourse(o2, name, singleAssm, groupAssm, description, slipdays, isSlipdays, isPrivRepo, isCodeReview)
 
-	name = "DAT310"
+	name = "DAT100"
 	singleAssm = 5
 	groupAssm = 2
 	description = "Databaser"

@@ -10,14 +10,15 @@ var Socket = require("./Socket.js");
 module.exports = {
   // TODO:  remove waifFor when it's fixed
   // TODO:  structurize payload better
-  getAllStudents: function() {
+  sentToken: false,
+
+  getAllStudents: function(course) {
     var mock = require("../components/StudentAvailableSelector/mock.js");
 
     Socket.waitForSocketConnection(Socket.ws, function() {
-      // var payload = RequestAPI.send(ActionTypes.RECEIVE_RAW_STUDENTS, {"username": "thomas"});
-      // Socket.ws.send(payload);
-      var arr = mock.stnr();
-      TeacherGroupsServerActionCreators.receiveStudents(arr);
+      var payload = RequestAPI.send(ActionTypes.RECEIVE_STUDENTS_FOR_COURSE, {"courseName": course});
+      Socket.ws.send(payload);
     });
+    this.sentToken = true;
   }
 };

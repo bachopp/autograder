@@ -32,7 +32,7 @@ function getStateFromStores() {
 var StudentAvailableSelector = React.createClass({
 
   getInitialState: function() {
-    StudentAvailableSelectorAPI.getAllStudents();
+    // StudentAvailableSelectorAPI.getAllStudents();
     return getStateFromStores();
   },
 

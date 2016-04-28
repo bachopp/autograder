@@ -1,6 +1,8 @@
 var TopBarServerActionCreators = require("../actions/TopBarServerActionCreators");
 var CoursesServerActionCreators = require("../actions/CoursesServerActionCreators");
 var CourseNavServerActionCreators = require("../actions/CourseNavServerActionCreators");
+var TeacherGroupsServerActionCreators = require("../actions/TeacherGroupsServerActionCreators");
+
 
 var AGConstants = require("../constants/AGConstants");
 var ActionTypes = AGConstants.ActionTypes;
@@ -23,6 +25,7 @@ var Socket =  function() {
         CourseNavServerActionCreators.receiveModeCourses(data.payload);
         break;
       case ActionTypes.RECEIVE_STUDENTS_FOR_COURSE:
+        TeacherGroupsServerActionCreators.receiveStudents(data.payload);
         console.log(data.payload);
       default:
         // do nothing

@@ -1,14 +1,19 @@
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 
+// api
+var StudentAvailableSelectorAPI = require("../utils/StudentAvailableSelectorAPI.js");
+
+
 // local
 var AGDispatcher = require('../dispatcher/AGDispatcher');
 var AGConstants = require('../constants/AGConstants.js');
 
-var GroupSelectorUtils = require('../utils/GroupSelectorUtils.js')
-
+var GroupSelectorUtils = require('../utils/GroupSelectorUtils.js');
+var TeacherGroupsStoreUtils = require('../utils/TeacherGroupsStoreUtils.js');
 // store dependencies
 var TeacherGroupsStore = require('./TeacherGroupsStore.js');
+var UsersStore = require('./UsersStore.js');
 
 var ActionTypes = AGConstants.ActionTypes;
 
@@ -178,7 +183,16 @@ var TeacherGroupsStore = assign({}, EventEmitter.prototype, {
   },
 
   getAllStudents: function() {
-    return _students;
+    var course = UsersStore.getActiveCourse();
+
+    if (_students === undefined || _students.length == 0) {
+      if (!StudentAvailableSelectorAPI.sentToken) {
+        StudentAvailableSelectorAPI.getAllStudents("DAT310");
+      }
+      return [];
+    } else {
+      return _students;
+    }
   },
 
   isGroupsExpanded: function() {
@@ -220,8 +234,9 @@ TeacherGroupsStore.dispachToken = AGDispatcher.register(function(action) {
       _removeStudentFromGroup(action.student, action.group);
       TeacherGroupsStore.emitChange();
       break;
-    case ActionTypes.RECEIVE_RAW_STUDENTS:
-      _newStudents(action.rawStudents);
+    case ActionTypes.RECEIVE_STUDENTS_FOR_COURSE:
+      students = TeacherGroupsStoreUtils.convertStudents(action.rawStudents);
+      _newStudents(students);
       TeacherGroupsStore.emitChange();
       break;
     case ActionTypes.QUERY_FOR_STUDENT:
