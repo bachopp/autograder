@@ -90,7 +90,7 @@ func TestDummyData(t *testing.T) {
 		t.Error(err)
 	}
 	// test courses
-	name := "DAT310"
+	name := "DAT100"
 	singleAssm := 5
 	groupAssm := 2
 	description := "Objektorientert programmering"
@@ -110,7 +110,7 @@ func TestDummyData(t *testing.T) {
 	isCodeReview = false
 	c2, err := InsertCourse(o2, name, singleAssm, groupAssm, description, slipdays, isSlipdays, isPrivRepo, isCodeReview)
 
-	name = "DAT100"
+	name = "DAT310"
 	singleAssm = 5
 	groupAssm = 2
 	description = "Databaser"
@@ -136,46 +136,47 @@ func TestDummyData(t *testing.T) {
 	if err := u1.AddToCourse(c3, student); err != nil {
 		t.Error(err)
 	}
-	if err := u2.AddToCourse(c3, student); err != nil {
+
+	if err := u2.AddToCourse(c1, student); err != nil {
 		t.Error(err)
 	}
-	if err := u3.AddToCourse(c3, student); err != nil {
+	if err := u3.AddToCourse(c1, student); err != nil {
 		t.Error(err)
 	}
-	if err := u4.AddToCourse(c3, student); err != nil {
+	if err := u4.AddToCourse(c1, student); err != nil {
 		t.Error(err)
 	}
-	if err := u5.AddToCourse(c3, student); err != nil {
+	if err := u5.AddToCourse(c1, student); err != nil {
 		t.Error(err)
 	}
-	if err := u6.AddToCourse(c3, student); err != nil {
+	if err := u6.AddToCourse(c1, student); err != nil {
 		t.Error(err)
 	}
-	if err := u7.AddToCourse(c3, student); err != nil {
+	if err := u7.AddToCourse(c1, student); err != nil {
 		t.Error(err)
 	}
-	if err := u8.AddToCourse(c3, student); err != nil {
+	if err := u8.AddToCourse(c1, student); err != nil {
 		t.Error(err)
 	}
-	if err := u9.AddToCourse(c3, student); err != nil {
+	if err := u9.AddToCourse(c1, student); err != nil {
 		t.Error(err)
 	}
-	if err := u10.AddToCourse(c3, student); err != nil {
+	if err := u10.AddToCourse(c1, student); err != nil {
 		t.Error(err)
 	}
-	if err := u11.AddToCourse(c3, student); err != nil {
+	if err := u11.AddToCourse(c1, student); err != nil {
 		t.Error(err)
 	}
-	if err := u12.AddToCourse(c3, student); err != nil {
+	if err := u12.AddToCourse(c1, student); err != nil {
 		t.Error(err)
 	}
-	if err := u13.AddToCourse(c3, student); err != nil {
+	if err := u13.AddToCourse(c1, student); err != nil {
 		t.Error(err)
 	}
-	if err := u14.AddToCourse(c3, student); err != nil {
+	if err := u14.AddToCourse(c1, student); err != nil {
 		t.Error(err)
 	}
-	if err := u15.AddToCourse(c3, student); err != nil {
+	if err := u15.AddToCourse(c1, student); err != nil {
 		t.Error(err)
 	}
 }
