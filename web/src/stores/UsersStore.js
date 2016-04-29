@@ -111,9 +111,6 @@ UsersStore.dispachToken = AGDispatcher.register(function(action) {
       // TODO: create constant, create action and call for actions in CourseNav!
       UsersStore.emitChange();
       break;
-    case ActionTypes.SWITCH_MODE:
-      UsersStore.emitChange();
-      break;
     case ActionTypes.SWITCH_SIDE_NAV:
       // _currentSideNav = action.mode;
       // UsersStore.emitChange();

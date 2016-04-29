@@ -16,6 +16,8 @@ const groupIcon = <i className="fa fa-users fa-fw"></i>;
 const infoIcon = <i className="fa fa-info fa-fw"></i>;
 const settingsIcon = <i className="fa fa-cog fa-fw"></i>;
 
+// stores
+var UsersStore = require("../../stores/UsersStore.js");
 // actions
 var SideNavActionCreators = require("../../actions/SideNavActionCreators.js");
 
@@ -32,7 +34,8 @@ var TeacherSideNav = React.createClass({
 
   getLastCourse: function(courses) {
     // TODO: coockies
-    return courses[0];
+    return UsersStore.getActiveCourse();
+
   },
 
   render: function() {

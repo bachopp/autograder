@@ -16,15 +16,13 @@ var Col = require("react-bootstrap").Col;
 var GroupSelectorElement = require("./GroupSelectorElement.jsx");
 var GroupSelectorAdd = require("./GroupSelectorAdd.jsx");
 
-var GroupSelectorAPI = require("../../utils/GroupSelectorAPI.js");
+var TeacherGroupsAPI = require("../../utils/TeacherGroupsAPI.js");
+
+//stores
 var TeacherGroupsStore = require("../../stores/TeacherGroupsStore.js");
+var UsersStore = require("../../stores/UsersStore.js");
 
 var TeacherGroupsActionCreators = require("../../actions/TeacherGroupsActionCreators.js");
-
-// stores
-var mock = require("./mock.js");
-// var TeacherGroupsStore = require("../../stores/TeacherGroupsStore.js");
-
 
 function getStateFromStores() {
   return {
@@ -36,15 +34,17 @@ function getStateFromStores() {
 var GroupSelector = React.createClass({
 
   getInitialState: function() {
-    GroupSelectorAPI.getAllGroups()
+    TeacherGroupsAPI.getAllGroups();
     return getStateFromStores();
   },
 
   componentDidMount: function() {
     TeacherGroupsStore.addChangeListener(this._onChange);
+    UsersStore.addChangeListener(this._onChange);
   },
   componentWillUnmount: function() {
     TeacherGroupsStore.removeChangeListener(this._onChange);
+    UsersStore.removeChangeListener(this._onChange);
   },
 
   activateGroup: function(group) {

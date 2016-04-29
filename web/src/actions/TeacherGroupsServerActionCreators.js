@@ -13,7 +13,7 @@ module.exports = {
   },
   receiveGroups: function(rawGroups) {
     AGDispatcher.dispatch({
-      type: ActionTypes.RECEIVE_RAW_GROUPS,
+      type: ActionTypes.RECEIVE_GROUPS_FOR_COURSE,
       rawGroups: rawGroups,
     });
   },

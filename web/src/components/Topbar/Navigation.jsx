@@ -23,7 +23,7 @@ var Navigation = React.createClass({
   },
 
   handleClick: function(mode) {
-    TopBarActionCreators.receiveUserCourses(mode);
+    TopBarActionCreators.changeMode(mode);
   },
 
   getLastSideNav: function() {

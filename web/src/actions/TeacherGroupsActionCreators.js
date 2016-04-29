@@ -10,7 +10,7 @@ module.exports = {
       type: ActionTypes.ADD_TO_GROUP,
       rawStudent: rawStudent,
     });
-    // TODO: call StudentAvailableSelectorAPI to send data to DB
+    // TODO: call TeacherGroupsAPI to send data to DB
   },
   searchForStudent: function(query) {
     AGDispatcher.dispatch({
@@ -30,14 +30,14 @@ module.exports = {
     AGDispatcher.dispatch({
       type: ActionTypes.ADD_NEW_GROUP,
     });
-    // TODO call GroupSelectorAPI to inser group to DB
+    // TODO call TeacherGroupsAPI to inser group to DB
   },
   removeGroup: function(group) {
     AGDispatcher.dispatch({
       type: ActionTypes.REMOVE_GROUP,
       group: group,
     });
-    // TODO call GroupSelectorAPI to release students from group update DB
+    // TODO call TeacherGroupsAPI to release students from group update DB
   },
   removeUser: function(student, group) {
     AGDispatcher.dispatch({

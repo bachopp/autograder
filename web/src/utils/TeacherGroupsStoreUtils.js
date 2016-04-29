@@ -5,15 +5,19 @@ module.exports = {
   convertStudents: function(rawStudents) {
     var i = 0;
     var students = [];
-    rawStudents.forEach(function(rawStud) {
-      var stud = {};
-      stud.firstName = rawStud.FirstName;
-      stud.lastName = rawStud.LastName;
-      stud.hasGroup = false;
-      stud.username = rawStud.Github;
-      stud.studentNumber = i++;
-      students.push(stud);
-    });
-    return students;
+    if (rawStudents === null || rawStudents === undefined || rawStudents.length == 0) {
+      return [];
+    } else {
+      rawStudents.forEach(function(rawStud) {
+        var stud = {};
+        stud.firstName = rawStud.FirstName;
+        stud.lastName = rawStud.LastName;
+        stud.hasGroup = false;
+        stud.username = rawStud.Github;
+        stud.studentNumber = i++;
+        students.push(stud);
+      });
+      return students;
+    }
   },
 }

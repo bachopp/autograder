@@ -9,12 +9,12 @@ var Table = require("react-bootstrap").Table;
 
 // stores
 var TeacherGroupsStore = require("../../stores/TeacherGroupsStore.js");
-
+var UsersStore = require("../../stores/UsersStore.js");
 // actions
 var TeacherGroupsActionCreators = require("../../actions/TeacherGroupsActionCreators.js");
 
 // API
-var StudentAvailableSelectorAPI = require("../../utils/StudentAvailableSelectorAPI.js");
+var TeacherGroupsAPI = require("../../utils/TeacherGroupsAPI.js");
 
 // local
 var StudentAvailableSelectorElement = require("./StudentAvailableSelectorElement.jsx");
@@ -32,17 +32,19 @@ function getStateFromStores() {
 var StudentAvailableSelector = React.createClass({
 
   getInitialState: function() {
-    // StudentAvailableSelectorAPI.getAllStudents();
+    // TeacherGroupsAPI.getAllStudents();
     return getStateFromStores();
   },
 
   componentDidMount: function() {
     TeacherGroupsStore.addChangeListener(this._onChange);
+    UsersStore.addChangeListener(this._onChange);
   },
 
 // three hours of debugging becouse componentWill/u/Unmount
   componentWillUnmount: function() {
     TeacherGroupsStore.removeChangeListener(this._onChange);
+    UsersStore.removeChangeListener(this._onChange);
   },
 
   render: function() {

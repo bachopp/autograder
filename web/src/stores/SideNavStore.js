@@ -11,16 +11,16 @@ var ActionTypes = AGConstants.ActionTypes;
 
 var CHANGE_EVENT = 'change';
 
-var _currentMode = '';
+// var _currentMode = '';
 var _activeElement = '';
-var _sideElements = {
-  Teacher:["results","groups","users","settings","info"],
-  Student:[{
-    labs:[],
-    grouplabs:[]
-  },"members","groups","settings","info"],
-  Admin:["settings", "info"],
-};
+// var _sideElements = {
+//   Teacher:["results","groups","users","settings","info"],
+//   Student:[{
+//     labs:[],
+//     grouplabs:[]
+//   },"members","groups","settings","info"],
+//   Admin:["settings", "info"],
+// };
 
 var SideNavStore = assign({}, EventEmitter.prototype, {
 
@@ -47,11 +47,6 @@ SideNavStore.dispachToken = AGDispatcher.register(function(action) {
 
   switch(action.type) {
     // TODO: finish switch statement for different actions
-
-     case ActionTypes.SWITCH_MODE:
-      _currentMode = action.mode;
-      SideNavStore.emitChange();
-      break;
      case ActionTypes.SWITCH_SIDE_NAV:
       _activeElement = action.element;
       SideNavStore.emitChange();

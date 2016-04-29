@@ -13,12 +13,25 @@ module.exports = {
   sentToken: false,
 
   getAllStudents: function(course) {
-    var mock = require("../components/StudentAvailableSelector/mock.js");
-
     Socket.waitForSocketConnection(Socket.ws, function() {
       var payload = RequestAPI.send(ActionTypes.RECEIVE_STUDENTS_FOR_COURSE, {"courseName": course});
       Socket.ws.send(payload);
     });
     this.sentToken = true;
-  }
+  },
+
+  getAllGroups: function(course) {
+    var mock = require("../components/GroupSelector/mock.js");
+    var arr = mock.stnr();
+    console.log(course);
+    TeacherGroupsServerActionCreators.receiveGroups(arr);
+
+    // Socket.waitForSocketConnection(Socket.ws, function() {
+    //   var payload = RequestAPI.send(ActionTypes.RECEIVE_GROUPS_FOR_COURSE, {"courseName": course});
+    //   Socket.ws.send(payload);
+    // });
+
+    this.sentToken = true;
+  },
+
 };

@@ -9,6 +9,7 @@ var Button = require("react-bootstrap").Button;
 
 // actions
 var TopBarActionCreators = require("../actions/TopBarActionCreators.js");
+var CourseNavActionCreators = require("../actions/CourseNavActionCreators.js");
 
 // API
 var CourseNavAPI = require("../utils/CourseNavAPI.js");
@@ -34,7 +35,6 @@ function getStateFromStores() {
     courses: UsersStore.getCoursesForMode(mode.Teacher),
     currentCourse: UsersStore.getActiveCourse(),
     activeElement: SideNavStore.getActiveElement(),
-    nav: SideNavStore.getActiveElement(),
   };
 }
 
@@ -46,11 +46,11 @@ var TeacherMode = React.createClass({
   },
 
   componentDidMount: function() {
-    TopBarActionCreators.receiveUserCourses(mode.Teacher);
+    TopBarActionCreators.changeMode(mode.Teacher);
+    CourseNavActionCreators.changeActiveCourse(this.props.params.coursename);
+
     UsersStore.addChangeListener(this._onChange);
     SideNavStore.addChangeListener(this._onChange);
-
-    // TopBarActionCreators.receiveUserCourses(mode);
   },
 
   componentWillUnmount: function() {
@@ -59,11 +59,15 @@ var TeacherMode = React.createClass({
   },
 
   render: function() {
+    // from url
+    var coursename = this.props.params.coursename;
+
     var self = this;
     var courses = this.state.courses;
     var infoType = "Teacher " + this.state.currentCourse;
     var activeElement = this.state.activeElement;
 
+    console.log()
     return(
       <Row>
         <Col xs={2}>

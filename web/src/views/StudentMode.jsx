@@ -43,7 +43,7 @@ var StudentMode = React.createClass({
   },
 
   componentDidMount: function() {
-    TopBarActionCreators.receiveUserCourses(mode.Student);
+    TopBarActionCreators.changeMode(mode.Student);
     UsersStore.addChangeListener(this._onChange);
     SideNavStore.addChangeListener(this._onChange);
   },

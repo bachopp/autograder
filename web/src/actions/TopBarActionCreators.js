@@ -5,7 +5,7 @@ var ActionTypes = AGConstants.ActionTypes;
 
 module.exports = {
 
-  receiveUserCourses: function(mode) {
+  changeMode: function(mode) {
     AGDispatcher.dispatch({
       type: ActionTypes.SWITCH_MODE,
       mode: mode,
