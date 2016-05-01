@@ -15,15 +15,13 @@ var ActionTypes = AGConstants.ActionTypes;
 var CHANGE_EVENT = "change";
 var logExpanded = false;
 
-var fullStudentList = mockData.students;
-var selectedStudents = fullStudentList;
+//var fullStudentList = mockData.students;
+//var selectedStudents = fullStudentList;
 
 var selectedStudId = 0;     // default 0
 var selectedLabId = 0;      // default 0
-selectedStudents[selectedStudId].labs[selectedLabId].isSelected = true; // first student is selected
-
-
-
+var selectedStudents = [];
+//selectedStudents[selectedStudId].labs[selectedLabId].isSelected = true; // first student is selected
 
 var Student = function() {
   this.id = null;
@@ -87,42 +85,22 @@ var Student = function() {
   ];
 }
 
-function updateRawStudentList(rawStudentList) {
-  for(var i = 0; i<rawStudentList; i++){
-    var student = rawStudentList[i];
-    var newStud = new Student();
-    newStud.firstName = student.firstName;
-    newStud.lastName = student.lastName;
-    newStud.username = student.Github;
-    newStud.id = student.ID;
-    newStud.studentNumber = 223344;
-    newStud.slipDay = 4;
-    newStud.hasGroup = false;
-
-    console.log(newStud);
+function updateRawList(rawList) {
+  _newList = [];
+  for(var i = 0; i<rawList.length; i++) {
+    var current = rawList[i];
+    var s = new Student();
+    s.id = current.ID -1;               // HOT FIXING
+    s.username = current.Github;
+    s.firstName = current.FirstName;
+    s.lastName = current.LastName;
+    s.studentNumber = 223344;
+    s.slipDays = 6;
+    s.hasGroup = false;
+    _newList.push(s);
   }
-
-  //selectedStudents = rawStudentList;
-}
-
-
-
-
-
-
-
-function resetStudents() {
-  //console.log("RESET STUDENTS");
-  selectedStudents = [];
-  selectedStudents = fullStudentList;
-
-  selectedStudents.forEach(function(student) {
-    for(var i = 0; i<student.labs.length; i++) {
-      student.labs[i].isSelected = false;
-    }
-  });
-
-  selectedStudents[0].labs[0].isSelected = true;
+  selectedStudents = _newList;
+  fullStudentList = _newList;
 }
 
 // Search function - inputs the query and returns a list of students
@@ -130,9 +108,8 @@ function resetStudents() {
 // the student is not in the queried selection
 
 
-
 function queryStudents(query) {
-  //console.log("QUERY: " + query);
+
   resetStudents();
   if(query.length == 0 || query == "" || query == " ") {
     return false;
@@ -141,23 +118,36 @@ function queryStudents(query) {
   query = query.toLowerCase();
 
   selectedStudents.forEach(function(cStud) {
-
-    var uname = cStud.username.toLowerCase().indexOf(query);
+    // username is not used in this view -> therefore not implemented
+    //var uname = cStud.username.toLowerCase().indexOf(query);
     var fname = cStud.firstName.toLowerCase().indexOf(query);
     var lname = cStud.lastName.toLowerCase().indexOf(query);
+    var fullname = (cStud.firstName + " " + cStud.lastName).toLowerCase().indexOf(query);
 
-    if(uname >= 0 || fname >= 0 || lname >= 0) {
+    if(fullname >= 0 || fname >= 0 || lname >= 0) {
       queryResults.push(cStud);
     }
   });
-  console.log(queryResults);
-  console.log("-------------------");
 
-  //selectedStudents = queryResults;
-  queryResults[0].labs[0].isSelected = true;
+  if(queryResults.length > 0) {
+    queryResults[0].labs[0].isSelected = true;
+  }
   return queryResults;
 }
 
+function resetStudents() {
+
+  selectedStudents = fullStudentList;
+  for(var i = 0; i<selectedStudents.length; i++) {
+    var c = selectedStudents[i];
+    for(var j = 0; j<c.labs.length;j++) {
+      c.labs[j].isSelected = false;
+    }
+  }
+
+  selectedStudents[0].labs[0].isSelected = true;
+
+}
 
 
 function getStudentLabs() {
@@ -169,17 +159,22 @@ function getStudentLabs() {
   return selectedStudents;
 }
 function getSelectedStudentLab() {
-  if(selectedStudents.length == 0) {
-    return false;
+  var students = getStudentLabs();
+  if(selectedStudId > students.length - 1) {
+    // before this is set
+    selectedStudId = 0;
+    selectedLabId = 0;
+  }
+  if(students.length > 0) {
+    return students[selectedStudId].labs[selectedLabId];
   } else {
-    return selectedStudents[selectedStudId].labs[selectedLabId];
+    return false;
   }
 }
 
 // updates the student list - if [] -> error
 function updateStudentList(newList) {
   if(newList == 0 || !newList || newList.length == 0) {
-    console.log("EMPTY UPDATE");
   }
   selectedStudents = newList;
 }
@@ -233,7 +228,9 @@ var LabViewStore = assign({},EventEmitter.prototype, {
 LabViewStore.dispatchToken = AGDispatcher.register(function(action) {
   switch(action.type) {
     case ActionTypes.RECEIVE_STUDENTS_FOR_COURSE:
-      updateRawStudentList(action.courseStudents);
+      //console.log(":::::::::::::::::::::::::");
+      updateRawList(action.courseStudents);
+      //updateRawStudentList(action.courseStudents);
       LabViewStore.emitChange();
       break;
     case ActionTypes.SET_SELECTED_STUDENTLAB:
@@ -252,15 +249,13 @@ LabViewStore.dispatchToken = AGDispatcher.register(function(action) {
     case ActionTypes.SEARCH_FOR_STUDENT:
       var keep = queryStudents(action.query);
       if(keep.length == 0) {
-        // no matching results
-        //console.log("NO MATCH");
+        // no results => send an empty list to the updater
         updateStudentList([]);
       } else if(!keep) {
-        // query is empty -- updates the list with full student list
-        // must reset the student list to the raw again.
-        // might want to change this in a future version
+        // query is empty -> resets the students
         resetStudents();
       } else {
+        // student were found and the studentList is updated
         updateStudentList(keep);
       }
       LabViewStore.emitChange();

@@ -10,7 +10,6 @@ module.exports = {
   // TODO:  remove waifFor when it's fixed
   // TODO:  call for more data, like course description
   getStudentsForCourse: function(name) {
-
     Socket.waitForSocketConnection(Socket.ws, function() {
       var payload = RequestAPI.send(ActionTypes.RECEIVE_STUDENTS_FOR_COURSE, {"courseName": name});
       Socket.ws.send(payload);

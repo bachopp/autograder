@@ -15,7 +15,6 @@ var Socket =  function() {
     // TODO: emit that message has arrived
     // figure out what ActionCreator to call with new data?
     var data = JSON.parse(m.data);
-
     switch(data.actionType) {
       case ActionTypes.RECEIVE_RAW_ROLES:
         TopBarServerActionCreators.receiveAll(data.payload);
@@ -25,7 +24,7 @@ var Socket =  function() {
         CourseNavServerActionCreators.receiveModeCourses(data.payload);
         break;
       case ActionTypes.RECEIVE_STUDENTS_FOR_COURSE:
-        console.log(data.payload);
+        //console.log(data.payload);
         StudentResultsListServerActionCreators.receiveAll(data.payload);
       default:
         // do nothing
