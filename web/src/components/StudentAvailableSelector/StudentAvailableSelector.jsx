@@ -24,12 +24,15 @@ var StudentAvailableSelectorSearch = require("./StudentAvailableSelectorSearch.j
 function getStateFromStores() {
    return {
     query: '',
-    students: TeacherGroupsStore.getAllStudents(),
   };
 };
 
 // this className
 var StudentAvailableSelector = React.createClass({
+
+  propTypes: {
+    students: React.PropTypes.array.isRequired,
+  },
 
   getInitialState: function() {
     // TeacherGroupsAPI.getAllStudents();
@@ -48,7 +51,7 @@ var StudentAvailableSelector = React.createClass({
   },
 
   render: function() {
-    var students = this.state.students;
+    var students = this.props.students;
     var self = this;
     return (
         <div>

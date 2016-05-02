@@ -26,12 +26,14 @@ var TeacherGroupsActionCreators = require("../../actions/TeacherGroupsActionCrea
 
 function getStateFromStores() {
   return {
-    groups: TeacherGroupsStore.getAllGroups(),
     isGroupsExpanded: TeacherGroupsStore.isGroupsExpanded(),
   };
 }
 // this className
 var GroupSelector = React.createClass({
+  propTypes: {
+    groups: React.PropTypes.array.isRequired,
+  },
 
   getInitialState: function() {
     TeacherGroupsAPI.getAllGroups();
@@ -70,7 +72,7 @@ var GroupSelector = React.createClass({
 
 
     var self = this;
-    var groups = this.state.groups;
+    var groups = this.props.groups;
     var isGroupsExpanded = this.state.isGroupsExpanded;
     var expandToggle = "Expand";
     if (isGroupsExpanded) {

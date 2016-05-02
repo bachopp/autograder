@@ -174,6 +174,7 @@ var TeacherGroupsStore = assign({}, EventEmitter.prototype, {
     var course = UsersStore.getActiveCourse();
       if (!TeacherGroupsAPI.sentToken) {
         TeacherGroupsAPI.getAllGroups(course);
+        console.log([]);
         return [];
       }
       return _groups;
@@ -207,6 +208,7 @@ TeacherGroupsStore.dispachToken = AGDispatcher.register(function(action) {
     case ActionTypes.RECEIVE_GROUPS_FOR_COURSE:
       _newGroups(action.rawGroups);
       TeacherGroupsStore.emitChange();
+      console.log(action);
       break;
     case ActionTypes.RECEIVE_RAW_GROUPS:
       _newGroups(action.rawGroups);
@@ -251,8 +253,8 @@ TeacherGroupsStore.dispachToken = AGDispatcher.register(function(action) {
       break;
     case ActionTypes.QUERY_FOR_STUDENT:
       var keep = _newStudents(_searchFor(action.query));
-      TeacherGroupsStore.emitChange();
       var _ = _newStudents(keep);
+      TeacherGroupsStore.emitChange();
       break;
     case ActionTypes.EXPANDE_ALL_GROUPS:
       _expandAllGroups();

@@ -21,6 +21,12 @@ var UsersStore = require("../../stores/UsersStore.js");
 // actions
 var SideNavActionCreators = require("../../actions/SideNavActionCreators.js");
 
+function getStateFromStores() {
+  return {
+    activeCourse: UsersStore.getActiveCourse(),
+  }
+}
+
 var TeacherSideNav = React.createClass({
 
   propTypes: {
@@ -28,11 +34,24 @@ var TeacherSideNav = React.createClass({
     activeElement: React.PropTypes.string.isRequired,
   },
 
+  getInitialState: function() {
+    // Calls for initial data from server on first render cycle only when mounted.
+    return getStateFromStores();
+  },
+
+  componentDidMount: function() {
+    UsersStore.addChangeListener(this._onChange);
+  },
+
+  componentWillUnmount: function() {
+    UsersStore.removeChangeListener(this._onChange);
+  },
+
   handleClick: function(activeElement) {
     SideNavActionCreators.changeActiveSideElement(activeElement);
   },
 
-  getLastCourse: function(courses) {
+  getLastCourse: function() {
     // TODO: coockies
     return UsersStore.getActiveCourse();
 
@@ -44,7 +63,8 @@ var TeacherSideNav = React.createClass({
 
     var activeElement = this.props.activeElement;
 
-    var lastCourse = this.getLastCourse(this.props.courses);
+    var lastCourse = this.getLastCourse();
+    console.log(lastCourse);
 
     return(
       <Col xs={12} className="whitebox">
@@ -72,7 +92,10 @@ var TeacherSideNav = React.createClass({
         {this.props.children}
       </Col>
     );
-  }
+  },
+  _onChange: function() {
+    this.setState(getStateFromStores());
+  },
 });
 
 

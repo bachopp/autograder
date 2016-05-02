@@ -23,7 +23,7 @@ module.exports = {
   getAllGroups: function(course) {
     var mock = require("../components/GroupSelector/mock.js");
     var arr = mock.stnr();
-    console.log(course);
+    // console.log(course);
     TeacherGroupsServerActionCreators.receiveGroups(arr);
 
     // Socket.waitForSocketConnection(Socket.ws, function() {
