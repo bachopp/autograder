@@ -49,10 +49,6 @@ CoursesStore.dispatchToken = AGDispatcher.register(function(action) {
       _newCourses(courses);
       CoursesStore.emitChange();
       break;
-    case ActionTypes.SWITCH_COURSE:
-
-      CoursesStore.emitChange();
-      break;
     default:
      // no action
   }

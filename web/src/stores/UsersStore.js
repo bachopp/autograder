@@ -22,11 +22,20 @@ var _navCourses = [];
 var _currentRole = '';
 
 var _currentSideNav = '';
-var _activeCourse = '';
+var _activeCourseTeacher = '';
+var _activeCourseStudent= '';
 
 
 function _addRoles(rawRoles) {
   _roles = rawRoles;
+}
+
+function _changeCourse(course) {
+  if (_currentRole == mode.Teacher) {
+    _activeCourseTeacher = course;
+  } else if (_currentRole == mode.Student) {
+    _activeCourseStudent = course;
+  }
 }
 
 var UsersStore = assign({}, EventEmitter.prototype, {
@@ -64,8 +73,20 @@ var UsersStore = assign({}, EventEmitter.prototype, {
   getCurrentSideNav: function() {
     return _currentSideNav;
   },
-  getActiveCourse: function() {
-    return _activeCourse;
+  getActiveCourse: function(m) {
+    // if mode provided - topbar + external links
+    if (m == mode.Teacher) {
+      return _activeCourseTeacher;
+    } else if (m == mode.Student) {
+      return _activeCourseStudent;
+    }
+
+    // if mode not provided use active mode
+    if (_currentRole == mode.Teacher) {
+      return _activeCourseTeacher;
+    } else if (_currentRole == mode.Student) {
+      return _activeCourseStudent;
+    }
   },
   getCurrentRole: function() {
     return _currentRole;
@@ -94,7 +115,7 @@ UsersStore.dispachToken = AGDispatcher.register(function(action) {
       UsersStore.emitChange();
       break;
     case ActionTypes.SWITCH_COURSE:
-      _activeCourse = action.course;
+      _changeCourse(action.course);
       // TODO: create constant, create action and call for actions in CourseNav!
       UsersStore.emitChange();
       break;

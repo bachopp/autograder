@@ -7,13 +7,13 @@ module.exports = {
 
   receiveStudents: function(rawStudents) {
     AGDispatcher.dispatch({
-      type: ActionTypes.RECEIVE_RAW_STUDENTS,
+      type: ActionTypes.RECEIVE_STUDENTS_FOR_COURSE,
       rawStudents: rawStudents,
     });
   },
   receiveGroups: function(rawGroups) {
     AGDispatcher.dispatch({
-      type: ActionTypes.RECEIVE_RAW_GROUPS,
+      type: ActionTypes.RECEIVE_GROUPS_FOR_COURSE,
       rawGroups: rawGroups,
     });
   },

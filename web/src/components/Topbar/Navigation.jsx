@@ -11,7 +11,7 @@ var DropdownList = require("./DropdownList.jsx")
 
 // stores
 var TopBarActionCreators = require("../../actions/TopBarActionCreators.js");
-
+var UsersStore = require("../../stores/UsersStore.js");
 // constants
 var constants = require("../../constants/constants.js");
 var mode = constants.mode;
@@ -23,7 +23,7 @@ var Navigation = React.createClass({
   },
 
   handleClick: function(mode) {
-    TopBarActionCreators.receiveUserCourses(mode);
+    TopBarActionCreators.changeMode(mode);
   },
 
   getLastSideNav: function() {
@@ -31,8 +31,11 @@ var Navigation = React.createClass({
   },
   getLastCourse: function(role) {
     // TODO: coockies
-    //console.log(role.Courses)
-    return "/" + role.Courses.Courses[0].Name;
+    var mode = UsersStore.getActiveCourse(role.Mode);
+    if (mode == "") {
+      return "/" + role.Courses.Courses[0].Name;
+    }
+    return "/" + mode;
   },
 
   render:function() {

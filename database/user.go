@@ -225,7 +225,10 @@ func (user *User) AddToCourse(course *Course, modes ...string) error {
 	defer tx.Rollback()
 	for _, mode := range modes {
 		// ok, err := checkMode(user.ID, mode)
-		isMode, err := checkMode(user.ID, mode)
+		isMode, errmd := checkMode(user.ID, mode)
+		if errmd != nil {
+			return errmd
+		}
 
 		if !isMode {
 			var sqls string
@@ -236,9 +239,9 @@ func (user *User) AddToCourse(course *Course, modes ...string) error {
 				sqls = "INSERT INTO " + mode + " (userid) " +
 					"VALUES (?)"
 			}
-			stmt, err := tx.Prepare(sqls)
-			if err != nil {
-				return err
+			stmt, errp := tx.Prepare(sqls)
+			if errp != nil {
+				return errp
 			}
 			defer stmt.Close()
 			_, err = stmt.Exec(user.ID)
@@ -252,10 +255,10 @@ func (user *User) AddToCourse(course *Course, modes ...string) error {
 				return err
 			}
 		}
-		stmt2, err := tx.Prepare("INSERT INTO " + mode + "_course " +
+		stmt2, errp := tx.Prepare("INSERT INTO " + mode + "_course " +
 			"VALUES (?,?)")
-		if err != nil {
-			return err
+		if errp != nil {
+			return errp
 		}
 		defer stmt2.Close() // danger!
 		_, err = stmt2.Exec(user.ID, course.ID)

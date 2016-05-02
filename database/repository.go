@@ -6,9 +6,12 @@ type Repository struct {
 	url  string
 }
 
+// NewRepository placeholder
 func NewRepository() {
 
 }
+
+// InsertRepository placeholder
 func InsertRepository() {
 
 }

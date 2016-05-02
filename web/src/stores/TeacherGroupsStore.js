@@ -1,14 +1,18 @@
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 
+// api
+var TeacherGroupsAPI = require("../utils/TeacherGroupsAPI.js");
+
+
 // local
 var AGDispatcher = require('../dispatcher/AGDispatcher');
 var AGConstants = require('../constants/AGConstants.js');
 
-var GroupSelectorUtils = require('../utils/GroupSelectorUtils.js')
-
+var TeacherGroupsStoreUtils = require('../utils/TeacherGroupsStoreUtils.js');
 // store dependencies
 var TeacherGroupsStore = require('./TeacherGroupsStore.js');
+var UsersStore = require('./UsersStore.js');
 
 var ActionTypes = AGConstants.ActionTypes;
 
@@ -167,7 +171,13 @@ var TeacherGroupsStore = assign({}, EventEmitter.prototype, {
 
 
   getAllGroups: function() {
-    return _groups;
+    var course = UsersStore.getActiveCourse();
+      if (!TeacherGroupsAPI.sentToken) {
+        TeacherGroupsAPI.getAllGroups(course);
+        console.log([]);
+        return [];
+      }
+      return _groups;
   },
   getActiveGroup: function() {
     return _activeGroup;
@@ -178,7 +188,12 @@ var TeacherGroupsStore = assign({}, EventEmitter.prototype, {
   },
 
   getAllStudents: function() {
-    return _students;
+    var course = UsersStore.getActiveCourse();
+      if (!TeacherGroupsAPI.sentToken) {
+        TeacherGroupsAPI.getAllStudents(course);
+        return [];
+      }
+      return _students;
   },
 
   isGroupsExpanded: function() {
@@ -189,10 +204,16 @@ var TeacherGroupsStore = assign({}, EventEmitter.prototype, {
 TeacherGroupsStore.dispachToken = AGDispatcher.register(function(action) {
   switch(action.type) {
     // TODO: finish switch statement for different actions
+
+    case ActionTypes.RECEIVE_GROUPS_FOR_COURSE:
+      _newGroups(action.rawGroups);
+      TeacherGroupsStore.emitChange();
+      console.log(action);
+      break;
     case ActionTypes.RECEIVE_RAW_GROUPS:
-    _newGroups(action.rawGroups);
-    TeacherGroupsStore.emitChange();
-    break;
+      _newGroups(action.rawGroups);
+      TeacherGroupsStore.emitChange();
+      break;
     case ActionTypes.TOGGLE_GROUP:
       _setOneGroupActive(action.group);
       TeacherGroupsStore.emitChange();
@@ -220,14 +241,20 @@ TeacherGroupsStore.dispachToken = AGDispatcher.register(function(action) {
       _removeStudentFromGroup(action.student, action.group);
       TeacherGroupsStore.emitChange();
       break;
-    case ActionTypes.RECEIVE_RAW_STUDENTS:
-      _newStudents(action.rawStudents);
+    case ActionTypes.RECEIVE_STUDENTS_FOR_COURSE:
+      students = TeacherGroupsStoreUtils.convertStudents(action.rawStudents);
+      _newStudents(students);
+      TeacherGroupsStore.emitChange();
+      break;
+    case ActionTypes.SWITCH_COURSE:
+      // we want api to be triggered when needed if course is switched
+      TeacherGroupsAPI.sentToken = false;
       TeacherGroupsStore.emitChange();
       break;
     case ActionTypes.QUERY_FOR_STUDENT:
       var keep = _newStudents(_searchFor(action.query));
-      TeacherGroupsStore.emitChange();
       var _ = _newStudents(keep);
+      TeacherGroupsStore.emitChange();
       break;
     case ActionTypes.EXPANDE_ALL_GROUPS:
       _expandAllGroups();

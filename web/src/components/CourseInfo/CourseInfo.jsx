@@ -38,7 +38,6 @@ var CourseInfo = React.createClass({
 	},
 
 	render: function(){
-		console.log(this.state.course);
 		return (
 			<Col xs={12}>
         <Col xs={7} className="infoboxleft">

@@ -3,7 +3,7 @@ var CoursesServerActionCreators = require("../actions/CoursesServerActionCreator
 var CourseNavServerActionCreators = require("../actions/CourseNavServerActionCreators");
 var StudentResultsListServerActionCreators = require("../actions/StudentResultsListServerActionCreators");
 var UserManagerServerActionCreators = require("../actions/UserManagerServerActionCreators");
-
+var TeacherGroupsServerActionCreators = require("../actions/TeacherGroupsServerActionCreators");
 
 var AGConstants = require("../constants/AGConstants");
 var ActionTypes = AGConstants.ActionTypes;
@@ -13,9 +13,17 @@ var Socket =  function() {
   this.ws = new WebSocket("ws://localhost:8000/ws");
 
   this.message = function(m) {
-    // TODO: emit that message has arrived
-    // figure out what ActionCreator to call with new data?
-    var data = JSON.parse(m.data);
+
+    // this catches errors from server, if response is something that we do not expext
+    try {
+      var data = JSON.parse(m.data);
+    }
+    catch(err) {
+      console.log(err);
+      console.log(m.data);
+      return
+    }
+
     switch(data.actionType) {
       case ActionTypes.RECEIVE_RAW_ROLES:
         TopBarServerActionCreators.receiveAll(data.payload);
@@ -26,6 +34,10 @@ var Socket =  function() {
         break;
       case ActionTypes.RECEIVE_STUDENTS_FOR_COURSE:
         StudentResultsListServerActionCreators.receiveAll(data.payload);
+        TeacherGroupsServerActionCreators.receiveStudents(data.payload);
+        break;
+      case ActionTypes.RECEIVE_GROUPS_FOR_COURSE:
+        TeacherGroupsServerActionCreators.receiveGroups(data.payload);
       default:
         // do nothing
     }
