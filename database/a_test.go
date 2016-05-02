@@ -99,7 +99,9 @@ func TestDummyData(t *testing.T) {
 	isPrivRepo := false
 	isCodeReview := false
 	c1, err := InsertCourse(o1, name, singleAssm, groupAssm, description, slipdays, isSlipdays, isPrivRepo, isCodeReview)
-
+	if err != nil {
+		t.Error(err)
+	}
 	name = "DAT200"
 	singleAssm = 5
 	groupAssm = 2
@@ -109,7 +111,9 @@ func TestDummyData(t *testing.T) {
 	isPrivRepo = false
 	isCodeReview = false
 	c2, err := InsertCourse(o2, name, singleAssm, groupAssm, description, slipdays, isSlipdays, isPrivRepo, isCodeReview)
-
+	if err != nil {
+		t.Error(err)
+	}
 	name = "DAT310"
 	singleAssm = 5
 	groupAssm = 2
@@ -119,7 +123,21 @@ func TestDummyData(t *testing.T) {
 	isPrivRepo = false
 	isCodeReview = false
 	c3, err := InsertCourse(o3, name, singleAssm, groupAssm, description, slipdays, isSlipdays, isPrivRepo, isCodeReview)
-
+	if err != nil {
+		t.Error(err)
+	}
+	name = "DAT320"
+	singleAssm = 5
+	groupAssm = 2
+	description = "Testdescriptin of the course how long will it display on in the application, it should not break anything"
+	slipdays = 0
+	isSlipdays = false
+	isPrivRepo = false
+	isCodeReview = false
+	c4, err := InsertCourse(o3, name, singleAssm, groupAssm, description, slipdays, isSlipdays, isPrivRepo, isCodeReview)
+	if err != nil {
+		t.Error(err)
+	}
 	// test inserts
 	if err := u1.MakeAdmin(); err != nil {
 		t.Error(err)
@@ -134,6 +152,9 @@ func TestDummyData(t *testing.T) {
 		t.Error(err)
 	}
 	if err := u1.AddToCourse(c3, student); err != nil {
+		t.Error(err)
+	}
+	if err := u1.AddToCourse(c4, student); err != nil {
 		t.Error(err)
 	}
 

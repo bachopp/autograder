@@ -1,7 +1,5 @@
 package database
 
-import "log"
-
 type courses struct {
 	Courseid   int
 	CourseName string
@@ -12,43 +10,6 @@ type Role struct {
 	Mode    string
 	Courses []courses
 }
-
-// Roles wraps all the roles to send as json through websocket
-// type Roles struct {
-// 	Roles []Role `json:"roles"`
-// }
-
-// // InsertTestUser inserts test user
-// func InsertTestUser(github string) {
-// 	connectDb()
-// 	defer con.Close()
-//
-// 	tx, err := con.Begin()
-// 	if err != nil {
-// 		log.Fatal(err)
-// 	}
-// 	defer tx.Rollback()
-// 	stmt, err := tx.Prepare("INSERT INTO user (github, last_name, first_name) VALUES (?, ?, ?)")
-// 	if err != nil {
-// 		log.Fatal(err)
-// 	}
-// 	defer stmt.Close() // danger!
-//
-// 	// test data:
-// 	lastName := "TestLast"
-// 	firstName := "TersFirst"
-// 	_, err = stmt.Exec(github, lastName, firstName)
-//
-// 	if err != nil {
-// 		log.Fatal(err)
-// 	}
-//
-// 	err = tx.Commit()
-// 	if err != nil {
-// 		log.Fatal(err)
-// 	}
-// 	// stmt.Close() runs here!
-// }
 
 func getUserID(username string) (int, error) {
 	// TODO: username is candidate key, find primary key of `username`
@@ -67,7 +28,7 @@ func getCourseID(courseName string) (int, error) {
 	// TODO: use courseName as candidate key to return `courseid` from database
 	stmt, err := con.Prepare("SELECT courseid FROM course WHERE course_name = ?")
 	if err != nil {
-		log.Fatal(err)
+		return 0, err
 	}
 	var courseid int
 	err = stmt.QueryRow(courseName).Scan(&courseid)
@@ -78,25 +39,27 @@ func getCourseID(courseName string) (int, error) {
 }
 
 // UpgradeUser upgrades user to either `admin`, `teacher` or `student` based on input string
-func UpgradeUser(username string, roles ...Role) {
+func UpgradeUser(username string, roles ...Role) error {
 	connectDb()
 	defer con.Close()
 
 	userid, err := getUserID(username)
+	if err != nil {
+		return err
+	}
 
 	tx, err := con.Begin()
 	if err != nil {
-		log.Fatal(err)
-
+		return err
 	}
 	defer tx.Rollback()
 
 	// Prepare statement in loop
 	for _, role := range roles {
 
-		stmt, err := tx.Prepare("INSERT INTO " + role.Mode + " (userid) VALUES (?)")
-		if err != nil {
-			log.Fatal(err)
+		stmt, errp := tx.Prepare("INSERT INTO " + role.Mode + " (userid) VALUES (?)")
+		if errp != nil {
+			return errp
 		}
 		defer stmt.Close() // danger!
 		// defer to wait for transaction to commit and not fail.
@@ -104,57 +67,62 @@ func UpgradeUser(username string, roles ...Role) {
 
 		_, err = stmt.Exec(userid)
 		if err != nil {
-			log.Fatal(err)
+			return err
 		}
 	}
 	err = tx.Commit()
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
+	return nil
 }
 
-func makeUpdate(username string, role Role) {
+func makeUpdate(username string, role Role) error {
 	connectDb()
 	// TODO: Logic for ascending user to admin status
 	userid, err := getUserID(username)
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 
 	tx, err := con.Begin()
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 	defer tx.Rollback()
 
 	// Prepare statement in loop
 	for _, course := range role.Courses {
-		courseid, err := getCourseID(course.CourseName)
+		courseid, errid := getCourseID(course.CourseName)
+		if errid != nil {
+			return errid
+		}
 		// TODO : prepare transaction
-		stmt, err := tx.Prepare("INSERT INTO " + role.Mode + "_course VALUES (?, ?)")
-		if err != nil {
-			log.Fatal(err)
+		stmt, errp := tx.Prepare("INSERT INTO " + role.Mode + "_course VALUES (?, ?)")
+		if errp != nil {
+			return errp
 		}
 		defer stmt.Close()
 		_, err = stmt.Exec(userid, courseid)
 		if err != nil {
-			log.Fatal(err)
+			return err
 		}
 	}
 	err = tx.Commit()
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
+	return nil
 }
 
 // GetUserRoles returns Roles
-func GetUserRoles(username string) map[string]Role {
+func GetUserRoles(username string) (map[string]Role, error) {
 	connectDb()
 	defer con.Close()
 	//TODO: Return roles of user from database as Roles
 	userid, err := getUserID(username)
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
 
 	roles := make(map[string]Role)
@@ -173,18 +141,18 @@ func GetUserRoles(username string) map[string]Role {
 				"ON course.courseid = " + mode + "_course.courseid " +
 				"WHERE " + mode + ".userid = (?)")
 		if err != nil {
-			log.Fatal(err)
+			return nil, err
 		}
 		defer stmt.Close()
 		rows, err := stmt.Query(userid)
 		if err != nil {
-			log.Fatal(err)
+			return nil, err
 		}
 		defer rows.Close()
 		for rows.Next() {
 			err := rows.Scan(&courseid, &course)
 			if err != nil {
-				log.Fatal(err)
+				return nil, err
 			}
 			crses = append(crses, courses{courseid, course})
 		}
@@ -197,5 +165,5 @@ func GetUserRoles(username string) map[string]Role {
 	}
 	rls := roles
 	// TODO: Combine result to one slice size <= 3
-	return rls
+	return rls, nil
 }
