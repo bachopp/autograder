@@ -13,7 +13,7 @@ module.exports = {
         roles.push(role);
       }
     }
-    console.log(roles);
+    //console.log(roles);
     return roles
   },
 

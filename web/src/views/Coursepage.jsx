@@ -40,7 +40,6 @@ var Coursepage = React.createClass({
     this.setState(getStatesFromStore());
   },
   getInitialState: function() {
-    //LabViewCourseActionCreators.receiveStudentlabs();
     CoursepageAPI.getStudentsForCourse("DAT310");
     return getStatesFromStore();
   },

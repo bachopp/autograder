@@ -44,6 +44,5 @@ module.exports = {
 
     // students for course
     RECEIVE_STUDENTS_FOR_COURSE: null,
-
   })
 };

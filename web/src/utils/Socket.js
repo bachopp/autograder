@@ -2,6 +2,7 @@ var TopBarServerActionCreators = require("../actions/TopBarServerActionCreators"
 var CoursesServerActionCreators = require("../actions/CoursesServerActionCreators");
 var CourseNavServerActionCreators = require("../actions/CourseNavServerActionCreators");
 var StudentResultsListServerActionCreators = require("../actions/StudentResultsListServerActionCreators");
+var UserManagerServerActionCreators = require("../actions/UserManagerServerActionCreators");
 
 
 var AGConstants = require("../constants/AGConstants");
@@ -24,7 +25,6 @@ var Socket =  function() {
         CourseNavServerActionCreators.receiveModeCourses(data.payload);
         break;
       case ActionTypes.RECEIVE_STUDENTS_FOR_COURSE:
-        //console.log(data.payload);
         StudentResultsListServerActionCreators.receiveAll(data.payload);
       default:
         // do nothing
