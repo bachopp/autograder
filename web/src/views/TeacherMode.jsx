@@ -27,9 +27,6 @@ var UsersStore = require("../stores/UsersStore.js");
 var CoursesStore = require("../stores/CoursesStore.js");
 var SideNavStore = require("../stores/SideNavStore.js");
 
-// const mode = "teacher";
-const user = "tokams"
-
 function getStateFromStores() {
   return {
     courses: UsersStore.getCoursesForMode(mode.Teacher),
@@ -41,7 +38,6 @@ function getStateFromStores() {
 var TeacherMode = React.createClass({
 
   getInitialState: function() {
-    // CourseNavAPI.getCoursesForMode(mode, user);
     return getStateFromStores();
   },
 
@@ -67,7 +63,6 @@ var TeacherMode = React.createClass({
     var infoType = "Teacher " + this.state.currentCourse;
     var activeElement = this.state.activeElement;
 
-    console.log()
     return(
       <Row>
         <Col xs={2}>

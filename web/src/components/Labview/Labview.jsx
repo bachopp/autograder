@@ -77,7 +77,7 @@ var Labview = React.createClass({
 
     }
 
-    console.log(logfile);
+    // console.log(logfile);
 
     if(this.state.lab.length == 0) {
 

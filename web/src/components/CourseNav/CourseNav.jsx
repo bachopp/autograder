@@ -71,6 +71,7 @@ var CourseNav = React.createClass({
     //   active = this.props.coursename;
     // }else {
       active = activeCourse;
+      console.log(sidenav);
     // }
     return (
       <Row>

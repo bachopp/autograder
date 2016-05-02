@@ -51,7 +51,7 @@ var Assignments = React.createClass({
 
 	render: function(){
 		var self = this;
-		console.log(this.state.ass);
+		// console.log(this.state.ass);
 		return (
       <div>
 				<Button block onClick={this._expand}>Assignments</Button>

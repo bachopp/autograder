@@ -73,7 +73,15 @@ var UsersStore = assign({}, EventEmitter.prototype, {
   getCurrentSideNav: function() {
     return _currentSideNav;
   },
-  getActiveCourse: function() {
+  getActiveCourse: function(m) {
+    // if mode provided - topbar + external links
+    if (m == mode.Teacher) {
+      return _activeCourseTeacher;
+    } else if (m == mode.Student) {
+      return _activeCourseStudent;
+    }
+
+    // if mode not provided use active mode
     if (_currentRole == mode.Teacher) {
       return _activeCourseTeacher;
     } else if (_currentRole == mode.Student) {

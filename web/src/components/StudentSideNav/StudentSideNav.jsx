@@ -14,6 +14,8 @@ var FontAwesome = require('react-fontawesome');
 // const
 var constants = require('../../constants/constants.js');
 var mode = constants.mode;
+// stores
+var UsersStore = require("../../stores/UsersStore.js");
 // actions
 var SideNavActionCreators = require("../../actions/SideNavActionCreators.js");
 
@@ -21,6 +23,7 @@ var StudentSideNav = React.createClass({
 
   propTypes: {
     courses: React.PropTypes.array.isRequired,
+    activeElement: React.PropTypes.string.isRequired,
   },
 
   handleClick: function(activeElement) {
@@ -29,7 +32,7 @@ var StudentSideNav = React.createClass({
 
   getLastCourse: function(courses) {
     // TODO: coockies
-    return courses[0];
+    return UsersStore.getActiveCourse();
   },
 
   render: function() {
@@ -39,6 +42,7 @@ var StudentSideNav = React.createClass({
     const infoIcon = <i className="fa fa-info fa-fw"></i>;
     const settingsIcon = <i className="fa fa-cog fa-fw"></i>;
     const taskIcon = <i className="fa fa-tasks fa-fw"></i>;
+
     var lastCourse = this.getLastCourse(this.props.courses);
 
     return(
