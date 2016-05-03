@@ -65,6 +65,7 @@ var Student = function() {
 
 module.exports = {
   convertRoles: function(rawList) {
+    // list empty ? return empty
     if(!rawList) {
       return [];
     }
@@ -72,7 +73,7 @@ module.exports = {
     for(var i = 0; i<rawList.length; i++) {
       var current = rawList[i];
       var s = new Student();
-      s.id = current.ID -1;               // HOT FIXING
+      s.id = current.ID-2;               // HOT FIXING
       s.username = current.Github;
       s.firstName = current.FirstName;
       s.lastName = current.LastName;

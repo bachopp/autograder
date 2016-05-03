@@ -11,25 +11,18 @@ var mockData = require("../components/StudentResultsList/mockData.js");
 var CourseStudentsStore = require('./CourseStudentsStore.js');
 var UsersStore = require('./UsersStore.js');
 
-
 // utils
 var LabViewUtils = require("../utils/LabViewUtils.js");
-
 
 var ActionTypes = AGConstants.ActionTypes;
 
 var CHANGE_EVENT = "change";
 var logExpanded = false;
 
-
 var _selectedStudId = 0;     // default 0
 var _selectedLabId = 0;      // default 0
-
-//var _selectedStudents = fullStudentList;
 var fullStudentList = [];
 var _selectedStudents = [];
-//_selectedStudents[_selectedStudId].labs[_selectedLabId].isSelected = true; // first student is selected
-
 
 function _updateRawList(rawList) {
   if (rawList == undefined || !rawList) {
@@ -38,6 +31,7 @@ function _updateRawList(rawList) {
   } else {
     fullStudentList = LabViewUtils.convertRoles(rawList);
     _selectedStudents = fullStudentList;
+    _selectedStudents[0].labs[0].isSelected = true;
   }
 }
 
@@ -45,9 +39,7 @@ function _updateRawList(rawList) {
 // this also set the current lab and student to the first one, if
 // the student is not in the queried selection
 
-
 function _queryStudents(query) {
-
   _resetStudents();
   if(query.length == 0 || query == "" || query == " ") {
     return false;
@@ -75,20 +67,22 @@ function _queryStudents(query) {
 
 function _resetStudents() {
 
-  _selectedStudents = fullStudentList;
-  for(var i = 0; i<_selectedStudents.length; i++) {
-    var c = _selectedStudents[i];
-    for(var j = 0; j<c.labs.length;j++) {
-      c.labs[j].isSelected = false;
+  if(fullStudentList != 0 || fullStudentList != [] || fullStudentList.length != 0) {
+    _selectedStudents = fullStudentList;
+    for(var i = 0; i<_selectedStudents.length; i++) {
+      var c = _selectedStudents[i];
+      for(var j = 0; j<c.labs.length;j++) {
+        c.labs[j].isSelected = false;
+      }
     }
+    _selectedStudents[0].labs[0].isSelected = true;
+  } else {
+    _selectedStudents = [];
   }
-  _selectedStudents[0].labs[0].isSelected = true;
 }
-
 
 function _checkStudentLab() {
   if(_selectedStudId > _selectedStudents.length - 1) {
-
     // before this is set
     _selectedStudId = 0;
     _selectedLabId = 0;
@@ -129,7 +123,6 @@ function _toggleSelectedLab() {
 }
 
 var LabViewStore = assign({},EventEmitter.prototype, {
-
   emitChange: function() {
     this.emit(CHANGE_EVENT);
   },
@@ -164,7 +157,6 @@ var LabViewStore = assign({},EventEmitter.prototype, {
   }
 });
 LabViewStore.dispatchToken = AGDispatcher.register(function(action) {
-
   switch(action.type) {
     case ActionTypes.RECEIVE_STUDENTS_FOR_COURSE:
       AGDispatcher.waitFor([CourseStudentsStore.dispatchToken]);
