@@ -25,7 +25,6 @@ var TeacherGroups = require("./views/TeacherGroups.jsx");
 var Coursepage= require("./views/Coursepage.jsx");
 var AllCourses = require("./views/AllCourses.jsx");
 var StudentList = require("./views/StudentList.jsx");
-var StudentResult = require("./views/StudentResult.jsx");
 var NotFound = require("./components/NotFound/NotFound.jsx")
 // local components requires
 var Topbar 		= require("./components/Topbar/Topbar.jsx")
@@ -74,7 +73,7 @@ ReactDOM.render(
 			</Route>
 
 			<Route path="Student" component={StudentMode}>
-					<Route path="results/:coursename" component={StudentResult}/>
+					<Route path="results/:coursename" component={NotFound}/>
 					<Route path="members/:coursename" component={StudentList}/>
 					<Route path="groups/:coursename" component={StudentGroup}/>
 					<Route path="settings/:coursename" component={UserSettings}/>
