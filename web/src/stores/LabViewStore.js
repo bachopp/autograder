@@ -31,9 +31,15 @@ var selectedStudents = [];
 
 
 function updateRawList(rawList) {
+  console.log("RAW LIST");
+  console.log(rawList);
   var _newList = LabViewUtils.convertRoles(rawList);
-  selectedStudents = _newList;
-  fullStudentList = _newList;
+  if(_newList || _newList.length != 0) {
+    selectedStudents = _newList;
+    fullStudentList = _newList;
+  } else {
+
+  }
 }
 
 // Search function - inputs the query and returns a list of students

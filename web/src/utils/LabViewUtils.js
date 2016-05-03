@@ -65,6 +65,9 @@ var Student = function() {
 
 module.exports = {
   convertRoles: function(rawList) {
+    if(!rawList) {
+      return [];
+    }
     _newList = [];
     for(var i = 0; i<rawList.length; i++) {
       var current = rawList[i];
