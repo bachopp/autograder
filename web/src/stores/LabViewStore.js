@@ -4,9 +4,12 @@ var AGConstants = require("../constants/AGConstants");
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 
-var StudentlistAPI = require("../utils/StudentlistAPI.js");
+var CourseStudentsAPI = require("../utils/CourseStudentsAPI.js");
 var mockData = require("../components/StudentResultsList/mockData.js");
-var CoursepageAPI = require("../utils/CoursepageAPI");
+
+// store dependencies
+var CourseStudentsStore = require('./CourseStudentsStore.js');
+var UsersStore = require('./UsersStore.js');
 
 
 
@@ -144,20 +147,18 @@ function resetStudents() {
       c.labs[j].isSelected = false;
     }
   }
-
   selectedStudents[0].labs[0].isSelected = true;
-
 }
 
-
 function getStudentLabs() {
-  if(!selectedStudents) {
-    CoursepageAPI.getStudentsForCourse("DAT310");
-  } else {
-
+  var course = UsersStore.getActiveCourse();
+  if (!CourseStudentsAPI.sentToken) {
+    CourseStudentsAPI.getAllStudents(course);
+    return [];
   }
   return selectedStudents;
 }
+
 function getSelectedStudentLab() {
   var students = getStudentLabs();
   if(selectedStudId > students.length - 1) {
@@ -228,9 +229,14 @@ var LabViewStore = assign({},EventEmitter.prototype, {
 LabViewStore.dispatchToken = AGDispatcher.register(function(action) {
   switch(action.type) {
     case ActionTypes.RECEIVE_STUDENTS_FOR_COURSE:
-      //console.log(":::::::::::::::::::::::::");
-      updateRawList(action.courseStudents);
-      //updateRawStudentList(action.courseStudents);
+      AGDispatcher.waitFor([CourseStudentsStore.dispatchToken]);
+      var studs = CourseStudentsStore.getAllStudents();
+      students = updateRawList(studs);
+      LabViewStore.emitChange();
+      break;
+    case ActionTypes.SWITCH_COURSE:
+      // we want api to be triggered when needed if course is switched
+      CourseStudentsAPI.sentToken = false;
       LabViewStore.emitChange();
       break;
     case ActionTypes.SET_SELECTED_STUDENTLAB:

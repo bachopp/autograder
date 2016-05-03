@@ -64,7 +64,6 @@ var TeacherSideNav = React.createClass({
     var activeElement = this.props.activeElement;
 
     var lastCourse = this.getLastCourse();
-    console.log(lastCourse);
 
     return(
       <Col xs={12} className="whitebox">

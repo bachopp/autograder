@@ -3,6 +3,7 @@ var assign = require('object-assign');
 
 // api
 var TeacherGroupsAPI = require("../utils/TeacherGroupsAPI.js");
+var CourseStudentsAPI = require("../utils/CourseStudentsAPI.js");
 
 
 // local
@@ -12,6 +13,7 @@ var AGConstants = require('../constants/AGConstants.js');
 var TeacherGroupsStoreUtils = require('../utils/TeacherGroupsStoreUtils.js');
 // store dependencies
 var TeacherGroupsStore = require('./TeacherGroupsStore.js');
+var CourseStudentsStore = require('./CourseStudentsStore.js');
 var UsersStore = require('./UsersStore.js');
 
 var ActionTypes = AGConstants.ActionTypes;
@@ -174,7 +176,6 @@ var TeacherGroupsStore = assign({}, EventEmitter.prototype, {
     var course = UsersStore.getActiveCourse();
       if (!TeacherGroupsAPI.sentToken) {
         TeacherGroupsAPI.getAllGroups(course);
-        console.log([]);
         return [];
       }
       return _groups;
@@ -189,11 +190,11 @@ var TeacherGroupsStore = assign({}, EventEmitter.prototype, {
 
   getAllStudents: function() {
     var course = UsersStore.getActiveCourse();
-      if (!TeacherGroupsAPI.sentToken) {
-        TeacherGroupsAPI.getAllStudents(course);
-        return [];
-      }
-      return _students;
+    if (!CourseStudentsAPI.sentToken) {
+      CourseStudentsAPI.getAllStudents(course);
+      return [];
+    }
+    return _students;
   },
 
   isGroupsExpanded: function() {
@@ -208,7 +209,6 @@ TeacherGroupsStore.dispachToken = AGDispatcher.register(function(action) {
     case ActionTypes.RECEIVE_GROUPS_FOR_COURSE:
       _newGroups(action.rawGroups);
       TeacherGroupsStore.emitChange();
-      console.log(action);
       break;
     case ActionTypes.RECEIVE_RAW_GROUPS:
       _newGroups(action.rawGroups);
@@ -242,13 +242,15 @@ TeacherGroupsStore.dispachToken = AGDispatcher.register(function(action) {
       TeacherGroupsStore.emitChange();
       break;
     case ActionTypes.RECEIVE_STUDENTS_FOR_COURSE:
-      students = TeacherGroupsStoreUtils.convertStudents(action.rawStudents);
+      AGDispatcher.waitFor([CourseStudentsStore.dispatchToken]);
+      var studs = CourseStudentsStore.getAllStudents();
+      students = TeacherGroupsStoreUtils.convertStudents(studs);
       _newStudents(students);
       TeacherGroupsStore.emitChange();
       break;
     case ActionTypes.SWITCH_COURSE:
       // we want api to be triggered when needed if course is switched
-      TeacherGroupsAPI.sentToken = false;
+      CourseStudentsAPI.sentToken = false;
       TeacherGroupsStore.emitChange();
       break;
     case ActionTypes.QUERY_FOR_STUDENT:
