@@ -13,19 +13,17 @@ var CHANGE_EVENT = 'change';
 
 var students = [];
 
-function requestStudents() {
-  CoursepageAPI.getStudentsForCourse();
+function updateStudentsList(newList) {
+  students = newList;
 }
 
-
-function updateStudentsList(list) {
-  console.log("list" + list.length);
-  students = list;
-}
 
 function returnStudents() {
-  requestStudents();
-  return students;
+  if(students == [] || students.length == 0) {
+    CoursepageAPI.getStudentsForCourse("DAT100");
+  } else {
+    return students;
+  }
 }
 
 var UserManagerStore = assign({},EventEmitter.prototype, {
@@ -39,9 +37,9 @@ var UserManagerStore = assign({},EventEmitter.prototype, {
     this.removeListener(CHANGE_EVENT,callback);
   },
   getStudents: function() {
-    return returnStudents();
-  },
-
+    var stud = returnStudents();
+    return stud;
+  }
 });
 
 UserManagerStore.dispatchToken = AGDispatcher.register(function(action) {
@@ -50,7 +48,6 @@ UserManagerStore.dispatchToken = AGDispatcher.register(function(action) {
 
       break;
     case ActionTypes.RECEIVE_STUDENTS_FOR_COURSE:
-      // get students
       updateStudentsList(action.courseStudents);
       UserManagerStore.emitChange();
       break;

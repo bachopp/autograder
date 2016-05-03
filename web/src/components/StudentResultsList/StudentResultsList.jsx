@@ -15,6 +15,7 @@ var SearchField = require("./SearchField.jsx");
 var PropTypes = React.PropTypes;
 
 function getStatesFromStore() {
+  console.log("GETTING DATA FROM STORE");
   return {
     // these are public functions of other classes, without _
     students: LabViewStore.getStudentLabs(),

@@ -8,6 +8,8 @@ var Button = require("react-bootstrap").Button;
 var Glyphicon = require("react-bootstrap").Glyphicon;
 var Row = require("react-bootstrap").Row;
 
+var UserRow = require("./UserRow.jsx");
+
 // store and actions
 var UserManagerStore = require("../../stores/UserManagerStore");
 
@@ -44,6 +46,10 @@ var UserSettings = React.createClass({
 
   render: function() {
     const innerSearch = <Glyphicon glyph="search"/>;
+
+    console.log("VIEW::::::");
+    
+
     self = this;
     return(
       <Col xs={12}>
@@ -68,19 +74,14 @@ var UserSettings = React.createClass({
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Thomas Darvik</td>
-                    <td>223344</td>
-                    <td>
-                      <Button bsStyle={this.state.bstyle} onClick={self._change.bind(self,"Pending")}>{this.state.sstat}</Button>
-                    </td>
-                    <td>
-                      <Button bsStyle="default">No</Button>
-                    </td>
-                    <td>
-                      <Button bsStyle="danger">Remove</Button>
-                    </td>
-                  </tr>
+
+                {this.state.students.map(function(student,index) {
+                  return(
+                      <UserRow key={"studentrow" + index} student={student}/>
+                  );
+                })}
+
+
                 </tbody>
               </Table>
             </Col>
