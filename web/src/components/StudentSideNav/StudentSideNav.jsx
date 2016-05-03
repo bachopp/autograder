@@ -63,7 +63,6 @@ var StudentSideNav = React.createClass({
     const taskIcon = <i className="fa fa-tasks fa-fw"></i>;
 
     var lastCourse = this.state.activeCourse;
-    console.log(lastCourse);
 
     return(
       <Col xs={12} className="whitebox">

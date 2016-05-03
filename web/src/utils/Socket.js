@@ -2,7 +2,7 @@ var TopBarServerActionCreators = require("../actions/TopBarServerActionCreators"
 var CoursesServerActionCreators = require("../actions/CoursesServerActionCreators");
 var CourseNavServerActionCreators = require("../actions/CourseNavServerActionCreators");
 var StudentResultsListServerActionCreators = require("../actions/StudentResultsListServerActionCreators");
-var UserManagerServerActionCreators = require("../actions/UserManagerServerActionCreators");
+var CourseStudentsServerActionCreators = require("../actions/CourseStudentsServerActionCreators");
 var TeacherGroupsServerActionCreators = require("../actions/TeacherGroupsServerActionCreators");
 
 var AGConstants = require("../constants/AGConstants");
@@ -33,8 +33,7 @@ var Socket =  function() {
         CourseNavServerActionCreators.receiveModeCourses(data.payload);
         break;
       case ActionTypes.RECEIVE_STUDENTS_FOR_COURSE:
-        StudentResultsListServerActionCreators.receiveAll(data.payload);
-        TeacherGroupsServerActionCreators.receiveStudents(data.payload);
+        CourseStudentsServerActionCreators.receiveStudents(data.payload);
         break;
       case ActionTypes.RECEIVE_GROUPS_FOR_COURSE:
         TeacherGroupsServerActionCreators.receiveGroups(data.payload);

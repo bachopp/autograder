@@ -13,10 +13,6 @@ var CHANGE_EVENT = 'change';
 
 var students = [];
 
-function updateStudentsList(newList) {
-  students = newList;
-}
-
 
 function returnStudents() {
   if(students == [] || students.length == 0) {
@@ -43,17 +39,19 @@ var UserManagerStore = assign({},EventEmitter.prototype, {
 });
 
 UserManagerStore.dispatchToken = AGDispatcher.register(function(action) {
-  switch(action.type) {
-    case ActionTypes.UPDATE_STUDENT_STATUS:
+  // switch(action.type) {
+  //   case ActionTypes.UPDATE_STUDENT_STATUS:
+  //
+  //     break;
+  //   case ActionTypes.RECEIVE_STUDENTS_FOR_COURSE:
+  //     // get students
+  //     updateStudentsList(action.courseStudents);
+  //     UserManagerStore.emitChange();
+  //     break;
+  //   default:
+  //     // do nothing
+  // }
 
-      break;
-    case ActionTypes.RECEIVE_STUDENTS_FOR_COURSE:
-      updateStudentsList(action.courseStudents);
-      UserManagerStore.emitChange();
-      break;
-    default:
-      // do nothing
-  }
 });
 
 module.exports = UserManagerStore;
