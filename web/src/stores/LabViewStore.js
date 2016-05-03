@@ -18,13 +18,14 @@ var ActionTypes = AGConstants.ActionTypes;
 var CHANGE_EVENT = "change";
 var logExpanded = false;
 
-//var fullStudentList = mockData.students;
-//var selectedStudents = fullStudentList;
 
-var selectedStudId = 0;     // default 0
-var selectedLabId = 0;      // default 0
-var selectedStudents = [];
-//selectedStudents[selectedStudId].labs[selectedLabId].isSelected = true; // first student is selected
+var _selectedStudId = 0;     // default 0
+var _selectedLabId = 0;      // default 0
+
+//var _selectedStudents = fullStudentList;
+var fullStudentList = [];
+var _selectedStudents = [];
+//_selectedStudents[_selectedStudId].labs[_selectedLabId].isSelected = true; // first student is selected
 
 var Student = function() {
   this.id = null;
@@ -88,22 +89,27 @@ var Student = function() {
   ];
 }
 
-function updateRawList(rawList) {
+function _updateRawList(rawList) {
   _newList = [];
-  for(var i = 0; i<rawList.length; i++) {
-    var current = rawList[i];
-    var s = new Student();
-    s.id = current.ID -1;               // HOT FIXING
-    s.username = current.Github;
-    s.firstName = current.FirstName;
-    s.lastName = current.LastName;
-    s.studentNumber = 223344;
-    s.slipDays = 6;
-    s.hasGroup = false;
-    _newList.push(s);
+  if (rawList == undefined || !rawList) {
+    fullStudentList = [];
+    _selectedStudents = fullStudentList;
+  } else {
+    for(var i = 0; i<rawList.length; i++) {
+      var current = rawList[i];
+      var s = new Student();
+      s.id = current.ID -1;               // HOT FIXING
+      s.username = current.Github;
+      s.firstName = current.FirstName;
+      s.lastName = current.LastName;
+      s.studentNumber = 223344;
+      s.slipDays = 6;
+      s.hasGroup = false;
+      _newList.push(s);
+    }
+    fullStudentList = _newList;
+    _selectedStudents = fullStudentList;
   }
-  selectedStudents = _newList;
-  fullStudentList = _newList;
 }
 
 // Search function - inputs the query and returns a list of students
@@ -111,16 +117,16 @@ function updateRawList(rawList) {
 // the student is not in the queried selection
 
 
-function queryStudents(query) {
+function _queryStudents(query) {
 
-  resetStudents();
+  _resetStudents();
   if(query.length == 0 || query == "" || query == " ") {
     return false;
   }
   queryResults = [];
   query = query.toLowerCase();
 
-  selectedStudents.forEach(function(cStud) {
+  _selectedStudents.forEach(function(cStud) {
     // username is not used in this view -> therefore not implemented
     //var uname = cStud.username.toLowerCase().indexOf(query);
     var fname = cStud.firstName.toLowerCase().indexOf(query);
@@ -138,66 +144,55 @@ function queryStudents(query) {
   return queryResults;
 }
 
-function resetStudents() {
+function _resetStudents() {
 
-  selectedStudents = fullStudentList;
-  for(var i = 0; i<selectedStudents.length; i++) {
-    var c = selectedStudents[i];
+  _selectedStudents = fullStudentList;
+  for(var i = 0; i<_selectedStudents.length; i++) {
+    var c = _selectedStudents[i];
     for(var j = 0; j<c.labs.length;j++) {
       c.labs[j].isSelected = false;
     }
   }
-  selectedStudents[0].labs[0].isSelected = true;
+  _selectedStudents[0].labs[0].isSelected = true;
 }
 
-function getStudentLabs() {
-  var course = UsersStore.getActiveCourse();
-  if (!CourseStudentsAPI.sentToken) {
-    CourseStudentsAPI.getAllStudents(course);
-    return [];
-  }
-  return selectedStudents;
-}
-
-function getSelectedStudentLab() {
-  var students = getStudentLabs();
-  if(selectedStudId > students.length - 1) {
+function _checkStudentLab() {
+  if(_selectedStudId > _selectedStudents.length - 1) {
     // before this is set
-    selectedStudId = 0;
-    selectedLabId = 0;
+    _selectedStudId = 0;
+    _selectedLabId = 0;
   }
-  if(students.length > 0) {
-    return students[selectedStudId].labs[selectedLabId];
+  if(_selectedStudents.length > 0) {
+    return _selectedStudents[_selectedStudId].labs[_selectedLabId];
   } else {
     return false;
   }
 }
 
 // updates the student list - if [] -> error
-function updateStudentList(newList) {
+function _updateStudentList(newList) {
   if(newList == 0 || !newList || newList.length == 0) {
   }
-  selectedStudents = newList;
+  _selectedStudents = newList;
 }
 
-function setSelectedStudentLab(sIndex,lIndex) {
-  selectedStudents[selectedStudId].labs[selectedLabId].isSelected = false;
-  selectedStudId = sIndex;
-  selectedLabId = lIndex;
-  selectedStudents[sIndex].labs[lIndex].isSelected = true;
+function _setSelectedStudentLab(sIndex,lIndex) {
+  _selectedStudents[_selectedStudId].labs[_selectedLabId].isSelected = false;
+  _selectedStudId = sIndex;
+  _selectedLabId = lIndex;
+  _selectedStudents[sIndex].labs[lIndex].isSelected = true;
 }
 
-
-
-function toggleLabExpand() {
+function _toggleLabExpand() {
   logExpanded = !logExpanded;
 }
 
-function toggleSelectedLab() {
-  selectedStudents[selectedStudId].labs[selectedLabId].approved = !selectedStudents[selectedStudId].labs[selectedLabId].approved;
+function _toggleSelectedLab() {
+  _selectedStudents[_selectedStudId].labs[_selectedLabId].approved = !_selectedStudents[_selectedStudId].labs[_selectedLabId].approved;
 }
 
 var LabViewStore = assign({},EventEmitter.prototype, {
+
   emitChange: function() {
     this.emit(CHANGE_EVENT);
   },
@@ -210,15 +205,20 @@ var LabViewStore = assign({},EventEmitter.prototype, {
   getExpandedStatus: function() {
     return logExpanded;
   },
+
   getStudentLabs: function() {
-    return getStudentLabs();
+    var course = UsersStore.getActiveCourse();
+    if (!CourseStudentsAPI.sentToken) {
+      CourseStudentsAPI.getAllStudents(course);
+      return [];
+    }
+    return _selectedStudents;
   },
   getSelectedStudent: function() {
-    var allStudents = getStudentLabs();
-    return allStudents[selectedStudId];
+    return _selectedStudents[_selectedStudId];
   },
   getSelectedStudentLab: function() {
-    var lab = getSelectedStudentLab();
+    var lab = _checkStudentLab();
     if(lab) {
       return lab;
     } else {
@@ -227,11 +227,12 @@ var LabViewStore = assign({},EventEmitter.prototype, {
   }
 });
 LabViewStore.dispatchToken = AGDispatcher.register(function(action) {
+
   switch(action.type) {
     case ActionTypes.RECEIVE_STUDENTS_FOR_COURSE:
       AGDispatcher.waitFor([CourseStudentsStore.dispatchToken]);
       var studs = CourseStudentsStore.getAllStudents();
-      students = updateRawList(studs);
+      _updateRawList(studs);
       LabViewStore.emitChange();
       break;
     case ActionTypes.SWITCH_COURSE:
@@ -241,28 +242,28 @@ LabViewStore.dispatchToken = AGDispatcher.register(function(action) {
       break;
     case ActionTypes.SET_SELECTED_STUDENTLAB:
       //console.log(action.studentIndex, action.labIndex);
-      setSelectedStudentLab(action.studentIndex, action.labIndex);
+      _setSelectedStudentLab(action.studentIndex, action.labIndex);
       LabViewStore.emitChange();
       break;
     case ActionTypes.TOGGLE_APPROVAL_STUDENTLAB:
-      toggleSelectedLab();
+      _toggleSelectedLab();
       LabViewStore.emitChange();
       break;
     case ActionTypes.TOGGLE_LAB_EXPAND:
-      toggleLabExpand();
+      _toggleLabExpand();
       LabViewStore.emitChange();
       break;
     case ActionTypes.SEARCH_FOR_STUDENT:
-      var keep = queryStudents(action.query);
+      var keep = _queryStudents(action.query);
       if(keep.length == 0) {
         // no results => send an empty list to the updater
-        updateStudentList([]);
+        _updateStudentList([]);
       } else if(!keep) {
         // query is empty -> resets the students
-        resetStudents();
+        _resetStudents();
       } else {
         // student were found and the studentList is updated
-        updateStudentList(keep);
+        _updateStudentList(keep);
       }
       LabViewStore.emitChange();
       break;
