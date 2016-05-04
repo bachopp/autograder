@@ -66,7 +66,7 @@ var Student = function() {
 module.exports = {
   convertRoles: function(rawList) {
     // list empty ? return empty
-    if(!rawList) {
+    if(!rawList || rawList.length == 0 || rawList == undefined) {
       return [];
     }
     _newList = [];

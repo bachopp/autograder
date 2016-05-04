@@ -7,18 +7,23 @@ var AGConstants = require('../constants/AGConstants.js');
 var CoursepageAPI = require("../utils/CoursepageAPI");
 var UserManagerServerActionCreators = require("../actions/UserManagerServerActionCreators");
 var ActionTypes = AGConstants.ActionTypes;
+var UsersStore = require("./UsersStore.js");
+var CourseStudentsAPI = require("../utils/CourseStudentsAPI.js");
+
+// TODO: Maybe change this
+var CourseStudentsStore = require("./CourseStudentsStore.js");
+
 
 // change event
 var CHANGE_EVENT = 'change';
 
-var students = [];
+var _students = [];
 
-
-function returnStudents() {
-  if(students == [] || students.length == 0) {
-    CoursepageAPI.getStudentsForCourse("DAT100");
+function _updateRawList(newList) {
+  if(!newList || newList == null || newList == undefined) {
+    _students = [];
   } else {
-    return students;
+    _students = newList;
   }
 }
 
@@ -33,25 +38,30 @@ var UserManagerStore = assign({},EventEmitter.prototype, {
     this.removeListener(CHANGE_EVENT,callback);
   },
   getStudents: function() {
-    var stud = returnStudents();
-    return stud;
+    var course = UsersStore.getActiveCourse();
+    if(!CourseStudentsAPI.sentToken) {
+      CourseStudentsAPI.getAllStudents(course);
+      return [];
+    }
+    return _students;
   }
 });
 
-UserManagerStore.dispatchToken = AGDispatcher.register(function(action) {
-  // switch(action.type) {
-  //   case ActionTypes.UPDATE_STUDENT_STATUS:
-  //
-  //     break;
-  //   case ActionTypes.RECEIVE_STUDENTS_FOR_COURSE:
-  //     // get students
-  //     updateStudentsList(action.courseStudents);
-  //     UserManagerStore.emitChange();
-  //     break;
-  //   default:
-  //     // do nothing
-  // }
 
+UserManagerStore.dispatchToken = AGDispatcher.register(function(action) {
+  switch(action.type) {
+    case ActionTypes.RECEIVE_STUDENTS_FOR_COURSE:
+      AGDispatcher.waitFor([CourseStudentsStore.dispatchToken]);
+      var studs = CourseStudentsStore.getAllStudents();
+      _updateRawList(studs);
+      UserManagerStore.emitChange();
+    break;
+
+
+
+    default:
+      // do nothing
+  }
 });
 
 module.exports = UserManagerStore;

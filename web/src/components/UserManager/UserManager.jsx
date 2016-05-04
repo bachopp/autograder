@@ -47,9 +47,6 @@ var UserSettings = React.createClass({
   render: function() {
     const innerSearch = <Glyphicon glyph="search"/>;
 
-    console.log("VIEW::::::");
-    
-
     self = this;
     return(
       <Col xs={12}>

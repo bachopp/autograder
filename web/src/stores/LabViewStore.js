@@ -135,7 +135,6 @@ var LabViewStore = assign({},EventEmitter.prototype, {
   getExpandedStatus: function() {
     return logExpanded;
   },
-
   getStudentLabs: function() {
     var course = UsersStore.getActiveCourse();
     if (!CourseStudentsAPI.sentToken) {
@@ -167,7 +166,6 @@ LabViewStore.dispatchToken = AGDispatcher.register(function(action) {
     case ActionTypes.SWITCH_COURSE:
       // we want api to be triggered when needed if course is switched
       CourseStudentsAPI.sentToken = false;
-
       LabViewStore.emitChange();
       break;
     case ActionTypes.SET_SELECTED_STUDENTLAB:

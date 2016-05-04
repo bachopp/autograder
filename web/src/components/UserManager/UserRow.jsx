@@ -1,4 +1,5 @@
 var React = require("react");
+var Button = require("react-bootstrap").Button;
 var PropTypes = React.PropTypes;
 
 
@@ -14,7 +15,7 @@ var UserRow = React.createClass({
         <td>{student.FirstName} {student.LastName}</td>
         <td>{student.ID}</td>
         <td>
-          <Button bsStyle={this.state.bstyle}>Yes</Button>
+          <Button bsStyle="info">Yes</Button>
         </td>
         <td>
           <Button bsStyle="default">No</Button>
