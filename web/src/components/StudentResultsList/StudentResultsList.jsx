@@ -18,10 +18,10 @@ function getStatesFromStore() {
   return {
     // these are public functions of other classes, without _
     students: LabViewStore.getStudentLabs(),
+    labExpanded: LabViewStore.getExpandedStatus()
   };
 }
 var StudentResultsList = React.createClass({
-
   // these are super functions of React so no _
   getInitialState: function() {
     //LabViewCourseActionCreators.receiveStudentlabs();
@@ -35,8 +35,10 @@ var StudentResultsList = React.createClass({
   },
   render: function() {
     if(!this.state.students || this.state.students.length == 0) {
+      // store.getStudentLabs() returned []
       var ifElement = <h4>No students found</h4>;
     } else {
+      // store.getStudentLabs() returned a student list - correct
       var ifElement = <Table className="tables" striped={true} responsive={true} bordered={true}>
         <thead>
           <tr>
@@ -69,7 +71,6 @@ var StudentResultsList = React.createClass({
             <Col xs={12}>
               {ifElement}
             </Col>
-
           </Col>
     )},
     _onChange: function() {

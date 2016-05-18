@@ -8,20 +8,43 @@ var Button = require("react-bootstrap").Button;
 var Glyphicon = require("react-bootstrap").Glyphicon;
 var Row = require("react-bootstrap").Row;
 
+// store and actions
+var UserManagerStore = require("../../stores/UserManagerStore");
+
+
 // actions
 var SideNavActionCreators = require("../../actions/SideNavActionCreators.js");
 
 // constants
 const _nav = "users";
 
+function getStatesFromStore() {
+  return {
+    students: UserManagerStore.getStudents()
+  }
+}
+
 var UserSettings = React.createClass({
+  getInitialState: function() {
+    return getStatesFromStore();
+  },
+  _change: function() {
+  },
+  _onChange: function(status) {
+    this.setState(getStatesFromStore());
+  },
 
   componentDidMount: function() {
+    UserManagerStore.addChangeListener(this._onChange);
     SideNavActionCreators.changeActiveSideElement(_nav);
+  },
+  componentWillUnmount: function() {
+    UserManagerStore.removeChangeListener(this._onChange);
   },
 
   render: function() {
     const innerSearch = <Glyphicon glyph="search"/>;
+    self = this;
     return(
       <Col xs={12}>
         <Row  className="infoboxleft">
@@ -49,137 +72,7 @@ var UserSettings = React.createClass({
                     <td>Thomas Darvik</td>
                     <td>223344</td>
                     <td>
-                      <Button bsStyle="info">Pending</Button>
-                    </td>
-                    <td>
-                      <Button bsStyle="default">No</Button>
-                    </td>
-                    <td>
-                      <Button bsStyle="danger">Remove</Button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Thomas Darvik</td>
-                    <td>223344</td>
-                    <td>
-                      <Button bsStyle="default">Yes</Button>
-                    </td>
-                    <td>
-                      <Button bsStyle="default">Yes</Button>
-                    </td>
-                    <td>
-                      <Button bsStyle="danger">Remove</Button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Thomas Darvik</td>
-                    <td>223344</td>
-                    <td>
-                      <Button bsStyle="info">Pending</Button>
-                    </td>
-                    <td>
-                      <Button bsStyle="default">No</Button>
-                    </td>
-                    <td>
-                      <Button bsStyle="danger">Remove</Button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Thomas Darvik</td>
-                    <td>223344</td>
-                    <td>
-                      <Button bsStyle="default">Yes</Button>
-                    </td>
-                    <td>
-                      <Button bsStyle="info">Pending</Button>
-                    </td>
-                    <td>
-                      <Button bsStyle="danger">Remove</Button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Thomas Darvik</td>
-                    <td>223344</td>
-                    <td>
-                      <Button bsStyle="default">Yes</Button>
-                    </td>
-                    <td>
-                      <Button bsStyle="default">No</Button>
-                    </td>
-                    <td>
-                      <Button bsStyle="danger">Remove</Button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Thomas Darvik</td>
-                    <td>223344</td>
-                    <td>
-                      <Button bsStyle="default">Yes</Button>
-                    </td>
-                    <td>
-                      <Button bsStyle="default">No</Button>
-                    </td>
-                    <td>
-                      <Button bsStyle="danger">Remove</Button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Thomas Darvik</td>
-                    <td>223344</td>
-                    <td>
-                      <Button bsStyle="default">Yes</Button>
-                    </td>
-                    <td>
-                      <Button bsStyle="default">No</Button>
-                    </td>
-                    <td>
-                      <Button bsStyle="danger">Remove</Button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Thomas Darvik</td>
-                    <td>223344</td>
-                    <td>
-                      <Button bsStyle="default">Yes</Button>
-                    </td>
-                    <td>
-                      <Button bsStyle="default">No</Button>
-                    </td>
-                    <td>
-                      <Button bsStyle="danger">Remove</Button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Thomas Darvik</td>
-                    <td>223344</td>
-                    <td>
-                      <Button bsStyle="default">Yes</Button>
-                    </td>
-                    <td>
-                      <Button bsStyle="info">Pending</Button>
-                    </td>
-                    <td>
-                      <Button bsStyle="danger">Remove</Button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Thomas Darvik</td>
-                    <td>223344</td>
-                    <td>
-                      <Button bsStyle="default">Yes</Button>
-                    </td>
-                    <td>
-                      <Button bsStyle="default">No</Button>
-                    </td>
-                    <td>
-                      <Button bsStyle="danger">Remove</Button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Thomas Darvik</td>
-                    <td>223344</td>
-                    <td>
-                      <Button bsStyle="default">Yes</Button>
+                      <Button bsStyle={this.state.bstyle} onClick={self._change.bind(self,"Pending")}>{this.state.sstat}</Button>
                     </td>
                     <td>
                       <Button bsStyle="default">No</Button>

@@ -17,6 +17,7 @@ var InfoBar = require("../components/InfoBar/InfoBar.jsx");
 
 // actions
 var TopBarActionCreators = require("../actions/TopBarActionCreators.js");
+var CourseNavActionCreators = require("../actions/CourseNavActionCreators.js");
 // API
 var CourseNavAPI = require("../utils/CourseNavAPI.js");
 // stores
@@ -28,22 +29,19 @@ function getStateFromStores() {
   return {
     courses: UsersStore.getCoursesForMode(mode.Student),
     currentCourse: UsersStore.getActiveCourse(),
-    nav: SideNavStore.getActiveElement(),
+    activeElement: SideNavStore.getActiveElement(),
   };
 }
 
-// const mode = "student";
-const user = "tokams";
-
 var StudentMode = React.createClass({
-
   getInitialState: function() {
-    // CourseNavAPI.getCoursesForMode(mode, user);
     return getStateFromStores();
   },
 
   componentDidMount: function() {
-    TopBarActionCreators.receiveUserCourses(mode.Student);
+    TopBarActionCreators.changeMode(mode.Student);
+    CourseNavActionCreators.changeActiveCourse(this.props.params.coursename);
+
     UsersStore.addChangeListener(this._onChange);
     SideNavStore.addChangeListener(this._onChange);
   },
@@ -57,18 +55,18 @@ var StudentMode = React.createClass({
     var self = this;
     var courses = this.state.courses;
     var infoType = "Student " + this.state.currentCourse;
+
+    var activeElement = this.state.activeElement;
+
     return(
       <Row>
         <Col xs={2}>
-          <StudentSideNav courses={courses}/>
+          <StudentSideNav courses={courses} activeElement={activeElement}/>
         </Col>
         <Col xs={10}>
           <Col xs={12}>
               <Col xs={7}>
                 <CourseNav courses={courses} mode={mode.Student}/>
-              </Col>
-              <Col xs={5} className="infoboxright">
-                <InfoBar infoType={infoType} nav={self.state.nav}/>
               </Col>
           </Col>
 

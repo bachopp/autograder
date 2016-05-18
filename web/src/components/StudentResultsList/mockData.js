@@ -21,7 +21,13 @@ var MockData = {
             "4: TEST1: 100%",
             "5: TEST2: 100%",
             "6: TESTS PASSED",
-            "7. LAB PASSED"
+            "7. Bigger labs",
+            "8. Longer logs",
+            "9. What next?",
+            "10. You decide",
+            "11. ...",
+            "12. 100200100",
+            "13. LAB PASSED"
           ],
           percent: 100,
           isSelected: false

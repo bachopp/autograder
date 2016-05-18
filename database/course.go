@@ -135,7 +135,10 @@ func joinOrganization(course string, org string) error {
 
 	// TODO: get the ID, but later they will be provided directly
 	// by function arguments
-	cid := CourseID(course)
+	cid, err := CourseID(course)
+	if err != nil {
+		return err
+	}
 	oid := OrgID(org)
 	_, err = stmt.Exec(cid, oid)
 	if err != nil {
@@ -150,17 +153,17 @@ func joinOrganization(course string, org string) error {
 }
 
 // CourseID returns course id from db
-func CourseID(name string) int {
+func CourseID(name string) (int, error) {
 	var id int
 	stmt, err := con.Prepare("SELECT courseid FROM course WHERE course_name = (?)")
 	if err != nil {
-		log.Fatal(err)
+		return 0, err
 	}
 	err = stmt.QueryRow(name).Scan(&id)
 	if err != nil {
-		log.Fatal(err)
+		return 0, err
 	}
-	return id
+	return id, nil
 }
 
 func createCourse(name string) {
@@ -188,4 +191,41 @@ func addAssignment() {
 
 func removeAssignment(id int) {
 
+}
+
+// GetAllUsers return users array for a given course
+func GetAllUsers(courseName string) ([]User, error) {
+	connectDb()
+	defer con.Close()
+	cid, err := CourseID(courseName)
+	if err != nil {
+		return nil, err
+	}
+
+	stmt, err := con.Prepare("SELECT user.userid, courseid, github, last_name, first_name " +
+		"FROM student_course " +
+		"INNER JOIN user " +
+		"ON student_course.userid = user.userid " +
+		"WHERE courseid = (?)")
+	if err != nil {
+		return nil, err
+	}
+	rows, err := stmt.Query(cid)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var students []User
+	var userid, courseid int
+	var github, lastName, firstName string
+	for rows.Next() {
+		err := rows.Scan(&userid, &courseid, &github, &lastName, &firstName)
+		if err != nil {
+			return nil, err
+		}
+		students = append(students, User{ID: userid, Github: github, LastName: lastName, FirstName: firstName})
+	}
+
+	return students, nil
 }

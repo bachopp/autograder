@@ -8,6 +8,9 @@ var Table = require("react-bootstrap").Table;
 var ListGroupItem = require("react-bootstrap").ListGroupItem;
 var Panel = require("react-bootstrap").Panel;
 
+// stores
+var TeacherGroupsStore = require("../stores/TeacherGroupsStore.js");
+var UsersStore = require("../stores/UsersStore.js");
 // actions
 var SideNavActionCreators = require("../actions/SideNavActionCreators.js");
 
@@ -19,10 +22,31 @@ var GroupSelector = require("../components/GroupSelector/GroupSelector.jsx");
 // constants
 const _nav = "groups";
 
+function getStateFromStores() {
+   return {
+    query: '',
+    students: TeacherGroupsStore.getAllStudents(),
+    groups: TeacherGroupsStore.getAllGroups(),
+  };
+};
+
 var TeacherGroups = React.createClass({
 
+
+  getInitialState: function() {
+    return getStateFromStores();
+  },
+
   componentDidMount: function() {
+    TeacherGroupsStore.addChangeListener(this._onChange);
+    UsersStore.addChangeListener(this._onChange);
+
     SideNavActionCreators.changeActiveSideElement(_nav);
+  },
+
+  componentWillUnmount: function() {
+    TeacherGroupsStore.removeChangeListener(this._onChange);
+    UsersStore.removeChangeListener(this._onChange);
   },
 
   render: function() {
@@ -30,14 +54,17 @@ var TeacherGroups = React.createClass({
     return(
       <Col xs={12}>
         <Col xs={7} className="infoboxleft">
-            <StudentAvailableSelector />
+            <StudentAvailableSelector students={self.state.students}/>
         </Col>
         <Col xs={5} className="infoboxright">
-            <GroupSelector/>
+            <GroupSelector groups={self.state.groups}/>
         </Col>
       </Col>
     );
   },
+  _onChange: function() {
+    this.setState(getStateFromStores());
+  }
 });
 
 module.exports = TeacherGroups;

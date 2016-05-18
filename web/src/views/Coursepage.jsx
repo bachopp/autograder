@@ -11,6 +11,12 @@ var Table = require("react-bootstrap").Table;
 var ProgressBar = require("react-bootstrap").ProgressBar;
 var Row = require("react-bootstrap").Row;
 
+// api
+var CoursepageAPI = require("../utils/CoursepageAPI.js");
+
+// stores
+var LabViewStore = require("../stores/LabViewStore.js");
+
 // actions
 var SideNavActionCreators = require("../actions/SideNavActionCreators.js");
 
@@ -21,21 +27,45 @@ var Labview = require("../components/Labview/Labview.jsx");
 // constants
 const _nav = "results";
 // this class
+
+function getStatesFromStore() {
+  return {
+    isExpanded: LabViewStore.getExpandedStatus()
+  }
+}
+
 var Coursepage = React.createClass({
 
+  _onChange: function() {
+    this.setState(getStatesFromStore());
+  },
+  getInitialState: function() {
+    return getStatesFromStore();
+  },
+  componentWillUnmount: function() {
+    LabViewStore.removeChangeListener(this._onChange);
+  },
   componentDidMount: function() {
+    LabViewStore.addChangeListener(this._onChange);
     SideNavActionCreators.changeActiveSideElement(_nav);
   },
-
   render: function() {
     const innerSearch = <Glyphicon glyph="search"/>;
 
+    if(this.state.isExpanded) {
+      resultSize = 5;
+      labSize = 7;
+    } else {
+      resultSize = 7;
+      labSize = 5;
+    }
+
     return(
       <Col xs={12}>
-        <Col xs={7} className="infoboxleft">
+        <Col xs={resultSize} className="infoboxleft">
             <StudentResultsList/>
         </Col>
-        <Col xs={5} className="infoboxright">
+        <Col xs={labSize} className="infoboxright">
             <Labview/>
         </Col>
       </Col>

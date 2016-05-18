@@ -1,5 +1,6 @@
 var React = require("react");
 // react-router
+var rr = require("react-router");
 var Link = require("react-router").Link;
 var browserHistory = require("react-router").browserHistory;
 var Router = require("react-router").Router;
@@ -66,11 +67,11 @@ var CourseNav = React.createClass({
 
     var size = Math.floor(12/courses.length);
     var active = '';
-    if (activeCourse == '') {
-      active = courses[0];
-    }else {
-      active = activeCourse;
-    }
+    // if (activeCourse == '') {
+    //   active = this.props.coursename;
+    // }else {
+    active = activeCourse;
+    // }
     return (
       <Row>
       <ButtonGroup justified>

@@ -9,12 +9,12 @@ var Table = require("react-bootstrap").Table;
 
 // stores
 var TeacherGroupsStore = require("../../stores/TeacherGroupsStore.js");
-
+var UsersStore = require("../../stores/UsersStore.js");
 // actions
 var TeacherGroupsActionCreators = require("../../actions/TeacherGroupsActionCreators.js");
 
 // API
-var StudentAvailableSelectorAPI = require("../../utils/StudentAvailableSelectorAPI.js");
+var TeacherGroupsAPI = require("../../utils/TeacherGroupsAPI.js");
 
 // local
 var StudentAvailableSelectorElement = require("./StudentAvailableSelectorElement.jsx");
@@ -24,29 +24,34 @@ var StudentAvailableSelectorSearch = require("./StudentAvailableSelectorSearch.j
 function getStateFromStores() {
    return {
     query: '',
-    students: TeacherGroupsStore.getAllStudents(),
   };
 };
 
 // this className
 var StudentAvailableSelector = React.createClass({
 
+  propTypes: {
+    students: React.PropTypes.array.isRequired,
+  },
+
   getInitialState: function() {
-    StudentAvailableSelectorAPI.getAllStudents();
+    // TeacherGroupsAPI.getAllStudents();
     return getStateFromStores();
   },
 
   componentDidMount: function() {
     TeacherGroupsStore.addChangeListener(this._onChange);
+    UsersStore.addChangeListener(this._onChange);
   },
 
 // three hours of debugging becouse componentWill/u/Unmount
   componentWillUnmount: function() {
     TeacherGroupsStore.removeChangeListener(this._onChange);
+    UsersStore.removeChangeListener(this._onChange);
   },
 
   render: function() {
-    var students = this.state.students;
+    var students = this.props.students;
     var self = this;
     return (
         <div>

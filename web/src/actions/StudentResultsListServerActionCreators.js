@@ -4,11 +4,11 @@ var AGConstants = require("../constants/AGConstants");
 var ActionTypes = AGConstants.ActionTypes;
 
 module.exports = {
-
-  changeMode: function(mode) {
+  // all the students in a course
+  receiveAll: function(courseStudents) {
     AGDispatcher.dispatch({
-      type: ActionTypes.SWITCH_MODE,
-      mode: mode,
+      type: ActionTypes.RECEIVE_STUDENTS_FOR_COURSE,
+      courseStudents: courseStudents,
     });
   },
 };

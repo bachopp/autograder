@@ -4,11 +4,11 @@ var AGConstants = require("../constants/AGConstants");
 var ActionTypes = AGConstants.ActionTypes;
 
 module.exports = {
-
-  changeMode: function(mode) {
+  // get the students for the usermanger on the teacher-panel
+  receiveStudents: function(course) {
     AGDispatcher.dispatch({
-      type: ActionTypes.SWITCH_MODE,
-      mode: mode,
+      type: ActionTypes.SWITCH_COURSE,
+      course: course,
     });
   },
 };

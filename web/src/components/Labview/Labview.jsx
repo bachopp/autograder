@@ -11,75 +11,100 @@ var Glyphicon = require("react-bootstrap").Glyphicon;
 var Table = require("react-bootstrap").Table;
 var ProgressBar = require("react-bootstrap").ProgressBar;
 
+var FormGroup = require("react-bootstrap").FormGroup;
+var ControlLabel = require("react-bootstrap").ControlLabel;
+var FormControl = require("react-bootstrap").FormControl;
+var InputGroup = require("react-bootstrap").InputGroup;
+
 var LabViewStore = require("../../stores/LabViewStore.js");
 var LabViewCourseActionCreators = require("../../actions/LabViewCourseActionCreators.js");
 
 var Statusbar = require("./Statusbar.jsx");
 var Buildlog = require("./Buildlog.jsx");
 
+function getDataFromStore() {
+  return {
+    student: LabViewStore.getSelectedStudent(),
+    lab: LabViewStore.getSelectedStudentLab(),
+    isExpanded: LabViewStore.getExpandedStatus(),
+  }
+}
+
 var Labview = React.createClass({
-  _getDataFromStore: function() {
-    return {
-      lab: LabViewStore.getSelectedStudentLab(),
-      student: LabViewStore.getSelectedStudent(),
-    }
+  propTypes: {
+    isStudent: React.PropTypes.bool,
   },
-  _onChange: function() {
-    this.setState(this._getDataFromStore);
+  onChange: function() {
+    this.setState(getDataFromStore());
   },
-  _handleClick: function() {
+  handleClick: function() {
     LabViewCourseActionCreators.toggleApprovalStudentLab();
   },
+  handleExpand: function() {
+    LabViewCourseActionCreators.toggleLabExpand();
+  },
+  triggerBuild: function() {
+    console.log("BUILD HANDLER");
+  },
   getInitialState: function() {
-    return this._getDataFromStore()
+    return getDataFromStore();
   },
   componentDidMount: function() {
-    LabViewStore.addChangeListener(this._onChange);
+    LabViewStore.addChangeListener(this.onChange);
   },
   componentWillUnmount: function() {
-    LabViewStore.removeChangeListener(this._onChange);
+    LabViewStore.removeChangeListener(this.onChange);
   },
   render: function() {
     const successIcon = <i className="fa fa-check fa-fw"></i>;
     const dangerIcon = <i className="fa fa-times fa-fw"></i>;
 
-    /*
-      Dirty code... fix later
-    */
-
-    if(this.state.lab.length == 0) {
-
-      ifElemet = <Col><p>Not found</p></Col>;
-
+    if(this.state.isExpanded == true) {
+      expandedButtonText = "Minimize log";
     } else {
+      expandedButtonText = "Expand log";
+    }
 
-      var theLab = this.state.lab;
-      var theStudent = this.state.student;
-
+    // check if the lab exists
+    if(!this.state.lab || this.state.lab.length == 0) {
+      ifElement = <Col><p>Lab not found</p></Col>
+    } else {
+      // the student lab exists
       if(this.state.lab.approved) {
-
+        // the lab is approved
         labApproval = <Alert className="approved" bsStyle="success">{successIcon} Approved</Alert>;
-        statusButton = <Button onClick={this._handleClick} bsStyle="danger">Remove approval</Button>;
+        if (!this.props.isStudent) {
+          statusButton = <Button onClick={this.handleClick} bsStyle="danger">Remove approval</Button>;
+        } else {
+          statusButton = <div></div>;
+        }
+
       } else {
+        // the lab is not approved
         labApproval = <Alert className="notApproved" bsStyle="danger">{dangerIcon} Not approved</Alert>;
-        statusButton = <Button onClick={this._handleClick} bsStyle="success">Approve</Button>
+        if (!this.props.isStudent) {
+          statusButton = <Button onClick={this.handleClick} bsStyle="success">Approve</Button>;
+        } else {
+          statusButton = <div></div>;
+        }
       }
 
-      var ifElement = <Col><h3>{theLab.title} - {theStudent.firstName} {theStudent.lastName}</h3>
-      <Statusbar percent={theLab.percent}/>
+      var ifElement = <Col>
+        <h3>{this.state.lab.title} - {this.state.student.firstName} {this.state.student.lastName}</h3>
+        <Statusbar percent={this.state.lab.percent}/>
         {labApproval}
         <Col className="bottomPadding">
           <ButtonToolbar>
             {statusButton}
-            <Button bsStyle="info">Rebuild</Button>
+            <Button onClick={this.triggerBuild} bsStyle="info">Rebuild</Button>
+            <Button bsStyle="default" onClick={this.handleExpand} className="pull-right">{expandedButtonText}</Button>
           </ButtonToolbar>
         </Col>
-      <Col>
-        <Buildlog log={theLab.log}/>
-      </Col></Col>;
-
+        <Col>
+          <Buildlog log={this.state.lab.log}/>
+        </Col>
+      </Col>
     }
-
     return(
       <Col>
         {ifElement}
@@ -87,9 +112,5 @@ var Labview = React.createClass({
     );
   }
 });
-
-
-
-
 
 module.exports = Labview;

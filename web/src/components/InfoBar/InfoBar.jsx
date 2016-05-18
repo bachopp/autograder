@@ -3,6 +3,8 @@ var React = require("react");
 // react-bootstrap
 var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
+var OverlayTrigger = require("react-bootstrap").OverlayTrigger;
+var Tooltip = require("react-bootstrap").Tooltip;
 
 var blinkclass = "";
 var InfoBar = React.createClass({
@@ -46,28 +48,45 @@ var InfoBar = React.createClass({
       });
   },
   componentWillMount: function(){
-    // this.setTime();
+    this.setTime();
   },
   componentDidMount: function(){
-    //  window.setInterval(function () {
-    //   this.setTime();
-    // }.bind(this), 60000);
+     window.setInterval(function () {
+      this.setTime();
+    }.bind(this), 60000);
   },
   componentWillUnmount: function() {
-    // blinkclass = "";
-    // console.log("test");
+    blinkclass = "";
+    console.log("test");
+  },
+
+  getInitialState() {
+    return { show: true };
+  },
+
+  toggle() {
+    //this.setState({ show: !this.state.show });
   },
 
   render: function() {
+    const tooltip = (
+      <Tooltip><strong>From: testuser </strong> Approve user </Tooltip>
+    );
+    const notificationIcon = <i className="fa fa-envelope fa-fw" aria-hidden="true"></i>;
+
     return(
       <div className={blinkclass}>
-        <Col xs={6}><b>{this.props.infoType} {this.props.nav} </b></Col>
-        <Col xs={6}>(data placeholder)<b>
+        <Col xs={4}><b>
         </b></Col>
+        <OverlayTrigger placement="bottom" overlay={tooltip}>
+        <Col xs={2} className="buttonify textc" >{notificationIcon} : <b> 1 </b> </Col>
+        </OverlayTrigger>
+        <Col xs={4} xsOffset={2}>(data placeholder)</Col>
       </div>
     )
   }
 });
+// {this.props.infoType} {this.props.nav}
 
+//{this.state.month}, {this.state.day} - {this.state.hours}:{this.state.minutes}
 module.exports = InfoBar;
-// {this.state.month}, {this.state.day} - {this.state.hours}:{this.state.minutes}

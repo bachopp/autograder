@@ -1,16 +1,22 @@
 var React = require("react");
 var Col = require("react-bootstrap").Col;
 var Well = require("react-bootstrap").Well;
+
+var PropTypes = React.PropTypes;
+
+
+/*
+The build log take is an array (line-by-line) and prints it with an ID attached to it.
+This might be changed if the build log comes in another format later
+*/
 var Buildlog = React.createClass({
-  getInitialState: function() {
-    return {
-      log: this.props.log
-    }
+  propTypes: {
+    log: React.PropTypes.array.isRequired
   },
   render: function() {
     return(
       <Well className="buildLog">
-        {this.state.log.map(function(entry, index) {
+        {this.props.log.map(function(entry, index) {
           return(
             <p key={"point" + index}>{entry}</p>
           );
