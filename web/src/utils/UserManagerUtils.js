@@ -8,7 +8,6 @@ module.exports = {
       student["pendingTeacher"] = false;
       student["isTeacher"] = false;
     }
-    console.log(rawRoles);
     return rawRoles;
   }
 };
