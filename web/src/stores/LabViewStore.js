@@ -40,32 +40,30 @@ function _updateRawList(rawList) {
 // the student is not in the queried selection
 
 function _queryStudents(query) {
-  _resetStudents();
-  if(query.length == 0 || query == "" || query == " ") {
-    return false;
-  }
-  queryResults = [];
-  query = query.toLowerCase();
-
-  _selectedStudents.forEach(function(cStud) {
-    // username is not used in this view -> therefore not implemented
-    //var uname = cStud.username.toLowerCase().indexOf(query);
-    var fname = cStud.firstName.toLowerCase().indexOf(query);
-    var lname = cStud.lastName.toLowerCase().indexOf(query);
-    var fullname = (cStud.firstName + " " + cStud.lastName).toLowerCase().indexOf(query);
-
-    if(fullname >= 0 || fname >= 0 || lname >= 0) {
-      queryResults.push(cStud);
+  if(query.length == 0 || !query) {
+    return fullStudentList;
+  } else {
+    var sResult = [];
+    var objectsList = fullStudentList;
+    for(var i=0;i<objectsList.length;i++){
+      var fullName = objectsList[i].firstName + " " + objectsList[i].lastName;
+      if(fullName.indexOf(query) != -1) {
+        sResult.push(objectsList[i]);
+      }
     }
-  });
-
-  if(queryResults.length > 0) {
-    queryResults[0].labs[0].isSelected = true;
+    return sResult;
   }
-  return queryResults;
+
+  if(sResult.length == 0) {
+    console.log("NO RESULTS");
+  }
 }
 
 function _resetStudents() {
+  // resetting student list
+  // this will clear the selected list and set it to the list that match the query
+
+  /*
 
   if(fullStudentList != 0 || fullStudentList != [] || fullStudentList.length != 0) {
     _selectedStudents = fullStudentList;
@@ -79,6 +77,8 @@ function _resetStudents() {
   } else {
     _selectedStudents = [];
   }
+
+  */
 }
 
 function _checkStudentLab() {
@@ -100,9 +100,14 @@ function _checkStudentLab() {
 
 // updates the student list - if [] -> error
 function _updateStudentList(newList) {
-  if(newList == 0 || !newList || newList.length == 0) {
-  }
   _selectedStudents = newList;
+
+  for(var i = 0; i<newList.length; i++) {
+    for(var j = 0; j<newList[i].labs.length; j++) {
+      newList[i].labs[j].isSelected = false;
+    }
+  }
+  _selectedStudents[0].labs[0].isSelected = true;
 }
 
 function _setSelectedStudentLab(sIndex,lIndex) {
@@ -183,16 +188,7 @@ LabViewStore.dispatchToken = AGDispatcher.register(function(action) {
       break;
     case ActionTypes.SEARCH_FOR_STUDENT:
       var keep = _queryStudents(action.query);
-      if(keep.length == 0) {
-        // no results => send an empty list to the updater
-        _updateStudentList([]);
-      } else if(!keep) {
-        // query is empty -> resets the students
-        _resetStudents();
-      } else {
-        // student were found and the studentList is updated
-        _updateStudentList(keep);
-      }
+      _updateStudentList(keep);
       LabViewStore.emitChange();
       break;
     default:
