@@ -45,7 +45,7 @@ var StudentList = React.createClass({
               </thead>
               <tbody className="scrolluserlist">
                 <tr>
-                  <td className="buttonify" >Name Surname</td>
+                  <td className="buttonify" >Firstname lastname</td>
                   <td className="buttonify">
                     <OverlayTrigger placement="right" overlay={tooltip}>
                       {invite}
@@ -81,7 +81,7 @@ var StudentList = React.createClass({
           </Col>
         </Col>
         <Col xs={5} className="infoboxright">
-          <b>Info bout user?</b>
+          <b>Info about the currently selected user</b>
         </Col>
       </Col>
 

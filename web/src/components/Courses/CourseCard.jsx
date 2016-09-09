@@ -29,7 +29,7 @@ var CourseCard = React.createClass({
     }
     return(
       <div onClick={this.handleClick.bind(this, roleCourse, course.Name)} >
-        <Col xs={12} xsOffset={0} className="whitebox whiteboxWithHover coursecardbutton" >
+        <Col xs={12} className="whitebox whiteboxWithHover coursecardbutton" >
           <h4 className="colouredHeader">{course.Name}</h4>
           <p className="fadedText">
             Course ID: <b>{course.ID}</b><br/>
@@ -40,6 +40,4 @@ var CourseCard = React.createClass({
     );
   }
 })
-
-
 module.exports = CourseCard;

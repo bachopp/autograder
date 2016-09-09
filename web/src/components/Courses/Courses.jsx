@@ -40,11 +40,11 @@ var Courses = React.createClass({
     return (
       <div>
       <Col xs={8} xsOffset={2}>
-        <h1>View courses</h1>
+        <h2>All courses</h2>
       </Col>
       <Col xs={8} xsOffset={2}>
           <CenterWrapper roles={roles}/>
-          {this.props.children}
+          {/*this.props.children*/}
       </Col>
       </div>
     )

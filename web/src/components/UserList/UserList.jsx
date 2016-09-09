@@ -9,11 +9,30 @@ var Input = require("react-bootstrap").Input;
 var Table = require("react-bootstrap").Table;
 var Glyphicon = require("react-bootstrap").Glyphicon;
 
+var UserManagerStore = require("../../stores/UserManagerStore.js");
+
 // local
+var UserRow = require("./UserRow.jsx");
+
+function getStatesFromStore() {
+  return {
+    students: UserManagerStore.getAllUsers()
+  }
+}
 
 var UserList = React.createClass({
 
+  getInitialState: function() {
+    return getStatesFromStore()
+  },
+  componentDidMount: function() {
+    UserManagerStore.addChangeListener(this._onChange);
+  },
+  componentWillUnmount: function() {
+    UserManagerStore.removeChangeListener(this._onChange);
+  },
   render: function() {
+
     const agcheck = "agcheck ";
     const isdisabled = "agcheckdisabled ";
     const isgreen = "agcheckgreen ";
@@ -24,6 +43,27 @@ var UserList = React.createClass({
     const xMark = <i className="fa fa-times fa-lg"></i>;
     const sortArrows = <i className="fa fa-sort fa-fw fa-lg"></i>
     const sortArrowsAsc = <i className="fa fa-sort-asc fa-fw fa-lg"></i>
+
+    if(this.state.students.length == 0 || this.state.students == []) {
+      // no users found
+      var Wrapper = <h4><i>Error. No users found.</i></h4>;
+    } else {
+      var Wrapper = <Table className="tables" striped={true} responsive={true} bordered={true}>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Admin</th>
+            <th>Teacher</th>
+            <th>Student</th>
+          </tr>
+        </thead>
+        <tbody>
+          {this.state.students.map(function(student,index) {
+            return <UserRow key={"userRowIndex" + index} student={student}/>
+          },this)}
+        </tbody>
+      </Table>;
+    }
     return (
       <Col xs={12}>
         <Col xs={7} className="infoboxleft">
@@ -35,145 +75,7 @@ var UserList = React.createClass({
           />
         </Col>
           <Col xs={12}>
-            <Table className="cleanTable" striped={true} responsive>
-              <thead className="floatingtablehead">
-                <tr>
-                  <th>Name</th>
-                  <th>Slipdays</th>
-                  <th>Admin{sortArrowsAsc}</th>
-                  <th>Teacher{sortArrows}</th>
-                  <th>Student{sortArrows}</th>
-                </tr>
-              </thead>
-              <tbody className="scrolluserlist">
-                <tr>
-                  <td>Name Surname</td>
-                  <td>{xMark}</td>
-                  <td>{checkMark}</td>
-                  <td>{checkMark}</td>
-                  <td>{checkMark}</td>
-                </tr>
-                <tr>
-                  <td>Name Surname</td>
-                  <td>{xMark}</td>
-                  <td>{checkMark}</td>
-                  <td>{checkMark}</td>
-                  <td>{checkMark}</td>
-                </tr>
-                <tr>
-                  <td>Name Surname</td>
-                  <td>{xMark}</td>
-                  <td>{checkMark}</td>
-                  <td>{checkMark}</td>
-                  <td>{checkMark}</td>
-                </tr>
-                <tr>
-                  <td>Name Surname</td>
-                  <td>5</td>
-                  <td>{checkMark}</td>
-                  <td>{checkMark}</td>
-                  <td>{checkMark}</td>
-                </tr>
-                <tr>
-                  <td>Name Surname</td>
-                  <td>5</td>
-                  <td>{checkMark}</td>
-                  <td>{checkMark}</td>
-                  <td>{checkMark}</td>
-                </tr>
-                <tr>
-                  <td>Name Surname</td>
-                  <td>5</td>
-                  <td>{checkMark}</td>
-                  <td>{checkMark}</td>
-                  <td>{checkMark}</td>
-                </tr>
-                <tr>
-                  <td>Name Surname</td>
-                  <td>5</td>
-                  <td>{checkMark}</td>
-                  <td>{checkMark}</td>
-                  <td>{checkMark}</td>
-                </tr>
-                <tr>
-                  <td>Name Surname</td>
-                  <td>5</td>
-                  <td>{checkMark}</td>
-                  <td>{checkMark}</td>
-                  <td>{checkMark}</td>
-                </tr>
-                <tr>
-                  <td>Name Surname</td>
-                  <td>5</td>
-                  <td>{checkMark}</td>
-                  <td>{checkMark}</td>
-                  <td>{checkMark}</td>
-                </tr>
-                <tr>
-                  <td>Name Surname</td>
-                  <td>5</td>
-                  <td>{checkMark}</td>
-                  <td>{checkMark}</td>
-                  <td>{checkMark}</td>
-                </tr>
-                <tr>
-                  <td>Name Surname</td>
-                  <td>5</td>
-                  <td>{checkMark}</td>
-                  <td>{checkMark}</td>
-                  <td>{checkMark}</td>
-                </tr>
-                <tr>
-                  <td>Name Surname</td>
-                  <td>5</td>
-                  <td>{checkMark}</td>
-                  <td>{checkMark}</td>
-                  <td>{checkMark}</td>
-                </tr>
-                <tr>
-                  <td>Name Surname</td>
-                  <td>5</td>
-                  <td>{checkMark}</td>
-                  <td>{checkMark}</td>
-                  <td>{checkMark}</td>
-                </tr>
-                <tr>
-                  <td>Name Surname</td>
-                  <td>5</td>
-                  <td>{checkMark}</td>
-                  <td>{checkMark}</td>
-                  <td>{checkMark}</td>
-                </tr>
-                <tr>
-                  <td>Name Surname</td>
-                  <td>5</td>
-                  <td>{checkMark}</td>
-                  <td>{checkMark}</td>
-                  <td>{checkMark}</td>
-                </tr>
-                <tr>
-                  <td>Name Surname</td>
-                  <td>5</td>
-                  <td>{checkMark}</td>
-                  <td>{checkMark}</td>
-                  <td>{checkMark}</td>
-                </tr>
-                <tr>
-                  <td>Name Surname</td>
-                  <td>5</td>
-                  <td>{checkMark}</td>
-                  <td>{checkMark}</td>
-                  <td>{checkMark}</td>
-                </tr>
-                <tr>
-                  <td>Name Surname</td>
-                  <td>5</td>
-                  <td>{checkMark}</td>
-                  <td>{checkMark}</td>
-                  <td>{checkMark}</td>
-                </tr>
-              </tbody>
-            </Table>
+            {Wrapper}
           </Col>
         </Col>
         <Col xs={5} className="infoboxright">
@@ -183,7 +85,10 @@ var UserList = React.createClass({
 
 
     );
-  }
+  },
+  _onChange: function() {
+    this.setState(getStatesFromStore());
+  },
 
 });
 
