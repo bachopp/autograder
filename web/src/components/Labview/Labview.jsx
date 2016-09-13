@@ -22,6 +22,11 @@ var LabViewCourseActionCreators = require("../../actions/LabViewCourseActionCrea
 var Statusbar = require("./Statusbar.jsx");
 var Buildlog = require("./Buildlog.jsx");
 
+const successIcon = <i className="fa fa-check fa-fw"></i>;
+const dangerIcon = <i className="fa fa-times fa-fw"></i>;
+
+
+
 function getDataFromStore() {
   return {
     student: LabViewStore.getSelectedStudent(),
@@ -56,14 +61,8 @@ var Labview = React.createClass({
     LabViewStore.removeChangeListener(this.onChange);
   },
   render: function() {
-    const successIcon = <i className="fa fa-check fa-fw"></i>;
-    const dangerIcon = <i className="fa fa-times fa-fw"></i>;
-
-    if(this.state.isExpanded == true) {
-      expandedButtonText = "Minimize log";
-    } else {
-      expandedButtonText = "Expand log";
-    }
+    
+    (this.state.isExpanded) ? expandedButtonText="Minimize log" : expandedButtonText="Expand log";
 
     // check if the lab exists
     if(!this.state.lab || this.state.lab.length == 0) {

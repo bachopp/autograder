@@ -20,7 +20,7 @@ var Welcome = React.createClass({
 		return (
       <Jumbotron>
         <h1>404 not found</h1>
-        <p>Go back</p>
+        <p>Click <a href="http://localhost:8000">here</a> to go back.</p>
       </Jumbotron>
 		)
 	}

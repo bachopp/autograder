@@ -47,9 +47,12 @@ html, body {
 
 .approved {
 	background-color:#c1e2b3;
+	border:1px solid #5ea63f;
 }
 .notApproved {
 	background-color:#f69988;
+	color:#000;
+	border:1px solid #ee3211;
 }
 .selected {
 	text-shadow:1px 1px 1px rgba(0,0,0,0.1);

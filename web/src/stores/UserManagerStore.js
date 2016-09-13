@@ -37,7 +37,20 @@ var UserManagerStore = assign({},EventEmitter.prototype, {
   removeChangeListener: function(callback){
     this.removeListener(CHANGE_EVENT,callback);
   },
+  /*          
+  
+    This is a hotfix, but will have to be fixed
+    The getTotalUserList will return regardless of selected course.
+    This should return a full set of students (of any course), since
+    it's the Admin page.
+
+  */
+  getTotalUserList: function() {
+    return [];
+  },
   getAllUsers: function() {
+
+
     var course = UsersStore.getActiveCourse();
     if(!CourseStudentsAPI.sentToken) {
       CourseStudentsAPI.getAllStudents(course);

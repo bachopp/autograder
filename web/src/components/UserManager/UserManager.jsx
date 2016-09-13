@@ -22,7 +22,7 @@ const _nav = "users";
 
 function getStatesFromStore() {
   return {
-    students: UserManagerStore.getStudents()
+    students: UserManagerStore.getAllUsers()
   }
 }
 

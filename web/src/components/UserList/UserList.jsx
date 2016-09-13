@@ -14,6 +14,19 @@ var UserManagerStore = require("../../stores/UserManagerStore.js");
 // local
 var UserRow = require("./UserRow.jsx");
 
+
+const agcheck = "agcheck ";
+const isdisabled = "agcheckdisabled ";
+const isgreen = "agcheckgreen ";
+const neutral = isdisabled + "fa fa-check-square fa-lg ";
+
+const innerSearch = <Glyphicon glyph="search"/>;
+const checkMark = <i className={neutral}></i>;
+const xMark = <i className="fa fa-times fa-lg"></i>;
+const sortArrows = <i className="fa fa-sort fa-fw fa-lg"></i>
+const sortArrowsAsc = <i className="fa fa-sort-asc fa-fw fa-lg"></i>
+
+
 function getStatesFromStore() {
   return {
     students: UserManagerStore.getAllUsers()
@@ -33,20 +46,9 @@ var UserList = React.createClass({
   },
   render: function() {
 
-    const agcheck = "agcheck ";
-    const isdisabled = "agcheckdisabled ";
-    const isgreen = "agcheckgreen ";
-    const neutral = isdisabled + "fa fa-check-square fa-lg ";
-
-    const innerSearch = <Glyphicon glyph="search"/>;
-    const checkMark = <i className={neutral}></i>;
-    const xMark = <i className="fa fa-times fa-lg"></i>;
-    const sortArrows = <i className="fa fa-sort fa-fw fa-lg"></i>
-    const sortArrowsAsc = <i className="fa fa-sort-asc fa-fw fa-lg"></i>
-
     if(this.state.students.length == 0 || this.state.students == []) {
       // no users found
-      var Wrapper = <h4><i>Error. No users found.</i></h4>;
+      var Wrapper = <h4><i>Error. No users found in "User manager store".</i></h4>;
     } else {
       var Wrapper = <Table className="tables" striped={true} responsive={true} bordered={true}>
         <thead>
@@ -79,7 +81,9 @@ var UserList = React.createClass({
           </Col>
         </Col>
         <Col xs={5} className="infoboxright">
-          <b>Info bout user?</b>
+          <Col xs={12}>
+            <div>Extended info about the user comes here.</div>
+          </Col>
         </Col>
       </Col>
 

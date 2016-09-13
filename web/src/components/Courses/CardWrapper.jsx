@@ -18,8 +18,8 @@ var CardWrapper = React.createClass({
         <Col xs={12}>
           {courses.map(function(course) {
               return(
-                <Col xs={sizeVar}>
-                  <CourseCard key={course.ID} course={course} role={self.props.role}/>
+                <Col xs={sizeVar} key={"cardVarSize" + course.ID}>
+                  <CourseCard key={"cardWrapper" + course.ID} course={course} role={self.props.role}/>
                 </Col>
               );
           })}
