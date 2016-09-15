@@ -60,6 +60,10 @@ html, body {
 	color:#FFF;
 }
 
+.selected.notApproved {
+	background-color:rgba(0, 0, 0,0.90);
+}
+
 .colouredHeader {
 		color:#444444;
 }
@@ -118,11 +122,6 @@ html, body {
 	margin-bottom: 2em;
 }
 
-.selectedCourse {
-	background-color:#5BC0DE;
-	border-color:#46b8da;
-	color:#FFF;
-}
 .shownElement {
 	display:none;
 }
