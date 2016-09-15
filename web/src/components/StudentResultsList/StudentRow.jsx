@@ -10,21 +10,25 @@ var StudentRow = React.createClass({
     student: PropTypes.object.isRequired,
   },
   handleClick: function(index) {
+    console.log("handle click: " + index);
     var studentId = this.props.student.id;
-    var labId = index;
-    LabViewCourseActionCreators.setSelectedStudentLab(studentId,labId);
+    LabViewCourseActionCreators.setSelectedStudentLab(studentId,index);
   },
   render: function() {
-  var _student = this.props.student;
   var self = this;
-
+  var cStudent = this.props.student;
   return(
       <tr className="border_bottom">
-        <td>{_student.firstName} {_student.lastName}</td>
-        <td>{_student.slipDays}</td>
-        {_student.labs.map(function(currentLab, index) {
-          var eventClick = this.handleClick.bind(null,index);
-          return <StudentElement onClick={eventClick} key={"sElement"+index} lab={currentLab}/>
+        <td>{cStudent.firstName} {cStudent.lastName}</td>
+        <td>{cStudent.slipDays}</td>
+        
+
+        {cStudent.labs.map(function(lab, index) {
+          return <StudentElement
+            lab={lab}
+            key={"labIndexStudent" + cStudent.firstName + index}
+            onClick={self.handleClick.bind(this, index)}
+          />
         },this)}
       </tr>
     );

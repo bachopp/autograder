@@ -19,19 +19,18 @@ var ActionTypes = AGConstants.ActionTypes;
 var CHANGE_EVENT = "change";
 var logExpanded = false;
 
-var _selectedStudId = 0;     // default 0
-var _selectedLabId = 0;      // default 0
+var selectedStudId = 0;     // default 0
+var selectedLabId = 0;      // default 0
 var fullStudentList = [];
-var _selectedStudents = [];
+var selectedStudents = [];
 
-function _updateRawList(rawList) {
+function updateRawList(rawList) {
   if (rawList == undefined || !rawList) {
     fullStudentList = [];
-    _selectedStudents = fullStudentList;
+    selectedStudents = fullStudentList;
   } else {
     fullStudentList = LabViewUtils.convertRoles(rawList);
-    _selectedStudents = fullStudentList;
-    _selectedStudents[0].labs[0].isSelected = true;
+    selectedStudents = fullStudentList;
   }
 }
 
@@ -39,7 +38,10 @@ function _updateRawList(rawList) {
 // this also set the current lab and student to the first one, if
 // the student is not in the queried selection
 
-function _queryStudents(query) {
+function queryStudents(query) {
+
+  resetStudents();
+
   if(query.length == 0 || !query) {
     return fullStudentList;
   } else {
@@ -59,71 +61,78 @@ function _queryStudents(query) {
   }
 }
 
-function _resetStudents() {
-  // resetting student list
-  // this will clear the selected list and set it to the list that match the query
+function resetStudents() {
+  sList = fullStudentList;
 
-  /*
+  selectedStudId = 0;
+  selectedLabId = 0;
 
-  if(fullStudentList != 0 || fullStudentList != [] || fullStudentList.length != 0) {
-    _selectedStudents = fullStudentList;
-    for(var i = 0; i<_selectedStudents.length; i++) {
-      var c = _selectedStudents[i];
-      for(var j = 0; j<c.labs.length;j++) {
-        c.labs[j].isSelected = false;
-      }
+  for(key in sList) {
+    var s = sList[key];
+    for(labKey in s.labs) {
+      var sLab = s.labs[labKey];
+      sLab.isSelected = false;
     }
-    _selectedStudents[0].labs[0].isSelected = true;
-  } else {
-    _selectedStudents = [];
   }
 
-  */
 }
 
-function _checkStudentLab() {
-  if(_selectedStudId > _selectedStudents.length - 1) {
+function checkStudentLab() {
+  if(selectedStudId > selectedStudents.length - 1) {
     // before this is set
-    _selectedStudId = 0;
-    _selectedLabId = 0;
+    selectedStudId = 0;
+    selectedLabId = 0;
   }
-  if(_selectedStudents.length > 0) {    var course = UsersStore.getActiveCourse();
+  if(selectedStudents.length > 0) {    
+    var course = UsersStore.getActiveCourse();
     if (!CourseStudentsAPI.sentToken) {
       CourseStudentsAPI.getAllStudents(course);
       return [];
     }
-    return _selectedStudents[_selectedStudId].labs[_selectedLabId];
+    return selectedStudents[selectedStudId].labs[selectedLabId];
   } else {
     return false;
   }
 }
 
 // updates the student list - if [] -> error
-function _updateStudentList(newList) {
-  _selectedStudents = newList;
+function updateStudentList(newList) {
+  resetStudents();
+  selectedStudents = newList;
+  resetStudents();
+}
 
-  for(var i = 0; i<newList.length; i++) {
-    for(var j = 0; j<newList[i].labs.length; j++) {
-      newList[i].labs[j].isSelected = false;
-    }
+function setSelectedStudentLab(sIndex,lIndex) {
+
+  console.log(selectedStudents);
+  console.log("Index: " + sIndex + " : " + lIndex);
+
+  /*
+  
+    @Hotfix Dette Fikser problemet med "out of bounds" ved søk ved en undefined index (for stor)
+    Dette burde fikses ved a componenten ikke leverer index som er for høy (re-render maybe?)
+
+  */
+
+
+  if(sIndex > selectedStudents.length -1) {
+    sIndex = selectedStudents.length-1;
   }
-  _selectedStudents[0].labs[0].isSelected = true;
+
+
+  selectedStudents[selectedStudId].labs[selectedLabId].isSelected = false;
+  selectedStudId = sIndex;
+  selectedLabId = lIndex;
+  selectedStudents[sIndex].labs[lIndex].isSelected = true;
 }
 
-function _setSelectedStudentLab(sIndex,lIndex) {
-  _selectedStudents[_selectedStudId].labs[_selectedLabId].isSelected = false;
-  _selectedStudId = sIndex;
-  _selectedLabId = lIndex;
-  _selectedStudents[sIndex].labs[lIndex].isSelected = true;
-}
-
-function _toggleLabExpand() {
+function toggleLabExpand() {
   logExpanded = !logExpanded;
 }
 
-function _toggleSelectedLab() {
-  var status = _selectedStudents[_selectedStudId].labs[_selectedLabId].approved;
-  _selectedStudents[_selectedStudId].labs[_selectedLabId].approved = !status;
+function toggleSelectedLab() {
+  var status = selectedStudents[selectedStudId].labs[selectedLabId].approved;
+  selectedStudents[selectedStudId].labs[selectedLabId].approved = !status;
 
 }
 
@@ -146,13 +155,13 @@ var LabViewStore = assign({},EventEmitter.prototype, {
       CourseStudentsAPI.getAllStudents(course);
       return [];
     }
-    return _selectedStudents;
+    return selectedStudents;
   },
   getSelectedStudent: function() {
-    return _selectedStudents[_selectedStudId];
+    return selectedStudents[selectedStudId];
   },
   getSelectedStudentLab: function() {
-    var lab = _checkStudentLab();
+    var lab = checkStudentLab();
     if(lab) {
       return lab;
     } else {
@@ -165,7 +174,7 @@ LabViewStore.dispatchToken = AGDispatcher.register(function(action) {
     case ActionTypes.RECEIVE_STUDENTS_FOR_COURSE:
       AGDispatcher.waitFor([CourseStudentsStore.dispatchToken]);
       var studs = CourseStudentsStore.getAllStudents();
-      _updateRawList(studs);
+      updateRawList(studs);
       LabViewStore.emitChange();
       break;
     case ActionTypes.SWITCH_COURSE:
@@ -175,20 +184,20 @@ LabViewStore.dispatchToken = AGDispatcher.register(function(action) {
       break;
     case ActionTypes.SET_SELECTED_STUDENTLAB:
       //console.log(action.studentIndex, action.labIndex);
-      _setSelectedStudentLab(action.studentIndex, action.labIndex);
+      setSelectedStudentLab(action.studentIndex, action.labIndex);
       LabViewStore.emitChange();
       break;
     case ActionTypes.TOGGLE_APPROVAL_STUDENTLAB:
-      _toggleSelectedLab();
+      toggleSelectedLab();
       LabViewStore.emitChange();
       break;
     case ActionTypes.TOGGLE_LAB_EXPAND:
-      _toggleLabExpand();
+      toggleLabExpand();
       LabViewStore.emitChange();
       break;
     case ActionTypes.SEARCH_FOR_STUDENT:
-      var keep = _queryStudents(action.query);
-      _updateStudentList(keep);
+      var keep = queryStudents(action.query);
+      updateStudentList(keep);
       LabViewStore.emitChange();
       break;
     default:

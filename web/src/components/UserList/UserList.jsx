@@ -29,7 +29,8 @@ const sortArrowsAsc = <i className="fa fa-sort-asc fa-fw fa-lg"></i>
 
 function getStatesFromStore() {
   return {
-    students: UserManagerStore.getAllUsers()
+    //students: UserManagerStore.getAllUsers(),
+    users: UserManagerStore.getTotalUserList()
   }
 }
 
@@ -46,6 +47,10 @@ var UserList = React.createClass({
   },
   render: function() {
 
+    console.log("USERS:");
+    console.log(this.state.users);
+    console.log("/USERS");
+
     if(this.state.students.length == 0 || this.state.students == []) {
       // no users found
       var Wrapper = <h4><i>Error. No users found in "User manager store".</i></h4>;
@@ -60,8 +65,8 @@ var UserList = React.createClass({
           </tr>
         </thead>
         <tbody>
-          {this.state.students.map(function(student,index) {
-            return <UserRow key={"userRowIndex" + index} student={student}/>
+          {this.state.users.map(function(user,index) {
+            return <UserRow key={"userRowIndex" + index} student={user}/>
           },this)}
         </tbody>
       </Table>;

@@ -25,6 +25,9 @@ var CourseCard = React.createClass({
     var course = this.props.course;
     var role = this.props.role;
     var roleCourse = role;
+
+    //console.log(course);
+
     if (role !== "Admin") {
       roleCourse =  role +"/results/"+ course.Name
     }
@@ -32,8 +35,9 @@ var CourseCard = React.createClass({
       <div onClick={this.handleClick.bind(this, roleCourse, course.Name)} >
         <Col xs={12} className="whitebox whiteboxWithHover coursecardbutton" >
           <h4 className="colouredHeader">{course.Name}</h4>
+          <p><i>Operating systems</i></p>
           <p className="fadedText">
-            Course ID: <b>{course.ID}</b><br/>
+            (This will be removed): Course ID: <b>{course.ID}</b><br/>
             {course.Description}
           </p>
         </Col>

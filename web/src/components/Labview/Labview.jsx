@@ -11,6 +11,10 @@ var Glyphicon = require("react-bootstrap").Glyphicon;
 var Table = require("react-bootstrap").Table;
 var ProgressBar = require("react-bootstrap").ProgressBar;
 
+
+var ListGroup = require("react-bootstrap").ListGroup;
+var ListGroupItem = require("react-bootstrap").ListGroupItem;
+
 var FormGroup = require("react-bootstrap").FormGroup;
 var ControlLabel = require("react-bootstrap").ControlLabel;
 var FormControl = require("react-bootstrap").FormControl;
@@ -102,6 +106,16 @@ var Labview = React.createClass({
         <Col>
           <Buildlog log={this.state.lab.log}/>
         </Col>
+
+        <ListGroup>
+          <ListGroupItem>Passed tests: <b>11</b>/17</ListGroupItem>
+          <ListGroupItem>Failed tests: <b>6</b>/17</ListGroupItem>
+          <ListGroupItem>Build date: <b>Today</b></ListGroupItem>
+          <ListGroupItem>Build ID: <b>1337</b></ListGroupItem>
+        </ListGroup>
+
+
+
       </Col>
     }
     return(

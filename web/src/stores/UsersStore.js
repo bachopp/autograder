@@ -12,6 +12,9 @@ var AGConstants = require('../constants/AGConstants.js');
 var TopBarUtils = require('../utils/TopBarUtils');
 var CourseNavUtils = require('../utils/CourseNavUtils.js');
 
+var CoursesStore = "./CoursesStore.js";
+
+
 var ActionTypes = AGConstants.ActionTypes;
 
 var CHANGE_EVENT = 'change';
@@ -72,6 +75,19 @@ var UsersStore = assign({}, EventEmitter.prototype, {
   },
   getCurrentSideNav: function() {
     return _currentSideNav;
+  },
+  getAllActiveUsers: function() {
+    // this should return a full list of students. Admins
+    // should be able to see all active users on the Autograder network.
+
+    // dette blir en skitten fix, men kanskje det funker.
+
+    
+    console.log(CoursesStore.getAllCourses());
+
+
+    return [];
+
   },
   getActiveCourse: function(m) {
     // if mode provided - topbar + external links

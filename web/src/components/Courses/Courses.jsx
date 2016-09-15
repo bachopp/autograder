@@ -41,6 +41,7 @@ var Courses = React.createClass({
       <div>
       <Col xs={8} xsOffset={2}>
         <h2>All courses</h2>
+        <h4><i>Click on the course cards to navigate</i></h4>
       </Col>
       <Col xs={8} xsOffset={2}>
           <CenterWrapper roles={roles}/>
