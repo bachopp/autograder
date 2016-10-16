@@ -9,7 +9,8 @@ html {
 }
 
 html, body {
-	background-color:#f5f5f5;
+	/*background-color:#f5f5f5;*/
+	background-color:#e2e2e2;
 }
 
 .whitebox {
@@ -21,7 +22,9 @@ html, body {
 	border-radius:4px;
 	box-shadow:1px 1px 1px rgba(0,0,0,0.1);
 	border:1px solid #fff;
-	margin-bottom: 2em;
+	margin-bottom: 5em;
+
+	min-height:120px;
 }
 .whitebox .fadedText {
 	color:#444444;
