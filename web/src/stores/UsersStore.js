@@ -17,55 +17,55 @@ var CoursesStore = "./CoursesStore.js";
 
 var ActionTypes = AGConstants.ActionTypes;
 
-var CHANGE_EVENT = 'change';
+var CHANGEEVENT = 'change';
 
-var _roles = [];
+var roles = [];
 
-var _navCourses = [];
-var _currentRole = '';
+var navCourses = [];
+var currentRole = '';
 
-var _currentSideNav = '';
-var _activeCourseTeacher = '';
-var _activeCourseStudent= '';
+var currentSideNav = '';
+var activeCourseTeacher = '';
+var activeCourseStudent= '';
 
 
-function _addRoles(rawRoles) {
-  _roles = rawRoles;
+function addRoles(rawRoles) {
+  roles = rawRoles;
 }
 
-function _changeCourse(course) {
-  if (_currentRole == mode.Teacher) {
-    _activeCourseTeacher = course;
-  } else if (_currentRole == mode.Student) {
-    _activeCourseStudent = course;
+function changeCourse(course) {
+  if (currentRole == mode.Teacher) {
+    activeCourseTeacher = course;
+  } else if (currentRole == mode.Student) {
+    activeCourseStudent = course;
   }
 }
 
 var UsersStore = assign({}, EventEmitter.prototype, {
 
   emitChange: function() {
-    this.emit(CHANGE_EVENT);
+    this.emit(CHANGEEVENT);
   },
 
   addChangeListener: function(callback) {
-    this.on(CHANGE_EVENT, callback);
+    this.on(CHANGEEVENT, callback);
   },
 
   removeChangeListener: function(callback) {
-    this.removeListener(CHANGE_EVENT, callback);
+    this.removeListener(CHANGEEVENT, callback);
   },
 
   getAllRoles: function() {
-    return _roles;
+    return roles;
   },
 
   getCoursesForMode: function(mode) {
     courses = [];
-    for (var key in _roles) {
-      if (_roles[key].Mode == mode) {
-        for (var key2 in _roles[key].Courses) {
-          for (var key3 in _roles[key].Courses[key2]) {
-            courses.push(_roles[key].Courses[key2][key3].Name);
+    for (var key in roles) {
+      if (roles[key].Mode == mode) {
+        for (var key2 in roles[key].Courses) {
+          for (var key3 in roles[key].Courses[key2]) {
+            courses.push(roles[key].Courses[key2][key3].Name);
           }
         }
         return courses;
@@ -74,7 +74,7 @@ var UsersStore = assign({}, EventEmitter.prototype, {
     return courses;
   },
   getCurrentSideNav: function() {
-    return _currentSideNav;
+    return currentSideNav;
   },
   getAllActiveUsers: function() {
     // this should return a full list of students. Admins
@@ -92,20 +92,20 @@ var UsersStore = assign({}, EventEmitter.prototype, {
   getActiveCourse: function(m) {
     // if mode provided - topbar + external links
     if (m == mode.Teacher) {
-      return _activeCourseTeacher;
+      return activeCourseTeacher;
     } else if (m == mode.Student) {
-      return _activeCourseStudent;
+      return activeCourseStudent;
     }
 
     // if mode not provided use active mode
-    if (_currentRole == mode.Teacher) {
-      return _activeCourseTeacher;
-    } else if (_currentRole == mode.Student) {
-      return _activeCourseStudent;
+    if (currentRole == mode.Teacher) {
+      return activeCourseTeacher;
+    } else if (currentRole == mode.Student) {
+      return activeCourseStudent;
     }
   },
   getCurrentRole: function() {
-    return _currentRole;
+    return currentRole;
   },
 });
 
@@ -115,28 +115,28 @@ UsersStore.dispachToken = AGDispatcher.register(function(action) {
   switch(action.type) {
     // TODO: finish switch statement for different actions
 
-     case ActionTypes.RECEIVE_RAW_ROLES:
+     case ActionTypes.RECEIVERAWROLES:
       roles = TopBarUtils.convertRawRole(action.rawRoles)
-      _addRoles(roles);
+      addRoles(roles);
       UsersStore.emitChange();
       break;
-    case ActionTypes.SWITCH_MODE:
-      courses = CourseNavUtils.convertToCourses(_roles, action.mode)
-      _currentRole = action.mode;
+    case ActionTypes.SWITCHMODE:
+      courses = CourseNavUtils.convertToCourses(roles, action.mode)
+      currentRole = action.mode;
       UsersStore.emitChange();
       break;
-    case ActionTypes.RECEIVE_COURSES_FOR_MODE:
-      _navCourses = CourseNavUtils.convertRawCourses(action.modeCourses.Courses);
-      _currentRole = action.modeCourses.Mode;
+    case ActionTypes.RECEIVECOURSESFORMODE:
+      navCourses = CourseNavUtils.convertRawCourses(action.modeCourses.Courses);
+      currentRole = action.modeCourses.Mode;
       UsersStore.emitChange();
       break;
-    case ActionTypes.SWITCH_COURSE:
-      _changeCourse(action.course);
+    case ActionTypes.SWITCHCOURSE:
+      changeCourse(action.course);
       // TODO: create constant, create action and call for actions in CourseNav!
       UsersStore.emitChange();
       break;
-    // case ActionTypes.SWITCH_SIDE_NAV:
-    //   // _currentSideNav = action.mode;
+    // case ActionTypes.SWITCHSIDENAV:
+    //   // currentSideNav = action.mode;
     //   // UsersStore.emitChange();
     //   break;
      default:

@@ -38,16 +38,16 @@ var Courses = React.createClass({
       return (<i/>)
     }
     return (
-      <div>
-      <Col xs={8} xsOffset={2}>
-        <h2>All courses</h2>
-        <h4><i>Click on the course cards to navigate</i></h4>
+      <Col xs={12}>
+        <Col>
+          <h1>All courses</h1>
+
+        </Col>
+        <Col xs={12}>
+            <CenterWrapper roles={roles}/>
+            {/*this.props.children*/}
+        </Col>
       </Col>
-      <Col xs={8} xsOffset={2}>
-          <CenterWrapper roles={roles}/>
-          {/*this.props.children*/}
-      </Col>
-      </div>
     )
   },
   _onChange: function() {

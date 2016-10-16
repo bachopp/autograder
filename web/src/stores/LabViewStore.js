@@ -61,6 +61,13 @@ function queryStudents(query) {
   }
 }
 
+/*
+  Denne koden burde kanskje skrives om.
+  fullStudentList henter alle brukerne, men
+  burde egentlig spørre på en annen måte.
+  Se på dette senere
+*/
+
 function resetStudents() {
   sList = fullStudentList;
 
@@ -83,7 +90,7 @@ function checkStudentLab() {
     selectedStudId = 0;
     selectedLabId = 0;
   }
-  if(selectedStudents.length > 0) {    
+  if(selectedStudents.length > 0) {
     var course = UsersStore.getActiveCourse();
     if (!CourseStudentsAPI.sentToken) {
       CourseStudentsAPI.getAllStudents(course);
@@ -103,23 +110,15 @@ function updateStudentList(newList) {
 }
 
 function setSelectedStudentLab(sIndex,lIndex) {
-
-  console.log(selectedStudents);
-  console.log("Index: " + sIndex + " : " + lIndex);
-
   /*
-  
+
     @Hotfix Dette Fikser problemet med "out of bounds" ved søk ved en undefined index (for stor)
     Dette burde fikses ved a componenten ikke leverer index som er for høy (re-render maybe?)
 
   */
-
-
   if(sIndex > selectedStudents.length -1) {
     sIndex = selectedStudents.length-1;
   }
-
-
   selectedStudents[selectedStudId].labs[selectedLabId].isSelected = false;
   selectedStudId = sIndex;
   selectedLabId = lIndex;

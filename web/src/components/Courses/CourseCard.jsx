@@ -17,7 +17,7 @@ var CourseCard = React.createClass({
   },
   handleClick: function(there, course) {
     CourseNavActionCreators.changeActiveCourse(course);
-    //console.log(there);
+    console.log(course);
     browserHistory.push(there);
   },
   render: function() {
@@ -31,15 +31,12 @@ var CourseCard = React.createClass({
     if (role !== "Admin") {
       roleCourse =  role +"/results/"+ course.Name
     }
+
     return(
       <div onClick={this.handleClick.bind(this, roleCourse, course.Name)} >
         <Col xs={12} className="whitebox whiteboxWithHover coursecardbutton" >
           <h4 className="colouredHeader">{course.Name}</h4>
-          <p><i>Operating systems</i></p>
-          <p className="fadedText">
-            (This will be removed): Course ID: <b>{course.ID}</b><br/>
-            {course.Description}
-          </p>
+          <h5 className="fadedText">{course.Description}</h5>
         </Col>
       </div>
     );
