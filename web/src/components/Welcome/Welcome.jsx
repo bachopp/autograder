@@ -16,7 +16,10 @@ var Welcome = React.createClass({
       <Jumbotron>
         <h1>Automated student feedback</h1>
         <p>Autograder provides instantaneous feedback to students on their programming assignments. It is also a valuable tool for teachers when grading lab assignments.</p>
-        <p><Button bsStyle="primary" href="http://autograder.ux.uis.no/#autograder">Learn more</Button></p>
+
+				<h2>A new front-end for Autograder written in ReactJS.</h2>
+				<p>Developed with ReactJS, Bootstrap, Go, MySQL and WebSocket.</p>
+				<p><Button bsStyle="primary" href="http://autograder.ux.uis.no/#autograder">Learn more</Button></p>
       </Jumbotron>
 		)
 	}

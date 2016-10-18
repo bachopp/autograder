@@ -13,6 +13,7 @@ html, body {
 	background-color:#e2e2e2;
 }
 
+
 .whitebox {
 	background-color:#FFF;
 	padding-top: 0.6em;
@@ -53,9 +54,10 @@ html, body {
 	border:1px solid #5ea63f;
 }
 .notApproved {
-	background-color:#f69988;
+	background-color:#e57e7e;
+	/*background-color:#f69988;*/
 	color:#000;
-	border:1px solid #ee3211;
+	border:1px solid #d35858;
 }
 .selected {
 	text-shadow:1px 1px 1px rgba(0,0,0,0.1);
@@ -303,9 +305,19 @@ background-color: #c1c1c1;
 .buttonify:hover {
 	box-shadow: inset 0px 0px 100px 100px rgba(0,0,0,0.05);
 }
+.selectedCourseButton {
+	/*box-shadow: inset 0px 0px 100px 100px rgba(0,0,0,0.1);*/
+	box-shadow:inset 0px 0px 50px 50px rgba(0,0,0,0.1);
+	background-color:#00aaa0;
+	color:#FFFFFF;
+	font-weight:bold;
+}
+
 .buttonactive {
 	box-shadow: inset 0px 0px 100px 100px rgba(0,0,0,0.1);
 }
+
+
 .buttonactive:hover {
 	box-shadow: inset 0px 0px 100px 100px rgba(0,0,0,0.1);
 }

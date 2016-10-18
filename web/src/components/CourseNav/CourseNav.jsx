@@ -78,7 +78,7 @@ var CourseNav = React.createClass({
       {
         courses.map(function(course) {
           if (active === course) {
-            isActive = "buttonactive";
+            isActive = "selectedCourseButton";
           } else {
             isActive = "";
           }
