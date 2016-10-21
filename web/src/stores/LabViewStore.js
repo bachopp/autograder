@@ -7,6 +7,7 @@ var assign = require('object-assign');
 var CourseStudentsAPI = require("../utils/CourseStudentsAPI.js");
 var mockData = require("../components/StudentResultsList/mockData.js");
 
+
 // store dependencies
 var CourseStudentsStore = require('./CourseStudentsStore.js');
 var UsersStore = require('./UsersStore.js');
@@ -29,6 +30,9 @@ function updateRawList(rawList) {
     fullStudentList = [];
     selectedStudents = fullStudentList;
   } else {
+
+    // this is where all the stuff with the labs happen
+    // this should be changed...
     fullStudentList = LabViewUtils.convertRoles(rawList);
     selectedStudents = fullStudentList;
   }

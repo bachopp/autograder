@@ -36,6 +36,7 @@ function getDataFromStore() {
     student: LabViewStore.getSelectedStudent(),
     lab: LabViewStore.getSelectedStudentLab(),
     isExpanded: LabViewStore.getExpandedStatus(),
+    isRunning: false,
   }
 }
 
@@ -54,6 +55,12 @@ var Labview = React.createClass({
   },
   triggerBuild: function() {
     console.log("BUILD HANDLER");
+    this.setState({isRunning: true});
+
+    setTimeout(() => {
+      this.setState({isRunning: false});
+    },2000);
+
   },
   getInitialState: function() {
     return getDataFromStore();
@@ -65,7 +72,7 @@ var Labview = React.createClass({
     LabViewStore.removeChangeListener(this.onChange);
   },
   render: function() {
-    
+
     (this.state.isExpanded) ? expandedButtonText="Minimize log" : expandedButtonText="Expand log";
 
     // check if the lab exists
@@ -99,23 +106,24 @@ var Labview = React.createClass({
         <Col className="bottomPadding">
           <ButtonToolbar>
             {statusButton}
-            <Button onClick={this.triggerBuild} bsStyle="info">Rebuild</Button>
+            <Button
+              bsStyle="info"
+              onClick={!this.state.isLoading ? this.triggerBuild : null}
+              disabled={this.state.isRunning}>
+                {!this.state.isRunning ? 'Build' : 'Building...'}
+              </Button>
             <Button bsStyle="default" onClick={this.handleExpand} className="pull-right">{expandedButtonText}</Button>
           </ButtonToolbar>
         </Col>
         <Col>
           <Buildlog log={this.state.lab.log}/>
         </Col>
-
         <ListGroup>
           <ListGroupItem>Passed tests: <b>11</b>/17</ListGroupItem>
           <ListGroupItem>Failed tests: <b>6</b>/17</ListGroupItem>
           <ListGroupItem>Build date: <b>Today</b></ListGroupItem>
           <ListGroupItem>Build ID: <b>1337</b></ListGroupItem>
         </ListGroup>
-
-
-
       </Col>
     }
     return(
