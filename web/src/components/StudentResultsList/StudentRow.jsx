@@ -10,7 +10,6 @@ var StudentRow = React.createClass({
     student: PropTypes.object.isRequired,
   },
   handleClick: function(index) {
-    console.log("handle click: " + index);
     var studentId = this.props.student.id;
     LabViewCourseActionCreators.setSelectedStudentLab(studentId,index);
   },
@@ -21,8 +20,6 @@ var StudentRow = React.createClass({
       <tr className="border_bottom">
         <td>{cStudent.firstName} {cStudent.lastName}</td>
         <td>{cStudent.slipDays}</td>
-        
-
         {cStudent.labs.map(function(lab, index) {
           return <StudentElement
             lab={lab}

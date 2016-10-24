@@ -115,14 +115,14 @@ function updateStudentList(newList) {
 
 function setSelectedStudentLab(sIndex,lIndex) {
   /*
-
     @Hotfix Dette Fikser problemet med "out of bounds" ved søk ved en undefined index (for stor)
     Dette burde fikses ved a componenten ikke leverer index som er for høy (re-render maybe?)
-
   */
+
   if(sIndex > selectedStudents.length -1) {
     sIndex = selectedStudents.length-1;
   }
+
   selectedStudents[selectedStudId].labs[selectedLabId].isSelected = false;
   selectedStudId = sIndex;
   selectedLabId = lIndex;

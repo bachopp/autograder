@@ -11,7 +11,7 @@ var Student = function() {
   this.studentNumber = "";
   this.slipDays = null;
   this.hasGroup = false;
-  this.labs = LabGenerator.generate(5);
+  this.labs = [];
 }
 
 module.exports = {
@@ -24,13 +24,16 @@ module.exports = {
     for(var i = 0; i<rawList.length; i++) {
       var current = rawList[i];
       var s = new Student();
+      var generatedLabs = LabGenerator.generate(5);
       s.id = current.ID-2;               // HOT FIXING
       s.username = current.Github;
       s.firstName = current.FirstName;
       s.lastName = current.LastName;
       s.studentNumber = 223344;
-      s.slipDays = 6;
+      s.slipDays = Math.floor(Math.random()*(6-1)+1);
+      s.labs = generatedLabs;          // generating random labs for students
       s.hasGroup = false;
+
       _newList.push(s);
     }
     return _newList;

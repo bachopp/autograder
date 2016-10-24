@@ -45,7 +45,9 @@ var Labview = React.createClass({
     isStudent: React.PropTypes.bool,
   },
   onChange: function() {
+  
     this.setState(getDataFromStore());
+
   },
   handleClick: function() {
     LabViewCourseActionCreators.toggleApprovalStudentLab();
@@ -54,7 +56,6 @@ var Labview = React.createClass({
     LabViewCourseActionCreators.toggleLabExpand();
   },
   triggerBuild: function() {
-    console.log("BUILD HANDLER");
     this.setState({isRunning: true});
 
     setTimeout(() => {
@@ -116,7 +117,8 @@ var Labview = React.createClass({
           </ButtonToolbar>
         </Col>
         <Col>
-          <Buildlog log={this.state.lab.log}/>
+          <Buildlog log={this.state.student.labs[0].log}/>
+          }
         </Col>
         <ListGroup>
           <ListGroupItem>Passed tests: <b>11</b>/17</ListGroupItem>
