@@ -166,9 +166,9 @@ var LabViewStore = assign({},EventEmitter.prototype, {
   getSelectedStudentLab: function() {
     var lab = checkStudentLab();
     if(lab) {
-      return lab;
+      return [selectedStudId, selectedLabId];
     } else {
-      return [];
+      return null;
     }
   }
 });

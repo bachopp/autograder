@@ -34,7 +34,7 @@ const dangerIcon = <i className="fa fa-times fa-fw"></i>;
 function getDataFromStore() {
   return {
     student: LabViewStore.getSelectedStudent(),
-    lab: LabViewStore.getSelectedStudentLab(),
+    lab: LabViewStore.getSelectedStudentLab(),    //  [student id, lab id]
     isExpanded: LabViewStore.getExpandedStatus(),
     isRunning: false,
   }
@@ -73,15 +73,21 @@ var Labview = React.createClass({
     LabViewStore.removeChangeListener(this.onChange);
   },
   render: function() {
+    var currentStudent = this.state.student;
+    var currentLab;
+
+    if(currentStudent) {
+      var currentLab = currentStudent.labs[this.state.lab[1]];
+    }
 
     (this.state.isExpanded) ? expandedButtonText="Minimize log" : expandedButtonText="Expand log";
 
     // check if the lab exists
-    if(!this.state.lab || this.state.lab.length == 0) {
+    if(!currentLab) {
       ifElement = <Col><p>Lab not found</p></Col>
     } else {
       // the student lab exists
-      if(this.state.lab.approved) {
+      if(currentLab.approved) {
         // the lab is approved
         labApproval = <Alert className="approved" bsStyle="success">{successIcon} Approved</Alert>;
         if (!this.props.isStudent) {
@@ -99,10 +105,9 @@ var Labview = React.createClass({
           statusButton = <div></div>;
         }
       }
-
       var ifElement = <Col>
-        <h3>{this.state.lab.title} - {this.state.student.firstName} {this.state.student.lastName}</h3>
-        <Statusbar percent={this.state.lab.percent}/>
+        <h3>{currentLab.title} - {this.state.student.firstName} {this.state.student.lastName}</h3>
+        <Statusbar percent={currentLab.percent}/>
         {labApproval}
         <Col className="bottomPadding">
           <ButtonToolbar>
@@ -117,8 +122,7 @@ var Labview = React.createClass({
           </ButtonToolbar>
         </Col>
         <Col>
-          <Buildlog log={this.state.student.labs[0].log}/>
-          }
+          <Buildlog log={currentLab.log}/>
         </Col>
         <ListGroup>
           <ListGroupItem>Passed tests: <b>11</b>/17</ListGroupItem>
