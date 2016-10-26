@@ -161,9 +161,6 @@ var LabViewStore = assign({},EventEmitter.prototype, {
     return selectedStudents;
   },
   getSelectedStudent: function() {
-
-    console.log(selectedStudents[selectedStudId]);
-
     return selectedStudents[selectedStudId];
   },
   getSelectedStudentLab: function() {

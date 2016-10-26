@@ -24,9 +24,7 @@ module.exports = {
     for(var i = 0; i<rawList.length; i++) {
       var current = rawList[i];
       var s = new Student();
-      
       var generatedLabs = LabGenerator.generate(5);
-
       s.id = current.ID-2;               // HOT FIXING
       s.username = current.Github;
       s.firstName = current.FirstName;

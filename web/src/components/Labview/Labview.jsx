@@ -29,14 +29,13 @@ var Buildlog = require("./Buildlog.jsx");
 const successIcon = <i className="fa fa-check fa-fw"></i>;
 const dangerIcon = <i className="fa fa-times fa-fw"></i>;
 
-
-
 function getDataFromStore() {
   return {
     student: LabViewStore.getSelectedStudent(),
     lab: LabViewStore.getSelectedStudentLab(),    //  [student id, lab id]
     isExpanded: LabViewStore.getExpandedStatus(),
     isRunning: false,
+    buildID: Math.floor(Math.random() * (50 - 15) + 15),
   }
 }
 
@@ -45,7 +44,7 @@ var Labview = React.createClass({
     isStudent: React.PropTypes.bool,
   },
   onChange: function() {
-  
+
     this.setState(getDataFromStore());
 
   },
@@ -57,6 +56,9 @@ var Labview = React.createClass({
   },
   triggerBuild: function() {
     this.setState({isRunning: true});
+
+    var lastID = this.state.buildID+1;
+    this.setState({buildID: lastID});
 
     setTimeout(() => {
       this.setState({isRunning: false});
@@ -75,6 +77,8 @@ var Labview = React.createClass({
   render: function() {
     var currentStudent = this.state.student;
     var currentLab;
+
+    var buildID = 1082;
 
     if(currentStudent) {
       var currentLab = currentStudent.labs[this.state.lab[1]];
@@ -122,13 +126,13 @@ var Labview = React.createClass({
           </ButtonToolbar>
         </Col>
         <Col>
-          <Buildlog log={currentLab.log}/>
+          <Buildlog isExpanded={this.state.isExpanded} log={currentLab.log}/>
         </Col>
         <ListGroup>
           <ListGroupItem>Passed tests: <b>11</b>/17</ListGroupItem>
           <ListGroupItem>Failed tests: <b>6</b>/17</ListGroupItem>
           <ListGroupItem>Build date: <b>Today</b></ListGroupItem>
-          <ListGroupItem>Build ID: <b>1337</b></ListGroupItem>
+          <ListGroupItem>Build ID: <b>{this.state.buildID}</b></ListGroupItem>
         </ListGroup>
       </Col>
     }

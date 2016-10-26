@@ -10,9 +10,18 @@ This might be changed if the build log comes in another format later
 */
 var Buildlog = React.createClass({
   render: function() {
+
+    var log = this.props.log;
+    var theLog = [];
+
+    if(this.props.isExpanded) {
+      theLog = this.props.log;
+    } else {
+      theLog = this.props.log.slice(log.length/2,log.length);
+    }
     return(
       <Well className="buildLog">
-        {this.props.log.map(function(entry, index) {
+        {theLog.map(function(entry, index) {
           return(
             <p key={"point" + index}>{index+1}. {entry}</p>
           );

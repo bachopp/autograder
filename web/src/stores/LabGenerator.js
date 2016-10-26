@@ -12,7 +12,10 @@ var loggedLines = [
   "Running test cases",
   "Test Case 4.01 failed",
   "Running new test",
-  "Trying to get labs and test cases"
+  "Trying to get labs and test cases",
+  "Running test cases based on code...",
+  "Code running...",
+  "Syntax error on line 2, labgenerator.js",
 ];
 
 // shuffles the in-array around at random.
@@ -67,11 +70,14 @@ function generateLabs(count) {
     var approved = Math.random() >= 0.4;
     var percent;
     (approved) ? percent = succeed() : percent = failed();
-    var log = shuffle(logSample);
-    var lab = new Lab(id,title,approved, log, percent);
+
+    var newLog = logSample.slice(0,logSample.length);
+    newLog = shuffle(newLog);
+
+
+    var lab = new Lab(id,title,approved, newLog, percent);
     generatedLabs.push(lab);
   }
-  console.log(generatedLabs);
   return generatedLabs;
 }
 

@@ -17,7 +17,7 @@ var CourseCard = React.createClass({
   },
   handleClick: function(there, course) {
     CourseNavActionCreators.changeActiveCourse(course);
-    console.log(course);
+    //console.log(course);
     browserHistory.push(there);
   },
   render: function() {
