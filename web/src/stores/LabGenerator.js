@@ -44,32 +44,36 @@ function failed() {
   return Math.floor(Math.random() * (60 - 30) + 30);
 }
 
-function generateLabs(count) {
-  generatedLabs = [];
 
-  for(var i = 0; i<count; i++) {
-    var apporved = Math.random() >= 0.4;
-
-    var logSample = loggedLines;
-
-    var theLog = shuffle(logSample);
-
-    if(apporved) {
-      var percent = succeed();
-    } else {
-      var percent = failed();
-    }
-    generatedLabs.push({
-      id: i,
-      title: "Lab " + (i+1),    // fixing i+1 -> Starts at lab 1
-      approved: apporved,        // this should be generated at random
-      log: theLog,
-      percent: percent,
-    });
-  }
-  return generatedLabs;
+var Lab = function(id, title, approved, log, percent) {
+  this.id = id;
+  this.title = title;
+  this.approved = approved;
+  this.log = log;
+  this.percent = percent;
 }
 
+
+// generate count-number of labs
+function generateLabs(count) {
+  generatedLabs = [];
+  logSample = loggedLines;
+
+  // generate labs
+  for(var i = 0; i<count; i++) {
+    logSample = loggedLines;
+    var id = i;
+    var title = "Lab " + (i+1);
+    var approved = Math.random() >= 0.4;
+    var percent;
+    (approved) ? percent = succeed() : percent = failed();
+    var log = shuffle(logSample);
+    var lab = new Lab(id,title,approved, log, percent);
+    generatedLabs.push(lab);
+  }
+  console.log(generatedLabs);
+  return generatedLabs;
+}
 
 var LabGenerator = {
   generate: function(count) {
