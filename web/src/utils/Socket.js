@@ -10,7 +10,7 @@ var ActionTypes = AGConstants.ActionTypes;
 
 var Socket =  function() {
 
-  this.ws = new WebSocket("ws://localhost:8000/ws");
+  this.ws = new WebSocket("ws:localhost:8000/ws");
 
   this.message = function(m) {
 
