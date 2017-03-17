@@ -1,4 +1,4 @@
-# autograder-fronend
+# autograder-fronend [![codebeat](https://codebeat.co/badges/521a3c16-5e3c-4e0c-b6e3-0b963d1957c7)](https://codebeat.co/projects/github-com-bachopp-autograder)
 
 # demo installation steps
 
